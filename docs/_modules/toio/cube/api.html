@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toio.cube.api &mdash; toio.py  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            toio.py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../toio.html">toio package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">toio.py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../cube.html">toio.cube</a></li>
+      <li class="breadcrumb-item active">toio.cube.api</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for toio.cube.api</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># ************************************************************</span>
+<span class="c1">#</span>
+<span class="c1">#     toio/cube/api/__init__.py</span>
+<span class="c1">#</span>
+<span class="c1">#     Copyright 2022 Sony Interactive Entertainment Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># ************************************************************</span>
+
+<span class="kn">from</span> <span class="nn">...device_interface</span> <span class="kn">import</span> <span class="n">CubeInterface</span>
+<span class="kn">from</span> <span class="nn">.battery</span> <span class="kn">import</span> <span class="n">Battery</span>
+<span class="kn">from</span> <span class="nn">.button</span> <span class="kn">import</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">.configuration</span> <span class="kn">import</span> <span class="n">Configuration</span>
+<span class="kn">from</span> <span class="nn">.id_information</span> <span class="kn">import</span> <span class="n">IdInformation</span>
+<span class="kn">from</span> <span class="nn">.indicator</span> <span class="kn">import</span> <span class="n">Indicator</span>
+<span class="kn">from</span> <span class="nn">.motor</span> <span class="kn">import</span> <span class="n">Motor</span>
+<span class="kn">from</span> <span class="nn">.sensor</span> <span class="kn">import</span> <span class="n">Sensor</span>
+<span class="kn">from</span> <span class="nn">.sound</span> <span class="kn">import</span> <span class="n">Sound</span>
+
+<span class="n">API_VERSION</span> <span class="o">=</span> <span class="s2">&quot;2.3.0&quot;</span>
+
+
+<div class="viewcode-block" id="ToioCoreCubeLowLevelAPI"><a class="viewcode-back" href="../../../toio.cube.api.html#toio.ToioCoreCubeLowLevelAPI">[docs]</a><span class="k">class</span> <span class="nc">ToioCoreCubeLowLevelAPI</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Control APIs</span>
+<span class="sd">    This class has control APIs for each characteristic.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        version (str): Version of supported API</span>
+<span class="sd">        battery (api.Battery): Interface to `battery characteristic &lt;https://toio.github.io/toio-spec/en/docs/ble_battery&gt;`_</span>
+<span class="sd">        button (api.Button): Interface to `button characteristic &lt;https://toio.github.io/toio-spec/en/docs/ble_button&gt;`_</span>
+<span class="sd">        configuration (api.Configuration): Interface to `configuration characteristic &lt;https://toio.github.io/toio-spec/en/docs/ble_configuration&gt;`_</span>
+<span class="sd">        id_information (api.IdInformation): Interface to `id information characteristic &lt;https://toio.github.io/toio-spec/en/docs/ble_id&gt;`_</span>
+<span class="sd">        indicator (api.IdInformation): Interface to `indicator characteristic &lt;https://toio.github.io/toio-spec/en/docs/ble_light&gt;`_</span>
+<span class="sd">        motor (api.Motor): Interface to `motor characteristic &lt;https://toio.github.io/toio-spec/en/docs/ble_motor&gt;`_</span>
+<span class="sd">        sensor (api.Sensor): Interface to sensor characteristic (</span>
+<span class="sd">         `Motion &lt;https://toio.github.io/toio-spec/en/docs/ble_sensor&gt;`_</span>
+<span class="sd">         `Posture &lt;https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor&gt;`_</span>
+<span class="sd">         `Magnet &lt;https://toio.github.io/toio-spec/en/docs/ble_magnetic_sensor&gt;`_</span>
+<span class="sd">         )</span>
+<span class="sd">        sound (api.Sound): Interface to `sound characteristic &lt;https://toio.github.io/toio-spec/en/docs/ble_sound&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">API_VERSION</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">battery</span> <span class="o">=</span> <span class="n">Battery</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_information</span> <span class="o">=</span> <span class="n">IdInformation</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indicator</span> <span class="o">=</span> <span class="n">Indicator</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">Sensor</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sound</span> <span class="o">=</span> <span class="n">Sound</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sony Interactive Entertainment.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

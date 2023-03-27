@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toio.cube.api.motor &mdash; toio.py  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            toio.py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toio.html">toio package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">toio.py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../cube.html">toio.cube</a></li>
+          <li class="breadcrumb-item"><a href="../api.html">toio.cube.api</a></li>
+      <li class="breadcrumb-item active">toio.cube.api.motor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for toio.cube.api.motor</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># ************************************************************</span>
+<span class="c1">#</span>
+<span class="c1">#     motor.py</span>
+<span class="c1">#</span>
+<span class="c1">#     Copyright 2022 Sony Interactive Entertainment Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># ************************************************************</span>
+
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">IntEnum</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeAlias</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">toio.cube.api.base_class</span> <span class="kn">import</span> <span class="n">CubeCharacteristic</span><span class="p">,</span> <span class="n">CubeCommand</span><span class="p">,</span> <span class="n">CubeResponse</span>
+<span class="kn">from</span> <span class="nn">toio.device_interface</span> <span class="kn">import</span> <span class="n">CubeInterface</span><span class="p">,</span> <span class="n">GattReadData</span>
+<span class="kn">from</span> <span class="nn">toio.logger</span> <span class="kn">import</span> <span class="n">get_toio_logger</span>
+<span class="kn">from</span> <span class="nn">toio.position</span> <span class="kn">import</span> <span class="n">CubeLocation</span>
+<span class="kn">from</span> <span class="nn">toio.toio_uuid</span> <span class="kn">import</span> <span class="n">TOIO_UUID_MOTOR_CTRL</span>
+<span class="kn">from</span> <span class="nn">toio.utility</span> <span class="kn">import</span> <span class="n">clip</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_toio_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="MotorControl"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.MotorControl">[docs]</a><span class="k">class</span> <span class="nc">MotorControl</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Motor control command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id_motor_control</span> <span class="o">=</span> <span class="mh">0x01</span>
+    <span class="n">_payload_id_motor_control_with_duration</span> <span class="o">=</span> <span class="mh">0x02</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">duration_ms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+        <span class="k">if</span> <span class="n">duration_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">duration_ms</span> <span class="o">/</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="MotorControl.speed_to_param"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.MotorControl.speed_to_param">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">speed_to_param</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="mh">0x01</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="mh">0x02</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">speed</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">direction</span><span class="p">,</span> <span class="n">value</span></div>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="n">l_dir</span><span class="p">,</span> <span class="n">l_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_to_param</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="n">r_dir</span><span class="p">,</span> <span class="n">r_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_to_param</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+                <span class="s2">&quot;&lt;BBBBBBB&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_payload_id_motor_control</span><span class="p">,</span>
+                <span class="mh">0x01</span><span class="p">,</span>
+                <span class="n">l_dir</span><span class="p">,</span>
+                <span class="n">l_val</span><span class="p">,</span>
+                <span class="mh">0x02</span><span class="p">,</span>
+                <span class="n">r_dir</span><span class="p">,</span>
+                <span class="n">r_val</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+                <span class="s2">&quot;&lt;BBBBBBBB&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_payload_id_motor_control_with_duration</span><span class="p">,</span>
+                <span class="mh">0x01</span><span class="p">,</span>
+                <span class="n">l_dir</span><span class="p">,</span>
+                <span class="n">l_val</span><span class="p">,</span>
+                <span class="mh">0x02</span><span class="p">,</span>
+                <span class="n">r_dir</span><span class="p">,</span>
+                <span class="n">r_val</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="MovementType"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.MovementType">[docs]</a><span class="k">class</span> <span class="nc">MovementType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Movement type</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#movement-type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Curve</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">CurveWithoutReverse</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Linear</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="RotationOption"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.RotationOption">[docs]</a><span class="k">class</span> <span class="nc">RotationOption</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rotation Option</span>
+
+<span class="sd">    Angle of the cube at the target point</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#%CE%B8-angle-of-the-cube-at-the-target-point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">AbsoluteOptimal</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">AbsolutePositive</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">AbsoluteNegative</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">RelativePositive</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">RelativeNegative</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">WithoutRotation</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">SameAsAtWriting</span> <span class="o">=</span> <span class="mi">6</span></div>
+
+
+<div class="viewcode-block" id="TargetPosition"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.TargetPosition">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">TargetPosition</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Target position parameter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cube_location</span><span class="p">:</span> <span class="n">CubeLocation</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Target position of the cube</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rotation_option</span><span class="p">:</span> <span class="n">RotationOption</span> <span class="o">=</span> <span class="n">RotationOption</span><span class="o">.</span><span class="n">AbsoluteOptimal</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rotation option</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TargetPosition.flatten"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.TargetPosition.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cube_location</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cube_location</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cube_location</span><span class="o">.</span><span class="n">angle</span> <span class="o">&amp;</span> <span class="mh">0x0FFF</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">rotation_option</span> <span class="o">&amp;</span> <span class="mh">0xF</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">13</span><span class="p">),</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="SpeedChangeType"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.SpeedChangeType">[docs]</a><span class="k">class</span> <span class="nc">SpeedChangeType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Speed change type</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#motor-speed-change-types</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Constant</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Acceleration</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Deceleration</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">AccelerationAndDeceleration</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+
+<div class="viewcode-block" id="Speed"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Speed">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Speed</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Speed parameter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Max speed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">speed_change_type</span><span class="p">:</span> <span class="n">SpeedChangeType</span> <span class="o">=</span> <span class="n">SpeedChangeType</span><span class="o">.</span><span class="n">Constant</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Speed change type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Speed.flatten"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Speed.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">speed_change_type</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="MotorControlTarget"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.MotorControlTarget">[docs]</a><span class="k">class</span> <span class="nc">MotorControlTarget</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Target specified motor control command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBBBBBBHHH&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">movement_type</span><span class="p">:</span> <span class="n">MovementType</span><span class="p">,</span>
+        <span class="n">speed</span><span class="p">:</span> <span class="n">Speed</span><span class="p">,</span>
+        <span class="n">target</span><span class="p">:</span> <span class="n">TargetPosition</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">movement_type</span> <span class="o">=</span> <span class="n">movement_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span>
+            <span class="mh">0x00</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">movement_type</span><span class="p">,</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="mh">0x00</span><span class="p">,</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="WriteMode"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.WriteMode">[docs]</a><span class="k">class</span> <span class="nc">WriteMode</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write mode of MotorControlMultipleTargets()</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#additional-write-operation-settings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Overwrite</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Append</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="MotorControlMultipleTargets"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.MotorControlMultipleTargets">[docs]</a><span class="k">class</span> <span class="nc">MotorControlMultipleTargets</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multiple targets specified motor control command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-multiple-targets-specified</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x04</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBBBBBBB&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">movement_type</span><span class="p">:</span> <span class="n">MovementType</span><span class="p">,</span>
+        <span class="n">speed</span><span class="p">:</span> <span class="n">Speed</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">WriteMode</span><span class="p">,</span>
+        <span class="n">target_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TargetPosition</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">movement_type</span> <span class="o">=</span> <span class="n">movement_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_list</span> <span class="o">=</span> <span class="n">target_list</span>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span>
+            <span class="mh">0x00</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">movement_type</span><span class="p">,</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="mh">0x00</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_list</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="n">body</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;HHH&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">target</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">header</span> <span class="o">+</span> <span class="n">body</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="AccelerationRotation"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.AccelerationRotation">[docs]</a><span class="k">class</span> <span class="nc">AccelerationRotation</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rotational direction when the cube is changing orientation</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor/#rotational-direction-when-cube-changes-orientation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Positive</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Negative</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="AccelerationDirection"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.AccelerationDirection">[docs]</a><span class="k">class</span> <span class="nc">AccelerationDirection</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Direction of cube travel</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor/#direction-of-cube-travel</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Forward</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Backward</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="AccelerationPriority"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.AccelerationPriority">[docs]</a><span class="k">class</span> <span class="nc">AccelerationPriority</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Priority to the translational speed or the rotational velocity</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor/#priority-designation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">TranslationalVelocity</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">RotationalVelocity</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="MotorControlAcceleration"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.MotorControlAcceleration">[docs]</a><span class="k">class</span> <span class="nc">MotorControlAcceleration</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Acceleration specified motor control command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor/#motor-control-with-acceleration-specified</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x05</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBBHBBBB&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">translation</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">acceleration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">rotation_velocity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">rotation_direction</span><span class="p">:</span> <span class="n">AccelerationRotation</span><span class="p">,</span>
+        <span class="n">cube_direction</span><span class="p">:</span> <span class="n">AccelerationDirection</span><span class="p">,</span>
+        <span class="n">priority</span><span class="p">:</span> <span class="n">AccelerationPriority</span><span class="p">,</span>
+        <span class="n">duration_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">translation</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">translation</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acceleration</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">acceleration</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotation_velocity</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">rotation_velocity</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mh">0xFFFF</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotation_direction</span> <span class="o">=</span> <span class="n">rotation_direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cube_direction</span> <span class="o">=</span> <span class="n">cube_direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">priority</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">duration_ms</span> <span class="o">/</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">translation</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">acceleration</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rotation_velocity</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rotation_direction</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cube_direction</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="MotorResponseCode"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.MotorResponseCode">[docs]</a><span class="k">class</span> <span class="nc">MotorResponseCode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Response code of motor control APIs</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#response-content</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SUCCESS</span> <span class="o">=</span> <span class="mh">0x00</span>
+    <span class="n">ERROR_TIMEOUT</span> <span class="o">=</span> <span class="mh">0x01</span>
+    <span class="n">ERROR_ID_MISSED</span> <span class="o">=</span> <span class="mh">0x02</span>
+    <span class="n">ERROR_INVALID_PARAMETER</span> <span class="o">=</span> <span class="mh">0x03</span>
+    <span class="n">ERROR_INVALID_CUBE_STATE</span> <span class="o">=</span> <span class="mh">0x04</span>
+    <span class="n">SUCCESS_WITH_OVERWRITE</span> <span class="o">=</span> <span class="mh">0x05</span>
+    <span class="n">ERROR_NOT_SUPPORTED</span> <span class="o">=</span> <span class="mh">0x06</span>
+    <span class="n">ERROR_FAILED_TO_APPEND</span> <span class="o">=</span> <span class="mh">0x07</span></div>
+
+
+<div class="viewcode-block" id="ResponseMotorControlTarget"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.ResponseMotorControlTarget">[docs]</a><span class="k">class</span> <span class="nc">ResponseMotorControlTarget</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Target specified motor control response</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        response_code (MotorResponseCode): Response code</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#responses-to-motor-control-with-target-specified</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x83</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseMotorControlTarget.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.ResponseMotorControlTarget.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseMotorControlTarget</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseMotorControlTarget</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_id</span><span class="p">,</span> <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">response_code</span> <span class="o">=</span> <span class="n">MotorResponseCode</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ResponseMotorControlMultipleTargets"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.ResponseMotorControlMultipleTargets">[docs]</a><span class="k">class</span> <span class="nc">ResponseMotorControlMultipleTargets</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multiple target specified motor control response</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        response_code (MotorResponseCode): Response code</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#responses-to-motor-control-with-multiple-targets-specified</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x84</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseMotorControlMultipleTargets.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.ResponseMotorControlMultipleTargets.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseMotorControlMultipleTargets</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseMotorControlMultipleTargets</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_id</span><span class="p">,</span> <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">response_code</span> <span class="o">=</span> <span class="n">MotorResponseCode</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ResponseMotorSpeed"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.ResponseMotorSpeed">[docs]</a><span class="k">class</span> <span class="nc">ResponseMotorSpeed</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Motor speed response</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        left (int): motor speed (left)</span>
+<span class="sd">        right (int): motor speed (right)</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor#obtaining-motor-speed-information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0xE0</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseMotorSpeed.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.ResponseMotorSpeed.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseMotorSpeed</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseMotorSpeed</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<span class="n">MotorResponseType</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span>
+    <span class="n">ResponseMotorControlTarget</span><span class="p">,</span> <span class="n">ResponseMotorControlMultipleTargets</span><span class="p">,</span> <span class="n">ResponseMotorSpeed</span>
+<span class="p">]</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Response types of motor characteristic</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="Motor"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Motor">[docs]</a><span class="k">class</span> <span class="nc">Motor</span><span class="p">(</span><span class="n">CubeCharacteristic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Motor characteristic</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_motor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Motor.is_my_data"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Motor.is_my_data">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_my_data</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MotorResponseType</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">ResponseMotorControlTarget</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ResponseMotorControlTarget</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ResponseMotorControlMultipleTargets</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ResponseMotorControlMultipleTargets</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ResponseMotorSpeed</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ResponseMotorSpeed</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">TOIO_UUID_MOTOR_CTRL</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Motor.motor_control"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Motor.motor_control">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">motor_control</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">duration_ms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send motor control command</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            left (int): Motor speed (left)</span>
+<span class="sd">            right (int): Motor speed (right)</span>
+<span class="sd">            duration_ms (Optional[int], optional): Motor driving period [ms]. Defaults to None.</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">motor</span> <span class="o">=</span> <span class="n">MotorControl</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">duration_ms</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_without_response</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">motor</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Motor.motor_control_target"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Motor.motor_control_target">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">motor_control_target</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">movement_type</span><span class="p">:</span> <span class="n">MovementType</span><span class="p">,</span>
+        <span class="n">speed</span><span class="p">:</span> <span class="n">Speed</span><span class="p">,</span>
+        <span class="n">target</span><span class="p">:</span> <span class="n">TargetPosition</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send target specified motor control command</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout (int): Timeout [s] (Note: not [ms])</span>
+<span class="sd">            movement_type (MovementType): Movement type</span>
+<span class="sd">            speed (Speed): Speed parameter</span>
+<span class="sd">            target (TargetPosition): Target parameter</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">motor_target</span> <span class="o">=</span> <span class="n">MotorControlTarget</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">movement_type</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_without_response</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">motor_target</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Motor.motor_control_multiple_targets"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Motor.motor_control_multiple_targets">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">motor_control_multiple_targets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">movement_type</span><span class="p">:</span> <span class="n">MovementType</span><span class="p">,</span>
+        <span class="n">speed</span><span class="p">:</span> <span class="n">Speed</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">WriteMode</span><span class="p">,</span>
+        <span class="n">target_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TargetPosition</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send multiple target specified motor control command</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout (int): Timeout [s] (Note: not [ms])</span>
+<span class="sd">            movement_type (MovementType): Movement type</span>
+<span class="sd">            speed (Speed): Speed parameter</span>
+<span class="sd">            mode (WriteMode): Write mode</span>
+<span class="sd">            target_list (list[TargetPosition]): Target parameter</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-multiple-targets-specified</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">motor_target</span> <span class="o">=</span> <span class="n">MotorControlMultipleTargets</span><span class="p">(</span>
+            <span class="n">timeout</span><span class="p">,</span> <span class="n">movement_type</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">target_list</span>
+        <span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_without_response</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">motor_target</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Motor.motor_control_acceleration"><a class="viewcode-back" href="../../../../toio.cube.api.motor.html#toio.Motor.motor_control_acceleration">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">motor_control_acceleration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">translation</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">acceleration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">rotation_velocity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">rotation_direction</span><span class="p">:</span> <span class="n">AccelerationRotation</span><span class="p">,</span>
+        <span class="n">cube_direction</span><span class="p">:</span> <span class="n">AccelerationDirection</span><span class="p">,</span>
+        <span class="n">priority</span><span class="p">:</span> <span class="n">AccelerationPriority</span><span class="p">,</span>
+        <span class="n">duration_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send acceleration specified motor control command</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            translation (int): Speed at which the cube moves in relation to the direction of travel.</span>
+<span class="sd">            acceleration (int): Specify the increment (or decrement) in speed every 100 milliseconds.</span>
+<span class="sd">            rotation_velocity (int): Rotational velocity when the cube is changing orientation.</span>
+<span class="sd">            rotation_direction (AccelerationRotation): Rotational direction when the cube is changing orientation.</span>
+<span class="sd">            cube_direction (AccelerationDirection): Direction the cube travels.</span>
+<span class="sd">            priority (AccelerationPriority): Priority to the translational speed or the rotational velocity.</span>
+<span class="sd">            duration_ms (int): Motor driving period [ms].</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_motor/#motor-control-with-acceleration-specified</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">motor_acceleration</span> <span class="o">=</span> <span class="n">MotorControlAcceleration</span><span class="p">(</span>
+            <span class="n">translation</span><span class="p">,</span>
+            <span class="n">acceleration</span><span class="p">,</span>
+            <span class="n">rotation_velocity</span><span class="p">,</span>
+            <span class="n">rotation_direction</span><span class="p">,</span>
+            <span class="n">cube_direction</span><span class="p">,</span>
+            <span class="n">priority</span><span class="p">,</span>
+            <span class="n">duration_ms</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_without_response</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">motor_acceleration</span><span class="p">))</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sony Interactive Entertainment.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

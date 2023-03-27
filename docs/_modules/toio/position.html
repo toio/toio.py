@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toio.position &mdash; toio.py  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            toio.py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../toio.html">toio package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">toio.py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">toio.position</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for toio.position</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># ************************************************************</span>
+<span class="c1">#</span>
+<span class="c1">#     position.py</span>
+<span class="c1">#</span>
+<span class="c1">#     Copyright 2022 Sony Interactive Entertainment Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># ************************************************************</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utility functions for cube position and cube location.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="n">MATRECT_DEFAULT_X</span> <span class="o">=</span> <span class="mi">65535</span>
+<span class="n">MATRECT_DEFAULT_Y</span> <span class="o">=</span> <span class="mi">65535</span>
+
+<span class="n">STAY_CURRENT</span> <span class="o">=</span> <span class="mh">0xFFFF</span>
+
+
+<div class="viewcode-block" id="Point"><a class="viewcode-back" href="../../toio.position.html#toio.Point">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A point on 2 dimensions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="Point.new"><a class="viewcode-back" href="../../toio.position.html#toio.Point.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Point</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Point</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mul</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">mul</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">mul</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">div</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">/</span> <span class="n">div</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">/</span> <span class="n">div</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">div</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">//</span> <span class="n">div</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">//</span> <span class="n">div</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Point.distance"><a class="viewcode-back" href="../../toio.position.html#toio.Point.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span> <span class="o">-</span> <span class="n">other</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">diff</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">diff</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">diff</span><span class="o">.</span><span class="n">y</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Point.flatten"><a class="viewcode-back" href="../../toio.position.html#toio.Point.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span></div></div>
+
+
+<div class="viewcode-block" id="CubeLocation"><a class="viewcode-back" href="../../toio.position.html#toio.CubeLocation">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">CubeLocation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Position and angle of a cube on 2 dimensions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">point</span><span class="p">:</span> <span class="n">Point</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Point of a cube</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">angle</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Angle of a cube (degree)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CubeLocation.new"><a class="viewcode-back" href="../../toio.position.html#toio.CubeLocation.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CubeLocation</span><span class="p">(</span>
+            <span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="o">.</span><span class="n">new</span><span class="p">(),</span>
+            <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">CubeLocation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">point</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">point</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">angle</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span>
+        <span class="k">return</span> <span class="n">CubeLocation</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="n">point</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">angle</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">CubeLocation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">point</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">point</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">-</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">angle</span> <span class="o">%</span> <span class="mi">360</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">angle</span> <span class="o">+=</span> <span class="mi">360</span>
+        <span class="k">return</span> <span class="n">CubeLocation</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="n">point</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">angle</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CubeLocation.get_boundary_point"><a class="viewcode-back" href="../../toio.position.html#toio.CubeLocation.get_boundary_point">[docs]</a>    <span class="k">def</span> <span class="nf">get_boundary_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">CubeLocation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Obtains the point where a line passing through two points</span>
+<span class="sd">        intersects the coordinate axis in the first quadrant.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">y</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">point</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">point</span>
+
+        <span class="c1"># Find the point that intersects the y-axis</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="p">((</span><span class="n">diff</span><span class="o">.</span><span class="n">y</span> <span class="o">/</span> <span class="n">diff</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+        <span class="c1"># If &#39;y&#39; is not in the first quadrant, find the point that intersects the x-axis</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">diff</span><span class="o">.</span><span class="n">x</span> <span class="o">/</span> <span class="n">diff</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">assert</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">CubeLocation</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">),</span> <span class="n">angle</span><span class="o">=</span><span class="n">target</span><span class="o">.</span><span class="n">angle</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CubeLocation.flatten"><a class="viewcode-back" href="../../toio.position.html#toio.CubeLocation.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">point</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">,)</span></div></div>
+
+
+<div class="viewcode-block" id="MatRect"><a class="viewcode-back" href="../../toio.position.html#toio.MatRect">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MatRect</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A toio mat</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">top_left</span><span class="p">:</span> <span class="n">Point</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Top-left point of a mat</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bottom_right</span><span class="p">:</span> <span class="n">Point</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bottom-right point of a mat</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Mat name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MatRect.new"><a class="viewcode-back" href="../../toio.position.html#toio.MatRect.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">MatRect</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">MatRect</span><span class="p">(</span>
+            <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">MATRECT_DEFAULT_X</span><span class="p">,</span> <span class="n">MATRECT_DEFAULT_Y</span><span class="p">),</span>
+            <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatRect.center"><a class="viewcode-back" href="../../toio.position.html#toio.MatRect.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_left</span> <span class="o">+</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">bottom_right</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Point</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_left</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_right</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">top_left</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">top_left</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">) - (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bottom_right</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bottom_right</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="MatRect.flatten"><a class="viewcode-back" href="../../toio.position.html#toio.MatRect.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_left</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_right</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="CoordinateSystemABC"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC">[docs]</a><span class="k">class</span> <span class="nc">CoordinateSystemABC</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">Point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">native_origin</span> <span class="o">=</span> <span class="n">origin</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<div class="viewcode-block" id="CoordinateSystemABC.set_origin"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.set_origin">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.to_native_angle"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.to_native_angle">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">to_native_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.to_native_x"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.to_native_x">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">to_native_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.to_native_y"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.to_native_y">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">to_native_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.from_native_angle"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.from_native_angle">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">from_native_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.from_native_x"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.from_native_x">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">from_native_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.from_native_y"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.from_native_y">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">from_native_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.to_native_point"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.to_native_point">[docs]</a>    <span class="k">def</span> <span class="nf">to_native_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_native_x</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">y</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_native_y</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">)),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.to_native_location"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.to_native_location">[docs]</a>    <span class="k">def</span> <span class="nf">to_native_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="n">CubeLocation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CubeLocation</span><span class="p">(</span>
+            <span class="n">point</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">to_native_point</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">point</span><span class="p">),</span>
+            <span class="n">angle</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_native_angle</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">angle</span><span class="p">)),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.from_native_point"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.from_native_point">[docs]</a>    <span class="k">def</span> <span class="nf">from_native_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_native_x</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">y</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_native_y</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">)),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CoordinateSystemABC.from_native_location"><a class="viewcode-back" href="../../toio.position.html#toio.CoordinateSystemABC.from_native_location">[docs]</a>    <span class="k">def</span> <span class="nf">from_native_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="n">CubeLocation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CubeLocation</span><span class="p">(</span>
+            <span class="n">point</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">from_native_point</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">point</span><span class="p">),</span>
+            <span class="n">angle</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_native_angle</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">angle</span><span class="p">)),</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DefaultCoordinateSystem"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem">[docs]</a><span class="k">class</span> <span class="nc">DefaultCoordinateSystem</span><span class="p">(</span><span class="n">CoordinateSystemABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Default coordinate system</span>
+
+<span class="sd">    No coordinate transformation</span>
+<span class="sd">    No angle transformation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">Point</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">native_origin</span> <span class="o">=</span> <span class="n">origin</span>
+
+<div class="viewcode-block" id="DefaultCoordinateSystem.set_origin"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem.set_origin">[docs]</a>    <span class="k">def</span> <span class="nf">set_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">native_origin</span> <span class="o">=</span> <span class="n">origin</span></div>
+
+<div class="viewcode-block" id="DefaultCoordinateSystem.to_native_angle"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem.to_native_angle">[docs]</a>    <span class="k">def</span> <span class="nf">to_native_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">angle</span></div>
+
+<div class="viewcode-block" id="DefaultCoordinateSystem.to_native_x"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem.to_native_x">[docs]</a>    <span class="k">def</span> <span class="nf">to_native_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+
+<div class="viewcode-block" id="DefaultCoordinateSystem.to_native_y"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem.to_native_y">[docs]</a>    <span class="k">def</span> <span class="nf">to_native_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">y</span></div>
+
+<div class="viewcode-block" id="DefaultCoordinateSystem.from_native_angle"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem.from_native_angle">[docs]</a>    <span class="k">def</span> <span class="nf">from_native_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">angle</span></div>
+
+<div class="viewcode-block" id="DefaultCoordinateSystem.from_native_x"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem.from_native_x">[docs]</a>    <span class="k">def</span> <span class="nf">from_native_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+
+<div class="viewcode-block" id="DefaultCoordinateSystem.from_native_y"><a class="viewcode-back" href="../../toio.position.html#toio.DefaultCoordinateSystem.from_native_y">[docs]</a>    <span class="k">def</span> <span class="nf">from_native_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">y</span></div></div>
+
+
+<div class="viewcode-block" id="RelativeCubeLocation"><a class="viewcode-back" href="../../toio.position.html#toio.RelativeCubeLocation">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">RelativeCubeLocation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Location of the cube in the relative coordinate system</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">relative_location</span><span class="p">:</span> <span class="n">CubeLocation</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Relative location of a cube</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coordinate_system</span><span class="p">:</span> <span class="n">CoordinateSystemABC</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Coordinate system</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RelativeCubeLocation.new"><a class="viewcode-back" href="../../toio.position.html#toio.RelativeCubeLocation.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RelativeCubeLocation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create new RelativeCubeLocation</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            RelativeCubeLocation: new relative cube location instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RelativeCubeLocation</span><span class="p">(</span>
+            <span class="n">relative_location</span><span class="o">=</span><span class="n">CubeLocation</span><span class="o">.</span><span class="n">new</span><span class="p">(),</span>
+            <span class="n">coordinate_system</span><span class="o">=</span><span class="n">DefaultCoordinateSystem</span><span class="p">(</span><span class="n">origin</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="RelativeCubeLocation.to_absolute_point"><a class="viewcode-back" href="../../toio.position.html#toio.RelativeCubeLocation.to_absolute_point">[docs]</a>    <span class="k">def</span> <span class="nf">to_absolute_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the point of the cube on the absolute coordinate system</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Point: Point of the absolute coordinate system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_system</span><span class="o">.</span><span class="n">to_native_point</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_location</span><span class="o">.</span><span class="n">point</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RelativeCubeLocation.to_absolute_location"><a class="viewcode-back" href="../../toio.position.html#toio.RelativeCubeLocation.to_absolute_location">[docs]</a>    <span class="k">def</span> <span class="nf">to_absolute_location</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the location of the cube on the absolute coordinate system</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CubeLocation: CubeLocation of the absolute coordinate system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_system</span><span class="o">.</span><span class="n">to_native_location</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_location</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RelativeCubeLocation.from_absolute_point"><a class="viewcode-back" href="../../toio.position.html#toio.RelativeCubeLocation.from_absolute_point">[docs]</a>    <span class="k">def</span> <span class="nf">from_absolute_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abs_point</span><span class="p">:</span> <span class="n">Point</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the relative point from the absolute point</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            abs_point (CubePoint): Point on the absolute coordinate system</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Point: Point on the relative coordinate system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_location</span><span class="o">.</span><span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_system</span><span class="o">.</span><span class="n">from_native_point</span><span class="p">(</span>
+            <span class="n">abs_point</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_location</span><span class="o">.</span><span class="n">point</span></div>
+
+<div class="viewcode-block" id="RelativeCubeLocation.from_absolute_location"><a class="viewcode-back" href="../../toio.position.html#toio.RelativeCubeLocation.from_absolute_location">[docs]</a>    <span class="k">def</span> <span class="nf">from_absolute_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abs_location</span><span class="p">:</span> <span class="n">CubeLocation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CubeLocation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the relative location from the absolute location</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            abs_location (CubeLocation): Location on the absolute coordinate system</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CubeLocation: Location on the relative coordinate system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_system</span><span class="o">.</span><span class="n">from_native_location</span><span class="p">(</span>
+            <span class="n">abs_location</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_location</span></div>
+
+<div class="viewcode-block" id="RelativeCubeLocation.change_coordinate_system"><a class="viewcode-back" href="../../toio.position.html#toio.RelativeCubeLocation.change_coordinate_system">[docs]</a>    <span class="k">def</span> <span class="nf">change_coordinate_system</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">new_coordinate_system</span><span class="p">:</span> <span class="n">CoordinateSystemABC</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Change the coordinate system</span>
+<span class="sd">        The location is updated to the coordinates in the new coordinate system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">abs_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_absolute_location</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_system</span> <span class="o">=</span> <span class="n">new_coordinate_system</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_system</span><span class="o">.</span><span class="n">from_native_location</span><span class="p">(</span>
+            <span class="n">abs_location</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ToioMat"><a class="viewcode-back" href="../../toio.position.html#toio.ToioMat">[docs]</a><span class="k">class</span> <span class="nc">ToioMat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Definitions of official toio mats</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ToioCollectionMatRing</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">45</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">455</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">455</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Toio Collection (ring)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ToioCollectionMatColoredTiles</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">545</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">45</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">955</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">455</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Toio Collection (colored tiles)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">PicotonsPlayMatFront</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">59</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2088</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">437</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2285</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Picotons (front)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">PicotonsPlayMatBack</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">59</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2303</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">437</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2499</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Picotons (back)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">PicotonsControlMat</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">764</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2093</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">953</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2290</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Picotons (control)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">PicotonsAutoplayMat</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">554</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2093</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">742</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2290</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Picotons (auto play)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">SimpleMat</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">98</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">142</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">402</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">358</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Simple mat&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">GesundroidMat</span> <span class="o">=</span> <span class="n">MatRect</span><span class="p">(</span>
+        <span class="n">top_left</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1050</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">45</span><span class="p">),</span>
+        <span class="n">bottom_right</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1460</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">455</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Gesundroid&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">mats</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ToioCollectionMatRing</span><span class="p">,</span>
+        <span class="n">ToioCollectionMatColoredTiles</span><span class="p">,</span>
+        <span class="n">PicotonsPlayMatFront</span><span class="p">,</span>
+        <span class="n">PicotonsPlayMatBack</span><span class="p">,</span>
+        <span class="n">PicotonsControlMat</span><span class="p">,</span>
+        <span class="n">PicotonsAutoplayMat</span><span class="p">,</span>
+        <span class="n">SimpleMat</span><span class="p">,</span>
+        <span class="n">GesundroidMat</span><span class="p">,</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sony Interactive Entertainment.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

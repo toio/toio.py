@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "toio.py"
+version = "1.0.1"
+description = "Control toio™Core Cube"
+authors = ["Sony Interactive Entertainment"]
+readme = "README.md"
+packages = [{include = "toio"}]
+license = "MIT"
+repository = "https://github.com/toio/toio.py"
+homepage = "https://toio.io/"
+keywords = ["toio"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+bleak = "^0.19.5"
+
+
+[tool.poetry.group.dev.dependencies]
+pyright = "^1.1.298"
+isort = "^5.12.0"
+pytest = "^7.2.2"
+pytest-asyncio = "^0.20.3"
+autopep8 = "^2.0.2"
+black = {extras = ["d"], version = "^22.12.0"}
+ipykernel = "^6.21.3"
+sphinx = "^5.3.0"
+pytest-cov = "^4.0.0"
+coverage = "^7.2.1"
+flake8 = "^6.0.0"
+mypy = "^1.1.1"
+pytest-mock = "^3.10.0"
+poethepoet = "^0.18.1"
+typing-extensions = "^4.5.0"
+sphinx-rtd-theme = "^1.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+ignore = ["tutorial/*"]
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 88
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+# addopts = "--cov toio --log-cli-level=INFO"
+addopts = "--log-cli-level=INFO"
+testpaths =  ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+
+[tool.poe.tasks]
+update-apidocs = { "shell" = "./mkdocs/mkdocs.sh --rebuild" }
+check-coverage = { "shell" = "./tests/check_coverage.sh" }
+

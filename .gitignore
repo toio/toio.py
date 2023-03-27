@@ -1,0 +1,17 @@
+# General Python ignores
+build/
+dist/
+__pycache__/
+__pypackages__/
+.ipynb_checkpoints/
+*.pyc
+*~
+*/.mypy_cache/
+.venv*/
+.idea/
+
+.vscode/*
+!.vscode/extensions.json
+
+# Project ignores
+.coverage

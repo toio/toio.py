@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toio.cube.api.configuration module &mdash; toio.py  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="toio.cube.api.id_information module" href="toio.cube.api.id_information.html" />
+    <link rel="prev" title="toio.cube.api.button module" href="toio.cube.api.button.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            toio.py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="toio.html">toio package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="toio.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="toio.cube.html">toio.cube package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="toio.cube.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.html">toio.device_interface package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.scanner.html">toio.scanner package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.simple.html">toio.simple package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="toio.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">toio.py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="toio.html">toio package</a></li>
+          <li class="breadcrumb-item"><a href="toio.cube.html">toio.cube package</a></li>
+          <li class="breadcrumb-item"><a href="toio.cube.api.html">toio.cube.api package</a></li>
+      <li class="breadcrumb-item active">toio.cube.api.configuration module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/toio.cube.api.configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-toio.cube.api.configuration">
+<span id="toio-cube-api-configuration-module"></span><h1>toio.cube.api.configuration module<a class="headerlink" href="#module-toio.cube.api.configuration" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCharacteristic" title="toio.cube.api.base_class.CubeCharacteristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCharacteristic</span></code></a></p>
+<p>Configuration characteristic</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration">https://toio.github.io/toio-spec/en/docs/ble_configuration</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.is_my_data">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_my_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.configuration.ProtocolVersion" title="toio.cube.api.configuration.ProtocolVersion"><span class="pre">ProtocolVersion</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.configuration.ResponseIdNotificationSettings" title="toio.cube.api.configuration.ResponseIdNotificationSettings"><span class="pre">ResponseIdNotificationSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.configuration.ResponseIdMissedNotificationSettings" title="toio.cube.api.configuration.ResponseIdMissedNotificationSettings"><span class="pre">ResponseIdMissedNotificationSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.configuration.ResponseMagneticSensorSettings" title="toio.cube.api.configuration.ResponseMagneticSensorSettings"><span class="pre">ResponseMagneticSensorSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings" title="toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings"><span class="pre">ResponseMotorSpeedInformationAcquisitionSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.configuration.ResponsePostureAngleDetectionSettings" title="toio.cube.api.configuration.ResponsePostureAngleDetectionSettings"><span class="pre">ResponsePostureAngleDetectionSettings</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.is_my_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.is_my_data" title="Permalink to this definition"></a></dt>
+<dd><p>If payload is my characteristic response, this function returns
+CubeResponse object. Otherwise, it returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.request_protocol_version">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_protocol_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.request_protocol_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.request_protocol_version" title="Permalink to this definition"></a></dt>
+<dd><p>Send protocol version request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#requesting-the-ble-protocol-version">https://toio.github.io/toio-spec/en/docs/ble_configuration#requesting-the-ble-protocol-version</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_collision_detection_threshold">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_collision_detection_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_collision_detection_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_collision_detection_threshold" title="Permalink to this definition"></a></dt>
+<dd><p>Send collision detection threshold setting request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>int</em>) – Threshold</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#collision-detection-threshold-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#collision-detection-threshold-settings</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_double_tap_detection_threshold">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_double_tap_detection_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_double_tap_detection_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_double_tap_detection_threshold" title="Permalink to this definition"></a></dt>
+<dd><p>Send double-tap detection threshold setting request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>int</em>) – Threshold</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#double-tap-detection-time-interval-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#double-tap-detection-time-interval-settings</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_horizontal_detection_threshold">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_horizontal_detection_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_horizontal_detection_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_horizontal_detection_threshold" title="Permalink to this definition"></a></dt>
+<dd><p>Send horizontal detection threshold setting command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>int</em>) – Threshold</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#horizontal-detection-threshold-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#horizontal-detection-threshold-settings</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_id_missed_notification">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_id_missed_notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensitivity_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_id_missed_notification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_id_missed_notification" title="Permalink to this definition"></a></dt>
+<dd><p>Send ID missed notification setting request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sensitivity_ms</strong> (<em>int</em>) – Sensitivity [ms]</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-missed-notification-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-missed-notification-settings</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_id_notification">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_id_notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.NotificationCondition" title="toio.cube.api.configuration.NotificationCondition"><span class="pre">NotificationCondition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_id_notification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_id_notification" title="Permalink to this definition"></a></dt>
+<dd><p>Send id information notification setting request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval_ms</strong> (<em>int</em>) – Notification interval [ms]</p></li>
+<li><p><strong>condition</strong> (<a class="reference internal" href="#toio.cube.api.configuration.NotificationCondition" title="toio.cube.api.configuration.NotificationCondition"><em>NotificationCondition</em></a>) – Condition</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-notification-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-notification-settings</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_magnetic_sensor">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_magnetic_sensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.MagneticSensorFunction" title="toio.cube.api.configuration.MagneticSensorFunction"><span class="pre">MagneticSensorFunction</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.MagneticSensorCondition" title="toio.cube.api.configuration.MagneticSensorCondition"><span class="pre">MagneticSensorCondition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_magnetic_sensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_magnetic_sensor" title="Permalink to this definition"></a></dt>
+<dd><p>Send magnetic sensor setting request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_type</strong> (<a class="reference internal" href="#toio.cube.api.configuration.MagneticSensorFunction" title="toio.cube.api.configuration.MagneticSensorFunction"><em>MagneticSensorFunction</em></a>) – Function type</p></li>
+<li><p><strong>interval_ms</strong> (<em>int</em>) – Notification interval [ms]</p></li>
+<li><p><strong>condition</strong> (<a class="reference internal" href="#toio.cube.api.configuration.MagneticSensorCondition" title="toio.cube.api.configuration.MagneticSensorCondition"><em>MagneticSensorCondition</em></a>) – Condition</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#magnetic-sensor-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#magnetic-sensor-settings</a>-</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_motor_speed_information_acquisition">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_motor_speed_information_acquisition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.MotorSpeedInformationAcquisitionState" title="toio.cube.api.configuration.MotorSpeedInformationAcquisitionState"><span class="pre">MotorSpeedInformationAcquisitionState</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_motor_speed_information_acquisition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_motor_speed_information_acquisition" title="Permalink to this definition"></a></dt>
+<dd><p>Send motor speed information acquisition setting request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<a class="reference internal" href="#toio.cube.api.configuration.MotorSpeedInformationAcquisitionState" title="toio.cube.api.configuration.MotorSpeedInformationAcquisitionState"><em>MotorSpeedInformationAcquisitionState</em></a>) – state</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#motor-speed-information-acquisition-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#motor-speed-information-acquisition-settings</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.set_posture_angle_detection">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_posture_angle_detection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detection_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.PostureAngleDetectionType" title="toio.cube.api.configuration.PostureAngleDetectionType"><span class="pre">PostureAngleDetectionType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.PostureAngleDetectionCondition" title="toio.cube.api.configuration.PostureAngleDetectionCondition"><span class="pre">PostureAngleDetectionCondition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.set_posture_angle_detection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.set_posture_angle_detection" title="Permalink to this definition"></a></dt>
+<dd><p>Send posture angle setting request command</p>
+<p>This function DO NOT return response payload.
+Receive the result by notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>detection_type</strong> (<a class="reference internal" href="#toio.cube.api.configuration.PostureAngleDetectionType" title="toio.cube.api.configuration.PostureAngleDetectionType"><em>PostureAngleDetectionType</em></a>) – Detection type</p></li>
+<li><p><strong>interval_ms</strong> (<em>int</em>) – Notification interval [ms]</p></li>
+<li><p><strong>condition</strong> (<a class="reference internal" href="#toio.cube.api.configuration.PostureAngleDetectionCondition" title="toio.cube.api.configuration.PostureAngleDetectionCondition"><em>PostureAngleDetectionCondition</em></a>) – Condition</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#posture-angle-detection-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#posture-angle-detection-settings</a>-</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ConfigurationResponseType">
+<span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ConfigurationResponseType</span></span><a class="headerlink" href="#toio.cube.api.configuration.ConfigurationResponseType" title="Permalink to this definition"></a></dt>
+<dd><p>Response types of configuration characteristic</p>
+<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="#toio.cube.api.configuration.ProtocolVersion" title="toio.cube.api.configuration.ProtocolVersion"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProtocolVersion</span></code></a>, <a class="reference internal" href="#toio.cube.api.configuration.ResponseIdNotificationSettings" title="toio.cube.api.configuration.ResponseIdNotificationSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseIdNotificationSettings</span></code></a>, <a class="reference internal" href="#toio.cube.api.configuration.ResponseIdMissedNotificationSettings" title="toio.cube.api.configuration.ResponseIdMissedNotificationSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseIdMissedNotificationSettings</span></code></a>, <a class="reference internal" href="#toio.cube.api.configuration.ResponseMagneticSensorSettings" title="toio.cube.api.configuration.ResponseMagneticSensorSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseMagneticSensorSettings</span></code></a>, <a class="reference internal" href="#toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings" title="toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseMotorSpeedInformationAcquisitionSettings</span></code></a>, <a class="reference internal" href="#toio.cube.api.configuration.ResponsePostureAngleDetectionSettings" title="toio.cube.api.configuration.ResponsePostureAngleDetectionSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponsePostureAngleDetectionSettings</span></code></a>]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MagneticSensorCondition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">MagneticSensorCondition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#MagneticSensorCondition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.MagneticSensorCondition" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MagneticSensorCondition.Always">
+<span class="sig-name descname"><span class="pre">Always</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.configuration.MagneticSensorCondition.Always" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MagneticSensorCondition.ChangeDetection">
+<span class="sig-name descname"><span class="pre">ChangeDetection</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.configuration.MagneticSensorCondition.ChangeDetection" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MagneticSensorFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">MagneticSensorFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#MagneticSensorFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.MagneticSensorFunction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MagneticSensorFunction.Disable">
+<span class="sig-name descname"><span class="pre">Disable</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.configuration.MagneticSensorFunction.Disable" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MagneticSensorFunction.MagnetState">
+<span class="sig-name descname"><span class="pre">MagnetState</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.configuration.MagneticSensorFunction.MagnetState" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MagneticSensorFunction.MagneticForce">
+<span class="sig-name descname"><span class="pre">MagneticForce</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.configuration.MagneticSensorFunction.MagneticForce" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MotorSpeedInformationAcquisitionState">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">MotorSpeedInformationAcquisitionState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#MotorSpeedInformationAcquisitionState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.MotorSpeedInformationAcquisitionState" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MotorSpeedInformationAcquisitionState.Disable">
+<span class="sig-name descname"><span class="pre">Disable</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.configuration.MotorSpeedInformationAcquisitionState.Disable" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.MotorSpeedInformationAcquisitionState.Enable">
+<span class="sig-name descname"><span class="pre">Enable</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.configuration.MotorSpeedInformationAcquisitionState.Enable" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.NotificationCondition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">NotificationCondition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#NotificationCondition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.NotificationCondition" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Notification conditions of ID notification</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#notification-conditions">https://toio.github.io/toio-spec/en/docs/ble_configuration#notification-conditions</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.NotificationCondition.Always">
+<span class="sig-name descname"><span class="pre">Always</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.configuration.NotificationCondition.Always" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.NotificationCondition.ChangeDetection">
+<span class="sig-name descname"><span class="pre">ChangeDetection</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.configuration.NotificationCondition.ChangeDetection" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.NotificationCondition.Periodic">
+<span class="sig-name descname"><span class="pre">Periodic</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">255</span></em><a class="headerlink" href="#toio.cube.api.configuration.NotificationCondition.Periodic" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.PostureAngleDetectionCondition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">PostureAngleDetectionCondition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#PostureAngleDetectionCondition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.PostureAngleDetectionCondition" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Notification condition of posture angle detection</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#notification-conditions-1">https://toio.github.io/toio-spec/en/docs/ble_configuration#notification-conditions-1</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.PostureAngleDetectionCondition.Always">
+<span class="sig-name descname"><span class="pre">Always</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.configuration.PostureAngleDetectionCondition.Always" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.PostureAngleDetectionCondition.ChangeDetection">
+<span class="sig-name descname"><span class="pre">ChangeDetection</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.configuration.PostureAngleDetectionCondition.ChangeDetection" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.PostureAngleDetectionType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">PostureAngleDetectionType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#PostureAngleDetectionType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.PostureAngleDetectionType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.PostureAngleDetectionType.Euler">
+<span class="sig-name descname"><span class="pre">Euler</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.configuration.PostureAngleDetectionType.Euler" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.PostureAngleDetectionType.Quaternions">
+<span class="sig-name descname"><span class="pre">Quaternions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.configuration.PostureAngleDetectionType.Quaternions" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ProtocolVersion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ProtocolVersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ProtocolVersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ProtocolVersion" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Protocol version response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ProtocolVersion.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#toio.cube.api.configuration.ProtocolVersion.version" title="Permalink to this definition"></a></dt>
+<dd><p>version (UTF-8)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-ble-protocol-version">https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-ble-protocol-version</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ProtocolVersion.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ProtocolVersion.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ProtocolVersion.is_myself" title="Permalink to this definition"></a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.RequestProtocolVersion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">RequestProtocolVersion</span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#RequestProtocolVersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.RequestProtocolVersion" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Protocol version request command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#requesting-the-ble-protocol-version">https://toio.github.io/toio-spec/en/docs/ble_configuration#requesting-the-ble-protocol-version</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseIdMissedNotificationSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponseIdMissedNotificationSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseIdMissedNotificationSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseIdMissedNotificationSettings" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>ID missed notification setting response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseIdMissedNotificationSettings.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseIdMissedNotificationSettings.result" title="Permalink to this definition"></a></dt>
+<dd><p>Result of the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-identification-sensor-id-missed-notification-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-identification-sensor-id-missed-notification-settings</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseIdMissedNotificationSettings.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseIdMissedNotificationSettings.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseIdMissedNotificationSettings.is_myself" title="Permalink to this definition"></a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseIdNotificationSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponseIdNotificationSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseIdNotificationSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseIdNotificationSettings" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>ID notification setting response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseIdNotificationSettings.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseIdNotificationSettings.result" title="Permalink to this definition"></a></dt>
+<dd><p>Result of the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-identification-sensor-id-notification-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-identification-sensor-id-notification-settings</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseIdNotificationSettings.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseIdNotificationSettings.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseIdNotificationSettings.is_myself" title="Permalink to this definition"></a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseMagneticSensorSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponseMagneticSensorSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseMagneticSensorSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseMagneticSensorSettings" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Magnetic sensor setting response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseMagneticSensorSettings.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseMagneticSensorSettings.result" title="Permalink to this definition"></a></dt>
+<dd><p>Result of the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-magnetic-sensor-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-magnetic-sensor-settings</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseMagneticSensorSettings.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseMagneticSensorSettings.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseMagneticSensorSettings.is_myself" title="Permalink to this definition"></a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponseMotorSpeedInformationAcquisitionSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseMotorSpeedInformationAcquisitionSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Motor speed information setting response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings.result" title="Permalink to this definition"></a></dt>
+<dd><p>Result of the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-motor-speed-information-acquisition-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-motor-speed-information-acquisition-settings</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseMotorSpeedInformationAcquisitionSettings.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseMotorSpeedInformationAcquisitionSettings.is_myself" title="Permalink to this definition"></a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponsePostureAngleDetectionSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponsePostureAngleDetectionSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponsePostureAngleDetectionSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponsePostureAngleDetectionSettings" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Posture angle detection setting response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponsePostureAngleDetectionSettings.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponsePostureAngleDetectionSettings.result" title="Permalink to this definition"></a></dt>
+<dd><p>Result of the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-posture-angle-detection-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-posture-angle-detection-settings</a>-</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponsePostureAngleDetectionSettings.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponsePostureAngleDetectionSettings.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponsePostureAngleDetectionSettings.is_myself" title="Permalink to this definition"></a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetCollisionDetectionThreshold">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetCollisionDetectionThreshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetCollisionDetectionThreshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetCollisionDetectionThreshold" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Collision detection threshold setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#collision-detection-threshold-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#collision-detection-threshold-settings</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetDoubleTapDetectionTimeInterval">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetDoubleTapDetectionTimeInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetDoubleTapDetectionTimeInterval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetDoubleTapDetectionTimeInterval" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Double-tap detection time interval setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#double-tap-detection-time-interval-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#double-tap-detection-time-interval-settings</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetHorizontalDetectionThreshold">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetHorizontalDetectionThreshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetHorizontalDetectionThreshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetHorizontalDetectionThreshold" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Horizontal detection threshold setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#horizontal-detection-threshold-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#horizontal-detection-threshold-settings</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetIdMissedNotification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetIdMissedNotification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensitivity_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetIdMissedNotification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetIdMissedNotification" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>ID missed notification setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-missed-notification-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-missed-notification-settings</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetIdNotification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetIdNotification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.NotificationCondition" title="toio.cube.api.configuration.NotificationCondition"><span class="pre">NotificationCondition</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetIdNotification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetIdNotification" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>ID notification setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-notification-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#identification-sensor-id-notification-settings</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetMagneticSensor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetMagneticSensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.MagneticSensorFunction" title="toio.cube.api.configuration.MagneticSensorFunction"><span class="pre">MagneticSensorFunction</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.MagneticSensorCondition" title="toio.cube.api.configuration.MagneticSensorCondition"><span class="pre">MagneticSensorCondition</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetMagneticSensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetMagneticSensor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Magnet sensor setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#magnetic-sensor-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#magnetic-sensor-settings</a>-</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetMotorSpeedInformationAcquisition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetMotorSpeedInformationAcquisition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.MotorSpeedInformationAcquisitionState" title="toio.cube.api.configuration.MotorSpeedInformationAcquisitionState"><span class="pre">MotorSpeedInformationAcquisitionState</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetMotorSpeedInformationAcquisition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetMotorSpeedInformationAcquisition" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Motor speed information acquisition setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#motor-speed-information-acquisition-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#motor-speed-information-acquisition-settings</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.SetPostureAngleDetection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">SetPostureAngleDetection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detection_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.PostureAngleDetectionType" title="toio.cube.api.configuration.PostureAngleDetectionType"><span class="pre">PostureAngleDetectionType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.configuration.PostureAngleDetectionCondition" title="toio.cube.api.configuration.PostureAngleDetectionCondition"><span class="pre">PostureAngleDetectionCondition</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#SetPostureAngleDetection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.SetPostureAngleDetection" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Posture angle detection setting command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#posture-angle-detection-settings">https://toio.github.io/toio-spec/en/docs/ble_configuration#posture-angle-detection-settings</a>-</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="toio.cube.api.button.html" class="btn btn-neutral float-left" title="toio.cube.api.button module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="toio.cube.api.id_information.html" class="btn btn-neutral float-right" title="toio.cube.api.id_information module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sony Interactive Entertainment.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

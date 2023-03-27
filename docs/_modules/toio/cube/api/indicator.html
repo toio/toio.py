@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toio.cube.api.indicator &mdash; toio.py  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            toio.py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toio.html">toio package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">toio.py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../cube.html">toio.cube</a></li>
+          <li class="breadcrumb-item"><a href="../api.html">toio.cube.api</a></li>
+      <li class="breadcrumb-item active">toio.cube.api.indicator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for toio.cube.api.indicator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># ************************************************************</span>
+<span class="c1">#</span>
+<span class="c1">#     indicator.py</span>
+<span class="c1">#</span>
+<span class="c1">#     Copyright 2022 Sony Interactive Entertainment Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># ************************************************************</span>
+
+<span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">toio.cube.api.base_class</span> <span class="kn">import</span> <span class="n">CubeCharacteristic</span><span class="p">,</span> <span class="n">CubeCommand</span>
+<span class="kn">from</span> <span class="nn">toio.device_interface</span> <span class="kn">import</span> <span class="n">CubeInterface</span><span class="p">,</span> <span class="n">GattReadData</span>
+<span class="kn">from</span> <span class="nn">toio.logger</span> <span class="kn">import</span> <span class="n">get_toio_logger</span>
+<span class="kn">from</span> <span class="nn">toio.toio_uuid</span> <span class="kn">import</span> <span class="n">TOIO_UUID_LIGHT_CTRL</span>
+<span class="kn">from</span> <span class="nn">toio.utility</span> <span class="kn">import</span> <span class="n">clip</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_toio_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Color"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Color">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Color</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indicator color in RGB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">r</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;R value (0 - 255)&quot;&quot;&quot;</span>
+    <span class="n">g</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;G value (0 - 255)&quot;&quot;&quot;</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;B value (0 - 255)&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Color.flatten"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Color.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the tuple representation of this dataclass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span></div></div>
+
+
+<div class="viewcode-block" id="IndicatorParam"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.IndicatorParam">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">IndicatorParam</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indicator color and lighting period</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">duration_ms</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | Duration of lighting:</span>
+<span class="sd">    |     Any fraction less than 10ms will be truncated.</span>
+<span class="sd">    |     0 - 9: no time limit</span>
+<span class="sd">    |     10 - 2550: duration [ms]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Color</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    |    RGB value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IndicatorParam.flatten"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.IndicatorParam.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration_ms</span> <span class="o">/</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">duration</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="TurningOnAndOff"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.TurningOnAndOff">[docs]</a><span class="k">class</span> <span class="nc">TurningOnAndOff</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indicator turning on / off command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_light#turning-the-indicator-on-and-off</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBBBBBB&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span> <span class="n">IndicatorParam</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="n">param</span>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="RepeatedTurningOnAndOff"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.RepeatedTurningOnAndOff">[docs]</a><span class="k">class</span> <span class="nc">RepeatedTurningOnAndOff</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Repeated indicator turning on /off command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x04</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
+    <span class="n">REPEAT_INFINITE</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">param_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IndicatorParam</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">IndicatorParam</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="n">repeat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_list</span> <span class="o">=</span> <span class="n">param_list</span>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="n">byte_representation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param_list</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_list</span><span class="p">:</span>
+            <span class="n">byte_representation</span> <span class="o">=</span> <span class="n">byte_representation</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+                <span class="s2">&quot;&lt;BBBBBB&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">param</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">byte_representation</span></div>
+
+
+<div class="viewcode-block" id="TurnOffAll"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.TurnOffAll">[docs]</a><span class="k">class</span> <span class="nc">TurnOffAll</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indicator all off command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x01</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,))</span></div>
+
+
+<div class="viewcode-block" id="TurnOff"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.TurnOff">[docs]</a><span class="k">class</span> <span class="nc">TurnOff</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indicator off command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x02</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indicator_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indicator_id</span> <span class="o">=</span> <span class="n">indicator_id</span>
+
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">indicator_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Indicator"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Indicator">[docs]</a><span class="k">class</span> <span class="nc">Indicator</span><span class="p">(</span><span class="n">CubeCharacteristic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indicator characteristic</span>
+
+<span class="sd">    References:</span>
+<span class="sd">       https://toio.github.io/toio-spec/en/docs/ble_light</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Indicator.is_my_data"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Indicator.is_my_data">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_my_data</span><span class="p">(</span><span class="n">_payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">TOIO_UUID_LIGHT_CTRL</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Indicator.turn_on"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Indicator.turn_on">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">turn_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span> <span class="n">IndicatorParam</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send indicator turn on / off command</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param: Indicator parameter</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">turn_on</span> <span class="o">=</span> <span class="n">TurningOnAndOff</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">turn_on</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Indicator.repeated_turn_on"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Indicator.repeated_turn_on">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">repeated_turn_on</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">param_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">IndicatorParam</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">IndicatorParam</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send repeated indicator turning on / off command</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            repeat (int): Number of repetitions</span>
+<span class="sd">            param_list (Union[list[IndicatorParam], tuple[IndicatorParam]]): List of indicator parameters</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">repeated</span> <span class="o">=</span> <span class="n">RepeatedTurningOnAndOff</span><span class="p">(</span><span class="n">repeat</span><span class="p">,</span> <span class="n">param_list</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">repeated</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Indicator.turn_off_all"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Indicator.turn_off_all">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">turn_off_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send all off command</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">turn_off</span> <span class="o">=</span> <span class="n">TurnOffAll</span><span class="p">()</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">turn_off</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Indicator.turn_off"><a class="viewcode-back" href="../../../../toio.cube.api.indicator.html#toio.Indicator.turn_off">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">turn_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indicator_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send off command</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            indicator_id (int): Indicator ID</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">turn_off</span> <span class="o">=</span> <span class="n">TurnOff</span><span class="p">(</span><span class="n">indicator_id</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">turn_off</span><span class="p">))</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sony Interactive Entertainment.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
