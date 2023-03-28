@@ -88,7 +88,7 @@ Python 機能拡張のインストールと同様の手順で、 `Jupyter` と�
 
 ## チュートリアルの実行
 
-[toio.py のチュートリアル tutorial.py](https://github.com/toio/toio.py/releases/latest/download/tutorial.py)
+[toio.py のチュートリアル tutorial.ja.py](https://github.com/toio/toio.py/releases/latest/download/tutorial.ja.py)
 をダウンロードし、Visual Studio Code でチュートリアルを開きます
 
 チュートリアルは Visual Studio Code の [コードセル機能](https://code.visualstudio.com/docs/python/jupyter-support-py#_jupyter-code-cell)を使って、実際にコードを実行しながら読み進められるようになっています。

@@ -76,7 +76,7 @@ ModuleNotFoundError: No module named 'toio.scanner'
 
 ## 运行教程
 
-在Visual Studio Code上导入“[tutorial.py](https://github.com/toio/toio.py/releases/latest/download/tutorial.py)”。
+在Visual Studio Code上导入“[tutorial.zh.py](https://github.com/toio/toio.py/releases/latest/download/tutorial.zh.py)”。
 
 在实际执行代码时可以阅读该教程去使用Visual Studio Code的[代码单元功能](https://code.visualstudio.com/docs/python/jupyter-support-py#_jupyter-code-cell)
 

@@ -86,7 +86,7 @@ Install the following Jupyter extensions from Microsoft
 
 ## Running the tutorial
 
-Download [tutorial.py](https://github.com/toio/toio.py/releases/latest/download/tutorial_EN.py).
+Download [tutorial.en.py](https://github.com/toio/toio.py/releases/latest/download/tutorial.en.py).
 Open `tutorial.py` on Visual Studio Code.
 
 The tutorial can be read while actually executing code using Visual Studio Code's [Code Cell feature](https://code.visualstudio.com/docs/python/jupyter-support-py#_jupyter-code-cell).
