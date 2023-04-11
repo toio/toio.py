@@ -17,4 +17,4 @@ logger = getLogger(__name__)
 @pytest.fixture(scope="function", autouse=True)
 def wait():
     logger.info("PRE WAIT")
-    time.sleep(1)
+    time.sleep(2)

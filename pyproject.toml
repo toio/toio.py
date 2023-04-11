@@ -12,24 +12,24 @@ keywords = ["toio"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-bleak = "^0.19.5"
+bleak = "0.20.1"
 
 
 [tool.poetry.group.dev.dependencies]
-pyright = "^1.1.298"
+pyright = "^1.1.302"
 isort = "^5.12.0"
 pytest = "^7.2.2"
-pytest-asyncio = "^0.20.3"
+pytest-asyncio = "0.21.0"
 autopep8 = "^2.0.2"
-black = {extras = ["d"], version = "^22.12.0"}
-ipykernel = "^6.21.3"
+black = {version = "23.3.0", extras = ["d"]}
+ipykernel = "^6.22.0"
 sphinx = "^5.3.0"
 pytest-cov = "^4.0.0"
-coverage = "^7.2.1"
+coverage = "^7.2.2"
 flake8 = "^6.0.0"
 mypy = "^1.1.1"
 pytest-mock = "^3.10.0"
-poethepoet = "^0.18.1"
+poethepoet = "0.19.0"
 typing-extensions = "^4.5.0"
 sphinx-rtd-theme = "^1.2.0"
 

@@ -128,7 +128,7 @@ class BleScanner(ScannerInterface):
         """
         w31j = False
         condition_met = asyncio.Event()
-        found_cubes: dict[int, CubeInfo] = {}
+        found_cubes: dict[Union[str, int], CubeInfo] = {}
 
         if cube_id is not None and "31j" in cube_id:
             logger.warning(
