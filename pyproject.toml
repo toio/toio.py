@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "toio.py"
-version = "1.0.1"
+version = "1.0.2"
 description = "Control toio™Core Cube"
 authors = ["Sony Interactive Entertainment"]
 readme = "README.md"
@@ -18,20 +18,21 @@ bleak = "0.20.1"
 [tool.poetry.group.dev.dependencies]
 pyright = "^1.1.302"
 isort = "^5.12.0"
-pytest = "^7.2.2"
+pytest = "^7.3.0"
 pytest-asyncio = "0.21.0"
 autopep8 = "^2.0.2"
 black = {version = "23.3.0", extras = ["d"]}
 ipykernel = "^6.22.0"
-sphinx = "^5.3.0"
+sphinx = "^6.1.3"
 pytest-cov = "^4.0.0"
-coverage = "^7.2.2"
+coverage = "^7.2.3"
 flake8 = "^6.0.0"
-mypy = "^1.1.1"
+mypy = "^1.2.0"
 pytest-mock = "^3.10.0"
 poethepoet = "0.19.0"
 typing-extensions = "^4.5.0"
 sphinx-rtd-theme = "^1.2.0"
+pygments = "^2.15.0"
 
 [build-system]
 requires = ["poetry-core"]
