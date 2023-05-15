@@ -19,6 +19,20 @@
 
 ### 完成以上流程后，接下来需要安装相关软件包，操作如下：
 
+#### setuptools
+#### 安装setuptools软件包，命令如下：
+
+```
+python -m pip install setuptools --upgrade
+```
+
+#### toio.py
+#### 安装toio.py软件包，命令如下：
+
+```
+python -m pip install toio-py --upgrade
+```
+
 #### bleak
 #### 安装bleak软件包，命令如下：
 
@@ -31,13 +45,6 @@ python -m pip install bleak
 
 ```
 python -m pip install ipykernel
-```
-
-#### toio.py
-#### 安装toio.py软件包，命令如下：
-
-```
-python -m pip install toio-py --upgrade
 ```
 
 **确认**

@@ -29,6 +29,20 @@ toio.py は Python から[toio コアキューブ](https://toio.io/platform/cube
 
 下記のコマンドを入力し、Python パッケージをインストールします。
 
+#### setuptools
+
+setuptoolsを最新版にします。
+
+```
+python -m pip install setuptools --upgrade
+```
+
+#### toio.py
+
+```
+python -m pip install toio-py --upgrade
+```
+
 #### bleak
 
 ```
@@ -42,13 +56,6 @@ python -m pip install bleak
 python -m pip install ipykernel
 ```
 
-#### toio.py
-
-下記のコマンドを実行してインストールします。
-
-```
-python -m pip install toio-py --upgrade
-```
 
 **確認**
 

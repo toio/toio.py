@@ -23,9 +23,10 @@
 确保您已经掌握了如何执行单元格代码。
 '''
 
+!pip install setuptools --upgrade
+!pip install toio-py --upgrade
 !pip install bleak
 !pip install ipykernel
-!pip install toio-py --upgrade
 
 # --------------------------------------------------------------------------------
 # %% [markdown]

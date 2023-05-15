@@ -28,6 +28,22 @@ Open a command prompt.
 
 Type the following command to install these Python packages.
 
+#### setuptools
+
+Update setuptools to latest.
+
+```
+python -m pip install setuptools --upgrade
+```
+
+#### toio.py
+
+Execute the following command to install.
+
+```
+python -m pip install toio-py --upgrade
+```
+
 #### bleak
 
 ```
@@ -40,13 +56,6 @@ python -m pip install bleak
 python -m pip install ipykernel
 ```
 
-#### toio.py
-
-Execute the following command to install.
-
-```
-python -m pip install toio-py --upgrade
-```
 
 **Confirmation**
 

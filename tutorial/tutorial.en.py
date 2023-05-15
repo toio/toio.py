@@ -27,9 +27,10 @@
 # Make sure you have mastered how to execute the cell code at this point.
 #
 
+!pip install setuptools --upgrade
+!pip install toio-py --upgrade
 !pip install bleak
 !pip install ipykernel
-!pip install toio-py --upgrade
 
 
 # %% [markdown]

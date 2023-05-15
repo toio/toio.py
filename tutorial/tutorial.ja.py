@@ -25,9 +25,10 @@
 # このチュートリアルではコードセルを使って動作確認を行います。
 # ここでコードセルの実行方法をマスターしておいてください。
 
+!pip install setuptools --upgrade
+!pip install toio-py --upgrade
 !pip install bleak
 !pip install ipykernel
-!pip install toio-py --upgrade
 
 
 # %% [markdown]
