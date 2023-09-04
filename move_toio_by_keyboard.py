@@ -5,17 +5,6 @@ import tty
 
 from toio import *
 
-async def scan_and_connect():
-    dev_list = await BLEScanner.scan(num=1)
-    assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
-    await cube.connect()
-
-    await asyncio.sleep(3)
-
-    await cube.disconnect()
-    return 0
-
 class ReadChar():
 
     def __enter__(self):
@@ -77,5 +66,4 @@ async def motor_1():
     return 0
 
 if __name__ == "__main__":
-    # asyncio.run(scan_and_connect())
     asyncio.run(motor_1())
