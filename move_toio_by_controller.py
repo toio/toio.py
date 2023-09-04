@@ -9,10 +9,12 @@ from toio import *
 import time
 
 
-if __name__ == "__main__":
-    # ps4 = PS4Controller()
-    # ps4.init()
-    # ps4.listen()
+async def motor_1():
+    # connect to a cube
+    dev_list = await BLEScanner.scan(1)
+    assert len(dev_list)
+    cube = ToioCoreCube(dev_list[0].interface)
+    await cube.connect()
 
     # ref: https://gist.github.com/claymcleod/028386b860b75e4f5472
     pygame.init()
@@ -30,7 +32,13 @@ if __name__ == "__main__":
     for i in range(controller.get_numhats()):
         hat_data[i] = (0, 0)
 
-    while True:
+    # go
+    timeout = 20
+    interval = 0.05
+    import datetime
+    s_time = current_time = datetime.datetime.now()
+    while (datetime.datetime.now() - s_time).seconds < timeout:
+
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:
                 axis_data[event.axis] = round(event.value,2)
@@ -40,12 +48,8 @@ if __name__ == "__main__":
                 button_data[event.button] = False
             elif event.type == pygame.JOYHATMOTION:
                 hat_data[event.hat] = event.value
-
-            # Insert your code on what you would like to happen for each event here!
-            # In the current setup, I have the state simply printing out to the screen.
             
             os.system('clear')
-            # pprint.pprint(button_data)
             pprint.pprint(axis_data)
             if axis_data:
                 l_val, r_val = 0, 0
@@ -54,5 +58,16 @@ if __name__ == "__main__":
                 if 3 in axis_data and abs(axis_data[3]) >= 0.1:
                     r_val = - axis_data[3]
                 print(l_val, r_val)
-            # pprint.pprint(hat_data)
-            time.sleep(0.05)
+                await cube.api.motor.motor_control(int(r_val*20), int(l_val*20))
+                await asyncio.sleep(interval)
+
+    # stop
+    print('timeout!')
+    await cube.api.motor.motor_control(0, 0)
+
+    await cube.disconnect()
+    return 0
+
+
+if __name__ == "__main__":
+    asyncio.run(motor_1())
