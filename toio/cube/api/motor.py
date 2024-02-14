@@ -11,7 +11,9 @@ import pprint
 import struct
 from dataclasses import dataclass
 from enum import Enum, IntEnum
-from typing import Optional, TypeAlias, Union
+from typing import List
+
+from typing_extensions import Optional, TypeAlias, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand, CubeResponse
 from toio.device_interface import CubeInterface, GattReadData
@@ -238,7 +240,7 @@ class MotorControlMultipleTargets(CubeCommand):
         movement_type: MovementType,
         speed: Speed,
         mode: WriteMode,
-        target_list: list[TargetPosition],
+        target_list: List[TargetPosition],
     ):
         self.timeout = clip(timeout, 0, 255)
         self.movement_type = movement_type
@@ -527,7 +529,7 @@ class Motor(CubeCharacteristic):
         movement_type: MovementType,
         speed: Speed,
         mode: WriteMode,
-        target_list: list[TargetPosition],
+        target_list: List[TargetPosition],
     ) -> None:
         """
         Send multiple target specified motor control command

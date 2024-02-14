@@ -9,7 +9,9 @@
 
 import struct
 from dataclasses import dataclass
-from typing import Union
+from typing import List, Tuple
+
+from typing_extensions import Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand
 from toio.device_interface import CubeInterface, GattReadData
@@ -99,7 +101,7 @@ class RepeatedTurningOnAndOff(CubeCommand):
     def __init__(
         self,
         repeat: int,
-        param_list: Union[list[IndicatorParam], tuple[IndicatorParam, ...]],
+        param_list: Union[List[IndicatorParam], Tuple[IndicatorParam, ...]],
     ) -> None:
         self.repeat = repeat
         self.param_list = param_list
@@ -182,14 +184,14 @@ class Indicator(CubeCharacteristic):
     async def repeated_turn_on(
         self,
         repeat: int,
-        param_list: Union[list[IndicatorParam], tuple[IndicatorParam, ...]],
+        param_list: Union[List[IndicatorParam], Tuple[IndicatorParam, ...]],
     ) -> None:
         """
         Send repeated indicator turning on / off command
 
         Args:
             repeat (int): Number of repetitions
-            param_list (Union[list[IndicatorParam], tuple[IndicatorParam]]): List of indicator parameters
+            param_list (Union[List[IndicatorParam], Tuple[IndicatorParam]]): List of indicator parameters
 
         References:
             https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator

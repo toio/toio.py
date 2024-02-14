@@ -18,12 +18,21 @@ The abstract base classes defined are as follows:
 """
 
 from abc import ABCMeta, abstractmethod
-from typing import Awaitable, Callable, Literal, NamedTuple, Optional, TypeAlias, Union
+from typing import List, Set
 from uuid import UUID
 
 from bleak.backends.characteristic import BleakGATTCharacteristic
 from bleak.backends.device import BLEDevice
 from bleak.backends.scanner import AdvertisementData
+from typing_extensions import (
+    Awaitable,
+    Callable,
+    Literal,
+    NamedTuple,
+    Optional,
+    TypeAlias,
+    Union,
+)
 
 DEFAULT_SCAN_TIMEOUT = 5.0
 
@@ -103,9 +112,9 @@ class ScannerInterface(metaclass=ABCMeta):
     async def scan(
         self,
         num: Optional[int] = None,
-        cube_id: Optional[set[str]] = None,
-        address: Optional[set[str]] = None,
+        cube_id: Optional[Set[str]] = None,
+        address: Optional[Set[str]] = None,
         sort: SortKey = None,
         timeout: float = DEFAULT_SCAN_TIMEOUT,
-    ) -> list[CubeInfo]:
+    ) -> List[CubeInfo]:
         raise NotImplementedError()

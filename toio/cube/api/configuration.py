@@ -10,7 +10,8 @@
 import pprint
 import struct
 from enum import IntEnum
-from typing import Optional, TypeAlias, Union
+
+from typing_extensions import Optional, TypeAlias, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand, CubeResponse
 from toio.device_interface import CubeInterface, GattReadData

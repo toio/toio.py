@@ -14,7 +14,7 @@ Windows specific functions for ble scanner
 
 import re
 import winreg
-from typing import NamedTuple
+from typing import NamedTuple, Tuple
 
 from toio.logger import get_toio_logger
 
@@ -23,9 +23,9 @@ logger = get_toio_logger(__name__)
 BLE_ENUM_KEY = R"SYSTEM\CurrentControlSet\Services\BthLEEnum\Enum"
 
 
-def get_ble_device_address() -> tuple[str, ...]:
+def get_ble_device_address() -> Tuple[str, ...]:
     device_prefix = "Dev_"
-    ble_address: tuple = ()
+    ble_address: Tuple = ()
     key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, BLE_ENUM_KEY)
     _subKeyNum, value_num, _modifiedDate = winreg.QueryInfoKey(key)
     for i in range(value_num):
@@ -47,9 +47,9 @@ class RegisteredCube(NamedTuple):
 BLE_DEVICE_KEY = R"SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Devices"
 
 
-def get_registered_cubes() -> tuple[RegisteredCube, ...]:
+def get_registered_cubes() -> Tuple[RegisteredCube, ...]:
     ble_address = get_ble_device_address()
-    registered_cube: tuple = ()
+    registered_cube: Tuple = ()
     for address in ble_address:
         key_name = BLE_DEVICE_KEY + "\\" + str(address)
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_name)
@@ -61,7 +61,7 @@ def get_registered_cubes() -> tuple[RegisteredCube, ...]:
                     data = data[:-1]
                 device_name = data.decode("utf-8")
                 address_str = ":".join(re.split("(..)", address)[1::2]).upper()
-                if device_name.startswith("toio Core Cube"):
+                if device_name.startswith("toio"):
                     registered_cube = registered_cube + (
                         RegisteredCube(device_name, address_str),
                     )

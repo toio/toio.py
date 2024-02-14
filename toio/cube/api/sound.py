@@ -10,7 +10,7 @@
 import struct
 from dataclasses import dataclass
 from enum import IntEnum
-from typing import Union
+from typing import List, Tuple, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand
 from toio.device_interface import CubeInterface, GattReadData
@@ -241,7 +241,7 @@ class PlayMidi(CubeCommand):
     _payload_id = 0x03
     _converter = struct.Struct("<BBB")
 
-    def __init__(self, repeat: int, notes: Union[list[MidiNote], tuple[MidiNote, ...]]):
+    def __init__(self, repeat: int, notes: Union[List[MidiNote], Tuple[MidiNote, ...]]):
         self.repeat = repeat
         self.notes = notes
 
@@ -294,14 +294,14 @@ class Sound(CubeCharacteristic):
         await self._write(bytes(sound_effect))
 
     async def play_midi(
-        self, repeat: int, midi_notes: Union[list[MidiNote], tuple[MidiNote, ...]]
+        self, repeat: int, midi_notes: Union[List[MidiNote], Tuple[MidiNote, ...]]
     ):
         """
         Send play midi note command
 
         Args:
             repeat (int): Number of repetitions (0: Infinite)
-            midi_notes (Union[list[MidiNote], tuple[MidiNote, ...]]): List of midi notes
+            midi_notes (Union[List[MidiNote], Tuple[MidiNote, ...]]): List of midi notes
         """
         midi = PlayMidi(repeat, midi_notes)
         await self._write(bytes(midi))

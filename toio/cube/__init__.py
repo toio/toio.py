@@ -8,7 +8,7 @@
 # ************************************************************
 
 
-from typing import Optional
+from typing import Optional, Tuple
 from uuid import UUID
 
 from ..device_interface import GattNotificationHandler, GattReadData, GattWriteData
@@ -114,7 +114,7 @@ class ToioCoreCube(CubeInterface):
         return await self.interface.unregister_notification_handler(uuid)
 
 
-__all__: tuple[str, ...] = (
+__all__: Tuple[str, ...] = (
     "ToioCoreCube",
     # .api
     "ToioCoreCubeLowLevelAPI",

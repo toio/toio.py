@@ -7,27 +7,29 @@
 #     Copyright 2023 Sony Interactive Entertainment Inc.
 #
 # ************************************************************
+#
+# Two cubes are required for this test.
+# This test is performed on the cubes listed in _cubes.py.
+# Before testing, turn on the cubes, run make_cube_list.py and save the output as _cubes.py.
+# On Windows, register those two cubes as Bluetooth devices to the OS.
+#
 
 import platform
 import pprint
 from logging import getLogger
+from typing import Dict, List
 
 import pytest
 
 from toio.scanner import BLEScanner
+from ._cubes import CUBES
 
 logger = getLogger(__name__)
 
 
-CUBES: list[dict[str, str]] = [
-    {"name": "31j", "address": "DD:14:33:3D:14:0F"},
-    {"name": "h7p", "address": "D8:E3:49:A0:EF:19"},
-]
-
-
 @pytest.mark.asyncio
 async def test_rssi():
-    print("** RSSI")
+    logger.info("** RSSI")
     dev = await BLEScanner.scan(len(CUBES))
     for d in dev:
         pprint.pprint(d)
@@ -36,7 +38,7 @@ async def test_rssi():
 
 @pytest.mark.asyncio
 async def test_local_name():
-    print("** LOCAL NAME")
+    logger.info("** LOCAL NAME")
     dev = await BLEScanner.scan(len(CUBES), sort="local_name")
     for d in dev:
         pprint.pprint(d)
@@ -45,7 +47,7 @@ async def test_local_name():
 
 @pytest.mark.asyncio
 async def test_num1():
-    print("** NUM1")
+    logger.info("** NUM1")
     dev = await BLEScanner.scan(num=1)
     for d in dev:
         pprint.pprint(d)
@@ -54,7 +56,7 @@ async def test_num1():
 
 @pytest.mark.asyncio
 async def test_name1():
-    print("** NAME1")
+    logger.info("** NAME1")
     dev = await BLEScanner.scan_with_id(cube_id={CUBES[0]["name"]})
     for d in dev:
         pprint.pprint(d)
@@ -63,7 +65,7 @@ async def test_name1():
 
 @pytest.mark.asyncio
 async def test_name2():
-    print("** NAME2")
+    logger.info("** NAME2")
     dev = await BLEScanner.scan_with_id(cube_id={CUBES[0]["name"], CUBES[1]["name"]})
     for d in dev:
         pprint.pprint(d)
@@ -72,7 +74,7 @@ async def test_name2():
 
 @pytest.mark.asyncio
 async def test_name3():
-    print("** NAME3")
+    logger.info("** NAME3")
     dev = await BLEScanner.scan_with_id(
         cube_id={CUBES[0]["name"], CUBES[1]["name"], CUBES[0]["name"]}
     )
@@ -83,7 +85,7 @@ async def test_name3():
 
 @pytest.mark.asyncio
 async def test_address1():
-    print("** ADDRESS1 (UPPERCASE)")
+    logger.info("** ADDRESS1 (UPPERCASE)")
     dev = await BLEScanner.scan_with_address(address={CUBES[0]["address"].upper()})
     for d in dev:
         pprint.pprint(d)
@@ -95,7 +97,7 @@ async def test_address1():
 
 @pytest.mark.asyncio
 async def test_address2():
-    print("** ADDRESS2 (LOWERCASE)")
+    logger.info("** ADDRESS2 (LOWERCASE)")
     dev = await BLEScanner.scan_with_address(address={CUBES[0]["address"].lower()})
     for d in dev:
         pprint.pprint(d)
@@ -107,7 +109,7 @@ async def test_address2():
 
 @pytest.mark.asyncio
 async def test_registered_1():
-    print("** REGISTERED1")
+    logger.info("** REGISTERED1")
     dev = await BLEScanner.scan_registered_cubes(1)
     for d in dev:
         pprint.pprint(d)
@@ -120,7 +122,7 @@ async def test_registered_1():
 
 @pytest.mark.asyncio
 async def test_registered_2():
-    print("** REGISTERED2")
+    logger.info("** REGISTERED2")
     dev = await BLEScanner.scan_registered_cubes(2)
     for d in dev:
         pprint.pprint(d)
@@ -133,7 +135,7 @@ async def test_registered_2():
 
 @pytest.mark.asyncio
 async def test_registered_3():
-    print("** REGISTERED3")
+    logger.info("** REGISTERED3")
     dev = await BLEScanner.scan_registered_cubes_with_id({"ooo"})
     for d in dev:
         pprint.pprint(d)
@@ -142,7 +144,7 @@ async def test_registered_3():
 
 @pytest.mark.asyncio
 async def test_registered_4():
-    print("** REGISTERED4")
+    logger.info("** REGISTERED4")
     dev = await BLEScanner.scan_registered_cubes_with_id({"ooo", CUBES[0]["name"]})
     for d in dev:
         pprint.pprint(d)
@@ -155,7 +157,7 @@ async def test_registered_4():
 
 @pytest.mark.asyncio
 async def test_registered_5(mocker):
-    print("** REGISTERED5")
+    logger.info("** REGISTERED5")
     mocker.patch("platform.system", return_value="UnknownOS")
     dev = await BLEScanner.scan_registered_cubes(1)
     for d in dev:
@@ -165,7 +167,7 @@ async def test_registered_5(mocker):
 
 @pytest.mark.asyncio
 async def test_registered_6(mocker):
-    print("** REGISTERED6")
+    logger.info("** REGISTERED6")
     mocker.patch("platform.system", return_value="UnknownOS")
     dev = await BLEScanner.scan_registered_cubes_with_id({"ooo", CUBES[0]["name"]})
     for d in dev:

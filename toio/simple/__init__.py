@@ -14,7 +14,7 @@ import math
 import time
 from enum import Enum, auto
 from logging import NOTSET, NullHandler, StreamHandler, getLogger
-from typing import ClassVar, Optional, Type
+from typing import ClassVar, Optional, Tuple, Type
 
 from toio.coordinate_systems import (
     LocalCoordinateSystem,
@@ -130,9 +130,9 @@ class SimpleCube(object):
         self._on_standard_id: bool = False
         self._mat: Optional[MatRect] = None
         self._arrived: bool = False
-        self._coordinate_system_class: Type[
-            LocalCoordinateSystem
-        ] = coordinate_system_class
+        self._coordinate_system_class: Type[LocalCoordinateSystem] = (
+            coordinate_system_class
+        )
         if log_level is not NOTSET:
             logger.setLevel(log_level)
             log_handler = StreamHandler()
@@ -156,7 +156,7 @@ class SimpleCube(object):
         self._set_sensor_configurations()
         self._request_initial_information()
 
-        handlers: tuple[tuple[CubeCharacteristic, CubeNotificationHandler], ...] = (
+        handlers: Tuple[Tuple[CubeCharacteristic, CubeNotificationHandler], ...] = (
             (self._cube.api.id_information, self._id_notification_handler),
             (self._cube.api.motor, self._motor_notification_handler),
             (self._cube.api.sensor, self._motion_sensor_notification_handler),
@@ -454,7 +454,7 @@ class SimpleCube(object):
         cell_point = self._cell_to_point(cell_x, cell_y)
         return self.move_to(speed, cell_point.x, cell_point.y)
 
-    def get_current_position(self) -> Optional[tuple[int, int]]:
+    def get_current_position(self) -> Optional[Tuple[int, int]]:
         if self._location:
             return (
                 self._location.relative_location.point.x,
@@ -481,7 +481,7 @@ class SimpleCube(object):
         else:
             return None
 
-    def get_grid(self) -> Optional[tuple[int, int]]:
+    def get_grid(self) -> Optional[Tuple[int, int]]:
         if not self._on_position_id:
             return None
         assert self._location is not None
@@ -514,7 +514,7 @@ class SimpleCube(object):
     def _cell_to_point(self, cell_x: int, cell_y: int) -> Point:
         return Point(x=round(self.CELL_SIZE * cell_x), y=round(self.CELL_SIZE * cell_y))
 
-    def _point_to_cell(self, relative_point: Point) -> tuple[int, int]:
+    def _point_to_cell(self, relative_point: Point) -> Tuple[int, int]:
         cell = relative_point / self.CELL_SIZE
         return cell.x, cell.y
 
@@ -555,7 +555,7 @@ class SimpleCube(object):
         else:
             return None
 
-    def get_3d_angle(self) -> Optional[tuple[int, int, int]]:
+    def get_3d_angle(self) -> Optional[Tuple[int, int, int]]:
         if self._cube_angle is None:
             return None
         return self._cube_angle.roll, self._cube_angle.pitch, self._cube_angle.yaw

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "toio.py"
-version = "1.0.2"
+version = "1.0.3.dev2"
 description = "Control toio™Core Cube"
 authors = ["Sony Interactive Entertainment"]
 readme = "README.md"
@@ -11,28 +11,28 @@ homepage = "https://toio.io/"
 keywords = ["toio"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
-bleak = "0.20.1"
-
+python = ">=3.8.1,<3.13"
+bleak = "^0.21.1"
 
 [tool.poetry.group.dev.dependencies]
-pyright = "^1.1.302"
-isort = "^5.12.0"
-pytest = "^7.3.0"
-pytest-asyncio = "0.21.0"
+pyright = "^1.1.350"
+isort = "^5.13.2"
+pytest = "^8.0.0"
+pytest-asyncio = "^0.23.5"
 autopep8 = "^2.0.2"
-black = {version = "23.3.0", extras = ["d"]}
-ipykernel = "^6.22.0"
-sphinx = "^6.1.3"
+black = "^24.2.0"
+ipykernel = "^6.29.2"
+sphinx = "^6.2.1"
 pytest-cov = "^4.0.0"
-coverage = "^7.2.3"
-flake8 = "^6.0.0"
-mypy = "^1.2.0"
-pytest-mock = "^3.10.0"
-poethepoet = "0.19.0"
+coverage = "^7.4.0"
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+pytest-mock = "^3.12.0"
+poethepoet = "^0.24.4"
 typing-extensions = "^4.5.0"
-sphinx-rtd-theme = "^1.2.0"
-pygments = "^2.15.0"
+sphinx-rtd-theme = "^2.0.0"
+pygments = "^2.17.2"
+poetry = "^1.7.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -54,7 +54,7 @@ addopts = "--log-cli-level=INFO"
 testpaths =  ["tests"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.8"
 
 [tool.poe.tasks]
 update-apidocs = { "shell" = "./mkdocs/mkdocs.sh --rebuild" }

@@ -11,7 +11,7 @@ BLE device interface
 """
 
 import asyncio
-from typing import Optional, Union
+from typing import Dict, List, Optional, Set, Union
 from uuid import UUID
 
 from bleak import BleakClient, BleakScanner
@@ -98,11 +98,11 @@ class BleScanner(ScannerInterface):
     async def scan(
         self,
         num: Optional[int] = None,
-        cube_id: Optional[set[str]] = None,
-        address: Optional[set[str]] = None,
+        cube_id: Optional[Set[str]] = None,
+        address: Optional[Set[str]] = None,
         sort: SortKey = None,
         timeout: float = DEFAULT_SCAN_TIMEOUT,
-    ) -> list[CubeInfo]:
+    ) -> List[CubeInfo]:
         """Scan toio Core Cubes.
         Argument 'num', 'cube_id', and 'address' is exclusive.
 
@@ -128,7 +128,7 @@ class BleScanner(ScannerInterface):
         """
         w31j = False
         condition_met = asyncio.Event()
-        found_cubes: dict[Union[str, int], CubeInfo] = {}
+        found_cubes: Dict[Union[str, int], CubeInfo] = {}
 
         if cube_id is not None and "31j" in cube_id:
             logger.warning(
@@ -184,6 +184,8 @@ class BleScanner(ScannerInterface):
                 await asyncio.wait_for(condition_met.wait(), timeout=timeout)
             except TimeoutError:
                 logger.debug(f"scanner: timeout {timeout} sec")
+            except asyncio.TimeoutError:
+                logger.debug(f"scanner: timeout {timeout} sec (asyncio)")
             except Exception:
                 raise
 

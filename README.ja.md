@@ -9,7 +9,7 @@
 ## 特徴
 
 - Bluetooth 通信に[bleak](https://github.com/hbldh/bleak)を使用
-- Python 3.11 以降のバージョンをサポート
+- Python 3.8 以降のバージョンをサポート （Python 3.11 の使用を推奨）
 - マルチプラットフォーム (Windows, Linux, macOS)
 - 専用のドングルが不要
 - toio コアキューブ技術仕様に基づいた非同期 API (ToioCoreCube API) と 簡単にキューブを制御するための同期 API (SimpleCube API) の 2 種類を用意

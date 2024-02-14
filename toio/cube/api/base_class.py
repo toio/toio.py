@@ -10,7 +10,7 @@
 import binascii
 import inspect
 from abc import ABCMeta, abstractmethod
-from typing import Awaitable, Callable, Optional, Union
+from typing import Awaitable, Callable, List, Optional, Union
 from uuid import UUID
 
 from toio.device_interface import (
@@ -70,7 +70,7 @@ class CubeCharacteristic(metaclass=ABCMeta):
     def __init__(self, interface: CubeInterface, uuid: UUID):
         self.interface = interface
         self.uuid = uuid
-        self.notification_handler_list: list = []
+        self.notification_handler_list: List = []
         self.notification_handler_is_registered = False
 
     async def _read(self) -> GattReadData:

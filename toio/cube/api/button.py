@@ -9,7 +9,8 @@
 
 import pprint
 from enum import IntEnum
-from typing import Optional, TypeAlias
+
+from typing_extensions import Optional, TypeAlias
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeResponse
 from toio.device_interface import CubeInterface, GattReadData

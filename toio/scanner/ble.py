@@ -13,6 +13,7 @@ Scan toio Core Cubes with internal BLE interface.
 """
 
 import platform
+from typing import List, Set
 
 from toio.device_interface import DEFAULT_SCAN_TIMEOUT, CubeInfo, SortKey
 from toio.device_interface.ble import BleScanner
@@ -26,7 +27,7 @@ logger = get_toio_logger(__name__)
 
 async def scan(
     num: int, sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
-) -> list[CubeInfo]:
+) -> List[CubeInfo]:
     """Scan the specified number of toio Core Cubes.
 
     The scan is terminated by a timeout.
@@ -39,15 +40,15 @@ async def scan(
         timeout (float, optional): Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.
 
     Returns:
-        list[tuple[BLEDevice, AdvertisementData]]: List of found cubes.
+        List[Tuple[BLEDevice, AdvertisementData]]: List of found cubes.
     """
     scanner = BleScanner()
     return await scanner.scan(num=num, sort=sort, timeout=timeout)
 
 
 async def scan_with_id(
-    cube_id: set[str], sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
-) -> list[CubeInfo]:
+    cube_id: Set[str], sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
+) -> List[CubeInfo]:
     """Scan toio Core Cubes with specified id.
 
     The scan is terminated by a timeout.
@@ -60,15 +61,15 @@ async def scan_with_id(
         timeout (float, optional): Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.
 
     Returns:
-        list[tuple[BLEDevice, AdvertisementData]]: List of found cubes.
+        List[Tuple[BLEDevice, AdvertisementData]]: List of found cubes.
     """
     scanner = BleScanner()
     return await scanner.scan(cube_id=cube_id, sort=sort, timeout=timeout)
 
 
 async def scan_with_address(
-    address: set[str], sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
-) -> list[CubeInfo]:
+    address: Set[str], sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
+) -> List[CubeInfo]:
     """Scan toio Core Cubes with specified BLE address.
 
     The scan is terminated by a timeout.
@@ -81,7 +82,7 @@ async def scan_with_address(
         timeout (float, optional): Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.
 
     Returns:
-        list[tuple[BLEDevice, AdvertisementData]]: List of found cubes.
+        List[Tuple[BLEDevice, AdvertisementData]]: List of found cubes.
     """
     scanner = BleScanner()
     return await scanner.scan(address=address, sort=sort, timeout=timeout)
@@ -89,7 +90,7 @@ async def scan_with_address(
 
 async def scan_registered_cubes(
     num: int, sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
-) -> list[CubeInfo]:
+) -> List[CubeInfo]:
     """Scan toio Core Cubes registered with Windows
 
     This function only works on Windows platform.
@@ -104,7 +105,7 @@ async def scan_registered_cubes(
         timeout (float, optional): Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.
 
     Returns:
-        list[tuple[BLEDevice, AdvertisementData]]: List of found cubes.
+        List[Tuple[BLEDevice, AdvertisementData]]: List of found cubes.
     """
     if platform.system() == "Windows":
         registered_cubes = get_registered_cubes()
@@ -120,8 +121,8 @@ async def scan_registered_cubes(
 
 
 async def scan_registered_cubes_with_id(
-    cube_id: set[str], sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
-) -> list[CubeInfo]:
+    cube_id: Set[str], sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
+) -> List[CubeInfo]:
     """Scan toio Core Cube specified by the cube_id registered with Windows
 
     This function only works on Windows platform.
@@ -133,7 +134,7 @@ async def scan_registered_cubes_with_id(
         timeout (float, optional): Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.
 
     Returns:
-        list[tuple[BLEDevice, AdvertisementData]]: List of found cubes.
+        List[Tuple[BLEDevice, AdvertisementData]]: List of found cubes.
     """
     if platform.system() == "Windows":
         registered_cubes = get_registered_cubes()
