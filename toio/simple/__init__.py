@@ -591,7 +591,7 @@ class SimpleCube(object):
     def play_sound(
         self, note: int, duration: float, wait_to_complete: bool = True
     ) -> bool:
-        duration_ms = clip(int(duration * 100), 1, 255)
+        duration_ms = clip(int(duration * 1000), 1, 2550)
         try:
             note_name = Note(note)
         except ValueError:
