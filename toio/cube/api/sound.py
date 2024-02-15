@@ -263,7 +263,7 @@ class Stop(CubeCommand):
         pass
 
     def __bytes__(self) -> bytes:
-        return bytes(self._payload_id)
+        return bytes((self._payload_id,))
 
 
 class Sound(CubeCharacteristic):
