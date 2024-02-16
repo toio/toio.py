@@ -499,7 +499,7 @@ if cube.is_touched(StandardIdCard.NUMBER_0):
 | 引数     | 説明           | 指定可能な値             |
 | -------- | -------------- | ------------------------ |
 | note     | 音程           | 0 &lt;= note &lt;= 127         |
-| duration | 発音時間（秒） | 0.01 &lt;= duration &lt;= 25.5 |
+| duration | 発音時間（秒） | 0.01 &lt;= duration &lt;= 2.55 |
 
 `note` に指定する数値と音程の関係は[toio コアキューブ技術仕様 MIDI note number と Note name](https://toio.github.io/toio-spec/docs/ble_sound#midi-note-number-%E3%81%A8-note-name)を参照してください。
 

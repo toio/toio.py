@@ -498,7 +498,7 @@ Sound.
 | Arguments |     Description     |        Possible values         |
 | --------- | ------------------- | ------------------------------ |
 | note      | pitch               | 0 &lt;= note &lt;= 127         |
-| duration  | sounding time (sec) | 0.01 &lt;= duration &lt;= 25.5 |
+| duration  | sounding time (sec) | 0.01 &lt;= duration &lt;= 2.55 |
 
 For the relationship between the number specified for `note` and the pitch, see [toio Core Cube Specifications: MIDI note number and note name](https://toio.github.io/toio-spec/en/docs/ble_sound#midi-note-number-and-note-name).
 
