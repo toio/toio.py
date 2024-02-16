@@ -1,17 +1,11 @@
 toio package
 ============
 
-.. automodule:: toio
-   :noindex:
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 3
 
    toio.cube
    toio.device_interface
@@ -22,7 +16,7 @@ Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 3
 
    toio.coordinate_systems
    toio.logger
@@ -30,3 +24,12 @@ Submodules
    toio.standard_id
    toio.toio_uuid
    toio.utility
+
+Module contents
+---------------
+
+.. automodule:: toio
+   :noindex:
+   :members:
+   :undoc-members:
+   :show-inheritance:

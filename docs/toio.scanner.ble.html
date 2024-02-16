@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>toio.scanner.ble module &mdash; toio.py  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -48,12 +52,14 @@
 <li class="toctree-l3"><a class="reference internal" href="toio.device_interface.html">toio.device_interface package</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="toio.scanner.html">toio.scanner package</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="toio.scanner.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toio.scanner.html#module-toio.scanner">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="toio.simple.html">toio.simple package</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="toio.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toio.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -90,7 +96,7 @@
 <p>Scan toio Core Cubes with internal BLE interface.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="toio.scanner.ble.scan">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">toio.device_interface.CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan" title="Permalink to this definition"></a></dt>
 <dd><p>Scan the specified number of toio Core Cubes.</p>
 <p>The scan is terminated by a timeout.
 In the case of a timeout, the number of elements in the returned list
@@ -107,14 +113,62 @@ is the number of cubes found at the time of the timeout.</p>
 <dd class="field-even"><p>List of found cubes.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[tuple[BLEDevice, AdvertisementData]]</p>
+<dd class="field-odd"><p>List[Tuple[BLEDevice, AdvertisementData]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toio.scanner.ble.scan_with_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_with_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_with_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_with_id" title="Permalink to this definition"></a></dt>
+<dd><p>Scan toio Core Cubes with specified id.</p>
+<p>The scan is terminated by a timeout.
+In the case of a timeout, the number of elements in the returned list
+is the number of cubes found at the time of the timeout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cube_id</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – Set of cube id to be found.</p></li>
+<li><p><strong>sort</strong> (<em>SortKey</em><em>, </em><em>optional</em>) – Key to sort results. Defaults to “rssi”.</p></li>
+<li><p><strong>timeout</strong> (<em>float</em><em>, </em><em>optional</em>) – Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of found cubes.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[BLEDevice, AdvertisementData]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="toio.scanner.ble.scan_with_address">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_with_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_with_address"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_with_address" title="Permalink to this definition"></a></dt>
+<dd><p>Scan toio Core Cubes with specified BLE address.</p>
+<p>The scan is terminated by a timeout.
+In the case of a timeout, the number of elements in the returned list
+is the number of cubes found at the time of the timeout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – Set of BLE address to be found.</p></li>
+<li><p><strong>sort</strong> (<em>SortKey</em><em>, </em><em>optional</em>) – Key to sort results. Defaults to “rssi”.</p></li>
+<li><p><strong>timeout</strong> (<em>float</em><em>, </em><em>optional</em>) – Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of found cubes.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[BLEDevice, AdvertisementData]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="toio.scanner.ble.scan_registered_cubes">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_registered_cubes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">toio.device_interface.CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_registered_cubes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_registered_cubes" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_registered_cubes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_registered_cubes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_registered_cubes" title="Permalink to this definition"></a></dt>
 <dd><p>Scan toio Core Cubes registered with Windows</p>
 <p>This function only works on Windows platform.
 On the other platform, this function always returns empty list.</p>
@@ -132,14 +186,14 @@ the maximum size of the list returned by this function is the number of register
 <dd class="field-even"><p>List of found cubes.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[tuple[BLEDevice, AdvertisementData]]</p>
+<dd class="field-odd"><p>List[Tuple[BLEDevice, AdvertisementData]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="toio.scanner.ble.scan_registered_cubes_with_id">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_registered_cubes_with_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">toio.device_interface.CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_registered_cubes_with_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_registered_cubes_with_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_registered_cubes_with_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_registered_cubes_with_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_registered_cubes_with_id" title="Permalink to this definition"></a></dt>
 <dd><p>Scan toio Core Cube specified by the cube_id registered with Windows</p>
 <p>This function only works on Windows platform.
 On the other platform, this function always returns empty list.</p>
@@ -155,55 +209,7 @@ On the other platform, this function always returns empty list.</p>
 <dd class="field-even"><p>List of found cubes.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[tuple[BLEDevice, AdvertisementData]]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="toio.scanner.ble.scan_with_address">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_with_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">toio.device_interface.CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_with_address"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_with_address" title="Permalink to this definition"></a></dt>
-<dd><p>Scan toio Core Cubes with specified BLE address.</p>
-<p>The scan is terminated by a timeout.
-In the case of a timeout, the number of elements in the returned list
-is the number of cubes found at the time of the timeout.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>address</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – Set of BLE address to be found.</p></li>
-<li><p><strong>sort</strong> (<em>SortKey</em><em>, </em><em>optional</em>) – Key to sort results. Defaults to “rssi”.</p></li>
-<li><p><strong>timeout</strong> (<em>float</em><em>, </em><em>optional</em>) – Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of found cubes.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[tuple[BLEDevice, AdvertisementData]]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="toio.scanner.ble.scan_with_id">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.scanner.ble.</span></span><span class="sig-name descname"><span class="pre">scan_with_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rssi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">toio.device_interface.CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/scanner/ble.html#scan_with_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.scanner.ble.scan_with_id" title="Permalink to this definition"></a></dt>
-<dd><p>Scan toio Core Cubes with specified id.</p>
-<p>The scan is terminated by a timeout.
-In the case of a timeout, the number of elements in the returned list
-is the number of cubes found at the time of the timeout.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cube_id</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – Set of cube id to be found.</p></li>
-<li><p><strong>sort</strong> (<em>SortKey</em><em>, </em><em>optional</em>) – Key to sort results. Defaults to “rssi”.</p></li>
-<li><p><strong>timeout</strong> (<em>float</em><em>, </em><em>optional</em>) – Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of found cubes.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[tuple[BLEDevice, AdvertisementData]]</p>
+<dd class="field-odd"><p>List[Tuple[BLEDevice, AdvertisementData]]</p>
 </dd>
 </dl>
 </dd></dl>

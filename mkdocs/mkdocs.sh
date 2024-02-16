@@ -11,7 +11,7 @@ fi
 
 if [ ! -d ./docs-conf ] ; then
   echo "generate new sphinx project"
-  poetry run sphinx-apidoc -M -F -f -e -A "Sony Interactive Entertainment Inc." -H toio.py -o docs-conf -d 6 toio
+  poetry run sphinx-apidoc -d 3 -F -f -e -A "Sony Interactive Entertainment Inc." -H toio.py -o docs-conf toio toio/device_interface/pythonista3corebluetooth
   poetry run python ./mkdocs/add_noindex.py ${NOINDEX_FILES}
 
   cp ./mkdocs/conf.py ./docs-conf

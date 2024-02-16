@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>toio.cube.api.id_information &mdash; toio.py  documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
@@ -103,16 +107,16 @@
     <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PositionId</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+<div class="viewcode-block" id="PositionId.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.PositionId.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">PositionId</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">ca</span><span class="p">,</span> <span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">,</span> <span class="n">sa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">CubeLocation</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">),</span> <span class="n">angle</span><span class="o">=</span><span class="n">ca</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">CubeLocation</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span><span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">),</span> <span class="n">angle</span><span class="o">=</span><span class="n">sa</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+<div class="viewcode-block" id="PositionId.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.PositionId.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
 
 
 <div class="viewcode-block" id="StandardId"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.StandardId">[docs]</a><span class="k">class</span> <span class="nc">StandardId</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
@@ -130,14 +134,14 @@
     <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">StandardId</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+<div class="viewcode-block" id="StandardId.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.StandardId.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">StandardId</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+<div class="viewcode-block" id="StandardId.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.StandardId.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
 
 
 <div class="viewcode-block" id="PositionIdMissed"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.PositionIdMissed">[docs]</a><span class="k">class</span> <span class="nc">PositionIdMissed</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
@@ -155,14 +159,14 @@
     <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PositionIdMissed</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+<div class="viewcode-block" id="PositionIdMissed.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.PositionIdMissed.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">PositionIdMissed</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Position ID missed&quot;</span></div>
+<div class="viewcode-block" id="PositionIdMissed.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.PositionIdMissed.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Position ID missed&quot;</span></div></div>
 
 
 <div class="viewcode-block" id="StandardIdMissed"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.StandardIdMissed">[docs]</a><span class="k">class</span> <span class="nc">StandardIdMissed</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
@@ -180,14 +184,14 @@
     <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">StandardIdMissed</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+<div class="viewcode-block" id="StandardIdMissed.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.StandardIdMissed.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">StandardIdMissed</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Standard ID missed&quot;</span></div>
+<div class="viewcode-block" id="StandardIdMissed.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.StandardIdMissed.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Standard ID missed&quot;</span></div></div>
 
 
 <span class="n">IdInformationResponseType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span>
@@ -219,9 +223,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">):</span>
+<div class="viewcode-block" id="IdInformation.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.IdInformation.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">TOIO_UUID_ID_INFO</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">TOIO_UUID_ID_INFO</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IdInformation.read"><a class="viewcode-back" href="../../../../toio.cube.api.id_information.html#toio.IdInformation.read">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IdInformationResponseType</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>

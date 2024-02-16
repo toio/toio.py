@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>toio.cube.api.indicator module &mdash; toio.py  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -46,6 +50,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="toio.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="toio.cube.html">toio.cube package</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="toio.cube.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toio.cube.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="toio.device_interface.html">toio.device_interface package</a></li>
@@ -54,6 +59,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="toio.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toio.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -93,6 +99,18 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Indicator color in RGB</p>
 <dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.Color.r">
+<span class="sig-name descname"><span class="pre">r</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.indicator.Color.r" title="Permalink to this definition"></a></dt>
+<dd><p>R value (0 - 255)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.Color.g">
+<span class="sig-name descname"><span class="pre">g</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.indicator.Color.g" title="Permalink to this definition"></a></dt>
+<dd><p>G value (0 - 255)</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="toio.cube.api.indicator.Color.b">
 <span class="sig-name descname"><span class="pre">b</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.indicator.Color.b" title="Permalink to this definition"></a></dt>
 <dd><p>B value (0 - 255)</p>
@@ -104,16 +122,164 @@
 <dd><p>Return the tuple representation of this dataclass</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.Color.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.cube.api.indicator.Color.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">IndicatorParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.Color" title="toio.cube.api.indicator.Color"><span class="pre">Color</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#IndicatorParam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Indicator color and lighting period</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.Color.g">
-<span class="sig-name descname"><span class="pre">g</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.indicator.Color.g" title="Permalink to this definition"></a></dt>
-<dd><p>G value (0 - 255)</p>
+<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam.duration_ms">
+<span class="sig-name descname"><span class="pre">duration_ms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam.duration_ms" title="Permalink to this definition"></a></dt>
+<dd><div class="line-block">
+<div class="line">Duration of lighting:</div>
+<div class="line-block">
+<div class="line">Any fraction less than 10ms will be truncated.</div>
+<div class="line">0 - 9: no time limit</div>
+<div class="line">10 - 2550: duration [ms]</div>
+</div>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.Color.r">
-<span class="sig-name descname"><span class="pre">r</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.indicator.Color.r" title="Permalink to this definition"></a></dt>
-<dd><p>R value (0 - 255)</p>
+<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam.color">
+<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.indicator.Color" title="toio.cube.api.indicator.Color"><span class="pre">Color</span></a></em><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam.color" title="Permalink to this definition"></a></dt>
+<dd><div class="line-block">
+<div class="line">RGB value</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#IndicatorParam.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam.flatten" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.Color" title="toio.cube.api.indicator.Color"><span class="pre">Color</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurningOnAndOff">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">TurningOnAndOff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurningOnAndOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurningOnAndOff" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Indicator turning on / off command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turning-the-indicator-on-and-off">https://toio.github.io/toio-spec/en/docs/ble_light#turning-the-indicator-on-and-off</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurningOnAndOff.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurningOnAndOff.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurningOnAndOff.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurningOnAndOff.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurningOnAndOff.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurningOnAndOff.__bytes__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.RepeatedTurningOnAndOff">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">RepeatedTurningOnAndOff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#RepeatedTurningOnAndOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.RepeatedTurningOnAndOff" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Repeated indicator turning on /off command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.RepeatedTurningOnAndOff.REPEAT_INFINITE">
+<span class="sig-name descname"><span class="pre">REPEAT_INFINITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.indicator.RepeatedTurningOnAndOff.REPEAT_INFINITE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.RepeatedTurningOnAndOff.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#RepeatedTurningOnAndOff.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.RepeatedTurningOnAndOff.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.RepeatedTurningOnAndOff.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#RepeatedTurningOnAndOff.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.RepeatedTurningOnAndOff.__bytes__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOffAll">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">TurnOffAll</span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOffAll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOffAll" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Indicator all off command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators">https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOffAll.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOffAll.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOffAll.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOffAll.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOffAll.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOffAll.__bytes__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOff">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">TurnOff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indicator_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOff" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Indicator off command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOff.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indicator_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOff.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOff.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOff.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOff.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOff.__bytes__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -138,19 +304,45 @@ CubeResponse object. Otherwise, it returns None.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.Indicator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#Indicator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.Indicator.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.Indicator.turn_on">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">turn_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#Indicator.turn_on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.Indicator.turn_on" title="Permalink to this definition"></a></dt>
+<dd><p>Send indicator turn on / off command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>param</strong> – Indicator parameter</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</a></p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.indicator.Indicator.repeated_turn_on">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repeated_turn_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">toio.cube.api.indicator.IndicatorParam</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">toio.cube.api.indicator.IndicatorParam</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#Indicator.repeated_turn_on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.Indicator.repeated_turn_on" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repeated_turn_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#Indicator.repeated_turn_on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.Indicator.repeated_turn_on" title="Permalink to this definition"></a></dt>
 <dd><p>Send repeated indicator turning on / off command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>repeat</strong> (<em>int</em>) – Number of repetitions</p></li>
-<li><p><strong>param_list</strong> (<em>Union</em><em>[</em><em>list</em><em>[</em><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><em>IndicatorParam</em></a><em>]</em><em>, </em><em>tuple</em><em>[</em><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><em>IndicatorParam</em></a><em>]</em><em>]</em>) – List of indicator parameters</p></li>
+<li><p><strong>param_list</strong> (<em>Union</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><em>IndicatorParam</em></a><em>]</em><em>, </em><em>Tuple</em><em>[</em><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><em>IndicatorParam</em></a><em>]</em><em>]</em>) – List of indicator parameters</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">References</p>
 <p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.indicator.Indicator.turn_off_all">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">turn_off_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#Indicator.turn_off_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.Indicator.turn_off_all" title="Permalink to this definition"></a></dt>
+<dd><p>Send all off command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators">https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators</a></p>
 </dd></dl>
 
 <dl class="py method">
@@ -166,101 +358,6 @@ CubeResponse object. Otherwise, it returns None.</p>
 <p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator</a></p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.Indicator.turn_off_all">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">turn_off_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#Indicator.turn_off_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.Indicator.turn_off_all" title="Permalink to this definition"></a></dt>
-<dd><p>Send all off command</p>
-<p class="rubric">References</p>
-<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators">https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators</a></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.Indicator.turn_on">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">turn_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#Indicator.turn_on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.Indicator.turn_on" title="Permalink to this definition"></a></dt>
-<dd><p>Send indicator turn on / off command</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>param</strong> – Indicator parameter</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</a></p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">IndicatorParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.Color" title="toio.cube.api.indicator.Color"><span class="pre">Color</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#IndicatorParam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Indicator color and lighting period</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam.color">
-<span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.indicator.Color" title="toio.cube.api.indicator.Color"><span class="pre">Color</span></a></em><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam.color" title="Permalink to this definition"></a></dt>
-<dd><div class="line-block">
-<div class="line">RGB value</div>
-</div>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam.duration_ms">
-<span class="sig-name descname"><span class="pre">duration_ms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam.duration_ms" title="Permalink to this definition"></a></dt>
-<dd><div class="line-block">
-<div class="line">Duration of lighting:</div>
-<div class="line-block">
-<div class="line">Any fraction less than 10ms will be truncated.</div>
-<div class="line">0 - 9: no time limit</div>
-<div class="line">10 - 2550: duration [ms]</div>
-</div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.IndicatorParam.flatten">
-<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#IndicatorParam.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.IndicatorParam.flatten" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.RepeatedTurningOnAndOff">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">RepeatedTurningOnAndOff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">toio.cube.api.indicator.IndicatorParam</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">toio.cube.api.indicator.IndicatorParam</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#RepeatedTurningOnAndOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.RepeatedTurningOnAndOff" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
-<p>Repeated indicator turning on /off command</p>
-<p class="rubric">References</p>
-<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator</a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.RepeatedTurningOnAndOff.REPEAT_INFINITE">
-<span class="sig-name descname"><span class="pre">REPEAT_INFINITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.indicator.RepeatedTurningOnAndOff.REPEAT_INFINITE" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOff">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">TurnOff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indicator_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOff" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
-<p>Indicator off command</p>
-<p class="rubric">References</p>
-<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator">https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-a-specific-indicator</a></p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.TurnOffAll">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">TurnOffAll</span></span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurnOffAll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurnOffAll" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
-<p>Indicator all off command</p>
-<p class="rubric">References</p>
-<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators">https://toio.github.io/toio-spec/en/docs/ble_light#turn-off-all-indicators</a></p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.cube.api.indicator.TurningOnAndOff">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.indicator.</span></span><span class="sig-name descname"><span class="pre">TurningOnAndOff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.indicator.IndicatorParam" title="toio.cube.api.indicator.IndicatorParam"><span class="pre">IndicatorParam</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/indicator.html#TurningOnAndOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.indicator.TurningOnAndOff" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
-<p>Indicator turning on / off command</p>
-<p class="rubric">References</p>
-<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_light#turning-the-indicator-on-and-off">https://toio.github.io/toio-spec/en/docs/ble_light#turning-the-indicator-on-and-off</a></p>
 </dd></dl>
 
 </section>

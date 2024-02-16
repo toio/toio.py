@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>toio.cube.api.sound &mdash; toio.py  documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
@@ -81,7 +85,7 @@
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">toio.cube.api.base_class</span> <span class="kn">import</span> <span class="n">CubeCharacteristic</span><span class="p">,</span> <span class="n">CubeCommand</span>
 <span class="kn">from</span> <span class="nn">toio.device_interface</span> <span class="kn">import</span> <span class="n">CubeInterface</span><span class="p">,</span> <span class="n">GattReadData</span>
@@ -293,12 +297,12 @@
     <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x02</span>
     <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">volume</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="PlaySoundEffect.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.PlaySoundEffect.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">volume</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sound_id</span> <span class="o">=</span> <span class="n">sound_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sound_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">)</span></div>
+<div class="viewcode-block" id="PlaySoundEffect.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.PlaySoundEffect.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sound_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="PlayMidi"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.PlayMidi">[docs]</a><span class="k">class</span> <span class="nc">PlayMidi</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
@@ -312,15 +316,15 @@
     <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
     <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">,</span> <span class="o">...</span><span class="p">]]):</span>
+<div class="viewcode-block" id="PlayMidi.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.PlayMidi.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">,</span> <span class="o">...</span><span class="p">]]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="n">repeat</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span></div>
 
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="viewcode-block" id="PlayMidi.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.PlayMidi.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="n">byte_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
             <span class="n">byte_data</span> <span class="o">=</span> <span class="n">byte_data</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">note</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">byte_data</span></div>
+        <span class="k">return</span> <span class="n">byte_data</span></div></div>
 
 
 <div class="viewcode-block" id="Stop"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.Stop">[docs]</a><span class="k">class</span> <span class="nc">Stop</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
@@ -330,11 +334,11 @@
 
     <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x01</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
+<div class="viewcode-block" id="Stop.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.Stop.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
 
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">)</span></div>
+<div class="viewcode-block" id="Stop.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.Stop.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,))</span></div></div>
 
 
 <div class="viewcode-block" id="Sound"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.Sound">[docs]</a><span class="k">class</span> <span class="nc">Sound</span><span class="p">(</span><span class="n">CubeCharacteristic</span><span class="p">):</span>
@@ -349,9 +353,9 @@
     <span class="k">def</span> <span class="nf">is_my_data</span><span class="p">(</span><span class="n">_payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">):</span>
+<div class="viewcode-block" id="Sound.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.Sound.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">TOIO_UUID_SOUND_CTRL</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">TOIO_UUID_SOUND_CTRL</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Sound.play_sound_effect"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.Sound.play_sound_effect">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">play_sound_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound_id</span><span class="p">:</span> <span class="n">SoundId</span><span class="p">,</span> <span class="n">volume</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -365,14 +369,14 @@
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">sound_effect</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Sound.play_midi"><a class="viewcode-back" href="../../../../toio.cube.api.sound.html#toio.Sound.play_midi">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">play_midi</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">midi_notes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">midi_notes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">MidiNote</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Send play midi note command</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            repeat (int): Number of repetitions (0: Infinite)</span>
-<span class="sd">            midi_notes (Union[list[MidiNote], tuple[MidiNote, ...]]): List of midi notes</span>
+<span class="sd">            midi_notes (Union[List[MidiNote], Tuple[MidiNote, ...]]): List of midi notes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">midi</span> <span class="o">=</span> <span class="n">PlayMidi</span><span class="p">(</span><span class="n">repeat</span><span class="p">,</span> <span class="n">midi_notes</span><span class="p">)</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">midi</span><span class="p">))</span></div>

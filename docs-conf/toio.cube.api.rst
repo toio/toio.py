@@ -1,17 +1,11 @@
 toio.cube.api package
 =====================
 
-.. automodule:: toio.cube.api
-   :noindex:
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 3
 
    toio.cube.api.base_class
    toio.cube.api.battery
@@ -22,3 +16,12 @@ Submodules
    toio.cube.api.motor
    toio.cube.api.sensor
    toio.cube.api.sound
+
+Module contents
+---------------
+
+.. automodule:: toio.cube.api
+   :noindex:
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -9,6 +9,7 @@ __pypackages__/
 */.mypy_cache/
 .venv*/
 .idea/
+.DS_Store
 
 .vscode/*
 !.vscode/extensions.json

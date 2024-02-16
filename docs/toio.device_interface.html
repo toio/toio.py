@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>toio.device_interface package &mdash; toio.py  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -46,10 +50,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="toio.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="toio.cube.html">toio.cube package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">toio.device_interface package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#toio.device_interface.CubeInfo"><code class="docutils literal notranslate"><span class="pre">CubeInfo</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toio.device_interface.CubeInterface"><code class="docutils literal notranslate"><span class="pre">CubeInterface</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toio.device_interface.ScannerInterface"><code class="docutils literal notranslate"><span class="pre">ScannerInterface</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-toio.device_interface">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="toio.scanner.html">toio.scanner package</a></li>
@@ -57,6 +59,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="toio.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toio.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -86,8 +89,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-toio.device_interface">
-<span id="toio-device-interface-package"></span><h1>toio.device_interface package<a class="headerlink" href="#module-toio.device_interface" title="Permalink to this heading"></a></h1>
+  <section id="toio-device-interface-package">
+<h1>toio.device_interface package<a class="headerlink" href="#toio-device-interface-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="toio.device_interface.ble.html">toio.device_interface.ble module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube"><code class="docutils literal notranslate"><span class="pre">BleCube</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.__init__"><code class="docutils literal notranslate"><span class="pre">BleCube.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.connect"><code class="docutils literal notranslate"><span class="pre">BleCube.connect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.disconnect"><code class="docutils literal notranslate"><span class="pre">BleCube.disconnect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.read"><code class="docutils literal notranslate"><span class="pre">BleCube.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.write"><code class="docutils literal notranslate"><span class="pre">BleCube.write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.register_notification_handler"><code class="docutils literal notranslate"><span class="pre">BleCube.register_notification_handler()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.unregister_notification_handler"><code class="docutils literal notranslate"><span class="pre">BleCube.unregister_notification_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleScanner"><code class="docutils literal notranslate"><span class="pre">BleScanner</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleScanner.__init__"><code class="docutils literal notranslate"><span class="pre">BleScanner.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleScanner.scan"><code class="docutils literal notranslate"><span class="pre">BleScanner.scan()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-toio.device_interface">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-toio.device_interface" title="Permalink to this heading"></a></h2>
 <p>device_interface</p>
 <p>Abstraction layer to communicate toio Core Cubes.</p>
 <p>The abstract base classes defined are as follows:</p>
@@ -95,36 +125,6 @@
 <li><p>ScannerInterface</p></li>
 <li><p>CubeInterface</p></li>
 </ul>
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.device_interface.CubeInfo">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.device_interface.</span></span><span class="sig-name descname"><span class="pre">CubeInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">advertisement</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/device_interface.html#CubeInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.CubeInfo" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.advertisement">
-<span class="sig-name descname"><span class="pre">advertisement</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AdvertisementData</span></em><a class="headerlink" href="#toio.device_interface.CubeInfo.advertisement" title="Permalink to this definition"></a></dt>
-<dd><p>Alias for field number 3</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.device">
-<span class="sig-name descname"><span class="pre">device</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BLEDevice</span></em><a class="headerlink" href="#toio.device_interface.CubeInfo.device" title="Permalink to this definition"></a></dt>
-<dd><p>Alias for field number 1</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.interface">
-<span class="sig-name descname"><span class="pre">interface</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></em><a class="headerlink" href="#toio.device_interface.CubeInfo.interface" title="Permalink to this definition"></a></dt>
-<dd><p>Alias for field number 2</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#toio.device_interface.CubeInfo.name" title="Permalink to this definition"></a></dt>
-<dd><p>Alias for field number 0</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="toio.device_interface.CubeInterface">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.device_interface.</span></span><span class="sig-name descname"><span class="pre">CubeInterface</span></span><a class="reference internal" href="_modules/toio/device_interface.html#CubeInterface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.CubeInterface" title="Permalink to this definition"></a></dt>
@@ -146,6 +146,11 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="toio.device_interface.CubeInterface.write">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UUID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytearray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">memoryview</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/device_interface.html#CubeInterface.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.CubeInterface.write" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="toio.device_interface.CubeInterface.register_notification_handler">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">register_notification_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UUID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">BleakGATTCharacteristic</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/device_interface.html#CubeInterface.register_notification_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.CubeInterface.register_notification_handler" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -155,10 +160,35 @@
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unregister_notification_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UUID</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/device_interface.html#CubeInterface.unregister_notification_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.CubeInterface.unregister_notification_handler" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.device_interface.CubeInterface.write">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UUID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytearray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">memoryview</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/device_interface.html#CubeInterface.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.CubeInterface.write" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.device_interface.CubeInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.device_interface.</span></span><span class="sig-name descname"><span class="pre">CubeInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">advertisement</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/device_interface.html#CubeInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.CubeInfo" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#toio.device_interface.CubeInfo.name" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.device">
+<span class="sig-name descname"><span class="pre">device</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BLEDevice</span></em><a class="headerlink" href="#toio.device_interface.CubeInfo.device" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.interface">
+<span class="sig-name descname"><span class="pre">interface</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></em><a class="headerlink" href="#toio.device_interface.CubeInfo.interface" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.device_interface.CubeInfo.advertisement">
+<span class="sig-name descname"><span class="pre">advertisement</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AdvertisementData</span></em><a class="headerlink" href="#toio.device_interface.CubeInfo.advertisement" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -170,33 +200,11 @@
 This interface is used from toio.scanner.* module.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.device_interface.ScannerInterface.scan">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">toio.device_interface.CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/device_interface.html#ScannerInterface.scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.ScannerInterface.scan" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'rssi'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'local_name'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/device_interface.html#ScannerInterface.scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.device_interface.ScannerInterface.scan" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="toio.device_interface.ble.html">toio.device_interface.ble module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube"><code class="docutils literal notranslate"><span class="pre">BleCube</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.connect"><code class="docutils literal notranslate"><span class="pre">BleCube.connect()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.disconnect"><code class="docutils literal notranslate"><span class="pre">BleCube.disconnect()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.read"><code class="docutils literal notranslate"><span class="pre">BleCube.read()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.register_notification_handler"><code class="docutils literal notranslate"><span class="pre">BleCube.register_notification_handler()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.unregister_notification_handler"><code class="docutils literal notranslate"><span class="pre">BleCube.unregister_notification_handler()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube.write"><code class="docutils literal notranslate"><span class="pre">BleCube.write()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleScanner"><code class="docutils literal notranslate"><span class="pre">BleScanner</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleScanner.scan"><code class="docutils literal notranslate"><span class="pre">BleScanner.scan()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
 </section>
 </section>
 

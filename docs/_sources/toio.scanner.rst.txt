@@ -1,15 +1,18 @@
 toio.scanner package
 ====================
 
-.. automodule:: toio.scanner
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 3
 
    toio.scanner.ble
+
+Module contents
+---------------
+
+.. automodule:: toio.scanner
+   :members:
+   :undoc-members:
+   :show-inheritance:

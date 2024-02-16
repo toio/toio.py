@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>toio.position module &mdash; toio.py  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -48,11 +52,11 @@
 <li class="toctree-l3"><a class="reference internal" href="toio.coordinate_systems.html">toio.coordinate_systems module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="toio.logger.html">toio.logger module</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">toio.position module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#toio.position.CoordinateSystemABC"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toio.position.CubeLocation"><code class="docutils literal notranslate"><span class="pre">CubeLocation</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toio.position.DefaultCoordinateSystem"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toio.position.MatRect"><code class="docutils literal notranslate"><span class="pre">MatRect</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#toio.position.Point"><code class="docutils literal notranslate"><span class="pre">Point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#toio.position.CubeLocation"><code class="docutils literal notranslate"><span class="pre">CubeLocation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#toio.position.MatRect"><code class="docutils literal notranslate"><span class="pre">MatRect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#toio.position.CoordinateSystemABC"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#toio.position.DefaultCoordinateSystem"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#toio.position.RelativeCubeLocation"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#toio.position.ToioMat"><code class="docutils literal notranslate"><span class="pre">ToioMat</span></code></a></li>
 </ul>
@@ -62,6 +66,7 @@
 <li class="toctree-l3"><a class="reference internal" href="toio.utility.html">toio.utility module</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="toio.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -95,32 +100,141 @@
 <span id="toio-position-module"></span><h1>toio.position module<a class="headerlink" href="#module-toio.position" title="Permalink to this heading"></a></h1>
 <p>Utility functions for cube position and cube location.</p>
 <dl class="py class">
+<dt class="sig sig-object py" id="toio.position.Point">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">Point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#Point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A point on 2 dimensions</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.Point.x">
+<span class="sig-name descname"><span class="pre">x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.position.Point.x" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.Point.y">
+<span class="sig-name descname"><span class="pre">y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.position.Point.y" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.Point.new">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#Point.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point.new" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.Point.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#Point.distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point.distance" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.Point.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#Point.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point.flatten" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.Point.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.position.Point.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.position.CubeLocation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">CubeLocation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#CubeLocation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Position and angle of a cube on 2 dimensions</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.CubeLocation.point">
+<span class="sig-name descname"><span class="pre">point</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></em><a class="headerlink" href="#toio.position.CubeLocation.point" title="Permalink to this definition"></a></dt>
+<dd><p>Point of a cube</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.CubeLocation.angle">
+<span class="sig-name descname"><span class="pre">angle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.position.CubeLocation.angle" title="Permalink to this definition"></a></dt>
+<dd><p>Angle of a cube (degree)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CubeLocation.new">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CubeLocation.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation.new" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CubeLocation.get_boundary_point">
+<span class="sig-name descname"><span class="pre">get_boundary_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CubeLocation.get_boundary_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation.get_boundary_point" title="Permalink to this definition"></a></dt>
+<dd><p>Obtains the point where a line passing through two points
+intersects the coordinate axis in the first quadrant.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CubeLocation.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#CubeLocation.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation.flatten" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CubeLocation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.position.CubeLocation.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.position.MatRect">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">MatRect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#MatRect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A toio mat</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.MatRect.top_left">
+<span class="sig-name descname"><span class="pre">top_left</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></em><a class="headerlink" href="#toio.position.MatRect.top_left" title="Permalink to this definition"></a></dt>
+<dd><p>Top-left point of a mat</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.MatRect.bottom_right">
+<span class="sig-name descname"><span class="pre">bottom_right</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></em><a class="headerlink" href="#toio.position.MatRect.bottom_right" title="Permalink to this definition"></a></dt>
+<dd><p>Bottom-right point of a mat</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.MatRect.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#toio.position.MatRect.name" title="Permalink to this definition"></a></dt>
+<dd><p>Mat name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.MatRect.new">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.MatRect" title="toio.position.MatRect"><span class="pre">MatRect</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#MatRect.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect.new" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.MatRect.center">
+<span class="sig-name descname"><span class="pre">center</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#MatRect.center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect.center" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.MatRect.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/position.html#MatRect.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect.__str__" title="Permalink to this definition"></a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.MatRect.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#MatRect.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect.flatten" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.MatRect.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.position.MatRect.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="toio.position.CoordinateSystemABC">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">CoordinateSystemABC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Point(x=0,</span> <span class="pre">y=0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_angle">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_native_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_angle" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_location">
-<span class="sig-name descname"><span class="pre">from_native_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_location" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_point">
-<span class="sig-name descname"><span class="pre">from_native_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_point" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_x">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_native_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_x" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_y">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_native_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_y" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.__init__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Point(x=0,</span> <span class="pre">y=0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.__init__" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -134,16 +248,6 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.to_native_location">
-<span class="sig-name descname"><span class="pre">to_native_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.to_native_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.to_native_location" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.to_native_point">
-<span class="sig-name descname"><span class="pre">to_native_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.to_native_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.to_native_point" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.to_native_x">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_native_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.to_native_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.to_native_x" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -153,41 +257,40 @@
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_native_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.to_native_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.to_native_y" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.position.CubeLocation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">CubeLocation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#CubeLocation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A Position and angle of a cube on 2 dimensions</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.CubeLocation.angle">
-<span class="sig-name descname"><span class="pre">angle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.position.CubeLocation.angle" title="Permalink to this definition"></a></dt>
-<dd><p>Angle of a cube (degree)</p>
-</dd></dl>
-
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CubeLocation.flatten">
-<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#CubeLocation.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation.flatten" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_angle">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_native_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_angle" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CubeLocation.get_boundary_point">
-<span class="sig-name descname"><span class="pre">get_boundary_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CubeLocation.get_boundary_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation.get_boundary_point" title="Permalink to this definition"></a></dt>
-<dd><p>Obtains the point where a line passing through two points
-intersects the coordinate axis in the first quadrant.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.CubeLocation.new">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CubeLocation.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CubeLocation.new" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_x">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_native_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_x" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.CubeLocation.point">
-<span class="sig-name descname"><span class="pre">point</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></em><a class="headerlink" href="#toio.position.CubeLocation.point" title="Permalink to this definition"></a></dt>
-<dd><p>Point of a cube</p>
-</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_y">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_native_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_y" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.to_native_point">
+<span class="sig-name descname"><span class="pre">to_native_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.to_native_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.to_native_point" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.to_native_location">
+<span class="sig-name descname"><span class="pre">to_native_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.to_native_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.to_native_location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_point">
+<span class="sig-name descname"><span class="pre">from_native_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_point" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.CoordinateSystemABC.from_native_location">
+<span class="sig-name descname"><span class="pre">from_native_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#CoordinateSystemABC.from_native_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.CoordinateSystemABC.from_native_location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -199,18 +302,8 @@ intersects the coordinate axis in the first quadrant.</p>
 <p>No coordinate transformation
 No angle transformation</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.DefaultCoordinateSystem.from_native_angle">
-<span class="sig-name descname"><span class="pre">from_native_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.from_native_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.from_native_angle" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.DefaultCoordinateSystem.from_native_x">
-<span class="sig-name descname"><span class="pre">from_native_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.from_native_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.from_native_x" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.DefaultCoordinateSystem.from_native_y">
-<span class="sig-name descname"><span class="pre">from_native_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.from_native_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.from_native_y" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.DefaultCoordinateSystem.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.__init__" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -233,76 +326,19 @@ No angle transformation</p>
 <span class="sig-name descname"><span class="pre">to_native_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.to_native_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.to_native_y" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.position.MatRect">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">MatRect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#MatRect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A toio mat</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.MatRect.bottom_right">
-<span class="sig-name descname"><span class="pre">bottom_right</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></em><a class="headerlink" href="#toio.position.MatRect.bottom_right" title="Permalink to this definition"></a></dt>
-<dd><p>Bottom-right point of a mat</p>
-</dd></dl>
-
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.MatRect.center">
-<span class="sig-name descname"><span class="pre">center</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#MatRect.center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect.center" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.DefaultCoordinateSystem.from_native_angle">
+<span class="sig-name descname"><span class="pre">from_native_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.from_native_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.from_native_angle" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.MatRect.flatten">
-<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#MatRect.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect.flatten" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.MatRect.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#toio.position.MatRect.name" title="Permalink to this definition"></a></dt>
-<dd><p>Mat name</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.MatRect.new">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.MatRect" title="toio.position.MatRect"><span class="pre">MatRect</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#MatRect.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.MatRect.new" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.MatRect.top_left">
-<span class="sig-name descname"><span class="pre">top_left</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></em><a class="headerlink" href="#toio.position.MatRect.top_left" title="Permalink to this definition"></a></dt>
-<dd><p>Top-left point of a mat</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="toio.position.Point">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">Point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#Point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A point on 2 dimensions</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.Point.distance">
-<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#Point.distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point.distance" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.DefaultCoordinateSystem.from_native_x">
+<span class="sig-name descname"><span class="pre">from_native_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.from_native_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.from_native_x" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.Point.flatten">
-<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#Point.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point.flatten" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.Point.new">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#Point.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.Point.new" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.Point.x">
-<span class="sig-name descname"><span class="pre">x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.position.Point.x" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.Point.y">
-<span class="sig-name descname"><span class="pre">y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.position.Point.y" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.DefaultCoordinateSystem.from_native_y">
+<span class="sig-name descname"><span class="pre">from_native_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/position.html#DefaultCoordinateSystem.from_native_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.DefaultCoordinateSystem.from_native_y" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -312,11 +348,10 @@ No angle transformation</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.position.</span></span><span class="sig-name descname"><span class="pre">RelativeCubeLocation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate_system</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CoordinateSystemABC" title="toio.position.CoordinateSystemABC"><span class="pre">CoordinateSystemABC</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Location of the cube in the relative coordinate system</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.change_coordinate_system">
-<span class="sig-name descname"><span class="pre">change_coordinate_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_coordinate_system</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CoordinateSystemABC" title="toio.position.CoordinateSystemABC"><span class="pre">CoordinateSystemABC</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.change_coordinate_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.change_coordinate_system" title="Permalink to this definition"></a></dt>
-<dd><p>Change the coordinate system
-The location is updated to the coordinates in the new coordinate system</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.relative_location">
+<span class="sig-name descname"><span class="pre">relative_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></em><a class="headerlink" href="#toio.position.RelativeCubeLocation.relative_location" title="Permalink to this definition"></a></dt>
+<dd><p>Relative location of a cube</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -326,18 +361,43 @@ The location is updated to the coordinates in the new coordinate system</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.from_absolute_location">
-<span class="sig-name descname"><span class="pre">from_absolute_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">abs_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.from_absolute_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.from_absolute_location" title="Permalink to this definition"></a></dt>
-<dd><p>Set the relative location from the absolute location</p>
+<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.new">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.RelativeCubeLocation" title="toio.position.RelativeCubeLocation"><span class="pre">RelativeCubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.new" title="Permalink to this definition"></a></dt>
+<dd><p>Create new RelativeCubeLocation</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>abs_location</strong> (<a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><em>CubeLocation</em></a>) – Location on the absolute coordinate system</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new relative cube location instance</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Location on the relative coordinate system</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#toio.position.RelativeCubeLocation" title="toio.position.RelativeCubeLocation">RelativeCubeLocation</a></p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation">CubeLocation</a></p>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.to_absolute_point">
+<span class="sig-name descname"><span class="pre">to_absolute_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.to_absolute_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.to_absolute_point" title="Permalink to this definition"></a></dt>
+<dd><p>Get the point of the cube on the absolute coordinate system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Point of the absolute coordinate system</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#toio.position.Point" title="toio.position.Point">Point</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.to_absolute_location">
+<span class="sig-name descname"><span class="pre">to_absolute_location</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.to_absolute_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.to_absolute_location" title="Permalink to this definition"></a></dt>
+<dd><p>Get the location of the cube on the absolute coordinate system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CubeLocation of the absolute coordinate system</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation">CubeLocation</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -360,52 +420,33 @@ The location is updated to the coordinates in the new coordinate system</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.new">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.RelativeCubeLocation" title="toio.position.RelativeCubeLocation"><span class="pre">RelativeCubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.new" title="Permalink to this definition"></a></dt>
-<dd><p>Create new RelativeCubeLocation</p>
+<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.from_absolute_location">
+<span class="sig-name descname"><span class="pre">from_absolute_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">abs_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.from_absolute_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.from_absolute_location" title="Permalink to this definition"></a></dt>
+<dd><p>Set the relative location from the absolute location</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>new relative cube location instance</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>abs_location</strong> (<a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><em>CubeLocation</em></a>) – Location on the absolute coordinate system</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#toio.position.RelativeCubeLocation" title="toio.position.RelativeCubeLocation">RelativeCubeLocation</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Location on the relative coordinate system</p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.relative_location">
-<span class="sig-name descname"><span class="pre">relative_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></em><a class="headerlink" href="#toio.position.RelativeCubeLocation.relative_location" title="Permalink to this definition"></a></dt>
-<dd><p>Relative location of a cube</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.to_absolute_location">
-<span class="sig-name descname"><span class="pre">to_absolute_location</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.to_absolute_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.to_absolute_location" title="Permalink to this definition"></a></dt>
-<dd><p>Get the location of the cube on the absolute coordinate system</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>CubeLocation of the absolute coordinate system</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation">CubeLocation</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation">CubeLocation</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.to_absolute_point">
-<span class="sig-name descname"><span class="pre">to_absolute_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.position.Point" title="toio.position.Point"><span class="pre">Point</span></a></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.to_absolute_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.to_absolute_point" title="Permalink to this definition"></a></dt>
-<dd><p>Get the point of the cube on the absolute coordinate system</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Point of the absolute coordinate system</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#toio.position.Point" title="toio.position.Point">Point</a></p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.change_coordinate_system">
+<span class="sig-name descname"><span class="pre">change_coordinate_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_coordinate_system</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CoordinateSystemABC" title="toio.position.CoordinateSystemABC"><span class="pre">CoordinateSystemABC</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/position.html#RelativeCubeLocation.change_coordinate_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.position.RelativeCubeLocation.change_coordinate_system" title="Permalink to this definition"></a></dt>
+<dd><p>Change the coordinate system
+The location is updated to the coordinates in the new coordinate system</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.position.RelativeCubeLocation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate_system</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.position.CoordinateSystemABC" title="toio.position.CoordinateSystemABC"><span class="pre">CoordinateSystemABC</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.position.RelativeCubeLocation.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -415,33 +456,8 @@ The location is updated to the coordinates in the new coordinate system</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Definitions of official toio mats</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.ToioMat.GesundroidMat">
-<span class="sig-name descname"><span class="pre">GesundroidMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=1050,</span> <span class="pre">y=45),</span> <span class="pre">bottom_right=Point(x=1460,</span> <span class="pre">y=455),</span> <span class="pre">name='Gesundroid')</span></em><a class="headerlink" href="#toio.position.ToioMat.GesundroidMat" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsAutoplayMat">
-<span class="sig-name descname"><span class="pre">PicotonsAutoplayMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=554,</span> <span class="pre">y=2093),</span> <span class="pre">bottom_right=Point(x=742,</span> <span class="pre">y=2290),</span> <span class="pre">name='Picotons</span> <span class="pre">(auto</span> <span class="pre">play)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsAutoplayMat" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsControlMat">
-<span class="sig-name descname"><span class="pre">PicotonsControlMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=764,</span> <span class="pre">y=2093),</span> <span class="pre">bottom_right=Point(x=953,</span> <span class="pre">y=2290),</span> <span class="pre">name='Picotons</span> <span class="pre">(control)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsControlMat" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsPlayMatBack">
-<span class="sig-name descname"><span class="pre">PicotonsPlayMatBack</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=59,</span> <span class="pre">y=2303),</span> <span class="pre">bottom_right=Point(x=437,</span> <span class="pre">y=2499),</span> <span class="pre">name='Picotons</span> <span class="pre">(back)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsPlayMatBack" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsPlayMatFront">
-<span class="sig-name descname"><span class="pre">PicotonsPlayMatFront</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=59,</span> <span class="pre">y=2088),</span> <span class="pre">bottom_right=Point(x=437,</span> <span class="pre">y=2285),</span> <span class="pre">name='Picotons</span> <span class="pre">(front)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsPlayMatFront" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.ToioMat.SimpleMat">
-<span class="sig-name descname"><span class="pre">SimpleMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=98,</span> <span class="pre">y=142),</span> <span class="pre">bottom_right=Point(x=402,</span> <span class="pre">y=358),</span> <span class="pre">name='Simple</span> <span class="pre">mat')</span></em><a class="headerlink" href="#toio.position.ToioMat.SimpleMat" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.ToioMat.ToioCollectionMatRing">
+<span class="sig-name descname"><span class="pre">ToioCollectionMatRing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=45,</span> <span class="pre">y=45),</span> <span class="pre">bottom_right=Point(x=455,</span> <span class="pre">y=455),</span> <span class="pre">name='Toio</span> <span class="pre">Collection</span> <span class="pre">(ring)')</span></em><a class="headerlink" href="#toio.position.ToioMat.ToioCollectionMatRing" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -450,8 +466,33 @@ The location is updated to the coordinates in the new coordinate system</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="toio.position.ToioMat.ToioCollectionMatRing">
-<span class="sig-name descname"><span class="pre">ToioCollectionMatRing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=45,</span> <span class="pre">y=45),</span> <span class="pre">bottom_right=Point(x=455,</span> <span class="pre">y=455),</span> <span class="pre">name='Toio</span> <span class="pre">Collection</span> <span class="pre">(ring)')</span></em><a class="headerlink" href="#toio.position.ToioMat.ToioCollectionMatRing" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsPlayMatFront">
+<span class="sig-name descname"><span class="pre">PicotonsPlayMatFront</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=59,</span> <span class="pre">y=2088),</span> <span class="pre">bottom_right=Point(x=437,</span> <span class="pre">y=2285),</span> <span class="pre">name='Picotons</span> <span class="pre">(front)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsPlayMatFront" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsPlayMatBack">
+<span class="sig-name descname"><span class="pre">PicotonsPlayMatBack</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=59,</span> <span class="pre">y=2303),</span> <span class="pre">bottom_right=Point(x=437,</span> <span class="pre">y=2499),</span> <span class="pre">name='Picotons</span> <span class="pre">(back)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsPlayMatBack" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsControlMat">
+<span class="sig-name descname"><span class="pre">PicotonsControlMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=764,</span> <span class="pre">y=2093),</span> <span class="pre">bottom_right=Point(x=953,</span> <span class="pre">y=2290),</span> <span class="pre">name='Picotons</span> <span class="pre">(control)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsControlMat" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.ToioMat.PicotonsAutoplayMat">
+<span class="sig-name descname"><span class="pre">PicotonsAutoplayMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=554,</span> <span class="pre">y=2093),</span> <span class="pre">bottom_right=Point(x=742,</span> <span class="pre">y=2290),</span> <span class="pre">name='Picotons</span> <span class="pre">(auto</span> <span class="pre">play)')</span></em><a class="headerlink" href="#toio.position.ToioMat.PicotonsAutoplayMat" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.ToioMat.SimpleMat">
+<span class="sig-name descname"><span class="pre">SimpleMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=98,</span> <span class="pre">y=142),</span> <span class="pre">bottom_right=Point(x=402,</span> <span class="pre">y=358),</span> <span class="pre">name='Simple</span> <span class="pre">mat')</span></em><a class="headerlink" href="#toio.position.ToioMat.SimpleMat" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.position.ToioMat.GesundroidMat">
+<span class="sig-name descname"><span class="pre">GesundroidMat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MatRect(top_left=Point(x=1050,</span> <span class="pre">y=45),</span> <span class="pre">bottom_right=Point(x=1460,</span> <span class="pre">y=455),</span> <span class="pre">name='Gesundroid')</span></em><a class="headerlink" href="#toio.position.ToioMat.GesundroidMat" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
