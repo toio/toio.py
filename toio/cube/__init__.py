@@ -7,11 +7,12 @@
 #
 # ************************************************************
 
+from __future__ import annotations
 
-from typing import Optional, Tuple
+from typing_extensions import Iterable, List, Optional, Sequence, Tuple, TypeAlias, Union, Sequence
 from uuid import UUID
 
-from ..device_interface import GattNotificationHandler, GattReadData, GattWriteData
+from ..device_interface import CubeInfo, GattNotificationHandler, GattReadData, GattWriteData
 from .api import ToioCoreCubeLowLevelAPI
 from .api.base_class import CubeInterface
 from .api.battery import Battery, BatteryInformation, BatteryResponseType
@@ -70,6 +71,7 @@ from .api.sensor import (
 )
 from .api.sound import MidiNote, Note, Sound, SoundId
 
+CubeInitializer: TypeAlias = Union[CubeInterface, CubeInfo]
 
 class ToioCoreCube(CubeInterface):
     """
@@ -80,6 +82,52 @@ class ToioCoreCube(CubeInterface):
         name (str): cube name (optional)
         api (ToioCoreCubeLowLevelAPI): API class
     """
+
+    @staticmethod
+    def create(initializer: Union[CubeInitializer, Sequence[CubeInitializer]]) -> ToioCoreCube:
+        """
+        Supported version: v1.2.0 or later
+
+        Create a ToioCoreCube instance from a CubeInterface or CubeInfo
+
+        Args:
+            initializer (CubeInitializer): initializer
+
+        Returns:
+            Optional[ToioCoreCube]:
+        """
+        if isinstance(initializer, Sequence) and not isinstance(initializer, CubeInitializer):
+            if len(initializer) < 1:
+                raise ValueError("no initializer")
+            first_initializer = initializer[0]
+        else:
+            first_initializer = initializer
+
+        if isinstance(first_initializer, CubeInterface):
+            return ToioCoreCube(interface=first_initializer)
+        elif isinstance(first_initializer, CubeInfo):
+            return ToioCoreCube(interface=first_initializer.interface, name=first_initializer.name)
+        else:
+            raise ValueError("wrong initializer: " + str(type(first_initializer)))
+
+    @staticmethod
+    def create_cubes(initializers: Iterable[CubeInitializer]) -> List[ToioCoreCube]:
+        """
+        Supported version: v1.2.0 or later
+
+        Create a ToioCoreCube instance list from a CubeInterface or CubeInfo list
+
+        Args:
+            initializers (Iterable[CubeInitializer]): initializers
+
+        Returns:
+            List[ToioCoreCube]:
+        """
+        cubes = []
+        for initializer in initializers:
+            cube = ToioCoreCube.create(initializer)
+            cubes.append(cube)
+        return cubes
 
     def __init__(self, interface: CubeInterface, name: Optional[str] = None):
         self.interface = interface
