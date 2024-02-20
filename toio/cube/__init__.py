@@ -9,10 +9,24 @@
 
 from __future__ import annotations
 
-from typing_extensions import Iterable, List, Optional, Sequence, Tuple, TypeAlias, Union, Sequence
 from uuid import UUID
 
-from ..device_interface import CubeInfo, GattNotificationHandler, GattReadData, GattWriteData
+from typing_extensions import (
+    Iterable,
+    List,
+    Optional,
+    Sequence,
+    Tuple,
+    TypeAlias,
+    Union,
+)
+
+from ..device_interface import (
+    CubeInfo,
+    GattNotificationHandler,
+    GattReadData,
+    GattWriteData,
+)
 from .api import ToioCoreCubeLowLevelAPI
 from .api.base_class import CubeInterface
 from .api.battery import Battery, BatteryInformation, BatteryResponseType
@@ -73,20 +87,33 @@ from .api.sound import MidiNote, Note, Sound, SoundId
 
 CubeInitializer: TypeAlias = Union[CubeInterface, CubeInfo]
 
+
 class ToioCoreCube(CubeInterface):
     """
     Access to toio Core Cube
+
+    Note:
+       self.protocol_version is set after connecting to the cube.
+       self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.2.0.
 
     Attributes:
         interface (CubeInterface): control interface (e.g. BleCube)
         name (str): cube name (optional)
         api (ToioCoreCubeLowLevelAPI): API class
+        protocol_version (Optional[ProtocolVersion]): protocol version of the cube
+        max_retry_to_get_protocol_version (int): number of retries to get protocol version
+
     """
 
+    SUPPORTED_MAJOR_VERSION: int = 2
+    SUPPORTED_MINOR_VERSION: int = 4
+
     @staticmethod
-    def create(initializer: Union[CubeInitializer, Sequence[CubeInitializer]]) -> ToioCoreCube:
+    def create(
+        initializer: Union[CubeInitializer, Sequence[CubeInitializer]]
+    ) -> ToioCoreCube:
         """
-        Supported version: v1.2.0 or later
+        Supported toio.py versions: v1.2.0 or later
 
         Create a ToioCoreCube instance from a CubeInterface or CubeInfo
 
@@ -96,7 +123,9 @@ class ToioCoreCube(CubeInterface):
         Returns:
             Optional[ToioCoreCube]:
         """
-        if isinstance(initializer, Sequence) and not isinstance(initializer, CubeInitializer):
+        if isinstance(initializer, Sequence) and not isinstance(
+            initializer, CubeInitializer
+        ):
             if len(initializer) < 1:
                 raise ValueError("no initializer")
             first_initializer = initializer[0]
@@ -106,14 +135,16 @@ class ToioCoreCube(CubeInterface):
         if isinstance(first_initializer, CubeInterface):
             return ToioCoreCube(interface=first_initializer)
         elif isinstance(first_initializer, CubeInfo):
-            return ToioCoreCube(interface=first_initializer.interface, name=first_initializer.name)
+            return ToioCoreCube(
+                interface=first_initializer.interface, name=first_initializer.name
+            )
         else:
             raise ValueError("wrong initializer: " + str(type(first_initializer)))
 
     @staticmethod
     def create_cubes(initializers: Iterable[CubeInitializer]) -> List[ToioCoreCube]:
         """
-        Supported version: v1.2.0 or later
+        Supported toio.py versions: v1.2.0 or later
 
         Create a ToioCoreCube instance list from a CubeInterface or CubeInfo list
 
@@ -133,6 +164,8 @@ class ToioCoreCube(CubeInterface):
         self.interface = interface
         self.name = name
         self.api = ToioCoreCubeLowLevelAPI(interface)
+        self.protocol_version: Optional[ProtocolVersion] = None
+        self.max_retry_to_get_protocol_version: int = 10
 
     async def __aenter__(self):
         await self.connect()
@@ -142,7 +175,36 @@ class ToioCoreCube(CubeInterface):
         await self.disconnect()
 
     async def connect(self) -> bool:
-        return await self.interface.connect()
+        connect_result = await self.interface.connect()
+        if connect_result is True:
+            self.protocol_version = None
+            await self.api.configuration.request_protocol_version()
+            retry_count = 0
+            while (
+                self.protocol_version is None
+                and retry_count < self.max_retry_to_get_protocol_version
+            ):
+                retry_count += 1
+                received_data = await self.api.configuration._read()
+                if ProtocolVersion.is_myself(received_data):
+                    self.protocol_version = ProtocolVersion(received_data)
+                    import asyncio
+
+                    await asyncio.sleep(0.1)
+            if self.protocol_version is not None:
+                if (
+                    self.protocol_version._major != self.SUPPORTED_MAJOR_VERSION
+                    or self.protocol_version._minor < self.SUPPORTED_MINOR_VERSION
+                ):
+                    import warnings
+
+                    warnings.warn(
+                        "protocol version %s is not supported by toio.py\n"
+                        % self.protocol_version.version
+                        + "update cube firmware to latest version",
+                        UserWarning,
+                    )
+        return connect_result
 
     async def disconnect(self) -> bool:
         return await self.interface.disconnect()

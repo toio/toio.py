@@ -8,6 +8,7 @@
 #
 # ************************************************************
 
+import asyncio
 from logging import getLogger
 
 import pytest
@@ -74,4 +75,38 @@ async def test_connect_5():
     with pytest.raises(ValueError) as ex:
         cube = ToioCoreCube.create([])
     logger.info(ex)
+
+@pytest.mark.asyncio
+async def test_connect_6():
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube.create(device_list)
+    assert isinstance(cube, ToioCoreCube)
+    cube.SUPPORTED_MAJOR_VERSION = 2
+    cube.SUPPORTED_MINOR_VERSION = 8
+    logger.info("** CONNECTING...")
+    with pytest.warns(UserWarning) as warn:
+        await cube.connect()
+        logger.info("** CONNECTED")
+        await asyncio.sleep(0.5)
+        logger.info("** DISCONNECT")
+        await cube.disconnect()
+    logger.info(warn[0].message)
+
+@pytest.mark.asyncio
+async def test_connect_7():
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube.create(device_list)
+    assert isinstance(cube, ToioCoreCube)
+    cube.SUPPORTED_MAJOR_VERSION = 3
+    cube.SUPPORTED_MINOR_VERSION = 1
+    logger.info("** CONNECTING...")
+    with pytest.warns(UserWarning) as warn:
+        await cube.connect()
+        logger.info("** CONNECTED")
+        await asyncio.sleep(0.5)
+        logger.info("** DISCONNECT")
+        await cube.disconnect()
+    logger.info(warn[0].message)
 

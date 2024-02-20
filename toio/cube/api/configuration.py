@@ -260,7 +260,15 @@ class ProtocolVersion(CubeResponse):
     def __init__(self, payload: GattReadData):
         if ProtocolVersion.is_myself(payload):
             version = payload[2:]
+            self._major = 0
+            self._minor = 0
+            self._patch = 0
             self.version = version.decode("UTF-8")
+            version_numbers = self.version.split(".")
+            if len(version_numbers) >= 3:
+                self._major = int(version_numbers[0])
+                self._minor = int(version_numbers[1])
+                self._patch = int(version_numbers[2])
         else:
             raise TypeError("wrong payload")
 
