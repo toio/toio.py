@@ -14,6 +14,7 @@ import pytest
 
 logger = getLogger(__name__)
 
+
 @pytest.fixture(scope="function", autouse=True)
 def wait():
     logger.info("PRE WAIT")

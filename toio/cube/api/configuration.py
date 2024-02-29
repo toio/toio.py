@@ -200,6 +200,7 @@ class SetMotorSpeedInformationAcquisition(CubeCommand):
 class PostureAngleDetectionType(IntEnum):
     Euler = 0x01
     Quaternions = 0x02
+    HighPrecisionEuler = 0x03
 
 
 class PostureAngleDetectionCondition(IntEnum):

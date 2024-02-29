@@ -41,6 +41,7 @@ class RequestMotionDetection(CubeCommand):
 class PostureDataType(IntEnum):
     Euler = 0x01
     Quaternions = 0x02
+    HighPrecisionEuler = 0x03
 
 
 class RequestPostureAngleDetection(CubeCommand):
@@ -146,7 +147,7 @@ class PostureAngleEulerData(CubeResponse):
     Attributes:
         roll (int): Roll (X axis)
         pitch (int): Pitch (Y axis)
-        yaw (nt): Yaw (Z axis)
+        yaw (int): Yaw (Z axis)
 
     References:
        https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles
@@ -179,17 +180,17 @@ class PostureAngleQuaternionsData(CubeResponse):
     Information of posture angle (Quaternion)
 
     Attributes:
-        w (int):
-        x (int):
-        y (int):
-        z (int):
+        w (float):
+        x (float):
+        y (float):
+        z (float):
 
     References:
         https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-quaternions
     """
 
     _payload_id = 0x03
-    _converter = struct.Struct("<BBhhhh")
+    _converter = struct.Struct("<BBffff")
 
     @staticmethod
     def is_myself(payload: GattReadData) -> bool:
@@ -201,6 +202,41 @@ class PostureAngleQuaternionsData(CubeResponse):
     def __init__(self, payload: GattReadData):
         if PostureAngleQuaternionsData.is_myself(payload):
             _, _, self.w, self.x, self.y, self.z = self._converter.unpack_from(payload)
+        else:
+            raise TypeError("wrong payload")
+
+    def __str__(self) -> str:
+        return pprint.pformat(vars(self))
+
+
+class PostureAngleHighPrecisionEulerData(CubeResponse):
+    """PostureAngleHighPrecisionEulerData
+
+    Information of high precision posture angle (Euler angle)
+
+    Attributes:
+        roll (float): Roll (X axis)
+        pitch (float): Pitch (Y axis)
+        yaw (float): Yaw (Z axis)
+
+    References:
+       https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles
+
+    """
+
+    _payload_id = 0x03
+    _converter = struct.Struct("<BBfff")
+
+    @staticmethod
+    def is_myself(payload: GattReadData) -> bool:
+        return (
+            payload[0] == PostureAngleEulerData._payload_id
+            and payload[1] == PostureDataType.HighPrecisionEuler
+        )
+
+    def __init__(self, payload: GattReadData):
+        if PostureAngleHighPrecisionEulerData.is_myself(payload):
+            _, _, self.roll, self.pitch, self.yaw = self._converter.unpack_from(payload)
         else:
             raise TypeError("wrong payload")
 
@@ -249,6 +285,7 @@ SensorResponseType: TypeAlias = Union[
     MotionDetectionData,
     PostureAngleEulerData,
     PostureAngleQuaternionsData,
+    PostureAngleHighPrecisionEulerData,
     MagneticSensorData,
 ]
 """
@@ -276,6 +313,8 @@ class Sensor(CubeCharacteristic):
             return PostureAngleEulerData(payload)
         elif PostureAngleQuaternionsData.is_myself(payload):
             return PostureAngleQuaternionsData(payload)
+        elif PostureAngleHighPrecisionEulerData.is_myself(payload):
+            return PostureAngleHighPrecisionEulerData(payload)
         elif MagneticSensorData.is_myself(payload):
             return MagneticSensorData(payload)
         else:

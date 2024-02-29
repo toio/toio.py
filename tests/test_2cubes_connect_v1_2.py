@@ -51,7 +51,7 @@ async def test_connect_2():
         for i in range(len(cubes)):
             pos = await cubes[i].api.id_information.read()
             xx = str(pos)
-            logger.info("cube[%d]: %4d:%s",i , n, xx)
+            logger.info("cube[%d]: %4d:%s", i, n, xx)
     logger.info("** DISCONNECTING")
     for cube in cubes:
         await cube.disconnect()
@@ -61,20 +61,23 @@ async def test_connect_2():
 @pytest.mark.asyncio
 async def test_connect_3():
     with pytest.raises(ValueError) as ex:
-        cube = ToioCoreCube.create([1, 2, 3])
+        _ = ToioCoreCube.create([1, 2, 3])
     logger.info(ex)
+
 
 @pytest.mark.asyncio
 async def test_connect_4():
     with pytest.raises(ValueError) as ex:
-        cube = ToioCoreCube.create(1)
+        _ = ToioCoreCube.create(1)
     logger.info(ex)
+
 
 @pytest.mark.asyncio
 async def test_connect_5():
     with pytest.raises(ValueError) as ex:
-        cube = ToioCoreCube.create([])
+        _ = ToioCoreCube.create([])
     logger.info(ex)
+
 
 @pytest.mark.asyncio
 async def test_connect_6():
@@ -93,6 +96,7 @@ async def test_connect_6():
         await cube.disconnect()
     logger.info(warn[0].message)
 
+
 @pytest.mark.asyncio
 async def test_connect_7():
     device_list = await BLEScanner.scan(1)
@@ -109,4 +113,3 @@ async def test_connect_7():
         logger.info("** DISCONNECT")
         await cube.disconnect()
     logger.info(warn[0].message)
-

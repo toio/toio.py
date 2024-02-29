@@ -10,18 +10,19 @@
 #
 # Two cubes are required for this test.
 # This test is performed on the cubes listed in _cubes.py.
-# Before testing, turn on the cubes, run make_cube_list.py and save the output as _cubes.py.
+# Before testing, turn on the cubes, run make_cube_list.py and
+# save the output as _cubes.py.
 # On Windows, register those two cubes as Bluetooth devices to the OS.
 #
 
 import platform
 import pprint
 from logging import getLogger
-from typing import Dict, List
 
 import pytest
 
 from toio.scanner import BLEScanner
+
 from ._cubes import CUBES
 
 logger = getLogger(__name__)

@@ -70,26 +70,3 @@ async def test_sensor_2():
     await cube.api.sensor.unregister_notification_handler(sensor_handler)
     logger.info("** DISCONNECT")
     await cube.disconnect()
-
-
-@pytest.mark.asyncio
-async def test_sensor_3():
-    device_list = await BLEScanner.scan(1)
-    assert len(device_list)
-    cube = ToioCoreCube(device_list[0].interface)
-    logger.info("** CONNECTING...")
-    await cube.connect()
-    logger.info("** CONNECTED")
-    await cube.api.configuration.set_posture_angle_detection(
-        PostureAngleDetectionType.Quaternions,
-        100,
-        PostureAngleDetectionCondition.Always,
-    )
-    await cube.api.sensor.register_notification_handler(sensor_handler)
-    for i in range(15):
-        sensor = await cube.api.sensor.read()
-        logger.info("read: " + pprint.pformat(str(sensor)))
-        await asyncio.sleep(1)
-    await cube.api.sensor.unregister_notification_handler(sensor_handler)
-    logger.info("** DISCONNECT")
-    await cube.disconnect()

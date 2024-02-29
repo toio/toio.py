@@ -36,6 +36,7 @@ async def test_sound1():
     logger.info("** DISCONNECT")
     await cube.disconnect()
 
+
 @pytest.mark.asyncio
 async def test_sound2():
     device_list = await BLEScanner.scan(1)
