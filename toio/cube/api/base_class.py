@@ -44,7 +44,7 @@ class CubeCommand(metaclass=ABCMeta):
 class CubeResponse(metaclass=ABCMeta):
     @staticmethod
     @abstractmethod
-    def is_myself(data: GattReadData) -> bool:
+    def is_myself(payload: GattReadData) -> bool:
         """If argument data is a byte representation of this class,
         this function converts the byte representation to an object
         and returns it.

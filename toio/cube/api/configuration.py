@@ -241,6 +241,120 @@ class SetPostureAngleDetection(CubeCommand):
         )
 
 
+class ConnectionInterval:
+
+    BLE_MIN_INTERVAL = 6  # 7.5[ms]
+    BLE_MAX_INTERVAL = 3200  # 4.0[s]
+    BLE_INTERVAL_UNIT = 1.25  # 1.25[ms]
+    BLE_INTERVAL_NONE = 0xFFFF
+
+    @staticmethod
+    def _check_interval_value(interval_value: int) -> int:
+        if interval_value == ConnectionInterval.BLE_INTERVAL_NONE:
+            return interval_value
+
+        if (
+            interval_value < ConnectionInterval.BLE_MIN_INTERVAL
+            or ConnectionInterval.BLE_MAX_INTERVAL < interval_value
+        ):
+            raise ValueError("wrong value:%d" % interval_value)
+        else:
+            return interval_value
+
+    @staticmethod
+    def from_ms(interval_ms: float) -> int:
+        interval_value = ConnectionInterval._check_interval_value(
+            int(round(interval_ms / ConnectionInterval.BLE_INTERVAL_UNIT))
+        )
+        logger.info("interval_value:%d", interval_value)
+        return interval_value
+
+    @staticmethod
+    def to_ms(interval_value: int) -> float:
+        return interval_value * ConnectionInterval.BLE_INTERVAL_UNIT
+
+    def __init__(self, interval: int):
+        self.value = ConnectionInterval._check_interval_value(interval)
+
+    @property
+    def value_ms(self):
+        return ConnectionInterval.to_ms(self.value)
+
+    def __int__(self):
+        return self.value
+
+    def __str__(self):
+        return "connection interval: %d (%fms)" % (self.value, self.value_ms)
+
+
+class RequestConnectionInterval(CubeCommand):
+    """
+    Request to change bluetooth Connection interval
+
+    References:
+        https://
+    """
+
+    _payload_id = 0x30
+
+    @staticmethod
+    def is_myself(payload: GattReadData) -> bool:
+        return payload[0] == RequestConnectionInterval._payload_id
+
+    def __init__(self, min_interval: int, max_interval: int):
+        if (
+            min_interval != 0xFFFF
+            and max_interval != 0xFFFF
+            and min_interval > max_interval
+        ):
+            raise ValueError
+        self.min_interval = ConnectionInterval(min_interval)
+        self.max_interval = ConnectionInterval(max_interval)
+
+    def __bytes__(self) -> bytes:
+        return struct.pack(
+            "<BBHH",
+            self._payload_id,
+            0x01,
+            self.min_interval.value,
+            self.max_interval.value,
+        )
+
+
+class GetRequestedConnectionIntervalValue(CubeCommand):
+    """
+    Get requested connection interval value
+
+    References:
+        http://
+    """
+
+    _payload_id = 0x31
+
+    def __init__(self):
+        pass
+
+    def __bytes__(self) -> bytes:
+        return bytes((self._payload_id, 0x00))
+
+
+class GetCurrentConnectionIntervalValue(CubeCommand):
+    """
+    Get current connection interval value
+
+    References:
+        http://
+    """
+
+    _payload_id = 0x32
+
+    def __init__(self):
+        pass
+
+    def __bytes__(self) -> bytes:
+        return bytes((self._payload_id, 0x00))
+
+
 class ProtocolVersion(CubeResponse):
     """
     Protocol version response
@@ -424,6 +538,76 @@ class ResponsePostureAngleDetectionSettings(CubeResponse):
         return pprint.pformat(vars(self))
 
 
+class ResponseConnectionIntervalRequest(CubeResponse):
+    """
+    Response of connection interval request
+    """
+
+    _payload_id = 0xB0
+    _converter = struct.Struct("<BBB")
+
+    @staticmethod
+    def is_myself(payload: GattReadData) -> bool:
+        return payload[0] == ResponseConnectionIntervalRequest._payload_id
+
+    def __init__(self, payload: GattReadData):
+        if ResponseConnectionIntervalRequest.is_myself(payload):
+            _, _, result = self._converter.unpack_from(payload)
+            self.result = result == 0x00
+        else:
+            raise TypeError("wrong payload")
+
+    def __str__(self) -> str:
+        return pprint.pformat(vars(self))
+
+
+class ResponseGettingRequestedConnectionInterval(CubeResponse):
+    """
+    Response of getting requested connection interval value
+    """
+
+    _payload_id = 0xB1
+    _converter = struct.Struct("<BBHH")
+
+    @staticmethod
+    def is_myself(payload: GattReadData) -> bool:
+        return payload[0] == ResponseGettingRequestedConnectionInterval._payload_id
+
+    def __init__(self, payload: GattReadData):
+        if self.is_myself(payload):
+            _, _, min_interval, max_interval = self._converter.unpack_from(payload)
+            self.min_interval = ConnectionInterval(min_interval)
+            self.max_interval = ConnectionInterval(max_interval)
+        else:
+            raise TypeError("wrong payload")
+
+    def __str__(self) -> str:
+        return pprint.pformat(vars(self))
+
+
+class ResponseGettingCurrentConnectionInterval(CubeResponse):
+    """
+    Response of getting current connection interval value
+    """
+
+    _payload_id = 0xB2
+    _converter = struct.Struct("<BBH")
+
+    @staticmethod
+    def is_myself(payload: GattReadData) -> bool:
+        return payload[0] == ResponseGettingCurrentConnectionInterval._payload_id
+
+    def __init__(self, payload: GattReadData):
+        if self.is_myself(payload):
+            _, _, interval = self._converter.unpack_from(payload)
+            self.interval = ConnectionInterval(interval)
+        else:
+            raise TypeError("wrong payload")
+
+    def __str__(self) -> str:
+        return pprint.pformat(vars(self))
+
+
 ConfigurationResponseType: TypeAlias = Union[
     ProtocolVersion,
     ResponseIdNotificationSettings,
@@ -431,6 +615,9 @@ ConfigurationResponseType: TypeAlias = Union[
     ResponseMagneticSensorSettings,
     ResponseMotorSpeedInformationAcquisitionSettings,
     ResponsePostureAngleDetectionSettings,
+    ResponseConnectionIntervalRequest,
+    ResponseGettingRequestedConnectionInterval,
+    ResponseGettingCurrentConnectionInterval,
 ]
 """
 Response types of configuration characteristic
@@ -459,6 +646,12 @@ class Configuration(CubeCharacteristic):
             return ResponseMotorSpeedInformationAcquisitionSettings(payload)
         elif ResponsePostureAngleDetectionSettings.is_myself(payload):
             return ResponsePostureAngleDetectionSettings(payload)
+        elif ResponseConnectionIntervalRequest.is_myself(payload):
+            return ResponseConnectionIntervalRequest(payload)
+        elif ResponseGettingRequestedConnectionInterval.is_myself(payload):
+            return ResponseGettingRequestedConnectionInterval(payload)
+        elif ResponseGettingCurrentConnectionInterval.is_myself(payload):
+            return ResponseGettingCurrentConnectionInterval(payload)
         else:
             return None
 
@@ -625,4 +818,51 @@ class Configuration(CubeCharacteristic):
             https://toio.github.io/toio-spec/en/docs/ble_configuration#posture-angle-detection-settings-
         """
         command = SetPostureAngleDetection(detection_type, interval_ms, condition)
+        await self._write(bytes(command))
+
+    async def request_connection_interval(
+        self, min_interval: int, max_interval: int
+    ) -> None:
+        """
+        Request the connected central device to change the connection interval.
+
+
+        Note:
+            If central device can not accept the requested connection interval value,
+            one of the following occurs:
+            - Bluetooth connection is disconnected.
+            - Another connection interval value is set that can be accepted by the central device.
+
+            `max_interval` must be greater than or equal to `min_interval`. (except the value is 0xFFFF)
+
+        Args:
+            min_interval (int): min_interval, from 6 to 3200, or 0xFFFF (0xFFFF means "to be determined by central")
+            max_interval (int): max_interval, from 6 to 3200, or 0xFFFF (0xFFFF means "to be determined by central")
+
+        References:
+            https://
+        """
+        command = RequestConnectionInterval(min_interval, max_interval)
+        await self._write(bytes(command))
+
+    async def get_requested_connection_interval(self) -> None:
+        """
+        Get requested connection interval value.
+
+
+        References:
+            https://
+        """
+        command = GetRequestedConnectionIntervalValue()
+        await self._write(bytes(command))
+
+    async def get_current_connection_interval(self) -> None:
+        """
+        Get current connection interval value.
+
+
+        References:
+            https://
+        """
+        command = GetCurrentConnectionIntervalValue()
         await self._write(bytes(command))
