@@ -410,7 +410,7 @@ class ResponseIdNotificationSettings(CubeResponse):
         return payload[0] == ResponseIdNotificationSettings._payload_id
 
     def __init__(self, payload: GattReadData):
-        if ProtocolVersion.is_myself(payload):
+        if ResponseIdNotificationSettings.is_myself(payload):
             _, _, result = self._converter.unpack_from(payload)
             self.result = result == 0x00
         else:
@@ -439,7 +439,7 @@ class ResponseIdMissedNotificationSettings(CubeResponse):
         return payload[0] == ResponseIdMissedNotificationSettings._payload_id
 
     def __init__(self, payload: GattReadData):
-        if ProtocolVersion.is_myself(payload):
+        if ResponseIdMissedNotificationSettings.is_myself(payload):
             _, _, result = self._converter.unpack_from(payload)
             self.result = result == 0x00
         else:
@@ -468,7 +468,7 @@ class ResponseMagneticSensorSettings(CubeResponse):
         return payload[0] == ResponseMagneticSensorSettings._payload_id
 
     def __init__(self, payload: GattReadData):
-        if ProtocolVersion.is_myself(payload):
+        if ResponseMagneticSensorSettings.is_myself(payload):
             _, _, result = self._converter.unpack_from(payload)
             self.result = result == 0x00
         else:
@@ -489,7 +489,7 @@ class ResponseMotorSpeedInformationAcquisitionSettings(CubeResponse):
         https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-motor-speed-information-acquisition-settings
     """
 
-    _payload_id = 0x9B
+    _payload_id = 0x9C
     _converter = struct.Struct("<BBB")
 
     @staticmethod
@@ -499,7 +499,7 @@ class ResponseMotorSpeedInformationAcquisitionSettings(CubeResponse):
         )
 
     def __init__(self, payload: GattReadData):
-        if ProtocolVersion.is_myself(payload):
+        if ResponseMotorSpeedInformationAcquisitionSettings.is_myself(payload):
             _, _, result = self._converter.unpack_from(payload)
             self.result = result == 0x00
         else:
@@ -520,7 +520,7 @@ class ResponsePostureAngleDetectionSettings(CubeResponse):
         https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-posture-angle-detection-settings-
     """
 
-    _payload_id = 0x9B
+    _payload_id = 0x9D
     _converter = struct.Struct("<BBB")
 
     @staticmethod
@@ -528,7 +528,7 @@ class ResponsePostureAngleDetectionSettings(CubeResponse):
         return payload[0] == ResponsePostureAngleDetectionSettings._payload_id
 
     def __init__(self, payload: GattReadData):
-        if ProtocolVersion.is_myself(payload):
+        if ResponsePostureAngleDetectionSettings.is_myself(payload):
             _, _, result = self._converter.unpack_from(payload)
             self.result = result == 0x00
         else:
@@ -639,7 +639,7 @@ class Configuration(CubeCharacteristic):
         elif ResponseIdNotificationSettings.is_myself(payload):
             return ResponseIdNotificationSettings(payload)
         elif ResponseIdMissedNotificationSettings.is_myself(payload):
-            return ResponseIdNotificationSettings(payload)
+            return ResponseIdMissedNotificationSettings(payload)
         elif ResponseMagneticSensorSettings.is_myself(payload):
             return ResponseMagneticSensorSettings(payload)
         elif ResponseMotorSpeedInformationAcquisitionSettings.is_myself(payload):
