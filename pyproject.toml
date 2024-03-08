@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "toio.py"
-version = "1.0.3.dev2"
+version = "1.0.3.dev3"
 description = "Control toio™Core Cube"
 authors = ["Sony Interactive Entertainment"]
 readme = "README.md"
