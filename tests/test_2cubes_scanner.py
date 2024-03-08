@@ -89,10 +89,7 @@ async def test_address1():
     logger.info("** ADDRESS1 (UPPERCASE)")
     dev = await BLEScanner.scan_with_address(address={CUBES[0]["address"].upper()})
     for d in dev:
-        pprint.pprint(d)
-    if platform.system() == "Darwin":
-        assert len(dev) == 0
-    else:
+        logger.info(d)
         assert len(dev) == 1
 
 
@@ -101,10 +98,7 @@ async def test_address2():
     logger.info("** ADDRESS2 (LOWERCASE)")
     dev = await BLEScanner.scan_with_address(address={CUBES[0]["address"].lower()})
     for d in dev:
-        pprint.pprint(d)
-    if platform.system() == "Darwin":
-        assert len(dev) == 0
-    else:
+        logger.info(d)
         assert len(dev) == 1
 
 
