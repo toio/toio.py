@@ -115,7 +115,8 @@
 
 <div class="viewcode-block" id="PostureDataType"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureDataType">[docs]</a><span class="k">class</span> <span class="nc">PostureDataType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
     <span class="n">Euler</span> <span class="o">=</span> <span class="mh">0x01</span>
-    <span class="n">Quaternions</span> <span class="o">=</span> <span class="mh">0x02</span></div>
+    <span class="n">Quaternions</span> <span class="o">=</span> <span class="mh">0x02</span>
+    <span class="n">HighPrecisionEuler</span> <span class="o">=</span> <span class="mh">0x03</span></div>
 
 
 <div class="viewcode-block" id="RequestPostureAngleDetection"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestPostureAngleDetection">[docs]</a><span class="k">class</span> <span class="nc">RequestPostureAngleDetection</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
@@ -221,7 +222,7 @@
 <span class="sd">    Attributes:</span>
 <span class="sd">        roll (int): Roll (X axis)</span>
 <span class="sd">        pitch (int): Pitch (Y axis)</span>
-<span class="sd">        yaw (nt): Yaw (Z axis)</span>
+<span class="sd">        yaw (int): Yaw (Z axis)</span>
 
 <span class="sd">    References:</span>
 <span class="sd">       https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles</span>
@@ -254,17 +255,17 @@
 <span class="sd">    Information of posture angle (Quaternion)</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        w (int):</span>
-<span class="sd">        x (int):</span>
-<span class="sd">        y (int):</span>
-<span class="sd">        z (int):</span>
+<span class="sd">        w (float):</span>
+<span class="sd">        x (float):</span>
+<span class="sd">        y (float):</span>
+<span class="sd">        z (float):</span>
 
 <span class="sd">    References:</span>
 <span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-quaternions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
-    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBhhhh&quot;</span><span class="p">)</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBffff&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PostureAngleQuaternionsData.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleQuaternionsData.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -280,6 +281,41 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PostureAngleQuaternionsData.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleQuaternionsData.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData">[docs]</a><span class="k">class</span> <span class="nc">PostureAngleHighPrecisionEulerData</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;PostureAngleHighPrecisionEulerData</span>
+
+<span class="sd">    Information of high precision posture angle (Euler angle)</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        roll (float): Roll (X axis)</span>
+<span class="sd">        pitch (float): Pitch (Y axis)</span>
+<span class="sd">        yaw (float): Yaw (Z axis)</span>
+
+<span class="sd">    References:</span>
+<span class="sd">       https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBfff&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureAngleEulerData</span><span class="o">.</span><span class="n">_payload_id</span>
+            <span class="ow">and</span> <span class="n">payload</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureDataType</span><span class="o">.</span><span class="n">HighPrecisionEuler</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">PostureAngleHighPrecisionEulerData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
 
 
@@ -324,6 +360,7 @@
     <span class="n">MotionDetectionData</span><span class="p">,</span>
     <span class="n">PostureAngleEulerData</span><span class="p">,</span>
     <span class="n">PostureAngleQuaternionsData</span><span class="p">,</span>
+    <span class="n">PostureAngleHighPrecisionEulerData</span><span class="p">,</span>
     <span class="n">MagneticSensorData</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -351,6 +388,8 @@
             <span class="k">return</span> <span class="n">PostureAngleEulerData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">PostureAngleQuaternionsData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">PostureAngleQuaternionsData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">PostureAngleHighPrecisionEulerData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">PostureAngleHighPrecisionEulerData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">MagneticSensorData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">MagneticSensorData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>

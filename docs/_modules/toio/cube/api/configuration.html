@@ -274,7 +274,8 @@
 
 <div class="viewcode-block" id="PostureAngleDetectionType"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.PostureAngleDetectionType">[docs]</a><span class="k">class</span> <span class="nc">PostureAngleDetectionType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
     <span class="n">Euler</span> <span class="o">=</span> <span class="mh">0x01</span>
-    <span class="n">Quaternions</span> <span class="o">=</span> <span class="mh">0x02</span></div>
+    <span class="n">Quaternions</span> <span class="o">=</span> <span class="mh">0x02</span>
+    <span class="n">HighPrecisionEuler</span> <span class="o">=</span> <span class="mh">0x03</span></div>
 
 
 <div class="viewcode-block" id="PostureAngleDetectionCondition"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.PostureAngleDetectionCondition">[docs]</a><span class="k">class</span> <span class="nc">PostureAngleDetectionCondition</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
@@ -315,6 +316,120 @@
         <span class="p">)</span></div></div>
 
 
+<div class="viewcode-block" id="ConnectionInterval"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ConnectionInterval">[docs]</a><span class="k">class</span> <span class="nc">ConnectionInterval</span><span class="p">:</span>
+
+    <span class="n">BLE_MIN_INTERVAL</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># 7.5[ms]</span>
+    <span class="n">BLE_MAX_INTERVAL</span> <span class="o">=</span> <span class="mi">3200</span>  <span class="c1"># 4.0[s]</span>
+    <span class="n">BLE_INTERVAL_UNIT</span> <span class="o">=</span> <span class="mf">1.25</span>  <span class="c1"># 1.25[ms]</span>
+    <span class="n">BLE_INTERVAL_NONE</span> <span class="o">=</span> <span class="mh">0xFFFF</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_check_interval_value</span><span class="p">(</span><span class="n">interval_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">interval_value</span> <span class="o">==</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">BLE_INTERVAL_NONE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval_value</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">interval_value</span> <span class="o">&lt;</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">BLE_MIN_INTERVAL</span>
+            <span class="ow">or</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">BLE_MAX_INTERVAL</span> <span class="o">&lt;</span> <span class="n">interval_value</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;wrong value:</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">interval_value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval_value</span>
+
+<div class="viewcode-block" id="ConnectionInterval.from_ms"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ConnectionInterval.from_ms">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_ms</span><span class="p">(</span><span class="n">interval_ms</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">interval_value</span> <span class="o">=</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">_check_interval_value</span><span class="p">(</span>
+            <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">interval_ms</span> <span class="o">/</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">BLE_INTERVAL_UNIT</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;interval_value:</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">interval_value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interval_value</span></div>
+
+<div class="viewcode-block" id="ConnectionInterval.to_ms"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ConnectionInterval.to_ms">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">to_ms</span><span class="p">(</span><span class="n">interval_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">interval_value</span> <span class="o">*</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">BLE_INTERVAL_UNIT</span></div>
+
+<div class="viewcode-block" id="ConnectionInterval.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ConnectionInterval.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">_check_interval_value</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value_ms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ConnectionInterval</span><span class="o">.</span><span class="n">to_ms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+
+<div class="viewcode-block" id="ConnectionInterval.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ConnectionInterval.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;connection interval: </span><span class="si">%d</span><span class="s2"> (</span><span class="si">%f</span><span class="s2">ms)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_ms</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="RequestConnectionInterval"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.RequestConnectionInterval">[docs]</a><span class="k">class</span> <span class="nc">RequestConnectionInterval</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Request to change bluetooth Connection interval</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x30</span>
+
+<div class="viewcode-block" id="RequestConnectionInterval.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.RequestConnectionInterval.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">RequestConnectionInterval</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+<div class="viewcode-block" id="RequestConnectionInterval.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.RequestConnectionInterval.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">min_interval</span> <span class="o">!=</span> <span class="mh">0xFFFF</span>
+            <span class="ow">and</span> <span class="n">max_interval</span> <span class="o">!=</span> <span class="mh">0xFFFF</span>
+            <span class="ow">and</span> <span class="n">min_interval</span> <span class="o">&gt;</span> <span class="n">max_interval</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span> <span class="o">=</span> <span class="n">ConnectionInterval</span><span class="p">(</span><span class="n">min_interval</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span> <span class="o">=</span> <span class="n">ConnectionInterval</span><span class="p">(</span><span class="n">max_interval</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RequestConnectionInterval.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.RequestConnectionInterval.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;BBHH&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span>
+            <span class="mh">0x01</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="GetRequestedConnectionIntervalValue"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.GetRequestedConnectionIntervalValue">[docs]</a><span class="k">class</span> <span class="nc">GetRequestedConnectionIntervalValue</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get requested connection interval value</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x31</span>
+
+<div class="viewcode-block" id="GetRequestedConnectionIntervalValue.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.GetRequestedConnectionIntervalValue.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="GetRequestedConnectionIntervalValue.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.GetRequestedConnectionIntervalValue.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="GetCurrentConnectionIntervalValue"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.GetCurrentConnectionIntervalValue">[docs]</a><span class="k">class</span> <span class="nc">GetCurrentConnectionIntervalValue</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get current connection interval value</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x32</span>
+
+<div class="viewcode-block" id="GetCurrentConnectionIntervalValue.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.GetCurrentConnectionIntervalValue.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="GetCurrentConnectionIntervalValue.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.GetCurrentConnectionIntervalValue.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">))</span></div></div>
+
+
 <div class="viewcode-block" id="ProtocolVersion"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ProtocolVersion">[docs]</a><span class="k">class</span> <span class="nc">ProtocolVersion</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Protocol version response</span>
@@ -335,7 +450,15 @@
 <div class="viewcode-block" id="ProtocolVersion.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ProtocolVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">ProtocolVersion</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">version</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_major</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_minor</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_patch</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span>
+            <span class="n">version_numbers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">version_numbers</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_major</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">version_numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">version_numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_patch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">version_numbers</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
 
@@ -362,7 +485,7 @@
         <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseIdNotificationSettings</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
 <div class="viewcode-block" id="ResponseIdNotificationSettings.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseIdNotificationSettings.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">ProtocolVersion</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseIdNotificationSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0x00</span>
         <span class="k">else</span><span class="p">:</span>
@@ -391,7 +514,7 @@
         <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseIdMissedNotificationSettings</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
 <div class="viewcode-block" id="ResponseIdMissedNotificationSettings.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseIdMissedNotificationSettings.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">ProtocolVersion</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseIdMissedNotificationSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0x00</span>
         <span class="k">else</span><span class="p">:</span>
@@ -420,7 +543,7 @@
         <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseMagneticSensorSettings</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
 <div class="viewcode-block" id="ResponseMagneticSensorSettings.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseMagneticSensorSettings.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">ProtocolVersion</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseMagneticSensorSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0x00</span>
         <span class="k">else</span><span class="p">:</span>
@@ -441,7 +564,7 @@
 <span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-motor-speed-information-acquisition-settings</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x9B</span>
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x9C</span>
     <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ResponseMotorSpeedInformationAcquisitionSettings.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseMotorSpeedInformationAcquisitionSettings.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -451,7 +574,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ResponseMotorSpeedInformationAcquisitionSettings.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseMotorSpeedInformationAcquisitionSettings.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">ProtocolVersion</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseMotorSpeedInformationAcquisitionSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0x00</span>
         <span class="k">else</span><span class="p">:</span>
@@ -472,7 +595,7 @@
 <span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-posture-angle-detection-settings-</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x9B</span>
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x9D</span>
     <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ResponsePostureAngleDetectionSettings.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponsePostureAngleDetectionSettings.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -480,13 +603,83 @@
         <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponsePostureAngleDetectionSettings</span><span class="o">.</span><span class="n">_payload_id</span></div>
 
 <div class="viewcode-block" id="ResponsePostureAngleDetectionSettings.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponsePostureAngleDetectionSettings.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">ProtocolVersion</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponsePostureAngleDetectionSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0x00</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ResponsePostureAngleDetectionSettings.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponsePostureAngleDetectionSettings.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="ResponseConnectionIntervalRequest"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseConnectionIntervalRequest">[docs]</a><span class="k">class</span> <span class="nc">ResponseConnectionIntervalRequest</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Response of connection interval request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0xB0</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBB&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseConnectionIntervalRequest.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseConnectionIntervalRequest.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseConnectionIntervalRequest</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+<div class="viewcode-block" id="ResponseConnectionIntervalRequest.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseConnectionIntervalRequest.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ResponseConnectionIntervalRequest</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="mh">0x00</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ResponseConnectionIntervalRequest.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseConnectionIntervalRequest.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="ResponseGettingRequestedConnectionInterval"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingRequestedConnectionInterval">[docs]</a><span class="k">class</span> <span class="nc">ResponseGettingRequestedConnectionInterval</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Response of getting requested connection interval value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0xB1</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBHH&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseGettingRequestedConnectionInterval.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingRequestedConnectionInterval.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseGettingRequestedConnectionInterval</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+<div class="viewcode-block" id="ResponseGettingRequestedConnectionInterval.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingRequestedConnectionInterval.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">min_interval</span><span class="p">,</span> <span class="n">max_interval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span> <span class="o">=</span> <span class="n">ConnectionInterval</span><span class="p">(</span><span class="n">min_interval</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span> <span class="o">=</span> <span class="n">ConnectionInterval</span><span class="p">(</span><span class="n">max_interval</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ResponseGettingRequestedConnectionInterval.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingRequestedConnectionInterval.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="ResponseGettingCurrentConnectionInterval"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingCurrentConnectionInterval">[docs]</a><span class="k">class</span> <span class="nc">ResponseGettingCurrentConnectionInterval</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Response of getting current connection interval value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0xB2</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBH&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseGettingCurrentConnectionInterval.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingCurrentConnectionInterval.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ResponseGettingCurrentConnectionInterval</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+<div class="viewcode-block" id="ResponseGettingCurrentConnectionInterval.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingCurrentConnectionInterval.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">interval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">ConnectionInterval</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ResponseGettingCurrentConnectionInterval.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.ResponseGettingCurrentConnectionInterval.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
 
 
@@ -497,6 +690,9 @@
     <span class="n">ResponseMagneticSensorSettings</span><span class="p">,</span>
     <span class="n">ResponseMotorSpeedInformationAcquisitionSettings</span><span class="p">,</span>
     <span class="n">ResponsePostureAngleDetectionSettings</span><span class="p">,</span>
+    <span class="n">ResponseConnectionIntervalRequest</span><span class="p">,</span>
+    <span class="n">ResponseGettingRequestedConnectionInterval</span><span class="p">,</span>
+    <span class="n">ResponseGettingCurrentConnectionInterval</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Response types of configuration characteristic</span>
@@ -518,13 +714,19 @@
         <span class="k">elif</span> <span class="n">ResponseIdNotificationSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">ResponseIdNotificationSettings</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ResponseIdMissedNotificationSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">ResponseIdNotificationSettings</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ResponseIdMissedNotificationSettings</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ResponseMagneticSensorSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">ResponseMagneticSensorSettings</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ResponseMotorSpeedInformationAcquisitionSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">ResponseMotorSpeedInformationAcquisitionSettings</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ResponsePostureAngleDetectionSettings</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">ResponsePostureAngleDetectionSettings</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ResponseConnectionIntervalRequest</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ResponseConnectionIntervalRequest</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ResponseGettingRequestedConnectionInterval</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ResponseGettingRequestedConnectionInterval</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ResponseGettingCurrentConnectionInterval</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ResponseGettingCurrentConnectionInterval</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
@@ -691,6 +893,52 @@
 <span class="sd">            https://toio.github.io/toio-spec/en/docs/ble_configuration#posture-angle-detection-settings-</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">command</span> <span class="o">=</span> <span class="n">SetPostureAngleDetection</span><span class="p">(</span><span class="n">detection_type</span><span class="p">,</span> <span class="n">interval_ms</span><span class="p">,</span> <span class="n">condition</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">command</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Configuration.request_connection_interval"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.Configuration.request_connection_interval">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">request_connection_interval</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">min_interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_interval</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request the connected central device to change the connection interval.</span>
+
+
+<span class="sd">        Note:</span>
+<span class="sd">            If central device can not accept the requested connection interval value,</span>
+<span class="sd">            one of the following occurs:</span>
+<span class="sd">            - Bluetooth connection is disconnected.</span>
+<span class="sd">            - Another connection interval value is set that can be accepted by the central device.</span>
+
+<span class="sd">            `max_interval` must be greater than or equal to `min_interval`. (except the value is 0xFFFF)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_interval (int): min_interval, from 6 to 3200, or 0xFFFF (0xFFFF means &quot;to be determined by central&quot;)</span>
+<span class="sd">            max_interval (int): max_interval, from 6 to 3200, or 0xFFFF (0xFFFF means &quot;to be determined by central&quot;)</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">RequestConnectionInterval</span><span class="p">(</span><span class="n">min_interval</span><span class="p">,</span> <span class="n">max_interval</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">command</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Configuration.get_requested_connection_interval"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.Configuration.get_requested_connection_interval">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_requested_connection_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get requested connection interval value.</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            https://</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">GetRequestedConnectionIntervalValue</span><span class="p">()</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">command</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Configuration.get_current_connection_interval"><a class="viewcode-back" href="../../../../toio.cube.api.configuration.html#toio.Configuration.get_current_connection_interval">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_current_connection_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get current connection interval value.</span>
+
+
+<span class="sd">        References:</span>
+<span class="sd">            https://</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">GetCurrentConnectionIntervalValue</span><span class="p">()</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">command</span><span class="p">))</span></div></div>
 </pre></div>
 

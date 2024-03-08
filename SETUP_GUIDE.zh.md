@@ -6,7 +6,7 @@
 
 - Windows: Windows10 (21H2)
 
-## 本指导手册以Windows操作系统为示例，若使用MAC或liunx操作系统，可参考以下内容自行设置。
+## 本指导手册以Windows操作系统为示例，若使用MAC或linux操作系统，可参考以下内容自行设置。
 ## Installation (Windows)
 ## 安装（Windows版本），并确认系统版本为win10
 

@@ -126,7 +126,7 @@ else:
 
  仅通过生成ToioCoreCube的示例，仍然无法实现与Q宝的通信。我们可以在程序中调用“connect()”，以实际连接到Q宝，并允许它进行通信。需要断开连接时，请在“cube”上调用“disconnect()”即可断开与Q宝的连接。
 
- 	说明：connect()和disconnnected()是异步函数, 所以使用“await”来等待它们完成。
+ 	说明：connect()和disconnected()是异步函数, 所以使用“await”来等待它们完成。
 
 以下代码将连接到立方体并在1秒后断开连接。
 '''

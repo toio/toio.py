@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # ************************************************************
 #
-#     get_informations_2.py
+#     get_information_2.py
 #
 #     Copyright 2023 Sony Interactive Entertainment Inc.
 #

@@ -326,7 +326,7 @@ class GetRequestedConnectionIntervalValue(CubeCommand):
     Get requested connection interval value
 
     References:
-        http://
+        https://
     """
 
     _payload_id = 0x31
@@ -343,7 +343,7 @@ class GetCurrentConnectionIntervalValue(CubeCommand):
     Get current connection interval value
 
     References:
-        http://
+        https://
     """
 
     _payload_id = 0x32
@@ -848,7 +848,6 @@ class Configuration(CubeCharacteristic):
     async def get_requested_connection_interval(self) -> None:
         """
         Get requested connection interval value.
-
 
         References:
             https://

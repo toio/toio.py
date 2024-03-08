@@ -260,7 +260,7 @@ if __name__ == "__main__":
     asyncio.run(read_id())
 ```
 
-Ctlr-C が押されるまで ID 情報を表示し続ける完全なコードは [examples/read_position.py](https://github.com/toio/toio.py/blob/main/examples/read_position.py) です。
+Ctrl-C が押されるまで ID 情報を表示し続ける完全なコードは [examples/read_position.py](https://github.com/toio/toio.py/blob/main/examples/read_position.py) です。
 
 ### モーター制御
 

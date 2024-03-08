@@ -135,6 +135,11 @@
 <span class="sig-name descname"><span class="pre">Quaternions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.sensor.PostureDataType.Quaternions" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureDataType.HighPrecisionEuler">
+<span class="sig-name descname"><span class="pre">HighPrecisionEuler</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#toio.cube.api.sensor.PostureDataType.HighPrecisionEuler" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -362,7 +367,7 @@ and returns it.</p>
 <dd><p>Yaw (Z axis)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nt</p>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -406,7 +411,7 @@ and returns it.</p>
 <span class="sig-name descname"><span class="pre">w</span></span><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleQuaternionsData.w" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -416,7 +421,7 @@ and returns it.</p>
 <span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleQuaternionsData.x" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -426,7 +431,7 @@ and returns it.</p>
 <span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleQuaternionsData.y" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -436,7 +441,7 @@ and returns it.</p>
 <span class="sig-name descname"><span class="pre">z</span></span><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleQuaternionsData.z" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -464,6 +469,72 @@ and returns it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleQuaternionsData.__str__">
 <span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#PostureAngleQuaternionsData.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleQuaternionsData.__str__" title="Permalink to this definition"></a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sensor.</span></span><span class="sig-name descname"><span class="pre">PostureAngleHighPrecisionEulerData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#PostureAngleHighPrecisionEulerData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Information of high precision posture angle (Euler angle)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.roll">
+<span class="sig-name descname"><span class="pre">roll</span></span><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.roll" title="Permalink to this definition"></a></dt>
+<dd><p>Roll (X axis)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.pitch">
+<span class="sig-name descname"><span class="pre">pitch</span></span><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.pitch" title="Permalink to this definition"></a></dt>
+<dd><p>Pitch (Y axis)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.yaw">
+<span class="sig-name descname"><span class="pre">yaw</span></span><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.yaw" title="Permalink to this definition"></a></dt>
+<dd><p>Yaw (Z axis)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles">https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#PostureAngleHighPrecisionEulerData.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.is_myself" title="Permalink to this definition"></a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#PostureAngleHighPrecisionEulerData.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#PostureAngleHighPrecisionEulerData.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData.__str__" title="Permalink to this definition"></a></dt>
 <dd><p>Return str(self).</p>
 </dd></dl>
 
@@ -555,7 +626,7 @@ and returns it.</p>
 <dt class="sig sig-object py" id="toio.cube.api.sensor.SensorResponseType">
 <span class="sig-prename descclassname"><span class="pre">toio.cube.api.sensor.</span></span><span class="sig-name descname"><span class="pre">SensorResponseType</span></span><a class="headerlink" href="#toio.cube.api.sensor.SensorResponseType" title="Permalink to this definition"></a></dt>
 <dd><p>Response types of Sensor characteristic</p>
-<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="#toio.cube.api.sensor.MotionDetectionData" title="toio.cube.api.sensor.MotionDetectionData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MotionDetectionData</span></code></a>, <a class="reference internal" href="#toio.cube.api.sensor.PostureAngleEulerData" title="toio.cube.api.sensor.PostureAngleEulerData"><code class="xref py py-class docutils literal notranslate"><span class="pre">PostureAngleEulerData</span></code></a>, <a class="reference internal" href="#toio.cube.api.sensor.PostureAngleQuaternionsData" title="toio.cube.api.sensor.PostureAngleQuaternionsData"><code class="xref py py-class docutils literal notranslate"><span class="pre">PostureAngleQuaternionsData</span></code></a>, <a class="reference internal" href="#toio.cube.api.sensor.MagneticSensorData" title="toio.cube.api.sensor.MagneticSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagneticSensorData</span></code></a>]</p>
+<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="#toio.cube.api.sensor.MotionDetectionData" title="toio.cube.api.sensor.MotionDetectionData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MotionDetectionData</span></code></a>, <a class="reference internal" href="#toio.cube.api.sensor.PostureAngleEulerData" title="toio.cube.api.sensor.PostureAngleEulerData"><code class="xref py py-class docutils literal notranslate"><span class="pre">PostureAngleEulerData</span></code></a>, <a class="reference internal" href="#toio.cube.api.sensor.PostureAngleQuaternionsData" title="toio.cube.api.sensor.PostureAngleQuaternionsData"><code class="xref py py-class docutils literal notranslate"><span class="pre">PostureAngleQuaternionsData</span></code></a>, <a class="reference internal" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData" title="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData"><code class="xref py py-class docutils literal notranslate"><span class="pre">PostureAngleHighPrecisionEulerData</span></code></a>, <a class="reference internal" href="#toio.cube.api.sensor.MagneticSensorData" title="toio.cube.api.sensor.MagneticSensorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagneticSensorData</span></code></a>]</p>
 </dd></dl>
 
 <dl class="py class">
@@ -569,7 +640,7 @@ and returns it.</p>
 <p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_magnetic_sensor">Magnetic sensor</a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.sensor.Sensor.is_my_data">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_my_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.cube.api.sensor.MotionDetectionData" title="toio.cube.api.sensor.MotionDetectionData"><span class="pre">MotionDetectionData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleEulerData" title="toio.cube.api.sensor.PostureAngleEulerData"><span class="pre">PostureAngleEulerData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleQuaternionsData" title="toio.cube.api.sensor.PostureAngleQuaternionsData"><span class="pre">PostureAngleQuaternionsData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.MagneticSensorData" title="toio.cube.api.sensor.MagneticSensorData"><span class="pre">MagneticSensorData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#Sensor.is_my_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.Sensor.is_my_data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_my_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.cube.api.sensor.MotionDetectionData" title="toio.cube.api.sensor.MotionDetectionData"><span class="pre">MotionDetectionData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleEulerData" title="toio.cube.api.sensor.PostureAngleEulerData"><span class="pre">PostureAngleEulerData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleQuaternionsData" title="toio.cube.api.sensor.PostureAngleQuaternionsData"><span class="pre">PostureAngleQuaternionsData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData" title="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData"><span class="pre">PostureAngleHighPrecisionEulerData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.MagneticSensorData" title="toio.cube.api.sensor.MagneticSensorData"><span class="pre">MagneticSensorData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#Sensor.is_my_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.Sensor.is_my_data" title="Permalink to this definition"></a></dt>
 <dd><p>If payload is my characteristic response, this function returns
 CubeResponse object. Otherwise, it returns None.</p>
 <dl class="field-list simple">
@@ -586,7 +657,7 @@ CubeResponse object. Otherwise, it returns None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.sensor.Sensor.read">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.cube.api.sensor.MotionDetectionData" title="toio.cube.api.sensor.MotionDetectionData"><span class="pre">MotionDetectionData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleEulerData" title="toio.cube.api.sensor.PostureAngleEulerData"><span class="pre">PostureAngleEulerData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleQuaternionsData" title="toio.cube.api.sensor.PostureAngleQuaternionsData"><span class="pre">PostureAngleQuaternionsData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.MagneticSensorData" title="toio.cube.api.sensor.MagneticSensorData"><span class="pre">MagneticSensorData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#Sensor.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.Sensor.read" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.cube.api.sensor.MotionDetectionData" title="toio.cube.api.sensor.MotionDetectionData"><span class="pre">MotionDetectionData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleEulerData" title="toio.cube.api.sensor.PostureAngleEulerData"><span class="pre">PostureAngleEulerData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleQuaternionsData" title="toio.cube.api.sensor.PostureAngleQuaternionsData"><span class="pre">PostureAngleQuaternionsData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.PostureAngleHighPrecisionEulerData" title="toio.cube.api.sensor.PostureAngleHighPrecisionEulerData"><span class="pre">PostureAngleHighPrecisionEulerData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sensor.MagneticSensorData" title="toio.cube.api.sensor.MagneticSensorData"><span class="pre">MagneticSensorData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sensor.html#Sensor.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sensor.Sensor.read" title="Permalink to this definition"></a></dt>
 <dd><p>Read sensor information response</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>

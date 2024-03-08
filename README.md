@@ -21,7 +21,7 @@ Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v
 
 ## System requirements
 
-### Primaly tested environment
+### Primary tested environment
 
 - Windows: Windows 10 (21H2)
 
@@ -165,6 +165,7 @@ If the specified number of cubes are not found by the timeout (default value is 
 
 ```Python
     dev_list = await BLEScanner.scan_registered_cubes()
+
 ```
 
 Scan for paired cubes and connect them. (Pair the cube with Windows using "Add Bluetooth Device" before doing this.)
@@ -221,8 +222,8 @@ if __name__ == "__main__":
 ### Get the cube location (using notification)
 
 You can receive notifications from the cube by registering a notification handler with `register_notification_handler()`.
-Notifications are per each characteristic. A notification handler registered with `ToioCoreCube.api.id_information.register_notification_handler()` receives
-receive only notifications from the read sensor.
+Notifications are per each characteristic. A notification handler that registered with `ToioCoreCube.api.id_information.register_notification_handler()` receives
+only notifications from the read sensor.
 
 The following code reads the ID by notification.
 
@@ -261,7 +262,7 @@ if __name__ == "__main__":
     asyncio.run(read_id())
 ```
 
-The complete code that keeps displaying ID information until Ctlr-C is pressed is [examples/read_position.py](https://github.com/toio/toio.py/blob/main/examples/read_position.py).
+The complete code that keeps displaying ID information until Ctrl-C is pressed is [examples/read_position.py](https://github.com/toio/toio.py/blob/main/examples/read_position.py).
 
 ### Motor control
 
