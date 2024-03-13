@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import collections
 from uuid import UUID
 
 from typing_extensions import (
@@ -110,7 +111,7 @@ class ToioCoreCube(CubeInterface):
 
     @staticmethod
     def create(
-        initializer: Union[CubeInitializer, Sequence[CubeInitializer]]
+        initializer: Union[CubeInitializer, collections.Sequence]
     ) -> ToioCoreCube:
         """
         Supported toio.py versions: v1.2.0 or later
@@ -123,8 +124,10 @@ class ToioCoreCube(CubeInterface):
         Returns:
             Optional[ToioCoreCube]:
         """
-        if isinstance(initializer, Sequence) and not isinstance(
-            initializer, CubeInitializer
+        if (
+            isinstance(initializer, Sequence)
+            and not isinstance(initializer, CubeInterface)
+            and not isinstance(initializer, CubeInfo)
         ):
             if len(initializer) < 1:
                 raise ValueError("no initializer")

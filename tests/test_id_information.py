@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from logging import getLogger
 
 import pytest
+from typing_extensions import List
 
 from toio.cube import ToioCoreCube
 from toio.cube.api.button import Button, ButtonInformation, ButtonState
@@ -48,8 +49,8 @@ class TargetArea:
             return False
 
 
-TARGET_AREA: list[TargetArea] = []
-TARGET_CARD: list[StandardIdCard] = []
+TARGET_AREA: List[TargetArea] = []
+TARGET_CARD: List[StandardIdCard] = []
 
 
 def id_information_handler(payload: bytearray):
