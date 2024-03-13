@@ -130,7 +130,7 @@ async def test_sensor_1():
     await cube.api.sensor.register_notification_handler(sensor_handler)
     await cube.api.button.register_notification_handler(button_handler)
     await cube.api.sensor.request_motion_information()
-    while current_conditions > 0 and BUTTON_PRESSED != ButtonState.PRESSED:
+    while current_conditions > 0 and not BUTTON_PRESSED:
         logger.info(
             "conditions met: %d/%d (%f%%) %s",
             current_conditions,
@@ -141,8 +141,9 @@ async def test_sensor_1():
         await asyncio.sleep(1)
     await cube.api.button.unregister_notification_handler(button_handler)
     await cube.api.sensor.unregister_notification_handler(sensor_handler)
-    logger.info("** DISCONNECT")
+    logger.info("** DISCONNECTING")
     await cube.disconnect()
+    logger.info("** DISCONNECTED")
     logger.info(
         "conditions met: %d/%d (%f%%) %s",
         current_conditions,
@@ -151,6 +152,8 @@ async def test_sensor_1():
         get_remained_axes_name(conditions),
     )
     logger.info("\n%s", pprint.pformat(conditions))
+    assert current_conditions == 0
+    assert BUTTON_PRESSED == False
 
 
 @pytest.mark.asyncio
@@ -236,7 +239,7 @@ async def test_sensor_2():
     await cube.api.sensor.register_notification_handler(sensor_handler)
     await cube.api.button.register_notification_handler(button_handler)
     await cube.api.sensor.request_motion_information()
-    while current_conditions > 0 and BUTTON_PRESSED != ButtonState.PRESSED:
+    while current_conditions > 0 and not BUTTON_PRESSED:
         logger.info(
             "conditions met: %d/%d (%f%%) %s",
             current_conditions,
@@ -247,8 +250,9 @@ async def test_sensor_2():
         await asyncio.sleep(1)
     await cube.api.button.unregister_notification_handler(button_handler)
     await cube.api.sensor.unregister_notification_handler(sensor_handler)
-    logger.info("** DISCONNECT")
+    logger.info("** DISCONNECTING")
     await cube.disconnect()
+    logger.info("** DISCONNECTED")
     logger.info(
         "conditions met: %d/%d (%f%%) %s",
         current_conditions,
@@ -257,6 +261,8 @@ async def test_sensor_2():
         get_remained_axes_name(conditions),
     )
     logger.info("\n%s", pprint.pformat(conditions))
+    assert current_conditions == 0
+    assert BUTTON_PRESSED == False
 
 
 @pytest.mark.asyncio
@@ -380,12 +386,13 @@ async def test_sensor_3():
     )
     await cube.api.sensor.register_notification_handler(sensor_handler)
     await cube.api.button.register_notification_handler(button_handler)
-    while current_conditions > 0 and BUTTON_PRESSED != ButtonState.PRESSED:
+    while current_conditions > 0 and not BUTTON_PRESSED:
         await asyncio.sleep(0.1)
     await cube.api.button.unregister_notification_handler(button_handler)
     await cube.api.sensor.unregister_notification_handler(sensor_handler)
-    logger.info("** DISCONNECT")
+    logger.info("** DISCONNECTING")
     await cube.disconnect()
+    logger.info("** DISCONNECTED")
     logger.info(
         "conditions met: %d/%d (%f%%)",
         current_conditions,
@@ -393,10 +400,76 @@ async def test_sensor_3():
         ((total_conditions - current_conditions) / total_conditions) * 100,
     )
     logger.info("\n%s", pprint.pformat(conditions))
+    assert current_conditions == 0
+    assert BUTTON_PRESSED == False
 
 
 @pytest.mark.asyncio
 async def test_sensor_4():
+    global BUTTON_PRESSED
+    BUTTON_PRESSED = False
+
+    result = []
+    posture = None
+    conditions = {
+        "horizontal": [True, False],
+        "collision": [True, False],
+        "double_tap": [True, False],
+        "posture": [1, 2, 3, 4, 5, 6],
+        "shake": list(range(10)),
+    }
+
+    def get_number_of_conditions_remaining(conditions):
+        condition_num = 0
+        for _, value in conditions.items():
+            condition_num += len(value)
+        return condition_num
+
+    total_conditions = get_number_of_conditions_remaining(conditions)
+    current_conditions = get_number_of_conditions_remaining(conditions)
+
+    async def sensor_handler(payload: bytearray):
+        nonlocal result
+        nonlocal posture
+        nonlocal conditions
+        nonlocal current_conditions
+
+        sensor_info = Sensor.is_my_data(payload)
+        if isinstance(sensor_info, MotionDetectionData):
+            if sensor_info.horizontal in conditions["horizontal"]:
+                conditions["horizontal"].remove(sensor_info.horizontal)
+            if sensor_info.collision in conditions["collision"]:
+                conditions["collision"].remove(sensor_info.collision)
+            if sensor_info.double_tap in conditions["double_tap"]:
+                conditions["double_tap"].remove(sensor_info.double_tap)
+            if sensor_info.posture in conditions["posture"]:
+                conditions["posture"].remove(sensor_info.posture)
+            if sensor_info.shake in conditions["shake"]:
+                conditions["shake"].remove(sensor_info.shake)
+            current_conditions = get_number_of_conditions_remaining(conditions)
+
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube(device_list[0].interface)
+    logger.info("** CONNECTING...")
+    await cube.connect()
+    logger.info("** CONNECTED")
+    await cube.api.sensor.register_notification_handler(sensor_handler)
+    await cube.api.button.register_notification_handler(button_handler)
+    while current_conditions > 0 and not BUTTON_PRESSED:
+        logger.info("read: %s:%d", str(conditions), current_conditions)
+        await asyncio.sleep(0.1)
+    await cube.api.button.unregister_notification_handler(button_handler)
+    await cube.api.sensor.unregister_notification_handler(sensor_handler)
+    logger.info("** DISCONNECTING")
+    await cube.disconnect()
+    logger.info("** DISCONNECTED")
+    assert current_conditions == 0
+    assert BUTTON_PRESSED == False
+
+
+@pytest.mark.asyncio
+async def test_sensor_5():
     logger.info("** HIGH PRECISION EULER READ")
     device_list = await BLEScanner.scan(1)
     assert len(device_list)
@@ -422,7 +495,7 @@ async def test_sensor_4():
 
 
 @pytest.mark.asyncio
-async def test_sensor_5():
+async def test_sensor_6():
     logger.info("** QUATERNION READ")
     device_list = await BLEScanner.scan(1)
     assert len(device_list)
@@ -441,6 +514,27 @@ async def test_sensor_5():
         if isinstance(sensor_info, PostureAngleQuaternionsData):
             if read_test > 0:
                 logger.info("read api test (quaternion): %s", sensor_info)
+                read_test -= 1
+        await asyncio.sleep(0.1)
+    logger.info("** DISCONNECT")
+    await cube.disconnect()
+
+
+@pytest.mark.asyncio
+async def test_sensor_7():
+    logger.info("** MOTION DETECTION DATA READ")
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube(device_list[0].interface)
+    logger.info("** CONNECTING...")
+    await cube.connect()
+    logger.info("** CONNECTED")
+    read_test = 10
+    while read_test > 0:
+        sensor_info = await cube.api.sensor.read()
+        if isinstance(sensor_info, MotionDetectionData):
+            if read_test > 0:
+                logger.info("read api test (motion detection data): %s", sensor_info)
                 read_test -= 1
         await asyncio.sleep(0.1)
     logger.info("** DISCONNECT")
