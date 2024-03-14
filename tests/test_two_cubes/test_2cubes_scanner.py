@@ -23,7 +23,7 @@ import pytest
 
 from toio.scanner import BLEScanner
 
-from ._cubes import CUBES
+from _cubes import CUBES
 
 logger = getLogger(__name__)
 
