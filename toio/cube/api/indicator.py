@@ -7,11 +7,12 @@
 #
 # ************************************************************
 
+from __future__ import annotations
+
 import struct
 from dataclasses import dataclass
-from typing import List, Tuple
 
-from typing_extensions import Union
+from typing_extensions import List, Sequence, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand
 from toio.device_interface import CubeInterface, GattReadData
@@ -63,6 +64,10 @@ class IndicatorParam:
     |    RGB value
     """
 
+    @staticmethod
+    def from_int(duration_ms: int, r: int, g: int, b: int) -> IndicatorParam:
+        return IndicatorParam(duration_ms=duration_ms, color=Color(r=r, g=g, b=b))
+
     def flatten(self):
         duration = clip(int(self.duration_ms / 10), 0, 255)
         return duration, 0x01, 0x01, *self.color.flatten()
@@ -101,7 +106,7 @@ class RepeatedTurningOnAndOff(CubeCommand):
     def __init__(
         self,
         repeat: int,
-        param_list: Union[List[IndicatorParam], Tuple[IndicatorParam, ...]],
+        param_list: Sequence[IndicatorParam],
     ) -> None:
         self.repeat = repeat
         self.param_list = param_list
@@ -168,35 +173,45 @@ class Indicator(CubeCharacteristic):
         self.interface = interface
         super().__init__(interface, TOIO_UUID_LIGHT_CTRL)
 
-    async def turn_on(self, param: IndicatorParam) -> None:
+    async def turn_on(self, param: Union[IndicatorParam, Sequence[int]]) -> None:
         """
         Send indicator turn on / off command
 
         Args:
-            param: Indicator parameter
+            param (Union[IndicatorParam, Sequence[int]]): Indicator parameter
 
         References:
             https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator
         """
+        if isinstance(param, Sequence):
+            param = IndicatorParam.from_int(*param)
         turn_on = TurningOnAndOff(param)
         await self._write(bytes(turn_on))
 
     async def repeated_turn_on(
         self,
         repeat: int,
-        param_list: Union[List[IndicatorParam], Tuple[IndicatorParam, ...]],
+        param_list: Union[Sequence[IndicatorParam], Sequence[Sequence[int]]],
     ) -> None:
         """
         Send repeated indicator turning on / off command
 
         Args:
             repeat (int): Number of repetitions
-            param_list (Union[List[IndicatorParam], Tuple[IndicatorParam]]): List of indicator parameters
+            param_list (Union[Sequence[IndicatorParam], Sequence[Sequence[int]]]): List of indicator parameters
 
         References:
             https://toio.github.io/toio-spec/en/docs/ble_light#repeated-turning-on-and-off-of-indicator
         """
-        repeated = RepeatedTurningOnAndOff(repeat, param_list)
+        params: List[IndicatorParam] = []
+        for param in param_list:
+            if isinstance(param, Sequence):
+                params.append(IndicatorParam.from_int(*param))
+            elif isinstance(param, IndicatorParam):
+                params.append(param)
+            else:
+                raise ValueError("wrong value is found in param_list: %s", str(param))
+        repeated = RepeatedTurningOnAndOff(repeat, params)
         await self._write(bytes(repeated))
 
     async def turn_off_all(self) -> None:

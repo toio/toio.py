@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # ************************************************************
 #
-#     test_indicator.py
+#     test_indicator_v1_2.py
 #
-#     Copyright 2022 Sony Interactive Entertainment Inc.
+#     Copyright 2024 Sony Interactive Entertainment Inc.
 #
 # ************************************************************
 
@@ -26,7 +26,7 @@ async def test_indicator_turn_on():
     print("** CONNECTED")
     print("** LED ON #FF0040 (2[s])")
     await cube.api.indicator.turn_on(
-        IndicatorParam(duration_ms=2000, color=Color(r=0xFF, g=0x00, b=0x40))
+        param=(2000, 0xFF, 0x00, 0x40)
     )
     await asyncio.sleep(5)
     print("** DISCONNECT")
@@ -43,7 +43,7 @@ async def test_indicator_turn_off_all():
     print("** CONNECTED")
     print("** LED ON #00FF40")
     await cube.api.indicator.turn_on(
-        IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0x40))
+        param=(0, 0x00, 0xFF, 0x40)
     )
     await asyncio.sleep(3)
     print("** LED OFF")
@@ -63,7 +63,7 @@ async def test_indicator_turn_off():
     print("** CONNECTED")
     print("** LED ON #00FF40")
     await cube.api.indicator.turn_on(
-        IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0x40))
+        param=(0, 0x00, 0xff, 0x40),
     )
     await asyncio.sleep(3)
     print("** LED OFF")
@@ -85,8 +85,8 @@ async def test_indicator_repeated_turn_on():
     await cube.api.indicator.repeated_turn_on(
         repeat=5,
         param_list=(
-            IndicatorParam(duration_ms=500, color=Color(r=0x00, g=0xFF, b=0x40)),
-            IndicatorParam(duration_ms=500, color=Color(r=0xFF, g=0x00, b=0x40)),
+            (500, 0x00, 0xFF, 0x40),
+            (500, 0xFF, 0x00, 0x40),
         ),
     )
     await asyncio.sleep(13)
