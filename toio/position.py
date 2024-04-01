@@ -97,6 +97,10 @@ class CubeLocation:
     """
 
     @staticmethod
+    def from_int(x: int = 0, y: int = 0, angle: int = 0):
+        return CubeLocation(point=Point(x, y), angle=angle)
+
+    @staticmethod
     def new() -> CubeLocation:
         return CubeLocation(
             point=Point.new(),
@@ -160,6 +164,20 @@ class MatRect:
     """
     Mat name
     """
+
+    @staticmethod
+    def from_int(
+        x_top_left: int = 0,
+        y_top_left: int = 0,
+        x_bottom_right: int = 0,
+        y_bottom_right: int = 0,
+        name: Optional[str] = None,
+    ):
+        return MatRect(
+            top_left=Point(x_top_left, y_top_left),
+            bottom_right=Point(x_bottom_right, y_bottom_right),
+            name=name,
+        )
 
     @staticmethod
     def new() -> MatRect:

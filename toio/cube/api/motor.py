@@ -7,18 +7,20 @@
 #
 # ************************************************************
 
+from __future__ import annotations
+
 import pprint
 import struct
 from dataclasses import dataclass
 from enum import Enum, IntEnum
 from typing import List
 
-from typing_extensions import Optional, TypeAlias, Union
+from typing_extensions import Optional, Sequence, TypeAlias, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand, CubeResponse
 from toio.device_interface import CubeInterface, GattReadData
 from toio.logger import get_toio_logger
-from toio.position import CubeLocation
+from toio.position import CubeLocation, Point
 from toio.toio_uuid import TOIO_UUID_MOTOR_CTRL
 from toio.utility import clip
 
@@ -132,6 +134,18 @@ class TargetPosition:
     Rotation option
     """
 
+    @staticmethod
+    def from_int(
+        x: int = 0,
+        y: int = 0,
+        angle: int = 0,
+        rotation_option: int = int(RotationOption.AbsoluteOptimal),
+    ) -> TargetPosition:
+        return TargetPosition(
+            cube_location=CubeLocation(point=Point(x, y), angle=angle),
+            rotation_option=RotationOption(rotation_option),
+        )
+
     def flatten(self):
         return (
             self.cube_location.point.x,
@@ -169,6 +183,12 @@ class Speed:
     Speed change type
     """
 
+    @staticmethod
+    def from_int(
+        max: int = 0, speed_change_type: int = int(SpeedChangeType.Constant)
+    ) -> Speed:
+        return Speed(max=max, speed_change_type=SpeedChangeType(speed_change_type))
+
     def flatten(self):
         return self.max, int(self.speed_change_type)
 
@@ -204,7 +224,7 @@ class MotorControlTarget(CubeCommand):
             self.movement_type,
             *self.speed.flatten(),
             0x00,
-            *self.target.flatten()
+            *self.target.flatten(),
         )
 
     def __str__(self) -> str:
@@ -240,7 +260,7 @@ class MotorControlMultipleTargets(CubeCommand):
         movement_type: MovementType,
         speed: Speed,
         mode: WriteMode,
-        target_list: List[TargetPosition],
+        target_list: Sequence[TargetPosition],
     ):
         self.timeout = clip(timeout, 0, 255)
         self.movement_type = movement_type
@@ -256,7 +276,7 @@ class MotorControlMultipleTargets(CubeCommand):
             self.movement_type,
             *self.speed.flatten(),
             0x00,
-            int(self.mode)
+            int(self.mode),
         )
         body = bytes()
         for target in self.target_list:
@@ -504,9 +524,9 @@ class Motor(CubeCharacteristic):
     async def motor_control_target(
         self,
         timeout: int,
-        movement_type: MovementType,
-        speed: Speed,
-        target: TargetPosition,
+        movement_type: Union[MovementType, int],
+        speed: Union[Speed, Sequence[int]],
+        target: Union[TargetPosition, Sequence[int]],
     ) -> None:
         """
         Send target specified motor control command
@@ -520,32 +540,50 @@ class Motor(CubeCharacteristic):
         References:
             https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified
         """
+        if isinstance(movement_type, int):
+            movement_type = MovementType(movement_type)
+        if isinstance(speed, Sequence):
+            speed = Speed.from_int(*speed)
+        if isinstance(target, Sequence):
+            target = TargetPosition.from_int(*target)
         motor_target = MotorControlTarget(timeout, movement_type, speed, target)
         await self._write_without_response(bytes(motor_target))
 
     async def motor_control_multiple_targets(
         self,
         timeout: int,
-        movement_type: MovementType,
-        speed: Speed,
-        mode: WriteMode,
-        target_list: List[TargetPosition],
+        movement_type: Union[MovementType, int],
+        speed: Union[Speed, Sequence[int]],
+        mode: Union[WriteMode, int],
+        target_list: Union[Sequence[TargetPosition], Sequence[Sequence[int]]],
     ) -> None:
         """
         Send multiple target specified motor control command
 
         Args:
             timeout (int): Timeout [s] (Note: not [ms])
-            movement_type (MovementType): Movement type
-            speed (Speed): Speed parameter
-            mode (WriteMode): Write mode
-            target_list (list[TargetPosition]): Target parameter
+            movement_type (Union[MovementType, int]): Movement type
+            speed (Union[Speed, Sequence[int]]): Speed parameter
+            mode (Union[WriteMode, int]): Write mode
+            target_list (List[Union[TargetPosition, Sequence[int]]]): Target parameter list
 
         References:
             https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-multiple-targets-specified
         """
+        if isinstance(movement_type, int):
+            movement_type = MovementType(movement_type)
+        if isinstance(speed, Sequence):
+            speed = Speed.from_int(*speed)
+        if isinstance(mode, int):
+            mode = WriteMode(mode)
+        targets: List[TargetPosition] = []
+        for target in target_list:
+            if isinstance(target, Sequence):
+                targets.append(TargetPosition.from_int(*target))
+            else:
+                targets.append(target)
         motor_target = MotorControlMultipleTargets(
-            timeout, movement_type, speed, mode, target_list
+            timeout, movement_type, speed, mode, targets
         )
         await self._write_without_response(bytes(motor_target))
 
@@ -554,9 +592,9 @@ class Motor(CubeCharacteristic):
         translation: int,
         acceleration: int,
         rotation_velocity: int,
-        rotation_direction: AccelerationRotation,
-        cube_direction: AccelerationDirection,
-        priority: AccelerationPriority,
+        rotation_direction: Union[AccelerationRotation, int],
+        cube_direction: Union[AccelerationDirection, int],
+        priority: Union[AccelerationPriority, int],
         duration_ms: int,
     ) -> None:
         """
@@ -566,14 +604,20 @@ class Motor(CubeCharacteristic):
             translation (int): Speed at which the cube moves in relation to the direction of travel.
             acceleration (int): Specify the increment (or decrement) in speed every 100 milliseconds.
             rotation_velocity (int): Rotational velocity when the cube is changing orientation.
-            rotation_direction (AccelerationRotation): Rotational direction when the cube is changing orientation.
-            cube_direction (AccelerationDirection): Direction the cube travels.
-            priority (AccelerationPriority): Priority to the translational speed or the rotational velocity.
+            rotation_direction (Union[AccelerationRotation, int]): Rotational direction when the cube is changing orientation.
+            cube_direction (Union[AccelerationDirection, int]): Direction the cube travels.
+            priority (Union[AccelerationPriority, int]): Priority to the translational speed or the rotational velocity.
             duration_ms (int): Motor driving period [ms].
 
         References:
             https://toio.github.io/toio-spec/en/docs/ble_motor/#motor-control-with-acceleration-specified
         """
+        if isinstance(rotation_direction, int):
+            rotation_direction = AccelerationRotation(rotation_direction)
+        if isinstance(cube_direction, int):
+            cube_direction = AccelerationDirection(cube_direction)
+        if isinstance(priority, int):
+            priority = AccelerationPriority(priority)
         motor_acceleration = MotorControlAcceleration(
             translation,
             acceleration,
