@@ -62,13 +62,14 @@ class BleCube(CubeInterface):
             logger.warning("already connected")
         return self.connected
 
-    async def disconnect(self):
+    async def disconnect(self) -> bool:
         if self.connected:
             await self.device.disconnect()
             while self.device.is_connected:
                 await asyncio.sleep(0.1)
         else:
             logger.warning("already disconnected")
+        return True
 
     async def read(self, char_uuid: UUID) -> GattReadData:
         return await self.device.read_gatt_char(char_uuid)
@@ -85,6 +86,9 @@ class BleCube(CubeInterface):
     async def unregister_notification_handler(self, char_uuid: UUID) -> bool:
         await self.device.stop_notify(char_uuid)
         return True
+
+    def is_connect(self) -> bool:
+        return self.device.is_connected
 
 
 class BleScanner(ScannerInterface):

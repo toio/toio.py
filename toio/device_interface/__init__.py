@@ -67,23 +67,32 @@ class CubeInterface(metaclass=ABCMeta):
         raise NotImplementedError()
 
     @abstractmethod
-    async def read(self, uuid: UUID) -> GattReadData:
+    async def read(self, char_uuid: UUID) -> GattReadData:
         raise NotImplementedError()
 
     @abstractmethod
     async def write(
-        self, uuid: UUID, data: GattWriteData, response: bool = False
+        self, char_uuid: UUID, data: GattWriteData, response: bool = False
     ) -> None:
         raise NotImplementedError()
 
     @abstractmethod
     async def register_notification_handler(
-        self, uuid: UUID, handler: GattNotificationHandler
+        self, char_uuid: UUID, notification_handler: GattNotificationHandler
     ) -> bool:
         raise NotImplementedError()
 
     @abstractmethod
-    async def unregister_notification_handler(self, uuid: UUID) -> bool:
+    async def unregister_notification_handler(self, char_uuid: UUID) -> bool:
+        raise NotImplementedError()
+
+    @abstractmethod
+    def is_connect(self) -> bool:
+        """
+        Implemented in v1.1.0 or later
+
+        get current connection state
+        """
         raise NotImplementedError()
 
 

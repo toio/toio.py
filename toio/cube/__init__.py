@@ -212,19 +212,24 @@ class ToioCoreCube(CubeInterface):
     async def disconnect(self) -> bool:
         return await self.interface.disconnect()
 
-    async def read(self, uuid: UUID) -> GattReadData:
-        return await self.interface.read(uuid)
+    async def read(self, char_uuid: UUID) -> GattReadData:
+        return await self.interface.read(char_uuid)
 
-    async def write(self, uuid: UUID, data: GattWriteData, response: bool = False):
-        return await self.interface.write(uuid, data, response)
+    async def write(self, char_uuid: UUID, data: GattWriteData, response: bool = False):
+        return await self.interface.write(char_uuid, data, response)
 
     async def register_notification_handler(
-        self, uuid: UUID, handler: GattNotificationHandler
+        self, char_uuid: UUID, notification_handler: GattNotificationHandler
     ) -> bool:
-        return await self.interface.register_notification_handler(uuid, handler)
+        return await self.interface.register_notification_handler(
+            char_uuid, notification_handler
+        )
 
-    async def unregister_notification_handler(self, uuid: UUID) -> bool:
-        return await self.interface.unregister_notification_handler(uuid)
+    async def unregister_notification_handler(self, char_uuid: UUID) -> bool:
+        return await self.interface.unregister_notification_handler(char_uuid)
+
+    def is_connect(self) -> bool:
+        return self.interface.is_connect()
 
 
 __all__: Tuple[str, ...] = (

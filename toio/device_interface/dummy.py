@@ -40,18 +40,21 @@ class DummyCube(CubeInterface):
     async def disconnect(self) -> bool:
         return True
 
-    async def read(self, uuid: UUID) -> GattReadData:
+    async def read(self, char_uuid: UUID) -> GattReadData:
         return GattReadData([])
 
     async def write(
-        self, uuid: UUID, data: GattWriteData, response: bool = False
+        self, char_uuid: UUID, data: GattWriteData, response: bool = False
     ) -> None:
         pass
 
     async def register_notification_handler(
-        self, uuid: UUID, handler: GattNotificationHandler
+        self, char_uuid: UUID, notification_handler: GattNotificationHandler
     ) -> bool:
         return True
 
-    async def unregister_notification_handler(self, uuid: UUID) -> bool:
+    async def unregister_notification_handler(self, char_uuid: UUID) -> bool:
+        return True
+
+    def is_connect(self):
         return True
