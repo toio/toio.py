@@ -24,12 +24,12 @@ from typing_extensions import (
 
 from ..device_interface import (
     CubeInfo,
+    CubeInterface,
     GattNotificationHandler,
     GattReadData,
     GattWriteData,
 )
 from .api import ToioCoreCubeLowLevelAPI
-from .api.base_class import CubeInterface
 from .api.battery import Battery, BatteryInformation, BatteryResponseType
 from .api.button import Button, ButtonInformation, ButtonResponseType, ButtonState
 from .api.configuration import (
@@ -85,6 +85,7 @@ from .api.sensor import (
     SensorResponseType,
 )
 from .api.sound import MidiNote, Note, Sound, SoundId
+from .notification_handler_info import NotificationHandlerInfo, NotificationHandlerTypes
 
 CubeInitializer: TypeAlias = Union[CubeInterface, CubeInfo]
 
@@ -96,6 +97,8 @@ class ToioCoreCube(CubeInterface):
     Note:
        self.protocol_version is set after connecting to the cube.
        self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.2.0.
+
+       In the next version, ToioCoreCube class will no longer have CubeInterface as an abstract base class.
 
     Attributes:
         interface (CubeInterface): control interface (e.g. BleCube)
@@ -166,7 +169,7 @@ class ToioCoreCube(CubeInterface):
     def __init__(self, interface: CubeInterface, name: Optional[str] = None):
         self.interface = interface
         self.name = name
-        self.api = ToioCoreCubeLowLevelAPI(interface)
+        self.api = ToioCoreCubeLowLevelAPI(interface=interface, root_device=self)
         self.protocol_version: Optional[ProtocolVersion] = None
         self.max_retry_to_get_protocol_version: int = 10
 
@@ -233,7 +236,10 @@ class ToioCoreCube(CubeInterface):
 
 
 __all__: Tuple[str, ...] = (
+    "CubeInitializer",
     "ToioCoreCube",
+    "NotificationHandlerInfo",
+    "NotificationHandlerTypes",
     # .api
     "ToioCoreCubeLowLevelAPI",
     # .api.battery

@@ -14,9 +14,10 @@ from enum import IntEnum
 from typing_extensions import Optional, TypeAlias, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand, CubeResponse
+from toio.cube.notification_handler_info import NotificationReceivedDevice
 from toio.device_interface import CubeInterface, GattReadData
 from toio.logger import get_toio_logger
-from toio.toio_uuid import TOIO_UUID_CONFIG
+from toio.toio_uuid import ToioUuid
 from toio.utility import clip
 
 logger = get_toio_logger(__name__)
@@ -655,9 +656,11 @@ class Configuration(CubeCharacteristic):
         else:
             return None
 
-    def __init__(self, interface: CubeInterface) -> None:
+    def __init__(
+        self, interface: CubeInterface, device: NotificationReceivedDevice
+    ) -> None:
         self.interface = interface
-        super().__init__(interface, TOIO_UUID_CONFIG)
+        super().__init__(interface, ToioUuid.Config.value, device)
 
     async def request_protocol_version(self) -> None:
         """

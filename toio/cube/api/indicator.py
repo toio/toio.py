@@ -15,9 +15,10 @@ from dataclasses import dataclass
 from typing_extensions import List, Sequence, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand
+from toio.cube.notification_handler_info import NotificationReceivedDevice
 from toio.device_interface import CubeInterface, GattReadData
 from toio.logger import get_toio_logger
-from toio.toio_uuid import TOIO_UUID_LIGHT_CTRL
+from toio.toio_uuid import ToioUuid
 from toio.utility import clip
 
 logger = get_toio_logger(__name__)
@@ -169,9 +170,9 @@ class Indicator(CubeCharacteristic):
     def is_my_data(_payload: GattReadData) -> None:
         return None
 
-    def __init__(self, interface: CubeInterface):
+    def __init__(self, interface: CubeInterface, device: NotificationReceivedDevice):
         self.interface = interface
-        super().__init__(interface, TOIO_UUID_LIGHT_CTRL)
+        super().__init__(interface, ToioUuid.Light.value, device)
 
     async def turn_on(self, param: Union[IndicatorParam, Sequence[int]]) -> None:
         """

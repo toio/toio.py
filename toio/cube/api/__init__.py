@@ -7,7 +7,13 @@
 #
 # ************************************************************
 
+from __future__ import annotations
+
+from typing_extensions import Dict, TypeAlias, Union
+
 from ...device_interface import CubeInterface
+from ..notification_handler_info import NotificationReceivedDevice
+from .base_class import CubeCharacteristic
 from .battery import Battery
 from .button import Button
 from .configuration import Configuration
@@ -17,16 +23,17 @@ from .motor import Motor
 from .sensor import Sensor
 from .sound import Sound
 
-API_VERSION = "2.3.0"
+CubeApi: TypeAlias = Union[
+    Battery, Button, Configuration, IdInformation, Indicator, Motor, Sensor, Sound
+]
 
 
-class ToioCoreCubeLowLevelAPI(object):
+class ToioCoreCubeLowLevelAPI:
     """
     Control APIs
     This class has control APIs for each characteristic.
 
     Attributes:
-        version (str): Version of supported API
         battery (api.Battery): Interface to `battery characteristic <https://toio.github.io/toio-spec/en/docs/ble_battery>`_
         button (api.Button): Interface to `button characteristic <https://toio.github.io/toio-spec/en/docs/ble_button>`_
         configuration (api.Configuration): Interface to `configuration characteristic <https://toio.github.io/toio-spec/en/docs/ble_configuration>`_
@@ -41,13 +48,15 @@ class ToioCoreCubeLowLevelAPI(object):
         sound (api.Sound): Interface to `sound characteristic <https://toio.github.io/toio-spec/en/docs/ble_sound>`_
     """
 
-    def __init__(self, interface: CubeInterface):
-        self.version = API_VERSION
-        self.battery = Battery(interface)
-        self.button = Button(interface)
-        self.configuration = Configuration(interface)
-        self.id_information = IdInformation(interface)
-        self.indicator = Indicator(interface)
-        self.motor = Motor(interface)
-        self.sensor = Sensor(interface)
-        self.sound = Sound(interface)
+    def __init__(
+        self, interface: CubeInterface, root_device: NotificationReceivedDevice
+    ):
+        self._all_api: Dict[str, CubeCharacteristic] = {}
+        self.battery = Battery(interface, root_device)
+        self.button = Button(interface, root_device)
+        self.configuration = Configuration(interface, root_device)
+        self.id_information = IdInformation(interface, root_device)
+        self.indicator = Indicator(interface, root_device)
+        self.motor = Motor(interface, root_device)
+        self.sensor = Sensor(interface, root_device)
+        self.sound = Sound(interface, root_device)

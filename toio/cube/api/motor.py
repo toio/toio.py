@@ -13,15 +13,15 @@ import pprint
 import struct
 from dataclasses import dataclass
 from enum import Enum, IntEnum
-from typing import List
 
-from typing_extensions import Optional, Sequence, TypeAlias, Union
+from typing_extensions import List, Optional, Sequence, TypeAlias, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeCommand, CubeResponse
+from toio.cube.notification_handler_info import NotificationReceivedDevice
 from toio.device_interface import CubeInterface, GattReadData
 from toio.logger import get_toio_logger
 from toio.position import CubeLocation, Point
-from toio.toio_uuid import TOIO_UUID_MOTOR_CTRL
+from toio.toio_uuid import ToioUuid
 from toio.utility import clip
 
 logger = get_toio_logger(__name__)
@@ -500,9 +500,9 @@ class Motor(CubeCharacteristic):
         else:
             return None
 
-    def __init__(self, interface: CubeInterface):
+    def __init__(self, interface: CubeInterface, device: NotificationReceivedDevice):
         self.interface = interface
-        super().__init__(interface, TOIO_UUID_MOTOR_CTRL)
+        super().__init__(interface, ToioUuid.Motor.value, device)
 
     async def motor_control(
         self, left: int, right: int, duration_ms: Optional[int] = None

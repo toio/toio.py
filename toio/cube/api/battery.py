@@ -7,13 +7,17 @@
 #
 # ************************************************************
 
+from __future__ import annotations
+
 import pprint
-from typing import Optional
+
+from typing_extensions import Optional
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeResponse
-from toio.device_interface import GattReadData
+from toio.cube.notification_handler_info import NotificationReceivedDevice
+from toio.device_interface import CubeInterface, GattReadData
 from toio.logger import get_toio_logger
-from toio.toio_uuid import TOIO_UUID_BATTERY_INFO
+from toio.toio_uuid import ToioUuid
 
 logger = get_toio_logger(__name__)
 
@@ -64,8 +68,8 @@ class Battery(CubeCharacteristic):
         else:
             return None
 
-    def __init__(self, interface):
-        super().__init__(interface, TOIO_UUID_BATTERY_INFO)
+    def __init__(self, interface: CubeInterface, device: NotificationReceivedDevice):
+        super().__init__(interface, ToioUuid.Battery.value, device)
 
     async def read(self) -> Optional[BatteryResponseType]:
         """

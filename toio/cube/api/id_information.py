@@ -9,12 +9,14 @@
 
 import pprint
 import struct
-from typing import Optional, Union
+
+from typing_extensions import Optional, Union
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeResponse
+from toio.cube.notification_handler_info import NotificationReceivedDevice
 from toio.device_interface import CubeInterface, GattReadData
 from toio.position import CubeLocation, Point
-from toio.toio_uuid import TOIO_UUID_ID_INFO
+from toio.toio_uuid import ToioUuid
 
 
 class PositionId(CubeResponse):
@@ -148,9 +150,9 @@ class IdInformation(CubeCharacteristic):
         else:
             return None
 
-    def __init__(self, interface: CubeInterface):
+    def __init__(self, interface: CubeInterface, device: NotificationReceivedDevice):
         self.interface = interface
-        super().__init__(interface, TOIO_UUID_ID_INFO)
+        super().__init__(interface, ToioUuid.Id.value, device)
 
     async def read(self) -> Optional[IdInformationResponseType]:
         """

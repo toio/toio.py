@@ -13,9 +13,10 @@ from enum import IntEnum
 from typing_extensions import Optional, TypeAlias
 
 from toio.cube.api.base_class import CubeCharacteristic, CubeResponse
+from toio.cube.notification_handler_info import NotificationReceivedDevice
 from toio.device_interface import CubeInterface, GattReadData
 from toio.logger import get_toio_logger
-from toio.toio_uuid import TOIO_UUID_BUTTON_INFO
+from toio.toio_uuid import ToioUuid
 
 logger = get_toio_logger(__name__)
 
@@ -77,9 +78,9 @@ class Button(CubeCharacteristic):
         else:
             return None
 
-    def __init__(self, interface: CubeInterface):
+    def __init__(self, interface: CubeInterface, device: NotificationReceivedDevice):
         self.interface = interface
-        super().__init__(interface, TOIO_UUID_BUTTON_INFO)
+        super().__init__(interface, ToioUuid.Button.value, device)
 
     async def read(self) -> Optional[ButtonResponseType]:
         """

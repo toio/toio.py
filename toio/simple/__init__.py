@@ -21,7 +21,7 @@ from toio.coordinate_systems import (
     VisualProgrammingCoordinateSystem,
 )
 from toio.cube import ToioCoreCube
-from toio.cube.api.base_class import CubeCharacteristic, CubeNotificationHandler
+from toio.cube.api.base_class import CubeCharacteristic, NotificationHandlerTypes
 from toio.cube.api.button import Button, ButtonInformation
 from toio.cube.api.configuration import (
     MagneticSensorCondition,
@@ -156,7 +156,7 @@ class SimpleCube(object):
         self._set_sensor_configurations()
         self._request_initial_information()
 
-        handlers: Tuple[Tuple[CubeCharacteristic, CubeNotificationHandler], ...] = (
+        handlers: Tuple[Tuple[CubeCharacteristic, NotificationHandlerTypes], ...] = (
             (self._cube.api.id_information, self._id_notification_handler),
             (self._cube.api.motor, self._motor_notification_handler),
             (self._cube.api.sensor, self._motion_sensor_notification_handler),

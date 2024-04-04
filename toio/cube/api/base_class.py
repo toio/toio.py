@@ -7,12 +7,27 @@
 #
 # ************************************************************
 
+from __future__ import annotations
+
 import binascii
-import inspect
 from abc import ABCMeta, abstractmethod
-from typing import Awaitable, Callable, List, Optional, Union
 from uuid import UUID
 
+from typing_extensions import (
+    Any,
+    Dict,
+    Optional,
+    cast,
+)
+
+from toio.cube.notification_handler_info import (
+    CubeNotificationHandler,
+    CubeNotificationHandlerAsync,
+    CubeNotificationHandlerWithParameter,
+    CubeNotificationHandlerWithParameterAsync,
+    NotificationHandlerInfo,
+    NotificationHandlerTypes,
+)
 from toio.device_interface import (
     CubeInterface,
     GattCharacteristic,
@@ -26,8 +41,6 @@ logger = get_toio_logger(__name__)
 
 DUMP_RAW_READ_DATA = False
 DUMP_RAW_WRITE_DATA = False
-
-CubeNotificationHandler = Callable[[bytearray], Union[None, Awaitable[None]]]
 
 
 class CubeCommand(metaclass=ABCMeta):
@@ -67,10 +80,13 @@ class CubeCharacteristic(metaclass=ABCMeta):
         """
         raise NotImplementedError()
 
-    def __init__(self, interface: CubeInterface, uuid: UUID):
+    def __init__(self, interface: CubeInterface, uuid: UUID, device: Any = None):
         self.interface = interface
         self.uuid = uuid
-        self.notification_handler_list: List = []
+        self.device = device
+        self.notification_handler_dict: Dict[
+            NotificationHandlerTypes, NotificationHandlerInfo
+        ] = {}
         self.notification_handler_is_registered = False
 
     async def _read(self) -> GattReadData:
@@ -107,35 +123,73 @@ class CubeCharacteristic(metaclass=ABCMeta):
     async def _root_notification_handler(
         self, _: GattCharacteristic, payload: bytearray
     ) -> None:
-        for handler in self.notification_handler_list:
-            if inspect.iscoroutinefunction(handler):
-                await handler(payload)
+        for func, handler_info in self.notification_handler_dict.items():
+            if handler_info.is_async:
+                if handler_info.num_of_args == 1:
+                    func = cast(CubeNotificationHandlerAsync, func)
+                    await func(payload)
+                elif handler_info.num_of_args == 2:
+                    func = cast(CubeNotificationHandlerWithParameterAsync, func)
+                    await func(payload, handler_info)
             else:
-                handler(payload)
+                if handler_info.num_of_args == 1:
+                    func = cast(CubeNotificationHandler, func)
+                    func(payload)
+                elif handler_info.num_of_args == 2:
+                    func = cast(CubeNotificationHandlerWithParameter, func)
+                    func(payload, handler_info)
 
     async def register_notification_handler(
-        self, handler: CubeNotificationHandler
+        self, handler: NotificationHandlerTypes, misc: Any = None
     ) -> bool:
-        """User interface to GATT for registering handler function."""
-        if handler in self.notification_handler_list:
+        """
+        User interface to GATT for registering handler function.
+
+        Note:
+            Type of the notification handler function must be
+                Callable[[bytearray, ToioNotificationHandlerInfo], None]
+            or
+                Callable[[bytearray, ToioNotificationHandlerInfo], Awaitable[None]]
+
+            `NotificationHandlerInfo` has `device`, `interface` and `misc` attributes.
+            `device` attribute is the ToioCoreCube instance that received the notification.
+            `interface` attribute is the CubeInterface instance that received the notification.
+            `misc` attribute is set to the `misc` argument of this function.
+
+            If you want to use some cube api in the notification handler, you must define
+            the notification handler as async function.
+            In this case, you can await the cube api in the notification handler.
+
+        Args:
+            handler (ToioCoreCubeNotificationHandler): handler function
+            misc (Any): data given to the handler function as NotificationHandlerInfo.misc
+
+        Returns:
+            bool:
+        """
+        if handler in self.notification_handler_dict:
             return False
-        self.notification_handler_list.append(handler)
+        handler_info = NotificationHandlerInfo(
+            func=handler, misc=misc, device=self.device, interface=self.interface
+        )
+        self.notification_handler_dict[handler] = handler_info
         if not self.notification_handler_is_registered:
             await self._register_notification_handler(self._root_notification_handler)
             self.notification_handler_is_registered = True
         return True
 
     async def unregister_notification_handler(
-        self, handler: Optional[CubeNotificationHandler]
+        self,
+        handler: NotificationHandlerTypes,
     ) -> bool:
         """User interface to GATT for unregistering handler function."""
         if handler is None:
-            self.notification_handler_list = []
+            self.notification_handler_dict.clear()
             return True
-        if handler in self.notification_handler_list:
-            self.notification_handler_list.remove(handler)
+        if handler in self.notification_handler_dict:
+            self.notification_handler_dict.pop(handler)
         if (
-            len(self.notification_handler_list) == 0
+            len(self.notification_handler_dict) == 0
             and self.notification_handler_is_registered
         ):
             await self._unregister_notification_handler()
