@@ -71,7 +71,7 @@ async def test_motor_1():
 
 
 @pytest.mark.asyncio
-async def test_motor_2():
+async def test_motor_2(position_id_mat):
     global RESPONSE_TARGET
     global RESPONSE_MULTIPLE_TARGET
     RESPONSE_TARGET = None
@@ -95,7 +95,7 @@ async def test_motor_2():
 
 
 @pytest.mark.asyncio
-async def test_motor_3():
+async def test_motor_3(position_id_mat):
     global RESPONSE_TARGET
     global RESPONSE_MULTIPLE_TARGET
     RESPONSE_TARGET = None
@@ -123,7 +123,7 @@ async def test_motor_3():
 
 
 @pytest.mark.asyncio
-async def test_motor_4():
+async def test_motor_4(position_id_mat):
     cube = await cube_connect()
 
     await cube.api.motor.motor_control_acceleration(

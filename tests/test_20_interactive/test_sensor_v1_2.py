@@ -47,7 +47,7 @@ def button_handler(payload: bytearray):
 
 
 @pytest.mark.asyncio
-async def test_sensor_1():
+async def test_sensor_1(interactive):
     global BUTTON_PRESSED
     BUTTON_PRESSED = False
 
@@ -157,7 +157,7 @@ async def test_sensor_1():
 
 
 @pytest.mark.asyncio
-async def test_sensor_2():
+async def test_sensor_2(interactive):
     global BUTTON_PRESSED
     BUTTON_PRESSED = False
 
@@ -266,7 +266,7 @@ async def test_sensor_2():
 
 
 @pytest.mark.asyncio
-async def test_sensor_3():
+async def test_sensor_3(interactive):
     global BUTTON_PRESSED
     BUTTON_PRESSED = False
 

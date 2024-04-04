@@ -1,6 +1,6 @@
 from typing import Dict, List
 
 CUBES: List[Dict[str, str]] = [
-    {"name": "toio-n6D", "address": "EA:BE:D7:F2:D1:87"},
-    {"name": "toio-61B", "address": "FA:25:BC:64:AA:52"},
+    {"name": "toio-h7p", "address": "D8:E3:49:A0:EF:19"},
+    {"name": "toio-P5M", "address": "F4:48:9A:1E:E2:E5"},
 ]
