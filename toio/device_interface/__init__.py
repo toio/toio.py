@@ -118,7 +118,7 @@ class ScannerInterface(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    async def scan(
+    async def _scan(
         self,
         num: Optional[int] = None,
         cube_id: Optional[Set[str]] = None,
@@ -126,4 +126,8 @@ class ScannerInterface(metaclass=ABCMeta):
         sort: SortKey = None,
         timeout: float = DEFAULT_SCAN_TIMEOUT,
     ) -> List[CubeInfo]:
+        raise NotImplementedError()
+
+    @abstractmethod
+    async def scan(self, *args, **kwargs) -> List[CubeInfo]:
         raise NotImplementedError()

@@ -7,6 +7,10 @@
 #
 # ************************************************************
 
-__all__ = ["BLEScanner"]
+from typing_extensions import Tuple
 
-import toio.scanner.ble as BLEScanner
+from .ble import UniversalBleScanner
+
+BLEScanner = UniversalBleScanner()
+
+__all__: Tuple[str, ...] = ("BLEScanner",)

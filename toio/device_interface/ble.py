@@ -91,7 +91,7 @@ class BleCube(CubeInterface):
         return self.device.is_connected
 
 
-class BleScanner(ScannerInterface):
+class BaseBleScanner(ScannerInterface):
     """BleScanner
     Scanner for internal BLE interface.
     """
@@ -99,7 +99,7 @@ class BleScanner(ScannerInterface):
     def __init__(self):
         pass
 
-    async def scan(
+    async def _scan(
         self,
         num: Optional[int] = None,
         cube_id: Optional[Set[str]] = None,
@@ -220,3 +220,6 @@ class BleScanner(ScannerInterface):
             return toio_cubes[:num]
         else:
             return toio_cubes
+
+    async def scan(self, *args, **kwargs) -> List[CubeInfo]:
+        return await self._scan(*args, **kwargs)

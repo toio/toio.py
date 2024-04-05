@@ -86,6 +86,7 @@ from .api.sensor import (
 )
 from .api.sound import MidiNote, Note, Sound, SoundId
 from .notification_handler_info import NotificationHandlerInfo, NotificationHandlerTypes
+from .multi_cubes import  MultipleToioCoreCubes
 
 CubeInitializer: TypeAlias = Union[CubeInterface, CubeInfo]
 
@@ -240,6 +241,7 @@ __all__: Tuple[str, ...] = (
     "ToioCoreCube",
     "NotificationHandlerInfo",
     "NotificationHandlerTypes",
+    "MultipleToioCoreCubes",
     # .api
     "ToioCoreCubeLowLevelAPI",
     # .api.battery
