@@ -17,14 +17,9 @@ import platform
 
 from typing_extensions import Any, List, NamedTuple, Optional, Set
 
-from toio.device_interface import (
-    DEFAULT_SCAN_TIMEOUT,
-    CubeInfo,
-    ScannerInterface,
-    SortKey,
-)
-from toio.device_interface.ble import BaseBleScanner
-from toio.logger import get_toio_logger
+from ..device_interface import DEFAULT_SCAN_TIMEOUT, CubeInfo, ScannerInterface, SortKey
+from ..device_interface.ble import BaseBleScanner
+from ..logger import get_toio_logger
 
 logger = get_toio_logger(__name__)
 
@@ -64,7 +59,7 @@ class UniversalBleScanner(ScannerInterface):
             num=num, cube_id=cube_id, address=address, sort=sort, timeout=timeout
         )
 
-    async def scan( # type: ignore
+    async def scan(  # type: ignore
         self, num: int, sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
     ) -> List[CubeInfo]:
         """Scan the specified number of toio Core Cubes.
@@ -147,7 +142,7 @@ class UniversalBleScanner(ScannerInterface):
         Returns:
             List[Tuple[BLEDevice, AdvertisementData]]: List of found cubes.
         """
-        from toio.scanner.platform.windows_ble import get_registered_cubes
+        from ..scanner.platform.windows_ble import get_registered_cubes
 
         registered_cubes = get_registered_cubes()
         addresses = {x.address.upper() for x in registered_cubes}
@@ -177,7 +172,7 @@ class UniversalBleScanner(ScannerInterface):
         Returns:
             List[Tuple[BLEDevice, AdvertisementData]]: List of found cubes.
         """
-        from toio.scanner.platform.windows_ble import get_registered_cubes
+        from ..scanner.platform.windows_ble import get_registered_cubes
 
         registered_cubes = get_registered_cubes()
         address_list = set([])

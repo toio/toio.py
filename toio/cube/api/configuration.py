@@ -13,12 +13,12 @@ from enum import IntEnum
 
 from typing_extensions import Optional, TypeAlias, Union
 
-from toio.cube.api.base_class import CubeCharacteristic, CubeCommand, CubeResponse
-from toio.cube.notification_handler_info import NotificationReceivedDevice
-from toio.device_interface import CubeInterface, GattReadData
-from toio.logger import get_toio_logger
-from toio.toio_uuid import ToioUuid
-from toio.utility import clip
+from ...device_interface import CubeInterface, GattReadData
+from ...logger import get_toio_logger
+from ...toio_uuid import ToioUuid
+from ...utility import clip
+from ..api.base_class import CubeCharacteristic, CubeCommand, CubeResponse
+from ..notification_handler_info import NotificationReceivedDevice
 
 logger = get_toio_logger(__name__)
 

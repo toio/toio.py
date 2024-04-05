@@ -22,7 +22,7 @@ from typing_extensions import (
     cast,
 )
 
-from toio.device_interface import CubeInterface
+from ..device_interface import CubeInterface
 
 if TYPE_CHECKING:
     from toio.cube import ToioCoreCube

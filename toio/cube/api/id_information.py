@@ -12,11 +12,11 @@ import struct
 
 from typing_extensions import Optional, Union
 
-from toio.cube.api.base_class import CubeCharacteristic, CubeResponse
-from toio.cube.notification_handler_info import NotificationReceivedDevice
-from toio.device_interface import CubeInterface, GattReadData
-from toio.position import CubeLocation, Point
-from toio.toio_uuid import ToioUuid
+from ...device_interface import CubeInterface, GattReadData
+from ...position import CubeLocation, Point
+from ...toio_uuid import ToioUuid
+from ..api.base_class import CubeCharacteristic, CubeResponse
+from ..notification_handler_info import NotificationReceivedDevice
 
 
 class PositionId(CubeResponse):

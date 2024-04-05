@@ -16,28 +16,28 @@ from enum import Enum, auto
 from logging import NOTSET, NullHandler, StreamHandler, getLogger
 from typing import ClassVar, Optional, Tuple, Type
 
-from toio.coordinate_systems import (
+from ..coordinate_systems import (
     LocalCoordinateSystem,
     VisualProgrammingCoordinateSystem,
 )
-from toio.cube import ToioCoreCube
-from toio.cube.api.base_class import CubeCharacteristic, NotificationHandlerTypes
-from toio.cube.api.button import Button, ButtonInformation
-from toio.cube.api.configuration import (
+from ..cube import ToioCoreCube
+from ..cube.api.base_class import CubeCharacteristic, NotificationHandlerTypes
+from ..cube.api.button import Button, ButtonInformation
+from ..cube.api.configuration import (
     MagneticSensorCondition,
     MagneticSensorFunction,
     PostureAngleDetectionCondition,
     PostureAngleDetectionType,
 )
-from toio.cube.api.id_information import (
+from ..cube.api.id_information import (
     IdInformation,
     PositionId,
     PositionIdMissed,
     StandardId,
     StandardIdMissed,
 )
-from toio.cube.api.indicator import Color, IndicatorParam
-from toio.cube.api.motor import (
+from ..cube.api.indicator import Color, IndicatorParam
+from ..cube.api.motor import (
     Motor,
     MotorResponseCode,
     MovementType,
@@ -47,15 +47,15 @@ from toio.cube.api.motor import (
     Speed,
     TargetPosition,
 )
-from toio.cube.api.sensor import (
+from ..cube.api.sensor import (
     MagneticSensorData,
     MotionDetectionData,
     PostureAngleEulerData,
     PostureDataType,
     Sensor,
 )
-from toio.cube.api.sound import MidiNote, Note
-from toio.position import (
+from ..cube.api.sound import MidiNote, Note
+from ..position import (
     STAY_CURRENT,
     CubeLocation,
     MatRect,
@@ -63,9 +63,9 @@ from toio.position import (
     RelativeCubeLocation,
     ToioMat,
 )
-from toio.scanner import BLEScanner
-from toio.standard_id import StandardIdCard
-from toio.utility import clip
+from ..scanner import BLEScanner
+from ..standard_id import StandardIdCard
+from ..utility import clip
 
 logger = getLogger(__name__)
 logger.setLevel(NOTSET)

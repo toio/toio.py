@@ -11,12 +11,23 @@ from __future__ import annotations
 
 import asyncio
 
-from typing_extensions import Any, Dict, List, Optional, Sequence, Type, Union
+from typing_extensions import (
+    TYPE_CHECKING,
+    Any,
+    Dict,
+    List,
+    Optional,
+    Sequence,
+    Type,
+    Union,
+)
 
-from toio.cube import ToioCoreCube
-from toio.device_interface import CubeInfo, ScannerInterface
-from toio.logger import get_toio_logger
-from toio.scanner.ble import UniversalBleScanner
+from ..device_interface import CubeInfo, ScannerInterface
+from ..logger import get_toio_logger
+from ..scanner.ble import UniversalBleScanner
+
+if TYPE_CHECKING:
+    from ..cube import ToioCoreCube
 
 logger = get_toio_logger(__name__)
 
@@ -86,6 +97,8 @@ class MultipleToioCoreCubes:
             scanner (Type[ScannerInterface]): scanner interface (default is UniversalBleScanner)
             scanner_args (Sequence[Any]): arguments given to the scanner.scan() function
         """
+        from ..cube import ToioCoreCube
+
         self._cube_num: Optional[int] = None
         self._cubes: List[ToioCoreCube] = []
         if isinstance(cubes, int):
@@ -135,6 +148,8 @@ class MultipleToioCoreCubes:
         If MultipleCubes is initialized with integer number,
         this function performs to scan the number of cubes.
         """
+        from ..cube import ToioCoreCube
+
         if self._scanning_required and isinstance(self._cube_num, int):
             device_list = await self._scanner().scan(
                 self._cube_num, *self._scanner_args

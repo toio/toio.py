@@ -16,7 +16,7 @@ import re
 import winreg
 from typing import NamedTuple, Tuple
 
-from toio.logger import get_toio_logger
+from ...logger import get_toio_logger
 
 logger = get_toio_logger(__name__)
 

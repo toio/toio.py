@@ -13,11 +13,11 @@ import pprint
 
 from typing_extensions import Optional
 
-from toio.cube.api.base_class import CubeCharacteristic, CubeResponse
-from toio.cube.notification_handler_info import NotificationReceivedDevice
-from toio.device_interface import CubeInterface, GattReadData
-from toio.logger import get_toio_logger
-from toio.toio_uuid import ToioUuid
+from ...device_interface import CubeInterface, GattReadData
+from ...logger import get_toio_logger
+from ...toio_uuid import ToioUuid
+from ..api.base_class import CubeCharacteristic, CubeResponse
+from ..notification_handler_info import NotificationReceivedDevice
 
 logger = get_toio_logger(__name__)
 

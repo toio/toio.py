@@ -85,8 +85,8 @@ from .api.sensor import (
     SensorResponseType,
 )
 from .api.sound import MidiNote, Note, Sound, SoundId
+from .multi_cubes import MultipleToioCoreCubes
 from .notification_handler_info import NotificationHandlerInfo, NotificationHandlerTypes
-from .multi_cubes import  MultipleToioCoreCubes
 
 CubeInitializer: TypeAlias = Union[CubeInterface, CubeInfo]
 

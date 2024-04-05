@@ -12,7 +12,7 @@ Dummy device interface (for debugging)
 
 from uuid import UUID
 
-from toio.device_interface import (
+from ..device_interface import (
     CubeInterface,
     GattNotificationHandler,
     GattReadData,

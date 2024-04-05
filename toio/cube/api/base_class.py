@@ -13,14 +13,17 @@ import binascii
 from abc import ABCMeta, abstractmethod
 from uuid import UUID
 
-from typing_extensions import (
-    Any,
-    Dict,
-    Optional,
-    cast,
-)
+from typing_extensions import Any, Dict, Optional, cast
 
-from toio.cube.notification_handler_info import (
+from ...device_interface import (
+    CubeInterface,
+    GattCharacteristic,
+    GattNotificationHandler,
+    GattReadData,
+    GattWriteData,
+)
+from ...logger import get_toio_logger
+from ..notification_handler_info import (
     CubeNotificationHandler,
     CubeNotificationHandlerAsync,
     CubeNotificationHandlerWithParameter,
@@ -28,14 +31,6 @@ from toio.cube.notification_handler_info import (
     NotificationHandlerInfo,
     NotificationHandlerTypes,
 )
-from toio.device_interface import (
-    CubeInterface,
-    GattCharacteristic,
-    GattNotificationHandler,
-    GattReadData,
-    GattWriteData,
-)
-from toio.logger import get_toio_logger
 
 logger = get_toio_logger(__name__)
 

@@ -51,6 +51,7 @@ line-length = 88
 minversion = "6.0"
 # addopts = "--cov toio --log-cli-level=INFO"
 addopts = "--log-cli-level=INFO"
+pythonpath = "toio"
 testpaths =  ["tests"]
 
 [tool.mypy]

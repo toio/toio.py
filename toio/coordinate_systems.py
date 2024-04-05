@@ -9,7 +9,7 @@
 
 from typing import Union
 
-from toio.position import CoordinateSystemABC, Point
+from .position import CoordinateSystemABC, Point
 
 
 class ToioRelativeCoordinateSystem(CoordinateSystemABC):

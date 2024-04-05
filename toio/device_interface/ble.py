@@ -16,7 +16,7 @@ from uuid import UUID
 
 from bleak import BleakClient, BleakScanner
 
-from toio.device_interface import (
+from ..device_interface import (
     DEFAULT_SCAN_TIMEOUT,
     AdvertisementData,
     BLEDevice,
@@ -29,8 +29,8 @@ from toio.device_interface import (
     ScannerInterface,
     SortKey,
 )
-from toio.logger import get_toio_logger
-from toio.toio_uuid import TOIO_UUID_SERVICE
+from ..logger import get_toio_logger
+from ..toio_uuid import TOIO_UUID_SERVICE
 
 RSSI_UNKNOWN = -65535
 
