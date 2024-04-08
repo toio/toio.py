@@ -75,3 +75,44 @@ async def test_connect_3():
     logger.info("** RE-DISCONNECT")
     await cube.disconnect()
     assert not cube.is_connect()
+
+
+@pytest.mark.asyncio
+async def test_connect_4():
+    async with ToioCoreCube() as cube:
+        assert cube.is_connect()
+        logger.info("** CONNECTED: %s", cube.name)
+        for n in range(100):
+            pos = await cube.api.id_information.read()
+            xx = str(pos)
+            logger.info("%4d:%s", n, xx)
+    logger.info("** DISCONNECTED")
+    assert not cube.is_connect()
+
+
+@pytest.mark.asyncio
+async def test_connect_5():
+    async with ToioCoreCube(name="taro") as cube:
+        assert cube.is_connect()
+        assert cube.name == "taro"
+        logger.info("** CONNECTED: %s", cube.name)
+        for n in range(100):
+            pos = await cube.api.id_information.read()
+            xx = str(pos)
+            logger.info("%4d:%s", n, xx)
+    logger.info("** DISCONNECTED")
+    assert not cube.is_connect()
+
+
+@pytest.mark.asyncio
+async def test_connect_6():
+    async with ToioCoreCube(name="taro") as cube:
+        assert cube.is_connect()
+        assert cube.name == "taro"
+        logger.info("** CONNECTED: %s", cube.name)
+        for n in range(100):
+            pos = await cube.api.id_information.read()
+            xx = str(pos)
+            logger.info("%4d:%s", n, xx)
+    logger.info("** DISCONNECTED")
+    assert not cube.is_connect()

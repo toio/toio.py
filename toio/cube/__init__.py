@@ -13,11 +13,13 @@ import collections
 from uuid import UUID
 
 from typing_extensions import (
+    Any,
     Iterable,
     List,
     Optional,
     Sequence,
     Tuple,
+    Type,
     TypeAlias,
     Union,
 )
@@ -28,7 +30,9 @@ from ..device_interface import (
     GattNotificationHandler,
     GattReadData,
     GattWriteData,
+    ScannerInterface,
 )
+from ..scanner import UniversalBleScanner
 from .api import ToioCoreCubeLowLevelAPI
 from .api.battery import Battery, BatteryInformation, BatteryResponseType
 from .api.button import Button, ButtonInformation, ButtonResponseType, ButtonState
@@ -167,21 +171,45 @@ class ToioCoreCube(CubeInterface):
             cubes.append(cube)
         return cubes
 
-    def __init__(self, interface: CubeInterface, name: Optional[str] = None):
-        self.interface = interface
+    def __init__(
+        self,
+        interface: Optional[CubeInterface] = None,
+        name: Optional[str] = None,
+        scanner: Type[ScannerInterface] = UniversalBleScanner,
+        scanner_args: Sequence[Any] = (),
+    ):
+        if interface is None:
+            self._scanning_required = True
+            self.interface = None
+        else:
+            self._scanning_required = False
+            self.interface = interface
         self.name = name
-        self.api = ToioCoreCubeLowLevelAPI(interface=interface, root_device=self)
+        self._scanner = scanner
+        self._scanner_args = scanner_args
+
         self.protocol_version: Optional[ProtocolVersion] = None
         self.max_retry_to_get_protocol_version: int = 10
 
     async def __aenter__(self):
+        await self.scan()
         await self.connect()
         return self
 
     async def __aexit__(self, exc_type, exc, tb):
         await self.disconnect()
 
+    async def scan(self):
+        if self._scanning_required and self.interface is None:
+            device_list = await self._scanner().scan(1, *self._scanner_args)
+            if len(device_list):
+                self.interface = device_list[0].interface
+                if self.name is None:
+                    self.name = device_list[0].name
+
     async def connect(self) -> bool:
+        assert self.interface is not None
+        self.api = ToioCoreCubeLowLevelAPI(interface=self.interface, root_device=self)
         connect_result = await self.interface.connect()
         if connect_result is True:
             self.protocol_version = None
@@ -214,25 +242,31 @@ class ToioCoreCube(CubeInterface):
         return connect_result
 
     async def disconnect(self) -> bool:
+        assert self.interface is not None
         return await self.interface.disconnect()
 
     async def read(self, char_uuid: UUID) -> GattReadData:
+        assert self.interface is not None
         return await self.interface.read(char_uuid)
 
     async def write(self, char_uuid: UUID, data: GattWriteData, response: bool = False):
+        assert self.interface is not None
         return await self.interface.write(char_uuid, data, response)
 
     async def register_notification_handler(
         self, char_uuid: UUID, notification_handler: GattNotificationHandler
     ) -> bool:
+        assert self.interface is not None
         return await self.interface.register_notification_handler(
             char_uuid, notification_handler
         )
 
     async def unregister_notification_handler(self, char_uuid: UUID) -> bool:
+        assert self.interface is not None
         return await self.interface.unregister_notification_handler(char_uuid)
 
     def is_connect(self) -> bool:
+        assert self.interface is not None
         return self.interface.is_connect()
 
 
