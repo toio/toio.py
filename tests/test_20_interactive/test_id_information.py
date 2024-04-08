@@ -95,7 +95,7 @@ def reset_state():
 
 
 @pytest.mark.asyncio
-async def test_id_information_1(interactive, position_id_mat):
+async def test_id_information_1(position_id_mat, confirm):
     reset_state()
 
     global TARGET_AREA
@@ -129,7 +129,7 @@ async def test_id_information_1(interactive, position_id_mat):
 
 
 @pytest.mark.asyncio
-async def test_id_information_2(interactive, standard_id_mat):
+async def test_id_information_2(standard_id_mat, confirm):
     reset_state()
 
     global TARGET_CARD

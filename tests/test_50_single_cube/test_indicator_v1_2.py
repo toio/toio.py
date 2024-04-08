@@ -25,9 +25,7 @@ async def test_indicator_turn_on():
     await cube.connect()
     print("** CONNECTED")
     print("** LED ON #FF0040 (2[s])")
-    await cube.api.indicator.turn_on(
-        param=(2000, 0xFF, 0x00, 0x40)
-    )
+    await cube.api.indicator.turn_on(param=(2000, 0xFF, 0x00, 0x40))
     await asyncio.sleep(5)
     print("** DISCONNECT")
     await cube.disconnect()
@@ -42,9 +40,7 @@ async def test_indicator_turn_off_all():
     await cube.connect()
     print("** CONNECTED")
     print("** LED ON #00FF40")
-    await cube.api.indicator.turn_on(
-        param=(0, 0x00, 0xFF, 0x40)
-    )
+    await cube.api.indicator.turn_on(param=(0, 0x00, 0xFF, 0x40))
     await asyncio.sleep(3)
     print("** LED OFF")
     await cube.api.indicator.turn_off_all()
@@ -63,7 +59,7 @@ async def test_indicator_turn_off():
     print("** CONNECTED")
     print("** LED ON #00FF40")
     await cube.api.indicator.turn_on(
-        param=(0, 0x00, 0xff, 0x40),
+        param=(0, 0x00, 0xFF, 0x40),
     )
     await asyncio.sleep(3)
     print("** LED OFF")

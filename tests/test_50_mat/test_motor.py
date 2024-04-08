@@ -71,7 +71,7 @@ async def test_motor_1():
 
 
 @pytest.mark.asyncio
-async def test_motor_2(position_id_mat):
+async def test_motor_2(position_id_mat, confirm):
     global RESPONSE_TARGET
     global RESPONSE_MULTIPLE_TARGET
     RESPONSE_TARGET = None

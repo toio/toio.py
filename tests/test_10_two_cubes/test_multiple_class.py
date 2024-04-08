@@ -13,13 +13,13 @@ from logging import getLogger
 
 import pytest
 
-from toio.scanner import BLEScanner
 from toio.cube import ToioCoreCube
+from toio.cube.api.indicator import Color, IndicatorParam
 from toio.cube.multi_cubes import MultipleToioCoreCubes
-from toio.cube.api.indicator import IndicatorParam, Color
 from toio.scanner import BLEScanner
 
 logger = getLogger(__name__)
+
 
 @pytest.mark.asyncio
 async def test_multiple_1():
@@ -28,8 +28,12 @@ async def test_multiple_1():
         logger.info("** CONNECTED")
         assert len(cubes) == 2
 
-        await cubes.taro.api.indicator.turn_on(IndicatorParam(duration_ms=0, color=Color(r=0xff, g=0x00, b=0xff)))
-        await cubes.jiro.api.indicator.turn_on(IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xff, b=0xff)))
+        await cubes.taro.api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0xFF, g=0x00, b=0xFF))
+        )
+        await cubes.jiro.api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0xFF))
+        )
         await asyncio.sleep(3)
         logger.info("** DISCONNECTING")
     logger.info("** DISCONNECTED")
@@ -53,8 +57,12 @@ async def test_multiple_2():
     taro: ToioCoreCube = cubes.named("taro")
     jiro: ToioCoreCube = cubes.named("jiro")
 
-    await taro.api.indicator.turn_on(IndicatorParam(duration_ms=0, color=Color(r=0xff, g=0x00, b=0xff)))
-    await jiro.api.indicator.turn_on(IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xff, b=0xff)))
+    await taro.api.indicator.turn_on(
+        IndicatorParam(duration_ms=0, color=Color(r=0xFF, g=0x00, b=0xFF))
+    )
+    await jiro.api.indicator.turn_on(
+        IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0xFF))
+    )
 
     await asyncio.sleep(3)
     logger.info("** DISCONNECTING")
@@ -70,9 +78,12 @@ async def test_multiple_3():
         assert len(cubes) == 2
 
         for c in cubes:
-            await c.api.indicator.turn_on(IndicatorParam(duration_ms=0, color=Color(r=0xff, g=0x00, b=0xff)))
+            await c.api.indicator.turn_on(
+                IndicatorParam(duration_ms=0, color=Color(r=0xFF, g=0x00, b=0xFF))
+            )
             await asyncio.sleep(2)
-            await c.api.indicator.turn_on(IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0x00, b=0x00)))
+            await c.api.indicator.turn_on(
+                IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0x00, b=0x00))
+            )
         logger.info("** DISCONNECTING")
     logger.info("** DISCONNECTED")
-

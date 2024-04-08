@@ -20,10 +20,9 @@ import pprint
 from logging import getLogger
 
 import pytest
+from _cubes import CUBES
 
 from toio.scanner import BLEScanner
-
-from _cubes import CUBES
 
 logger = getLogger(__name__)
 

@@ -15,12 +15,11 @@ import pytest
 
 from toio.scanner import BLEScanner
 
-
 logger = getLogger(__name__)
 
 
 @pytest.mark.asyncio
-async def test_cube_off(confirm):
+async def test_cube_off(post_confirm):
     logger.info("***** TESTS REQUIRED TWO CUBES FINISHED *****")
     logger.info("** turn on only one cube and turn off the rest")
 
@@ -32,5 +31,3 @@ async def test_confirm_cube_off():
     for d in dev:
         pprint.pprint(d)
     assert len(dev) == 1
-
-

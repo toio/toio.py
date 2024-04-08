@@ -20,7 +20,7 @@ logger = getLogger(__name__)
 
 
 @pytest.mark.asyncio
-async def test_indicator_turn_on(interactive_result):
+async def test_indicator_turn_on(indicator, get_result):
     device_list = await BLEScanner.scan(1)
     assert len(device_list)
     cube = ToioCoreCube(device_list[0].interface)
@@ -31,14 +31,16 @@ async def test_indicator_turn_on(interactive_result):
     await cube.api.indicator.turn_on(
         IndicatorParam(duration_ms=2000, color=Color(r=0xFF, g=0x00, b=0x80))
     )
-    await asyncio.sleep(5)
+    await asyncio.sleep(2)
+    logger.info("** LED OFF")
+    await asyncio.sleep(2)
     logger.info("** DISCONNECTING")
     await cube.disconnect()
     logger.info("** DISCONNECTED")
 
 
 @pytest.mark.asyncio
-async def test_indicator_turn_off_all(interactive_result):
+async def test_indicator_turn_off_all(indicator, get_result):
     device_list = await BLEScanner.scan(1)
     assert len(device_list)
     cube = ToioCoreCube(device_list[0].interface)
@@ -59,7 +61,7 @@ async def test_indicator_turn_off_all(interactive_result):
 
 
 @pytest.mark.asyncio
-async def test_indicator_turn_off(interactive_result):
+async def test_indicator_turn_off(indicator, get_result):
     device_list = await BLEScanner.scan(1)
     assert len(device_list)
     cube = ToioCoreCube(device_list[0].interface)
@@ -80,7 +82,7 @@ async def test_indicator_turn_off(interactive_result):
 
 
 @pytest.mark.asyncio
-async def test_indicator_repeated_turn_on(interactive_result):
+async def test_indicator_repeated_turn_on(indicator, get_result):
     device_list = await BLEScanner.scan(1)
     assert len(device_list)
     cube = ToioCoreCube(device_list[0].interface)
@@ -95,8 +97,9 @@ async def test_indicator_repeated_turn_on(interactive_result):
             IndicatorParam(duration_ms=500, color=Color(r=0xFF, g=0x00, b=0x80)),
         ),
     )
-    await asyncio.sleep(6)
+    await asyncio.sleep(5)
     logger.info("** LED OFF")
+    await asyncio.sleep(2)
     await cube.api.indicator.turn_off(1)
     await asyncio.sleep(2)
     logger.info("** DISCONNECTING")

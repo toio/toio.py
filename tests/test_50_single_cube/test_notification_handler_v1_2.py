@@ -11,13 +11,15 @@
 import asyncio
 import binascii
 import pprint
-import pytest
 from logging import getLogger
+
+import pytest
 from typing_extensions import Dict
+
+from toio.cube import NotificationHandlerInfo, ToioCoreCube
 from toio.cube.api.button import Button, ButtonInformation, ButtonState
-from toio.cube.api.indicator import IndicatorParam, Color
-from toio.cube.api.sensor import Sensor, MotionDetectionData, Posture
-from toio.cube import ToioCoreCube, NotificationHandlerInfo
+from toio.cube.api.indicator import Color, IndicatorParam
+from toio.cube.api.sensor import MotionDetectionData, Posture, Sensor
 from toio.scanner import BLEScanner
 
 logger = getLogger(__name__)

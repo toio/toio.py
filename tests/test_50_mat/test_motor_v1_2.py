@@ -71,7 +71,7 @@ async def test_motor_1():
 
 
 @pytest.mark.asyncio
-async def test_motor_2(position_id_mat):
+async def test_motor_2(position_id_mat, confirm):
     global RESPONSE_TARGET
     global RESPONSE_MULTIPLE_TARGET
     RESPONSE_TARGET = None
@@ -80,10 +80,7 @@ async def test_motor_2(position_id_mat):
     cube = await cube_connect()
     await cube.api.motor.register_notification_handler(notification_handler)
     await cube.api.motor.motor_control_target(
-        timeout=5,
-        movement_type=2,
-        speed=(100, 3),
-        target=(350, 170, 0, 0)
+        timeout=5, movement_type=2, speed=(100, 3), target=(350, 170, 0, 0)
     )
 
     await asyncio.sleep(4)

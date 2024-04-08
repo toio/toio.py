@@ -23,15 +23,24 @@ CUBES: List[Dict[str, str]] = [
 async def main(argv):
     dev = await BLEScanner.scan(2)
     if len(dev) < 2:
-        print("failed to find 2 cubes")
-        sys.exit(1)
-
-    print("from typing import Dict, List")
-    print()
-    print("CUBES: List[Dict[str, str]] = [")
-    for d in dev:
-        print(f'    {{"name": "{d.device.name}", "address": "{d.device.address}"}},')
-    print("]")
+        sys.stderr.write("failed to find 2 cubes\n")
+        return 1
+    else:
+        if len(argv) >= 2:
+            wfh = open(argv[1], "w")
+        else:
+            wfh = sys.stdout
+        sys.stderr.write("generate cube list: '%s'\n" % argv[1])
+        wfh.write("from typing import Dict, List\n")
+        wfh.write("\n")
+        wfh.write("CUBES: List[Dict[str, str]] = [\n")
+        for d in dev:
+            wfh.write(
+                f'    {{"name": "{d.device.name}", "address": "{d.device.address}"}},\n'
+            )
+        wfh.write("]\n")
+        wfh.close()
+    return 0
 
 
 if __name__ == "__main__":
