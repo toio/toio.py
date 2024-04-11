@@ -58,6 +58,11 @@ testpaths =  ["tests"]
 [tool.mypy]
 python_version = "3.8"
 
+[tool.ruff]
+line-length = 88
+exclude = ["pythonista3corebluetooth"]
+
+
 [tool.poe.tasks]
 update-apidocs = { "shell" = "./mkdocs/mkdocs.sh --rebuild" }
 check-coverage = { "shell" = "./tests/check_coverage.sh" }
