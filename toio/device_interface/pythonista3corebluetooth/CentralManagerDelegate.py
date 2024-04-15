@@ -4,7 +4,7 @@ manage CoreBluetooth services and resources on the Central End
 
 Created on June, 25 2019 by kevincar <kevincarrolldavis@gmail.com>
 
-Port to Pythonista3 by Sony Interactive Entertainment Inc.
+Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
 
 """
 

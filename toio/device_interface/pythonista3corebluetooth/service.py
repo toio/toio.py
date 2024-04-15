@@ -1,5 +1,5 @@
 """
-Port to Pythonista3 by Sony Interactive Entertainment Inc.
+Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
 
 """
 

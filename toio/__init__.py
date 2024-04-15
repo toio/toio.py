@@ -68,6 +68,11 @@ from .cube.api.sensor import (
     SensorResponseType,
 )
 from .cube.api.sound import MidiNote, Note, Sound, SoundId
+from .cube.multi_cubes import MultipleToioCoreCubes
+from .cube.notification_handler_info import (
+    NotificationHandlerInfo,
+    NotificationHandlerTypes,
+)
 from .position import (
     CoordinateSystemABC,
     CubeLocation,
@@ -85,6 +90,11 @@ __all__ = [
     "VisualProgrammingCoordinateSystem",
     # .cube
     "ToioCoreCube",
+    # .cube.multi_cubes
+    "MultipleToioCoreCubes",
+    # .cube.notification_handler_info
+    "NotificationHandlerInfo",
+    "NotificationHandlerTypes",
     # .cube.api
     "ToioCoreCubeLowLevelAPI",
     # .cube.api.battery

@@ -32,9 +32,6 @@ from ..device_interface import (
     ScannerInterface,
     SortKey,
 )
-if sys.platform == "ios":
-    from ..device_interface.pythonista3corebluetooth.client import BleakClientPythonista3
-    from ..device_interface.pythonista3corebluetooth.scanner import BleakScannerPythonista3
 from ..logger import get_toio_logger
 from ..toio_uuid import TOIO_UUID_SERVICE
 
@@ -42,19 +39,24 @@ RSSI_UNKNOWN = -65535
 
 logger = get_toio_logger(__name__)
 
+
 def _get_platform_client_backend_type() -> Optional[Type[BaseBleakClient]]:
     if sys.platform == "ios":
         from .pythonista3corebluetooth.client import BleakClientPythonista3
+
         return BleakClientPythonista3
     else:
         return None
 
+
 def _get_platform_scanner_backend() -> Optional[Type[BaseBleakScanner]]:
     if sys.platform == "ios":
         from .pythonista3corebluetooth.scanner import BleakScannerPythonista3
+
         return BleakScannerPythonista3
     else:
         return None
+
 
 class BleCube(CubeInterface):
     """
@@ -202,7 +204,9 @@ class BaseBleScanner(ScannerInterface):
                     )
 
         # scan ble devices
-        async with BleakScanner(detection_callback=check_condition, backend=_get_platform_scanner_backend()):
+        async with BleakScanner(
+            detection_callback=check_condition, backend=_get_platform_scanner_backend()
+        ):
             try:
                 await asyncio.wait_for(condition_met.wait(), timeout=timeout)
             except TimeoutError:

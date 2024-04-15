@@ -4,13 +4,13 @@
 
 これは Python から[toio コアキューブ](https://toio.io/platform/cube/)を制御するためのライブラリです。
 
-[toio コアキューブ技術仕様](https://toio.github.io/toio-spec/) v2.3.0 に基づいています。
+[toio コアキューブ技術仕様](https://toio.github.io/toio-spec/) v2.4.0 に基づいています。
 
 ## 特徴
 
 - Bluetooth 通信に[bleak](https://github.com/hbldh/bleak)を使用
-- Python 3.8 以降のバージョンをサポート （Python 3.11 の使用を推奨）
-- マルチプラットフォーム (Windows, Linux, macOS)
+- Python 3.8 以降のバージョンをサポート （Python 3.12 の使用を推奨）
+- マルチプラットフォーム (Windows, Linux, macOS, iOS, iPadOS)
 - 専用のドングルが不要
 - toio コアキューブ技術仕様に基づいた非同期 API (ToioCoreCube API) と 簡単にキューブを制御するための同期 API (SimpleCube API) の 2 種類を用意
 - BLE アドレス、キューブ固有名を指定してのスキャン機能
@@ -26,7 +26,8 @@
 ### 補助的な確認環境
 
 - Linux: Ubuntu22.04
-- macOS: macOS 12(Monterey)
+- macOS: macOS 13(Ventura)
+- iOS, iPadOS: 17
 
 ## セットアップとチュートリアル
 
@@ -56,7 +57,18 @@
 
 ## toio.py 実装概要
 
-toio.py は大きく分けて Scanner と ToioCoreCube の二つのクラスから構成されています。
+toio.py は大きく分けて下記のクラスで構成されています。
+
+### ToioCoreCube
+
+キューブを制御するためのクラスです。
+
+ToioCoreCube は[toio コアキューブ技術仕様](https://toio.github.io/toio-spec/) に記載されているキャラクタリスティックに対応したサブクラスを持ちます。このサブクラスを経由してキューブの各種機能へアクセスします。
+
+#### v1.1 から追加された機能
+
+ToioCoreCubeクラスは基本的な Scanner の機能を持ち、Scanner を使わなくてもキューブの探索と接続が行えるようになりました。  
+複雑な設定でのキューブの探索には Scanner を使ってください。
 
 ### Scanner
 
@@ -75,15 +87,59 @@ BLE インターフェース経由でキューブを探索するためのクラ�
 
 - Windows に登録されている（ペアリングされている）キューブの探索
 
-### ToioCoreCube
+#### MultipleToioCoreCubes
 
-キューブを制御するためのクラスです。
+このクラスは v1.1 から追加されました。
 
-ToioCoreCube は[toio コアキューブ技術仕様](https://toio.github.io/toio-spec/) に記載されているキャラクタリスティックに対応したサブクラスを持ちます。このサブクラスを経由してキューブの各種機能へアクセスします。
+複数台のキューブ制御を簡単に行うための補助的なクラスです。
+
+複数の ToioCoreCube クラスへの接続、切断制御を行います。
 
 ## サンプルコード
 
-### スキャンと接続
+### キューブへの接続
+
+パラメータなしで `ToioCureCube()` インスタンスを生成し、`scan()`, `connect()` を呼び出します。
+
+```Python
+import asyncio
+
+from toio import *
+
+async def scan_and_connect():
+    cube = ToioCoreCube()
+    await cube.scan()
+    await cube.connect()
+
+    await asyncio.sleep(3)
+
+    await cube.disconnect()
+    return 0
+
+if __name__ == "__main__":
+    asyncio.run(scan_and_connect())
+```
+
+`ToioCoreCube()` は非同期コンテキストマネージャなので `async with` を使うことでスキャン、接続、切断を暗黙に行えます。  
+前述のコードは `async with` を使って下記のように書けます。
+
+```Python
+import asyncio
+
+from toio import *
+
+async def scan_and_connect():
+    async with ToioCoreCube() as cube:
+
+        await asyncio.sleep(3)
+
+    return 0
+
+if __name__ == "__main__":
+    asyncio.run(scan_and_connect())
+```
+
+### Scanner を使ったスキャンと接続
 
 `BLEScanner.scan()` を使います。
 
@@ -103,7 +159,7 @@ from toio import *
 async def scan_and_connect():
     dev_list = await BLEScanner.scan(num=1)
     assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
+    cube = ToioCoreCube(dev_list[0])
     await cube.connect()
 
     await asyncio.sleep(3)
@@ -115,7 +171,7 @@ if __name__ == "__main__":
     asyncio.run(scan_and_connect())
 ```
 
-### スキャンと接続（キューブの名前を指定してスキャンする）
+### Scanner を使ったスキャンと接続（キューブの名前を指定してスキャンする）
 
 `BLEScanner.scan_with_id()` を使います。
 
@@ -140,7 +196,7 @@ from toio import *
 async def scan_and_connect():
     dev_list = await BLEScanner.scan_with_id(cube_id={"C7f"})
     assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
+    cube = ToioCoreCube(dev_list[0])
     await cube.connect()
 
     await asyncio.sleep(3)
@@ -152,7 +208,7 @@ if __name__ == "__main__":
     asyncio.run(scan_and_connect())
 ```
 
-### スキャンと接続（ペアリング済みキューブをスキャンする：Windows のみサポート）
+### Scanner を使ったスキャンと接続（ペアリング済みキューブをスキャンする：Windows のみサポート）
 
 Windows のみ、ペアリング済みのキューブをスキャンすることができます。
 
@@ -178,7 +234,7 @@ from toio import *
 async def scan_and_connect():
     dev_list = await BLEScanner.scan_registered_cubes(num=1)
     assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
+    cube = ToioCoreCube(dev_list[0])
     await cube.connect()
 
     await asyncio.sleep(3)
@@ -204,14 +260,10 @@ import asyncio
 from toio import *
 
 async def read_id():
-    device_list = await BLEScanner.scan(1)
-    assert len(device_list)
-    cube = ToioCoreCube(device_list[0].interface)
-    await cube.connect()
-    for n in range(200):
-        pos = await cube.api.id_information.read()
-        print("%4d:%s" % (n, str(pos)))
-    await cube.disconnect()
+    async with ToioCoreCube() as cube:
+        for n in range(200):
+            pos = await cube.api.id_information.read()
+            print("%4d:%s" % (n, str(pos)))
 
 if __name__ == "__main__":
     asyncio.run(read_id())
@@ -239,21 +291,16 @@ def notification_handler(payload: bytearray):
 
 
 async def read_id():
-    # connect to a cube
-    dev_list = await BLEScanner.scan(1)
-    assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
-    await cube.connect()
+    async with ToioCoreCube() as cube:
+        # add notification handler
+        await cube.api.id_information.register_notification_handler(notification_handler)
 
-    # add notification handler
-    await cube.api.id_information.register_notification_handler(notification_handler)
-    await asyncio.sleep(10)
+        await asyncio.sleep(10)
 
-    # remove notification handler
-    await cube.api.id_information.unregister_notification_handler(
-        notification_handler
-    )
-    await cube.disconnect()
+        # remove notification handler
+        await cube.api.id_information.unregister_notification_handler(
+            notification_handler
+        )
     return 0
 
 if __name__ == "__main__":
@@ -275,19 +322,13 @@ import asyncio
 from toio import *
 
 async def motor_1():
-    # connect to a cube
-    dev_list = await BLEScanner.scan(1)
-    assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
-    await cube.connect()
+    async with ToioCoreCube() as cube:
+        # go
+        await cube.api.motor.motor_control(10, -10)
+        await asyncio.sleep(2)
+        # stop
+        await cube.api.motor.motor_control(0, 0)
 
-    # go
-    await cube.api.motor.motor_control(10, -10)
-    await asyncio.sleep(2)
-    # stop
-    await cube.api.motor.motor_control(0, 0)
-
-    await cube.disconnect()
     return 0
 
 if __name__ == "__main__":
@@ -309,26 +350,20 @@ def notification_handler(payload: bytearray):
     print(str(id_info))
 
 async def motor_2():
-    # connect to a cube
-    dev_list = await BLEScanner.scan(1)
-    assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
-    await cube.connect()
+    async with ToioCoreCube() as cube:
+        await cube.api.motor.register_notification_handler(notification_handler)
+        await cube.api.motor.motor_control_target(
+            timeout=5,
+            movement_type=MovementType.Linear,
+            speed=Speed(
+                max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration),
+            target=TargetPosition(
+                cube_location=CubeLocation(point=Point(x=200, y=200), angle=0),
+                rotation_option=RotationOption.AbsoluteOptimal,
+            ),
+        )
 
-    await cube.api.motor.register_notification_handler(notification_handler)
-    await cube.api.motor.motor_control_target(
-        timeout=5,
-        movement_type=MovementType.Linear,
-        speed=Speed(
-            max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration),
-        target=TargetPosition(
-            cube_location=CubeLocation(point=Point(x=200, y=200), angle=0),
-            rotation_option=RotationOption.AbsoluteOptimal,
-        ),
-    )
-
-    await asyncio.sleep(4)
-    await cube.disconnect()
+        await asyncio.sleep(4)
 
 if __name__ == "__main__":
     asyncio.run(motor_2())
@@ -344,32 +379,108 @@ import asyncio
 from toio import *
 
 async def motor_3():
-    # connect to a cube
-    dev_list = await BLEScanner.scan(1)
-    assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
-    await cube.connect()
+    async with ToioCoreCube() as cube:
+        targets = [
+            TargetPosition(
+                cube_location=CubeLocation(point=Point(x=250, y=250), angle=0), rotation_option=RotationOption.AbsoluteOptimal
+            ),
+            TargetPosition(
+                cube_location=CubeLocation(point=Point(x=120, y=170), angle=0), rotation_option=RotationOption.AbsoluteOptimal
+            ),
+        ]
+        await cube.api.motor.motor_control_multiple_targets(
+            timeout=5,
+            movement_type=MovementType.Linear,
+            speed=Speed(
+                max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration),
+            mode=WriteMode.Overwrite,
+            target_list=targets,
+        )
 
-    targets = [
-        TargetPosition(
-            cube_location=CubeLocation(point=Point(x=250, y=250), angle=0), rotation_option=RotationOption.AbsoluteOptimal
-        ),
-        TargetPosition(
-            cube_location=CubeLocation(point=Point(x=120, y=170), angle=0), rotation_option=RotationOption.AbsoluteOptimal
-        ),
-    ]
-    await cube.api.motor.motor_control_multiple_targets(
-        timeout=5,
-        movement_type=MovementType.Linear,
-        speed=Speed(
-            max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration),
-        mode=WriteMode.Overwrite,
-        target_list=targets,
-    )
-
-    await asyncio.sleep(5)
-    await cube.disconnect()
+        await asyncio.sleep(5)
 
 if __name__ == "__main__":
     asyncio.run(motor_3())
 ```
+
+### 複数台制御
+
+`MultipleToioCoreCubes()` を使った複数台制御の例です。
+
+`cubes=` パラメータで使用するキューブの数を指定します。
+
+`MultipleToioCoreCubes()` はコンテキストマネージャです。
+`async with` ブロック内ではキューブはすでに接続されています。
+`async with` ブロックを出る時にすべてのキューブは切断されます。
+
+```Python
+import asyncio
+
+from toio import *
+
+async def scan_and_connect():
+    async with MultipleToioCoreCubes(cubes=2) as cubes:
+        await cubes[0].api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0xFF, g=0x00, b=0xFF))
+        )
+        await cubes[1].api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0xFF))
+        )
+        await asyncio.sleep(3)
+
+    return 0
+
+if __name__ == "__main__":
+    asyncio.run(scan_and_connect())
+```
+
+#### Name the cubes and access them by name
+
+`MultipleToioCoreCubes()` に `names=` パラメータを与えることにより、各キューブに名前でアクセスできます。
+
+```Python
+import asyncio
+
+from toio import *
+
+async def scan_and_connect():
+    async with MultipleToioCoreCubes(cubes=2, names=("taro", "jiro")) as cubes:
+        await cubes.taro.api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0xFF, g=0x00, b=0xFF))
+        )
+        await cubes.jiro.api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0xFF))
+        )
+        await asyncio.sleep(3)
+
+    return 0
+
+if __name__ == "__main__":
+    asyncio.run(scan_and_connect())
+```
+
+クラスプロパティを使った名前でのアクセスはLSPやコード補完システムに正しく理解されないことがあります。
+そのため、`named()` を使って書くことができます。
+
+```Python
+import asyncio
+
+from toio import *
+
+async def scan_and_connect():
+    async with MultipleToioCoreCubes(cubes=2, names=("taro", "jiro")) as cubes:
+        await cubes.named("taro").api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0xFF, g=0x00, b=0xFF))
+        )
+        await cubes.named("jiro").api.indicator.turn_on(
+            IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0xFF))
+        )
+        await asyncio.sleep(3)
+
+    return 0
+
+if __name__ == "__main__":
+    asyncio.run(scan_and_connect())
+```
+
+

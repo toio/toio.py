@@ -21,14 +21,10 @@ from toio.scanner import BLEScanner
 
 
 async def scan_and_connect():
-    print("scan")
-    dev_list = await BLEScanner.scan(num=1)
-
-    print("complete to scan")
-    assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
+    cube = ToioCoreCube()
 
     print("connecting...")
+    await cube.scan()
     await cube.connect()
     print("connected")
 

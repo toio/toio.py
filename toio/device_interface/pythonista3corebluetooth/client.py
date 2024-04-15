@@ -2,6 +2,9 @@
 BLE Client for Pythonista3 on iOS
 
 Created on 2019-06-26 by kevincar <kevincarrolldavis@gmail.com>
+
+Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
+
 """
 
 import asyncio

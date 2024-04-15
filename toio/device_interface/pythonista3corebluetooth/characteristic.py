@@ -3,7 +3,7 @@ Interface class for the Bleak representation of a GATT Characteristic
 
 Created on 2019-06-28 by kevincar <kevincarrolldavis@gmail.com>
 
-Port to Pythonista3 by Sony Interactive Entertainment Inc.
+Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
 
 """
 

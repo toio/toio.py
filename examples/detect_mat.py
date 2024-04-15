@@ -42,24 +42,20 @@ signal.signal(signal.SIGINT, ctrl_c_handler)
 
 
 async def read_id():
-    # connect to a cube
-    dev_list = await BLEScanner.scan(1)
-    assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
-    await cube.connect()
-
-    # add notification handler
-    await cube.api.id_information.register_notification_handler(notification_handler)
-    try:
-        # Loop until Ctrl-C is pressed
-        while LOOP:
-            await asyncio.sleep(0.1)
-    finally:
-        # remove notification handler
-        await cube.api.id_information.unregister_notification_handler(
+    async with ToioCoreCube() as cube:
+        # add notification handler
+        await cube.api.id_information.register_notification_handler(
             notification_handler
         )
-        await cube.disconnect()
+        try:
+            # Loop until Ctrl-C is pressed
+            while LOOP:
+                await asyncio.sleep(0.1)
+        finally:
+            # remove notification handler
+            await cube.api.id_information.unregister_notification_handler(
+                notification_handler
+            )
     return 0
 
 

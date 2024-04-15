@@ -2316,6 +2316,34 @@ lint = ["docutils-stubs", "flake8 (>=3.5.0)", "flake8-simplify", "isort", "mypy 
 test = ["cython", "filelock", "html5lib", "pytest (>=4.6)"]
 
 [[package]]
+name = "sphinx-multiversion"
+version = "0.2.4"
+description = "Add support for multiple versions to sphinx"
+optional = false
+python-versions = "*"
+files = [
+    {file = "sphinx-multiversion-0.2.4.tar.gz", hash = "sha256:5cd1ca9ecb5eed63cb8d6ce5e9c438ca13af4fa98e7eb6f376be541dd4990bcb"},
+    {file = "sphinx_multiversion-0.2.4-py3-none-any.whl", hash = "sha256:dec29f2a5890ad68157a790112edc0eb63140e70f9df0a363743c6258fbeb478"},
+]
+
+[package.dependencies]
+sphinx = ">=2.1"
+
+[[package]]
+name = "sphinx-nefertiti"
+version = "0.3.2"
+description = "The Nefertiti for Sphinx theme."
+optional = false
+python-versions = "*"
+files = [
+    {file = "sphinx-nefertiti-0.3.2.tar.gz", hash = "sha256:9c88385b18a7d7bf97a96829f96629019664650e62f38ea89451ba10aa71b80c"},
+    {file = "sphinx_nefertiti-0.3.2-py3-none-any.whl", hash = "sha256:d46836390b6c0951e6391c6b547a9a20edc616be2abcec54eb46c4ee06e8f417"},
+]
+
+[package.dependencies]
+sphinx = ">=6,<8"
+
+[[package]]
 name = "sphinx-rtd-theme"
 version = "2.0.0"
 description = "Read the Docs theme for Sphinx"
@@ -2892,4 +2920,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8.1,<3.13"
-content-hash = "246b782b9549a549382960c279a3f01aac625867ad109bd632de8cbc7005450e"
+content-hash = "6db5c58f5a820ee1e5e6673f4eb11047d2613611507089dee6f20515ab4d5a39"

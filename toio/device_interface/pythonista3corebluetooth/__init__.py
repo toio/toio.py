@@ -4,6 +4,6 @@ __init__.py
 
 Created on 2017-11-19 by hbldh <henrik.blidh@nedomkull.com>
 
-Port to Pythonista3 by Sony Interactive Entertainment Inc.
+Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
 
 """

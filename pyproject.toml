@@ -34,6 +34,8 @@ sphinx-rtd-theme = "^2.0.0"
 pygments = "^2.17.2"
 poetry = "^1.8.2"
 colorama = "^0.4.6"
+sphinx-multiversion = "^0.2.4"
+sphinx-nefertiti = "^0.3.2"
 
 [build-system]
 requires = ["poetry-core"]

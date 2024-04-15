@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-cd `git rev-parse --show-toplevel`
+cd "`git rev-parse --show-toplevel`"
 
 NOINDEX_FILES="./docs-conf/toio.rst ./docs-conf/toio.cube.rst ./docs-conf/toio.cube.api.rst"
 
@@ -15,6 +15,15 @@ if [ ! -d ./docs-conf ] ; then
   poetry run python ./mkdocs/add_noindex.py ${NOINDEX_FILES}
 
   cp ./mkdocs/conf.py ./docs-conf
+  cp ./mkdocs/_templates/version.html ./docs-conf/_templates/
 fi
 
-poetry run sphinx-build docs-conf docs
+#poetry run sphinx-build docs-conf docs
+poetry run sphinx-multiversion docs-conf docs
+
+LATEST=`git tag --sort=committerdate | egrep -e '^\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|\d+\.post\d+)$' | tail -1`
+
+cp ./mkdocs/index.html ./docs/index.html
+pushd docs
+ln -s ${LATEST} latest
+popd

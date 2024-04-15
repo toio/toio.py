@@ -9,11 +9,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import Dict, TypeAlias, Union
+from typing_extensions import TypeAlias, Union
 
 from ...device_interface import CubeInterface
 from ..notification_handler_info import NotificationReceivedDevice
-from .base_class import CubeCharacteristic
 from .battery import Battery
 from .button import Button
 from .configuration import Configuration
@@ -22,6 +21,8 @@ from .indicator import Indicator
 from .motor import Motor
 from .sensor import Sensor
 from .sound import Sound
+
+API_VERSION = "2.4.0"
 
 CubeApi: TypeAlias = Union[
     Battery, Button, Configuration, IdInformation, Indicator, Motor, Sensor, Sound
@@ -51,7 +52,7 @@ class ToioCoreCubeLowLevelAPI:
     def __init__(
         self, interface: CubeInterface, root_device: NotificationReceivedDevice
     ):
-        self._all_api: Dict[str, CubeCharacteristic] = {}
+        self._version = API_VERSION
         self.battery = Battery(interface, root_device)
         self.button = Button(interface, root_device)
         self.configuration = Configuration(interface, root_device)
@@ -60,3 +61,10 @@ class ToioCoreCubeLowLevelAPI:
         self.motor = Motor(interface, root_device)
         self.sensor = Sensor(interface, root_device)
         self.sound = Sound(interface, root_device)
+
+    @property
+    def version(self) -> str:
+        DeprecationWarning(
+            "use ToioCoreCube.SUPPORTED_MAJOR_VERSION and ToioCoreCube.SUPPORTED_MINOR_VERSION"
+        )
+        return self._version

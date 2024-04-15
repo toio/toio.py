@@ -1,5 +1,5 @@
 # %% [markdown]
-# # toio.py チュートリアル
+# # toio.py チュートリアル (v1.1)
 #
 # このチュートリアルでは、toio.py を使ったプログラムを作ります。
 # プログラムは、一つのキューブをマットの上に置くと、もう一つのキューブが
@@ -25,8 +25,10 @@
 # このチュートリアルではコードセルを使って動作確認を行います。
 # ここでコードセルの実行方法をマスターしておいてください。
 
+
 !pip install setuptools --upgrade
 !pip install toio-py --upgrade
+!pip install typing-extensions
 !pip install bleak
 !pip install ipykernel
 
@@ -45,7 +47,7 @@ print(
     "Python version (%d.%d) : " % (sys.version_info.major, sys.version_info.minor),
     end="",
 )
-if sys.version_info.major == 3 and sys.version_info.minor >= 11:
+if sys.version_info.major == 3 and 8 <= sys.version_info.minor <= 12:
     print("OK")
     print("%-22s: " % "bleak", end="")
     try:
@@ -68,103 +70,97 @@ else:
 
 # --------------------------------------------------------------------------------
 # %% [markdown]
-# # キューブのスキャン
+# # キューブのスキャン、接続、切断
 #
-# ## BLEScanner.scan()
-#
-# 使用例と説明
-# ```Python
-# dev_list = await BLEScanner.scan(num=10, sort="rssi", timeout=5)
-# ```
-
-# - キューブを最大10個までスキャンして結果を表示します
-# - 結果はRSSIでソートされます
-# - タイムアウトは5秒です
-# - キューブへの接続は行いません
-#
-# `scan()` は非同期関数なので `await` で完了を待ちます。
-#
-# キューブの電源を入れ、キューブが起動してから上の `Run Cell` をクリック
-# するとスキャンしたキューブの情報が表示されます。
-#
-from toio.scanner import BLEScanner
-
-dev_list = await BLEScanner.scan(num=10, sort="rssi", timeout=5)
-for n, ble_device in enumerate(dev_list):
-    print(f"\ncube: {n + 1} ----------\n")
-    print(ble_device)
-
-
-# --------------------------------------------------------------------------------
-# %% [markdown]
-# # ToioCoreCubeオブジェクトの生成
-#
-# ## ToioCoreCube()
-#
-# 使用例と説明
-# ```Python
-#    cube = ToioCoreCube(dev_list[0].interface)
-# ```
-#
-# Scan結果で得られたデバイス情報(CubeInfo)のinterfaceを引数として
-# 新しくToioCoreCubeのインスタンスを生成します。
-#
-# 実行して下記のような表示が出れば正しくインスタンスが生成できています。
-# （`????????????????`の部分には16進数の文字が入ります）
-#
-# ```
-# <toio.cube.ToioCoreCube object at 0x????????????????>
-# ```
-
-from toio.scanner import BLEScanner
-from toio.cube import ToioCoreCube
-
-dev_list = await BLEScanner.scan(num=1)
-if len(dev_list) > 0:
-    cube = ToioCoreCube(dev_list[0].interface)
-    print(cube)
-else:
-    print("No cubes found")
-
-
-# --------------------------------------------------------------------------------
-# %% [markdown]
-# # 接続と切断
-#
+# ## ToioCoreCube.scan()
 # ## ToioCoreCube.connect()
 # ## ToioCoreCube.disconnect()
 #
 # 使用例と説明
 # ```Python
+#    await cube.scan()
 #    await cube.connect()
 #    await cube.disconnect()
 # ```
 #
-# ToioCoreCubeのインスタンスを生成しただけでは、まだキューブとの通信が
-# できません。`cube` の `connect()` を呼び出して実際にキューブと接続し
+# ToioCoreCubeのインスタンスを生成し、キューブのスキャン、接続、切断を行います。
+# `cube` の `scan()` を呼び出した後に `connect()` を呼び出してキューブと接続し
 # 通信が行えるようにします。
 #
 # 切断するときは `cube` の `disconnect()` を呼び出します。
 #
-# `connect()` と `disconnect()` は非同期関数なので `await` で完了を待ちます。
+# `scan()`、`connect()`、`disconnect()` は非同期関数なので `await` で完了を待ちます。
 #
 # 下記のコードはキューブと接続し、1秒後に切断します。
 
 import asyncio
 
-from toio.scanner import BLEScanner
 from toio.cube import ToioCoreCube
 
-dev_list = await BLEScanner.scan(num=1)
-if len(dev_list) > 0:
-    cube = ToioCoreCube(dev_list[0].interface)
+try:
+    cube = ToioCoreCube()
+    await cube.scan()
     await cube.connect()
     print("Connected")
     await asyncio.sleep(1)
     await cube.disconnect()
     print("Disconnected")
-else:
+except:
     print("No cubes found")
+
+
+# --------------------------------------------------------------------------------
+# %% [markdown]
+# # コンテキストマネージャによるキューブのスキャン、接続、切断
+#
+# ## ToioCoreCube()
+#
+# 使用例と説明
+# ```Python
+#    async with ToioCoreCube()
+# ```
+#
+# ToioCoreCube クラスはコンテキストマネージャなので、`async with` 文を使うことで
+# キューブのスキャン、接続、切断を簡単に行うことができます。
+#
+# 下記のコードはキューブと接続し、1秒後に切断します。
+
+import asyncio
+
+from toio.cube import ToioCoreCube
+
+async with ToioCoreCube() as cube:
+    print("Connected")
+    await asyncio.sleep(1)
+print("Disconnected")
+
+# --------------------------------------------------------------------------------
+# %% [markdown]
+# # 複数のキューブのスキャン、接続、切断
+#
+# ## MultipleToioCoreCubes()
+#
+# 使用例と説明
+# ```Python
+#    async with MultipleToioCoreCubes()
+# ```
+#
+# MultipleToioCoreCubes クラスを使うことで、複数のキューブに対してのスキャン、
+# 接続、切断を行うことができます。
+# MultipleToioCoreCubes クラスは ToioCoreCube クラスと同様にコンテキストマネージャなので
+# `async with` 文を使うことでキューブのスキャン、接続、切断を簡単に行うことができます。
+#
+# 下記のコードは2台のキューブと接続し、1秒後に切断します。
+
+import asyncio
+
+from toio.cube.multi_cubes import MultipleToioCoreCubes
+
+async with MultipleToioCoreCubes(cubes=2) as cubes:
+    print("Connected to %s" % cubes[0].name)
+    print("Connected to %s" % cubes[1].name)
+    await asyncio.sleep(1)
+print("Disconnected")
 
 
 # --------------------------------------------------------------------------------
@@ -185,12 +181,6 @@ else:
 # `ToioCoreCube.api` クラスはキューブの各種機能にアクセスするためのインターフェースクラスを
 # 集めたクラスです。
 #
-# ### ToioCoreCube.api.version
-#
-# toio.py がサポートしているAPIのバージョンです。
-# APIバージョンと機能の対応は[toioコアキューブ技術仕様](https://toio.github.io/toio-spec/en/)
-# を参照してください。
-#
 # ### ToioCoreCube.api.(インターフェースクラス名)
 #
 # 各種機能にアクセスするためのインターフェースクラスです。
@@ -205,15 +195,16 @@ else:
 # - indicator: キューブのランプを制御するクラス
 # - motor: キューブのモーターを制御するクラス
 #
+
 from toio.cube import ToioCoreCube
 from toio.cube.api.base_class import CubeCharacteristic
 
-cube = ToioCoreCube(None)
-for key, value in vars(cube.api).items():
-    if isinstance(value, CubeCharacteristic):
-        print(f"{key:20s}: <interface class>")
-    else:
-        print(f"{key:20s}: {value}")
+async with ToioCoreCube() as cube:
+    for key, value in vars(cube.api).items():
+        if isinstance(value, CubeCharacteristic):
+            print(f"{key:20s}: <interface class>")
+        elif not key.startswith("_"):
+            print(f"{key:20s}: {value}")
 
 
 # --------------------------------------------------------------------------------
@@ -300,20 +291,15 @@ for key, value in vars(cube.api).items():
 #
 # 下記コードは `id_information.read()` を200回行い、読み出した内容を表示します。
 
-from toio.scanner import BLEScanner
 from toio.cube import ToioCoreCube
 
-device_list = await BLEScanner.scan(1)
-assert len(device_list)
-cube = ToioCoreCube(device_list[0].interface)
-await cube.connect()
-print("start")
-for n in range(200):
-    read_data = await cube.api.id_information.read()
-    if read_data is not None:
-        print(n, type(read_data), read_data)
-print("end")
-await cube.disconnect()
+async with ToioCoreCube() as cube:
+    print("start")
+    for n in range(200):
+        read_data = await cube.api.id_information.read()
+        if read_data is not None:
+            print(n, type(read_data), read_data)
+    print("end")
 
 
 # --------------------------------------------------------------------------------
@@ -352,25 +338,20 @@ await cube.disconnect()
 
 import asyncio
 
-from toio.scanner import BLEScanner
 from toio.cube import ToioCoreCube, IdInformation
 
 def notification_handler(payload: bytearray):
     id_info = IdInformation.is_my_data(payload)
     print(str(id_info))
 
-dev_list = await BLEScanner.scan(1)
-assert len(dev_list)
-cube = ToioCoreCube(dev_list[0].interface)
-await cube.connect()
-print("start")
-await cube.api.id_information.register_notification_handler(notification_handler)
-await asyncio.sleep(10)
-await cube.api.id_information.unregister_notification_handler(
-    notification_handler
-)
-print("end")
-await cube.disconnect()
+async with ToioCoreCube() as cube:
+    print("start")
+    await cube.api.id_information.register_notification_handler(notification_handler)
+    await asyncio.sleep(10)
+    await cube.api.id_information.unregister_notification_handler(
+        notification_handler
+    )
+    print("end")
 
 
 # --------------------------------------------------------------------------------
@@ -395,23 +376,18 @@ await cube.disconnect()
 
 import asyncio
 
-from toio.scanner import BLEScanner
 from toio.cube import ToioCoreCube
 
-dev_list = await BLEScanner.scan(1)
-assert len(dev_list)
-cube = ToioCoreCube(dev_list[0].interface)
-await cube.connect()
-print("go forward")
-await cube.api.motor.motor_control(10, 10)
-await asyncio.sleep(2)
-print("stop")
-await cube.api.motor.motor_control(0, 0)
-print("spin turn (1000[ms])")
-await cube.api.motor.motor_control(50, -50, 1000)
-await asyncio.sleep(2)
-print("end")
-await cube.disconnect()
+async with ToioCoreCube() as cube:
+    print("go forward")
+    await cube.api.motor.motor_control(10, 10)
+    await asyncio.sleep(2)
+    print("stop")
+    await cube.api.motor.motor_control(0, 0)
+    print("spin turn (1000[ms])")
+    await cube.api.motor.motor_control(50, -50, 1000)
+    await asyncio.sleep(2)
+    print("end")
 
 # --------------------------------------------------------------------------------
 # %% [markdown]
@@ -522,26 +498,22 @@ def notification_handler(payload: bytearray):
     motor_info = Motor.is_my_data(payload)
     print(type(motor_info), str(motor_info))
 
-dev_list = await BLEScanner.scan(1)
-assert len(dev_list)
-cube = ToioCoreCube(dev_list[0].interface)
-await cube.connect()
-await cube.api.motor.register_notification_handler(notification_handler)
-await cube.api.motor.motor_control_target(
-    timeout=5,
-    movement_type=MovementType.Linear,
-    speed=Speed(
-        max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration
-    ),
-    target=TargetPosition(
-        cube_location=CubeLocation(point=Point(x=200, y=200), angle=0),
-        rotation_option=RotationOption.AbsoluteOptimal,
-    ),
-)
+async with ToioCoreCube() as cube:
+    await cube.api.motor.register_notification_handler(notification_handler)
+    await cube.api.motor.motor_control_target(
+        timeout=5,
+        movement_type=MovementType.Linear,
+        speed=Speed(
+            max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration
+        ),
+        target=TargetPosition(
+            cube_location=CubeLocation(point=Point(x=200, y=200), angle=0),
+            rotation_option=RotationOption.AbsoluteOptimal,
+        ),
+    )
 
-await asyncio.sleep(5)
-await cube.api.motor.unregister_notification_handler(notification_handler)
-await cube.disconnect()
+    await asyncio.sleep(5)
+    await cube.api.motor.unregister_notification_handler(notification_handler)
 
 
 # --------------------------------------------------------------------------------
@@ -574,40 +546,32 @@ def id_notification_handler(payload: bytearray):
         green_cube_location = id_info.center
         print(str(green_cube_location))
 
-dev_list = await BLEScanner.scan(2)
-assert len(dev_list) == 2
-cube_1 = ToioCoreCube(dev_list[0].interface)
-cube_2 = ToioCoreCube(dev_list[1].interface)
+async with MultipleToioCoreCubes(cubes=2) as cubes:
+    cube_green = cubes[0]
+    cube_red = cubes[1]
 
-print("connect cube_1")
-await cube_1.connect()
-print("connect cube_2")
-await cube_2.connect()
+    red = IndicatorParam(
+        duration_ms = 0,
+        color = Color(r = 255, g = 0, b = 0)
+    )
 
-red = IndicatorParam(
-    duration_ms = 0,
-    color = Color(r = 255, g = 0, b = 0)
-)
+    green = IndicatorParam(
+        duration_ms = 0,
+        color = Color(r = 0, g = 255, b = 0)
+    )
+    await cube_green.api.indicator.turn_on(green)
+    await cube_red.api.indicator.turn_on(red)
 
-green = IndicatorParam(
-    duration_ms = 0,
-    color = Color(r = 0, g = 255, b = 0)
-)
-await cube_1.api.indicator.turn_on(green)
-await cube_2.api.indicator.turn_on(red)
+    print("start")
+    await cube_green.api.id_information.register_notification_handler(id_notification_handler)
+    await cube_red.api.motor.motor_control(30, -30, 1000)
 
-print("start")
-await cube_1.api.id_information.register_notification_handler(id_notification_handler)
-await cube_2.api.motor.motor_control(30, -30, 1000)
+    await asyncio.sleep(10)
 
-await asyncio.sleep(10)
-
-await cube_1.api.id_information.unregister_notification_handler(
-    id_notification_handler
-)
-print("end")
-await cube_1.disconnect()
-await cube_2.disconnect()
+    await cube_green.api.id_information.unregister_notification_handler(
+        id_notification_handler
+    )
+    print("end")
 
 
 # --------------------------------------------------------------------------------
@@ -640,144 +604,51 @@ def motor_notification_handler(payload: bytearray):
         print(motor_response)
         red_cube_arrived = True
 
-dev_list = await BLEScanner.scan(2)
-assert len(dev_list) == 2
-cube_1 = ToioCoreCube(dev_list[0].interface)
-cube_2 = ToioCoreCube(dev_list[1].interface)
+async with MultipleToioCoreCubes(cubes=2) as cubes:
+    cube_green = cubes[0]
+    cube_red = cubes[1]
 
-print("connect cube_1")
-await cube_1.connect()
-print("connect cube_2")
-await cube_2.connect()
+    red = IndicatorParam(
+        duration_ms = 0,
+        color = Color(r = 255, g = 0, b = 0)
+    )
 
-red = IndicatorParam(
-    duration_ms = 0,
-    color = Color(r = 255, g = 0, b = 0)
-)
+    green = IndicatorParam(
+        duration_ms = 0,
+        color = Color(r = 0, g = 255, b = 0)
+    )
+    await cube_green.api.indicator.turn_on(green)
+    await cube_red.api.indicator.turn_on(red)
 
-green = IndicatorParam(
-    duration_ms = 0,
-    color = Color(r = 0, g = 255, b = 0)
-)
-await cube_1.api.indicator.turn_on(green)
-await cube_2.api.indicator.turn_on(red)
+    print("start")
+    await cube_green.api.id_information.register_notification_handler(id_notification_handler)
+    await cube_red.api.motor.register_notification_handler(motor_notification_handler)
 
-print("start")
-await cube_1.api.id_information.register_notification_handler(id_notification_handler)
-await cube_2.api.motor.register_notification_handler(motor_notification_handler)
+    for _ in range(30):
+        if green_cube_location is not None and red_cube_arrived:
+            red_cube_arrived = False
+            print("cube_red: move to", str(green_cube_location))
+            await cube_red.api.motor.motor_control_target(
+                timeout=5,
+                movement_type=MovementType.Linear,
+                speed=Speed(
+                    max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration
+                ),
+                target=TargetPosition(
+                    cube_location=green_cube_location,
+                    rotation_option=RotationOption.AbsoluteOptimal,
+                ),
+            )
 
-for _ in range(30):
-    if green_cube_location is not None and red_cube_arrived:
-        red_cube_arrived = False
-        print("cube_2: move to", str(green_cube_location))
-        await cube_2.api.motor.motor_control_target(
-            timeout=5,
-            movement_type=MovementType.Linear,
-            speed=Speed(
-                max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration
-            ),
-            target=TargetPosition(
-                cube_location=green_cube_location,
-                rotation_option=RotationOption.AbsoluteOptimal,
-            ),
-        )
+        await asyncio.sleep(1)
 
-    await asyncio.sleep(1)
-
-await cube_2.api.motor.unregister_notification_handler(
-    motor_notification_handler
-)
-await cube_1.api.id_information.unregister_notification_handler(
-    id_notification_handler
-)
-print("end")
-await cube_1.disconnect()
-await cube_2.disconnect()
-
-
-# --------------------------------------------------------------------------------
-# %% [markdown]
-# # 少しだけ改善
-#
-# 完成したプログラムはキューブの接続や切断を各キューブごとに順番に行うため時間がかかります。
-# これを改善します。
-#
-# `asyncio.gather()` を使うことにより、複数の非同期処理を同時に await できます。
-#
-# 下記コードはキューブとの接続、ランプの点灯、切断を同時に行うように改善したものです。
-
-
-import asyncio
-from toio import *
-
-
-green_cube_location = None
-red_cube_arrived = True
-
-def id_notification_handler(payload: bytearray):
-    global green_cube_location
-    id_info = IdInformation.is_my_data(payload)
-    if isinstance(id_info, PositionId):
-        green_cube_location = id_info.center
-
-def motor_notification_handler(payload: bytearray):
-    global red_cube_arrived
-    motor_response = Motor.is_my_data(payload)
-    if isinstance(motor_response, ResponseMotorControlTarget):
-        print(motor_response)
-        red_cube_arrived = True
-
-dev_list = await BLEScanner.scan(2)
-assert len(dev_list) == 2
-cube_1 = ToioCoreCube(dev_list[0].interface)
-cube_2 = ToioCoreCube(dev_list[1].interface)
-
-print("connect cubes")
-await asyncio.gather(cube_1.connect(), cube_2.connect())
-
-red = IndicatorParam(
-    duration_ms = 0,
-    color = Color(r = 255, g = 0, b = 0)
-)
-
-green = IndicatorParam(
-    duration_ms = 0,
-    color = Color(r = 0, g = 255, b = 0)
-)
-
-await asyncio.gather(cube_1.api.indicator.turn_on(green), cube_2.api.indicator.turn_on(red))
-
-print("start")
-await cube_1.api.id_information.register_notification_handler(id_notification_handler)
-await cube_2.api.motor.register_notification_handler(motor_notification_handler)
-
-for _ in range(30):
-    if green_cube_location is not None and red_cube_arrived:
-        red_cube_arrived = False
-        print("cube_2: move to", str(green_cube_location))
-        await cube_2.api.motor.motor_control_target(
-            timeout=5,
-            movement_type=MovementType.Linear,
-            speed=Speed(
-                max=100, speed_change_type=SpeedChangeType.AccelerationAndDeceleration
-            ),
-            target=TargetPosition(
-                cube_location=green_cube_location,
-                rotation_option=RotationOption.AbsoluteOptimal,
-            ),
-        )
-
-    await asyncio.sleep(1)
-
-await cube_2.api.motor.unregister_notification_handler(
-    id_notification_handler
-)
-await cube_1.api.id_information.unregister_notification_handler(
-    id_notification_handler
-)
-print("end")
-await asyncio.gather(cube_1.disconnect(), cube_2.disconnect())
-
+    await cube_red.api.motor.unregister_notification_handler(
+        motor_notification_handler
+    )
+    await cube_green.api.id_information.unregister_notification_handler(
+        id_notification_handler
+    )
+    print("end")
 
 
 # --------------------------------------------------------------------------------
@@ -798,11 +669,12 @@ await asyncio.gather(cube_1.disconnect(), cube_2.disconnect())
 # | ---------------------------- | ------------------------------------------------------------ |
 # | examples/detect_mat.py       | 読み取った座標から、使われているマットの種類を表示します     |
 # | examples/motor_control.py    | モーター制御（移動、目標指定移動、複数目標指移動） |
+# | examples/multi.py            | 複数台Cubeへのスキャンと接続 |
 # | examples/read_position.py    | ID 読み取り                                          |
 # | examples/scan_and_connect.py | スキャンと接続                                     |
 # | examples/tutorial_pursuer.py | このチュートリアルで作成したプログラム（単独実行版）         |
-
 # --------------------------------------------------------------------------------
+
 # %% [markdown]
 # # 補足情報：コードセルを使わない非同期処理の実行方法
 #

@@ -1,0 +1,1348 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="docsearch:name" content="toio.py" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="" />
+    <meta name="docsearch:version" content="" />
+    
+      <title>toio.cube.api.sound module &mdash; toio.py  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-icons.css" type="text/css" />
+          <!-- add (1) pathto "_static/pygments.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css" />
+          <!-- add (1) pathto "_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts/nunito/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts/nunito/stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts/red-hat-mono/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts/red-hat-mono/stylesheet.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/pygments_dark.css" />
+        <link rel="index" title="Index" href="genindex.html" />
+        <link rel="search" title="Search" href="search.html" />
+        <link rel="top" title="toio.py  documentation" href="#" />
+        <link rel="up" title="toio.cube.api package" href="toio.cube.api.html" />
+        <link rel="next" title="toio.device_interface package" href="toio.device_interface.html" />
+        <link rel="prev" title="toio.cube.api.sensor module" href="toio.cube.api.sensor.html" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Red Hat Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+      h1 *, h2 *, h3 *, h4 *, h5 *, h6 * { font-size: inherit; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to docs navigation</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-wrap flex-xl-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="index.html"
+              
+              class="navbar-brand p-0 me-0 md-lg-2"
+          ><span class="brand-text">toio.py</span></a>
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search docs" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-text">Nefertiti for Sphinx</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              <!-- version_dropdown.html -->
+
+              
+              <!-- colorscheme_dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Toggle light/dark">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none small ms-2">Toggle light/dark</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Light/dark</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="small ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="small ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="small ms-3">Default</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-block">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- danirus sidebartemplate: "version.html" -->
+<h3>Versions</h3>
+<ul>
+  <li><a href="../1.0.1/toio.cube.api.sound.html">1.0.1</a></li>
+  <li><a href="toio.cube.api.sound.html">1.0.2</a></li>
+  <li><a href="../1.1.0a1/toio.cube.api.sound.html">1.1.0a1</a></li>
+</ul>
+
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+    <section id="module-toio.cube.api.sound">
+<span id="toio-cube-api-sound-module"></span><h1>toio.cube.api.sound module<a class="headerlink" href="#module-toio.cube.api.sound" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sound.</span></span><span class="sig-name descname"><span class="pre">SoundId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#SoundId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.SoundId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Sound effect ID</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_sound#sound-effect-id">https://toio.github.io/toio-spec/en/docs/ble_sound#sound-effect-id</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Enter">
+<span class="sig-name descname"><span class="pre">Enter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Enter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Selected">
+<span class="sig-name descname"><span class="pre">Selected</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Selected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Cancel">
+<span class="sig-name descname"><span class="pre">Cancel</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Cancel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Cursor">
+<span class="sig-name descname"><span class="pre">Cursor</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Cursor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.MatIn">
+<span class="sig-name descname"><span class="pre">MatIn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.MatIn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.MatOut">
+<span class="sig-name descname"><span class="pre">MatOut</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.MatOut" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Get1">
+<span class="sig-name descname"><span class="pre">Get1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Get1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Get2">
+<span class="sig-name descname"><span class="pre">Get2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Get2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Get3">
+<span class="sig-name descname"><span class="pre">Get3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Get3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Effect1">
+<span class="sig-name descname"><span class="pre">Effect1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Effect1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.SoundId.Effect2">
+<span class="sig-name descname"><span class="pre">Effect2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#toio.cube.api.sound.SoundId.Effect2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sound.</span></span><span class="sig-name descname"><span class="pre">Note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Midi notes</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_sound#midi-note-number-and-note-name">https://toio.github.io/toio-spec/en/docs/ble_sound#midi-note-number-and-note-name</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C0">
+<span class="sig-name descname"><span class="pre">C0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS0">
+<span class="sig-name descname"><span class="pre">CS0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D0">
+<span class="sig-name descname"><span class="pre">D0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS0">
+<span class="sig-name descname"><span class="pre">DS0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E0">
+<span class="sig-name descname"><span class="pre">E0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F0">
+<span class="sig-name descname"><span class="pre">F0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS0">
+<span class="sig-name descname"><span class="pre">FS0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G0">
+<span class="sig-name descname"><span class="pre">G0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS0">
+<span class="sig-name descname"><span class="pre">GS0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A0">
+<span class="sig-name descname"><span class="pre">A0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS0">
+<span class="sig-name descname"><span class="pre">AS0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B0">
+<span class="sig-name descname"><span class="pre">B0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C1">
+<span class="sig-name descname"><span class="pre">C1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS1">
+<span class="sig-name descname"><span class="pre">CS1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D1">
+<span class="sig-name descname"><span class="pre">D1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">14</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS1">
+<span class="sig-name descname"><span class="pre">DS1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E1">
+<span class="sig-name descname"><span class="pre">E1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F1">
+<span class="sig-name descname"><span class="pre">F1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS1">
+<span class="sig-name descname"><span class="pre">FS1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G1">
+<span class="sig-name descname"><span class="pre">G1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">19</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS1">
+<span class="sig-name descname"><span class="pre">GS1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A1">
+<span class="sig-name descname"><span class="pre">A1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">21</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS1">
+<span class="sig-name descname"><span class="pre">AS1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">22</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B1">
+<span class="sig-name descname"><span class="pre">B1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">23</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C2">
+<span class="sig-name descname"><span class="pre">C2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">24</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS2">
+<span class="sig-name descname"><span class="pre">CS2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">25</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D2">
+<span class="sig-name descname"><span class="pre">D2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">26</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS2">
+<span class="sig-name descname"><span class="pre">DS2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">27</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E2">
+<span class="sig-name descname"><span class="pre">E2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">28</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F2">
+<span class="sig-name descname"><span class="pre">F2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">29</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS2">
+<span class="sig-name descname"><span class="pre">FS2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G2">
+<span class="sig-name descname"><span class="pre">G2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">31</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS2">
+<span class="sig-name descname"><span class="pre">GS2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A2">
+<span class="sig-name descname"><span class="pre">A2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">33</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS2">
+<span class="sig-name descname"><span class="pre">AS2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B2">
+<span class="sig-name descname"><span class="pre">B2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C3">
+<span class="sig-name descname"><span class="pre">C3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS3">
+<span class="sig-name descname"><span class="pre">CS3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D3">
+<span class="sig-name descname"><span class="pre">D3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">38</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS3">
+<span class="sig-name descname"><span class="pre">DS3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">39</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E3">
+<span class="sig-name descname"><span class="pre">E3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">40</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F3">
+<span class="sig-name descname"><span class="pre">F3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">41</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS3">
+<span class="sig-name descname"><span class="pre">FS3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">42</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G3">
+<span class="sig-name descname"><span class="pre">G3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">43</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS3">
+<span class="sig-name descname"><span class="pre">GS3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">44</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A3">
+<span class="sig-name descname"><span class="pre">A3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">45</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS3">
+<span class="sig-name descname"><span class="pre">AS3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">46</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B3">
+<span class="sig-name descname"><span class="pre">B3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">47</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C4">
+<span class="sig-name descname"><span class="pre">C4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">48</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS4">
+<span class="sig-name descname"><span class="pre">CS4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">49</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D4">
+<span class="sig-name descname"><span class="pre">D4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS4">
+<span class="sig-name descname"><span class="pre">DS4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">51</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E4">
+<span class="sig-name descname"><span class="pre">E4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">52</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F4">
+<span class="sig-name descname"><span class="pre">F4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">53</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS4">
+<span class="sig-name descname"><span class="pre">FS4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">54</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G4">
+<span class="sig-name descname"><span class="pre">G4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">55</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS4">
+<span class="sig-name descname"><span class="pre">GS4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">56</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A4">
+<span class="sig-name descname"><span class="pre">A4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">57</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS4">
+<span class="sig-name descname"><span class="pre">AS4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">58</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B4">
+<span class="sig-name descname"><span class="pre">B4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">59</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C5">
+<span class="sig-name descname"><span class="pre">C5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">60</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS5">
+<span class="sig-name descname"><span class="pre">CS5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">61</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D5">
+<span class="sig-name descname"><span class="pre">D5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">62</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS5">
+<span class="sig-name descname"><span class="pre">DS5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">63</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E5">
+<span class="sig-name descname"><span class="pre">E5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F5">
+<span class="sig-name descname"><span class="pre">F5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS5">
+<span class="sig-name descname"><span class="pre">FS5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">66</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G5">
+<span class="sig-name descname"><span class="pre">G5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">67</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS5">
+<span class="sig-name descname"><span class="pre">GS5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">68</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A5">
+<span class="sig-name descname"><span class="pre">A5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">69</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS5">
+<span class="sig-name descname"><span class="pre">AS5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">70</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B5">
+<span class="sig-name descname"><span class="pre">B5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">71</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C6">
+<span class="sig-name descname"><span class="pre">C6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">72</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS6">
+<span class="sig-name descname"><span class="pre">CS6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">73</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D6">
+<span class="sig-name descname"><span class="pre">D6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">74</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS6">
+<span class="sig-name descname"><span class="pre">DS6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">75</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E6">
+<span class="sig-name descname"><span class="pre">E6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">76</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F6">
+<span class="sig-name descname"><span class="pre">F6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">77</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS6">
+<span class="sig-name descname"><span class="pre">FS6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">78</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G6">
+<span class="sig-name descname"><span class="pre">G6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">79</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS6">
+<span class="sig-name descname"><span class="pre">GS6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">80</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A6">
+<span class="sig-name descname"><span class="pre">A6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">81</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS6">
+<span class="sig-name descname"><span class="pre">AS6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">82</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B6">
+<span class="sig-name descname"><span class="pre">B6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">83</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C7">
+<span class="sig-name descname"><span class="pre">C7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">84</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS7">
+<span class="sig-name descname"><span class="pre">CS7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">85</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D7">
+<span class="sig-name descname"><span class="pre">D7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">86</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS7">
+<span class="sig-name descname"><span class="pre">DS7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">87</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E7">
+<span class="sig-name descname"><span class="pre">E7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">88</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F7">
+<span class="sig-name descname"><span class="pre">F7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">89</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS7">
+<span class="sig-name descname"><span class="pre">FS7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">90</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G7">
+<span class="sig-name descname"><span class="pre">G7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">91</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS7">
+<span class="sig-name descname"><span class="pre">GS7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">92</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A7">
+<span class="sig-name descname"><span class="pre">A7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">93</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS7">
+<span class="sig-name descname"><span class="pre">AS7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">94</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B7">
+<span class="sig-name descname"><span class="pre">B7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">95</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C8">
+<span class="sig-name descname"><span class="pre">C8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">96</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS8">
+<span class="sig-name descname"><span class="pre">CS8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">97</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D8">
+<span class="sig-name descname"><span class="pre">D8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">98</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS8">
+<span class="sig-name descname"><span class="pre">DS8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">99</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E8">
+<span class="sig-name descname"><span class="pre">E8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F8">
+<span class="sig-name descname"><span class="pre">F8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">101</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS8">
+<span class="sig-name descname"><span class="pre">FS8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">102</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G8">
+<span class="sig-name descname"><span class="pre">G8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">103</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS8">
+<span class="sig-name descname"><span class="pre">GS8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">104</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A8">
+<span class="sig-name descname"><span class="pre">A8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">105</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS8">
+<span class="sig-name descname"><span class="pre">AS8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">106</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B8">
+<span class="sig-name descname"><span class="pre">B8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">107</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C9">
+<span class="sig-name descname"><span class="pre">C9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">108</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS9">
+<span class="sig-name descname"><span class="pre">CS9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">109</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D9">
+<span class="sig-name descname"><span class="pre">D9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">110</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS9">
+<span class="sig-name descname"><span class="pre">DS9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">111</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E9">
+<span class="sig-name descname"><span class="pre">E9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">112</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F9">
+<span class="sig-name descname"><span class="pre">F9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">113</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS9">
+<span class="sig-name descname"><span class="pre">FS9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">114</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G9">
+<span class="sig-name descname"><span class="pre">G9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">115</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.GS9">
+<span class="sig-name descname"><span class="pre">GS9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">116</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.GS9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.A9">
+<span class="sig-name descname"><span class="pre">A9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">117</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.A9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.AS9">
+<span class="sig-name descname"><span class="pre">AS9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">118</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.AS9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.B9">
+<span class="sig-name descname"><span class="pre">B9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">119</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.B9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.C10">
+<span class="sig-name descname"><span class="pre">C10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">120</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.C10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.CS10">
+<span class="sig-name descname"><span class="pre">CS10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">121</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.CS10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.D10">
+<span class="sig-name descname"><span class="pre">D10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">122</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.D10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.DS10">
+<span class="sig-name descname"><span class="pre">DS10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">123</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.DS10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.E10">
+<span class="sig-name descname"><span class="pre">E10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">124</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.E10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.F10">
+<span class="sig-name descname"><span class="pre">F10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">125</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.F10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.FS10">
+<span class="sig-name descname"><span class="pre">FS10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">126</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.FS10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.G10">
+<span class="sig-name descname"><span class="pre">G10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">127</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.G10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Note.NO_SOUND">
+<span class="sig-name descname"><span class="pre">NO_SOUND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em><a class="headerlink" href="#toio.cube.api.sound.Note.NO_SOUND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sound.MidiNote">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sound.</span></span><span class="sig-name descname"><span class="pre">MidiNote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.sound.Note" title="toio.cube.api.sound.Note"><span class="pre">Note</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#MidiNote"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.MidiNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Midi note</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.MidiNote.duration_ms">
+<span class="sig-name descname"><span class="pre">duration_ms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.sound.MidiNote.duration_ms" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Duration of sounding note:</div>
+<div class="line-block">
+<div class="line">Any fraction less than 10ms will be truncated.</div>
+<div class="line">0 - 9: zero</div>
+<div class="line">10 - 2550: duration [ms]</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.MidiNote.note">
+<span class="sig-name descname"><span class="pre">note</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.sound.Note" title="toio.cube.api.sound.Note"><span class="pre">Note</span></a></em><a class="headerlink" href="#toio.cube.api.sound.MidiNote.note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Midi note</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.sound.MidiNote.volume">
+<span class="sig-name descname"><span class="pre">volume</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#toio.cube.api.sound.MidiNote.volume" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Volume:</div>
+<div class="line-block">
+<div class="line">0: off</div>
+<div class="line">1 - 255: max volume</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.MidiNote.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#MidiNote.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.MidiNote.flatten" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.MidiNote.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.sound.Note" title="toio.cube.api.sound.Note"><span class="pre">Note</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.cube.api.sound.MidiNote.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sound.PlaySoundEffect">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sound.</span></span><span class="sig-name descname"><span class="pre">PlaySoundEffect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sound_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#PlaySoundEffect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.PlaySoundEffect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Play sound effect command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_sound#playing-sound-effects">https://toio.github.io/toio-spec/en/docs/ble_sound#playing-sound-effects</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.PlaySoundEffect.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sound_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#PlaySoundEffect.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.PlaySoundEffect.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.PlaySoundEffect.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sound.html#PlaySoundEffect.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.PlaySoundEffect.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sound.PlayMidi">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sound.</span></span><span class="sig-name descname"><span class="pre">PlayMidi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><span class="pre">toio.cube.api.sound.MidiNote</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><span class="pre">toio.cube.api.sound.MidiNote</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#PlayMidi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.PlayMidi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Play midi notes command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_sound#playing-the-midi-note-numbers">https://toio.github.io/toio-spec/en/docs/ble_sound#playing-the-midi-note-numbers</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.PlayMidi.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><span class="pre">toio.cube.api.sound.MidiNote</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><span class="pre">toio.cube.api.sound.MidiNote</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#PlayMidi.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.PlayMidi.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.PlayMidi.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sound.html#PlayMidi.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.PlayMidi.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Stop">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sound.</span></span><span class="sig-name descname"><span class="pre">Stop</span></span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Stop sound command</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Stop.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Stop.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Stop.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Stop.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Stop.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Stop.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Sound">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.sound.</span></span><span class="sig-name descname"><span class="pre">Sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Sound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Sound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCharacteristic" title="toio.cube.api.base_class.CubeCharacteristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCharacteristic</span></code></a></p>
+<p>Sound characteristic</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_sound">https://toio.github.io/toio-spec/en/docs/ble_sound</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Sound.is_my_data">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_my_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Sound.is_my_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Sound.is_my_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>If payload is my characteristic response, this function returns
+CubeResponse object. Otherwise, it returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Sound.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Sound.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Sound.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Sound.play_sound_effect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">play_sound_effect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sound_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.sound.SoundId" title="toio.cube.api.sound.SoundId"><span class="pre">SoundId</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Sound.play_sound_effect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Sound.play_sound_effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send play sound effect command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sound_id</strong> (<a class="reference internal" href="#toio.cube.api.sound.SoundId" title="toio.cube.api.sound.SoundId"><em>SoundId</em></a>) – Sound ID</p></li>
+<li><p><strong>volume</strong> (<em>int</em>) – Volume</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Sound.play_midi">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">play_midi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">midi_notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><span class="pre">toio.cube.api.sound.MidiNote</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><span class="pre">toio.cube.api.sound.MidiNote</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Sound.play_midi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Sound.play_midi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send play midi note command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repeat</strong> (<em>int</em>) – Number of repetitions (0: Infinite)</p></li>
+<li><p><strong>midi_notes</strong> (<em>Union</em><em>[</em><em>list</em><em>[</em><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><em>MidiNote</em></a><em>]</em><em>, </em><em>tuple</em><em>[</em><a class="reference internal" href="#toio.cube.api.sound.MidiNote" title="toio.cube.api.sound.MidiNote"><em>MidiNote</em></a><em>, </em><em>...</em><em>]</em><em>]</em>) – List of midi notes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.sound.Sound.stop">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/sound.html#Sound.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.sound.Sound.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send sound stop command</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+</article>
+        <aside class="nftt-toc">
+          
+          <div class="mt-3 mb-1 my-lg-0 ps-xl-3 text-muted">
+            <button class="btn btn-link link-dark p-lg-0 mb-2 mb-lg-0 text-decoration-none nftt-toc-toggle d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents"
+            >On this page <i class="ms-2 bi bi-chevron-expand"></i></button>
+            <div class="title d-none d-lg-block">
+              <i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;<span class="small">On this page</span>
+            </div>
+            <div class="collapse nftt-toc-collapse" id="tocContents">
+              <nav id="TableOfContents">
+                <ul>
+<li><a class="reference internal" href="#">toio.cube.api.sound module</a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId"><code class="docutils literal notranslate"><span class="pre">SoundId</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Enter"><code class="docutils literal notranslate"><span class="pre">SoundId.Enter</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Selected"><code class="docutils literal notranslate"><span class="pre">SoundId.Selected</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Cancel"><code class="docutils literal notranslate"><span class="pre">SoundId.Cancel</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Cursor"><code class="docutils literal notranslate"><span class="pre">SoundId.Cursor</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.MatIn"><code class="docutils literal notranslate"><span class="pre">SoundId.MatIn</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.MatOut"><code class="docutils literal notranslate"><span class="pre">SoundId.MatOut</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Get1"><code class="docutils literal notranslate"><span class="pre">SoundId.Get1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Get2"><code class="docutils literal notranslate"><span class="pre">SoundId.Get2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Get3"><code class="docutils literal notranslate"><span class="pre">SoundId.Get3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Effect1"><code class="docutils literal notranslate"><span class="pre">SoundId.Effect1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.SoundId.Effect2"><code class="docutils literal notranslate"><span class="pre">SoundId.Effect2</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note"><code class="docutils literal notranslate"><span class="pre">Note</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C0"><code class="docutils literal notranslate"><span class="pre">Note.C0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS0"><code class="docutils literal notranslate"><span class="pre">Note.CS0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D0"><code class="docutils literal notranslate"><span class="pre">Note.D0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS0"><code class="docutils literal notranslate"><span class="pre">Note.DS0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E0"><code class="docutils literal notranslate"><span class="pre">Note.E0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F0"><code class="docutils literal notranslate"><span class="pre">Note.F0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS0"><code class="docutils literal notranslate"><span class="pre">Note.FS0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G0"><code class="docutils literal notranslate"><span class="pre">Note.G0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS0"><code class="docutils literal notranslate"><span class="pre">Note.GS0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A0"><code class="docutils literal notranslate"><span class="pre">Note.A0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS0"><code class="docutils literal notranslate"><span class="pre">Note.AS0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B0"><code class="docutils literal notranslate"><span class="pre">Note.B0</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C1"><code class="docutils literal notranslate"><span class="pre">Note.C1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS1"><code class="docutils literal notranslate"><span class="pre">Note.CS1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D1"><code class="docutils literal notranslate"><span class="pre">Note.D1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS1"><code class="docutils literal notranslate"><span class="pre">Note.DS1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E1"><code class="docutils literal notranslate"><span class="pre">Note.E1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F1"><code class="docutils literal notranslate"><span class="pre">Note.F1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS1"><code class="docutils literal notranslate"><span class="pre">Note.FS1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G1"><code class="docutils literal notranslate"><span class="pre">Note.G1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS1"><code class="docutils literal notranslate"><span class="pre">Note.GS1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A1"><code class="docutils literal notranslate"><span class="pre">Note.A1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS1"><code class="docutils literal notranslate"><span class="pre">Note.AS1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B1"><code class="docutils literal notranslate"><span class="pre">Note.B1</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C2"><code class="docutils literal notranslate"><span class="pre">Note.C2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS2"><code class="docutils literal notranslate"><span class="pre">Note.CS2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D2"><code class="docutils literal notranslate"><span class="pre">Note.D2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS2"><code class="docutils literal notranslate"><span class="pre">Note.DS2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E2"><code class="docutils literal notranslate"><span class="pre">Note.E2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F2"><code class="docutils literal notranslate"><span class="pre">Note.F2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS2"><code class="docutils literal notranslate"><span class="pre">Note.FS2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G2"><code class="docutils literal notranslate"><span class="pre">Note.G2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS2"><code class="docutils literal notranslate"><span class="pre">Note.GS2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A2"><code class="docutils literal notranslate"><span class="pre">Note.A2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS2"><code class="docutils literal notranslate"><span class="pre">Note.AS2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B2"><code class="docutils literal notranslate"><span class="pre">Note.B2</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C3"><code class="docutils literal notranslate"><span class="pre">Note.C3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS3"><code class="docutils literal notranslate"><span class="pre">Note.CS3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D3"><code class="docutils literal notranslate"><span class="pre">Note.D3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS3"><code class="docutils literal notranslate"><span class="pre">Note.DS3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E3"><code class="docutils literal notranslate"><span class="pre">Note.E3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F3"><code class="docutils literal notranslate"><span class="pre">Note.F3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS3"><code class="docutils literal notranslate"><span class="pre">Note.FS3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G3"><code class="docutils literal notranslate"><span class="pre">Note.G3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS3"><code class="docutils literal notranslate"><span class="pre">Note.GS3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A3"><code class="docutils literal notranslate"><span class="pre">Note.A3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS3"><code class="docutils literal notranslate"><span class="pre">Note.AS3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B3"><code class="docutils literal notranslate"><span class="pre">Note.B3</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C4"><code class="docutils literal notranslate"><span class="pre">Note.C4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS4"><code class="docutils literal notranslate"><span class="pre">Note.CS4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D4"><code class="docutils literal notranslate"><span class="pre">Note.D4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS4"><code class="docutils literal notranslate"><span class="pre">Note.DS4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E4"><code class="docutils literal notranslate"><span class="pre">Note.E4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F4"><code class="docutils literal notranslate"><span class="pre">Note.F4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS4"><code class="docutils literal notranslate"><span class="pre">Note.FS4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G4"><code class="docutils literal notranslate"><span class="pre">Note.G4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS4"><code class="docutils literal notranslate"><span class="pre">Note.GS4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A4"><code class="docutils literal notranslate"><span class="pre">Note.A4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS4"><code class="docutils literal notranslate"><span class="pre">Note.AS4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B4"><code class="docutils literal notranslate"><span class="pre">Note.B4</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C5"><code class="docutils literal notranslate"><span class="pre">Note.C5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS5"><code class="docutils literal notranslate"><span class="pre">Note.CS5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D5"><code class="docutils literal notranslate"><span class="pre">Note.D5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS5"><code class="docutils literal notranslate"><span class="pre">Note.DS5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E5"><code class="docutils literal notranslate"><span class="pre">Note.E5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F5"><code class="docutils literal notranslate"><span class="pre">Note.F5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS5"><code class="docutils literal notranslate"><span class="pre">Note.FS5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G5"><code class="docutils literal notranslate"><span class="pre">Note.G5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS5"><code class="docutils literal notranslate"><span class="pre">Note.GS5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A5"><code class="docutils literal notranslate"><span class="pre">Note.A5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS5"><code class="docutils literal notranslate"><span class="pre">Note.AS5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B5"><code class="docutils literal notranslate"><span class="pre">Note.B5</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C6"><code class="docutils literal notranslate"><span class="pre">Note.C6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS6"><code class="docutils literal notranslate"><span class="pre">Note.CS6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D6"><code class="docutils literal notranslate"><span class="pre">Note.D6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS6"><code class="docutils literal notranslate"><span class="pre">Note.DS6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E6"><code class="docutils literal notranslate"><span class="pre">Note.E6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F6"><code class="docutils literal notranslate"><span class="pre">Note.F6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS6"><code class="docutils literal notranslate"><span class="pre">Note.FS6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G6"><code class="docutils literal notranslate"><span class="pre">Note.G6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS6"><code class="docutils literal notranslate"><span class="pre">Note.GS6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A6"><code class="docutils literal notranslate"><span class="pre">Note.A6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS6"><code class="docutils literal notranslate"><span class="pre">Note.AS6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B6"><code class="docutils literal notranslate"><span class="pre">Note.B6</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C7"><code class="docutils literal notranslate"><span class="pre">Note.C7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS7"><code class="docutils literal notranslate"><span class="pre">Note.CS7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D7"><code class="docutils literal notranslate"><span class="pre">Note.D7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS7"><code class="docutils literal notranslate"><span class="pre">Note.DS7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E7"><code class="docutils literal notranslate"><span class="pre">Note.E7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F7"><code class="docutils literal notranslate"><span class="pre">Note.F7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS7"><code class="docutils literal notranslate"><span class="pre">Note.FS7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G7"><code class="docutils literal notranslate"><span class="pre">Note.G7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS7"><code class="docutils literal notranslate"><span class="pre">Note.GS7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A7"><code class="docutils literal notranslate"><span class="pre">Note.A7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS7"><code class="docutils literal notranslate"><span class="pre">Note.AS7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B7"><code class="docutils literal notranslate"><span class="pre">Note.B7</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C8"><code class="docutils literal notranslate"><span class="pre">Note.C8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS8"><code class="docutils literal notranslate"><span class="pre">Note.CS8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D8"><code class="docutils literal notranslate"><span class="pre">Note.D8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS8"><code class="docutils literal notranslate"><span class="pre">Note.DS8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E8"><code class="docutils literal notranslate"><span class="pre">Note.E8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F8"><code class="docutils literal notranslate"><span class="pre">Note.F8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS8"><code class="docutils literal notranslate"><span class="pre">Note.FS8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G8"><code class="docutils literal notranslate"><span class="pre">Note.G8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS8"><code class="docutils literal notranslate"><span class="pre">Note.GS8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A8"><code class="docutils literal notranslate"><span class="pre">Note.A8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS8"><code class="docutils literal notranslate"><span class="pre">Note.AS8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B8"><code class="docutils literal notranslate"><span class="pre">Note.B8</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C9"><code class="docutils literal notranslate"><span class="pre">Note.C9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS9"><code class="docutils literal notranslate"><span class="pre">Note.CS9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D9"><code class="docutils literal notranslate"><span class="pre">Note.D9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS9"><code class="docutils literal notranslate"><span class="pre">Note.DS9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E9"><code class="docutils literal notranslate"><span class="pre">Note.E9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F9"><code class="docutils literal notranslate"><span class="pre">Note.F9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS9"><code class="docutils literal notranslate"><span class="pre">Note.FS9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G9"><code class="docutils literal notranslate"><span class="pre">Note.G9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.GS9"><code class="docutils literal notranslate"><span class="pre">Note.GS9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.A9"><code class="docutils literal notranslate"><span class="pre">Note.A9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.AS9"><code class="docutils literal notranslate"><span class="pre">Note.AS9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.B9"><code class="docutils literal notranslate"><span class="pre">Note.B9</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.C10"><code class="docutils literal notranslate"><span class="pre">Note.C10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.CS10"><code class="docutils literal notranslate"><span class="pre">Note.CS10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.D10"><code class="docutils literal notranslate"><span class="pre">Note.D10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.DS10"><code class="docutils literal notranslate"><span class="pre">Note.DS10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.E10"><code class="docutils literal notranslate"><span class="pre">Note.E10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.F10"><code class="docutils literal notranslate"><span class="pre">Note.F10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.FS10"><code class="docutils literal notranslate"><span class="pre">Note.FS10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.G10"><code class="docutils literal notranslate"><span class="pre">Note.G10</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Note.NO_SOUND"><code class="docutils literal notranslate"><span class="pre">Note.NO_SOUND</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.sound.MidiNote"><code class="docutils literal notranslate"><span class="pre">MidiNote</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.MidiNote.duration_ms"><code class="docutils literal notranslate"><span class="pre">MidiNote.duration_ms</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.MidiNote.note"><code class="docutils literal notranslate"><span class="pre">MidiNote.note</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.MidiNote.volume"><code class="docutils literal notranslate"><span class="pre">MidiNote.volume</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.MidiNote.flatten"><code class="docutils literal notranslate"><span class="pre">MidiNote.flatten()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.MidiNote.__init__"><code class="docutils literal notranslate"><span class="pre">MidiNote.__init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.sound.PlaySoundEffect"><code class="docutils literal notranslate"><span class="pre">PlaySoundEffect</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.PlaySoundEffect.__init__"><code class="docutils literal notranslate"><span class="pre">PlaySoundEffect.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.PlaySoundEffect.__bytes__"><code class="docutils literal notranslate"><span class="pre">PlaySoundEffect.__bytes__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.sound.PlayMidi"><code class="docutils literal notranslate"><span class="pre">PlayMidi</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.PlayMidi.__init__"><code class="docutils literal notranslate"><span class="pre">PlayMidi.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.PlayMidi.__bytes__"><code class="docutils literal notranslate"><span class="pre">PlayMidi.__bytes__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Stop"><code class="docutils literal notranslate"><span class="pre">Stop</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.Stop.__init__"><code class="docutils literal notranslate"><span class="pre">Stop.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Stop.__bytes__"><code class="docutils literal notranslate"><span class="pre">Stop.__bytes__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Sound"><code class="docutils literal notranslate"><span class="pre">Sound</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.sound.Sound.is_my_data"><code class="docutils literal notranslate"><span class="pre">Sound.is_my_data()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Sound.__init__"><code class="docutils literal notranslate"><span class="pre">Sound.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Sound.play_sound_effect"><code class="docutils literal notranslate"><span class="pre">Sound.play_sound_effect()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Sound.play_midi"><code class="docutils literal notranslate"><span class="pre">Sound.play_midi()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.sound.Sound.stop"><code class="docutils literal notranslate"><span class="pre">Sound.stop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </nav>
+            </div>
+          </div>
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      <nav id="paginator" class="py-4" aria-label="Documentation navigation">
+    <div class="container">
+      <ul class="pagination justify-content-between mb-0"><li class="page-item">
+            <a href="toio.cube.api.sensor.html" class="d-flex px-5 align-items-end" rel="prev" aria-label="Previous page: toio.cube.api.sensor module">
+              <span class="prev-page"><i class="bi bi-caret-left"></i></span>
+              <div class="d-flex flex-column">
+                <span class="text-small text-start text-muted">Previous</span>
+                <span class="underline">toio.cube.api.sensor module</span>
+              </div>
+            </a>
+          </li>
+        <li class="page-item ms-auto">
+            <a href="toio.device_interface.html" class="d-flex px-5 align-items-end" rel="next" aria-label="Next page: toio.device_interface package">
+              <div class="d-flex flex-column">
+                <span class="text-small text-end text-start text-muted">Next</span>
+                <span class="underline">toio.device_interface package</span>
+              </div>
+              <span class="next-page"><i class="bi bi-caret-right"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Nefertiti-for-Sphinx">
+          <span class="fs-6 fw-bold">toio.py</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2022, Sony Interactive Entertainment</li>
+          </ul>
+        
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 6.2.1</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+
+    <script type="text/javascript" src="_static/sphinx-nefertiti-0.3.2.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.bundle-0.3.2.min.js"></script>
+    
+    <script type="text/javascript" src="_static/doc_versions.js"></script>
+  </body>
+</html>
