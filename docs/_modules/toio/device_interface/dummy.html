@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="docsearch:name" content="toio.py" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="" />
+    <meta name="docsearch:version" content="" />
+    
+      <title>toio.device_interface.dummy &mdash; toio.py  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons.css" type="text/css" />
+          <!-- add (1) pathto "_static/pygments.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+          <!-- add (1) pathto "_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts/nunito/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/fonts/nunito/stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts/red-hat-mono/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/fonts/red-hat-mono/stylesheet.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+        <link rel="index" title="Index" href="../../../genindex.html" />
+        <link rel="search" title="Search" href="../../../search.html" />
+        <link rel="top" title="toio.py  documentation" href="#" />
+        <link rel="up" title="toio.device_interface" href="../device_interface.html" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Red Hat Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+      h1 *, h2 *, h3 *, h4 *, h5 *, h6 * { font-size: inherit; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to docs navigation</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-wrap flex-xl-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="../../../index.html"
+              
+              class="navbar-brand p-0 me-0 md-lg-2"
+          ><span class="brand-text">toio.py</span></a>
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="../../../search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search docs" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-text">Nefertiti for Sphinx</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              <!-- version_dropdown.html -->
+
+              
+              <!-- colorscheme_dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Toggle light/dark">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none small ms-2">Toggle light/dark</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Light/dark</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="small ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="small ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="small ms-3">Default</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-block">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- danirus sidebartemplate: "version.html" -->
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+    <h1>Source code for toio.device_interface.dummy</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># ************************************************************</span>
+<span class="c1">#</span>
+<span class="c1">#     dummy.py</span>
+<span class="c1">#</span>
+<span class="c1">#     Copyright 2024 Sony Interactive Entertainment Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># ************************************************************</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Dummy device interface (for debugging)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
+
+<span class="kn">from</span> <span class="nn">..device_interface</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CubeInterface</span><span class="p">,</span>
+    <span class="n">GattNotificationHandler</span><span class="p">,</span>
+    <span class="n">GattReadData</span><span class="p">,</span>
+    <span class="n">GattWriteData</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="DummyCube"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube">[docs]</a><span class="k">class</span> <span class="nc">DummyCube</span><span class="p">(</span><span class="n">CubeInterface</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dummy cube interface for debugging.</span>
+
+<span class="sd">    All functions succeed but do nothing.</span>
+<span class="sd">    read() returns empty list &#39;[]&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="fm">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="DummyCube.connect"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube.connect">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DummyCube.disconnect"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube.disconnect">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DummyCube.read"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube.read">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char_uuid</span><span class="p">:</span> <span class="n">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GattReadData</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GattReadData</span><span class="p">([])</span></div>
+
+<div class="viewcode-block" id="DummyCube.write"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube.write">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">write</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">char_uuid</span><span class="p">:</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">GattWriteData</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="DummyCube.register_notification_handler"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube.register_notification_handler">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">register_notification_handler</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">char_uuid</span><span class="p">:</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">notification_handler</span><span class="p">:</span> <span class="n">GattNotificationHandler</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DummyCube.unregister_notification_handler"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube.unregister_notification_handler">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">unregister_notification_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char_uuid</span><span class="p">:</span> <span class="n">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DummyCube.is_connect"><a class="viewcode-back" href="../../../toio.device_interface.dummy.html#toio.device_interface.dummy.DummyCube.is_connect">[docs]</a>    <span class="k">def</span> <span class="nf">is_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+</pre></div>
+</article>
+        <aside class="nftt-toc">
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      
+<nav id="paginator"></nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Nefertiti-for-Sphinx">
+          <span class="fs-6 fw-bold">toio.py</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2022, Sony Interactive Entertainment</li>
+          </ul>
+        
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 6.2.1</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+
+    <script type="text/javascript" src="../../../_static/sphinx-nefertiti-0.3.2.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap.bundle-0.3.2.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/doc_versions.js"></script>
+  </body>
+</html>

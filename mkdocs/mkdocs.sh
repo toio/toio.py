@@ -18,7 +18,7 @@ if [ ! -d ./docs-conf ] ; then
   cp ./mkdocs/_templates/version.html ./docs-conf/_templates/
 fi
 
-#poetry run sphinx-build docs-conf docs
+poetry run sphinx-build docs-conf docs
 poetry run sphinx-multiversion docs-conf docs
 
 LATEST=`git tag --sort=committerdate | egrep -e '^\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|\d+\.post\d+)$' | tail -1`
