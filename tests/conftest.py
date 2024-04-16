@@ -38,16 +38,21 @@ def setup(pytestconfig):
     logger.info("** '_cube.py' is generated automatically.")
     logger.info("** To generate this, you turn on 2 cubes.")
     capmanager.suspend_global_capture(in_=True)
-    yn = input(
-        Fore.YELLOW
-        + "Press Enter key when ready (If you don't need to generate, type 's' and Enter)"
-        + Style.RESET_ALL
-    )
+    try:
+        yn = input(
+            Fore.YELLOW
+            + "Press Enter key when ready (If you don't need to generate, type 's' and Enter)"
+            + Style.RESET_ALL
+        )
+    except EOFError:
+        yn = ""
     capmanager.resume_global_capture()
     logger.info("%s", yn)
+    test_dir = os.path.dirname(__file__)
+    cube_file = os.path.join(test_dir, "_cubes.py")
     if yn.lower() != "s":
         logger.info("** GENERATE _cubes.py")
-        result = os.system("python ./make_cube_list.py _cubes.py")
+        result = os.system("python ./make_cube_list.py %s" % cube_file)
         if result:
             logger.info(
                 Fore.RED
@@ -57,7 +62,7 @@ def setup(pytestconfig):
     else:
         logger.info(Fore.YELLOW + "** skip to generate _cubes.py" + Style.RESET_ALL)
     logger.info("** cubes used in this test:")
-    with open("_cubes.py", "r") as rf:
+    with open(cube_file, "r") as rf:
         logger.info("\n" + rf.read())
 
 
@@ -65,7 +70,10 @@ def setup(pytestconfig):
 def confirm(pytestconfig):
     capmanager = pytestconfig.pluginmanager.getplugin("capturemanager")
     capmanager.suspend_global_capture(in_=True)
-    input(Fore.YELLOW + "\nPress Enter key when ready" + Style.RESET_ALL)
+    try:
+        input(Fore.YELLOW + "\nPress Enter key when ready" + Style.RESET_ALL)
+    except EOFError:
+        pass
     capmanager.resume_global_capture()
     logger.info("start")
 
@@ -75,7 +83,10 @@ def post_confirm(pytestconfig):
     yield  # At this point all the tests with this fixture are run
     capmanager = pytestconfig.pluginmanager.getplugin("capturemanager")
     capmanager.suspend_global_capture(in_=True)
-    input(Fore.YELLOW + "\nPress Enter key when ready" + Style.RESET_ALL)
+    try:
+        input(Fore.YELLOW + "\nPress Enter key when ready" + Style.RESET_ALL)
+    except EOFError:
+        pass
     capmanager.resume_global_capture()
 
 
@@ -89,11 +100,14 @@ def get_result(pytestconfig):
     yield  # At this point all the tests with this fixture are run
     capmanager = pytestconfig.pluginmanager.getplugin("capturemanager")
     capmanager.suspend_global_capture(in_=True)
-    yn = input(
-        Fore.YELLOW
-        + "\nIf this test fails, type 'N' and Enter. Otherwise, press Enter only"
-        + Style.RESET_ALL
-    )
+    try:
+        yn = input(
+            Fore.YELLOW
+            + "\nIf this test fails, type 'N' and Enter. Otherwise, press Enter only"
+            + Style.RESET_ALL
+        )
+    except EOFError:
+        yn = ""
     logger.info("%s", yn)
     capmanager.resume_global_capture()
     assert yn.lower() != "n"
