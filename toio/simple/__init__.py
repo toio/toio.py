@@ -94,6 +94,15 @@ class SimpleCube(object):
     CELL_SIZE: ClassVar[float] = 43.43
     MONITORING_CYCLE: ClassVar[float] = 0.01
 
+    @staticmethod
+    def ensure_event_loop() -> asyncio.AbstractEventLoop:
+        try:
+            return asyncio.get_running_loop()
+        except RuntimeError:
+            event_loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(event_loop)
+            return event_loop
+
     @classmethod
     async def search(cls, name: Optional[str] = None, timeout: int = 5) -> ToioCoreCube:
         if name is not None:
@@ -138,7 +147,7 @@ class SimpleCube(object):
             log_handler = StreamHandler()
             log_handler.setLevel(log_level)
             logger.addHandler(log_handler)
-        self._event_loop = asyncio.get_event_loop()
+        self._event_loop = self.ensure_event_loop()
         self._cube: ToioCoreCube = self._event_loop.run_until_complete(
             self.search(name=name, timeout=timeout)
         )
