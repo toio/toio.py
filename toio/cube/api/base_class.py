@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import binascii
 from abc import ABCMeta, abstractmethod
 from uuid import UUID
@@ -83,6 +84,7 @@ class CubeCharacteristic(metaclass=ABCMeta):
             NotificationHandlerTypes, NotificationHandlerInfo
         ] = {}
         self.notification_handler_is_registered = False
+        self.handler_semaphore = asyncio.Semaphore(1)
 
     async def _read(self) -> GattReadData:
         """Raw interface to GATT for reading."""
@@ -118,21 +120,22 @@ class CubeCharacteristic(metaclass=ABCMeta):
     async def _root_notification_handler(
         self, _: GattCharacteristic, payload: bytearray
     ) -> None:
-        for func, handler_info in self.notification_handler_dict.items():
-            if handler_info.is_async:
-                if handler_info.num_of_args == 1:
-                    func = cast(CubeNotificationHandlerAsync, func)
-                    await func(payload)
-                elif handler_info.num_of_args == 2:
-                    func = cast(CubeNotificationHandlerWithParameterAsync, func)
-                    await func(payload, handler_info)
-            else:
-                if handler_info.num_of_args == 1:
-                    func = cast(CubeNotificationHandler, func)
-                    func(payload)
-                elif handler_info.num_of_args == 2:
-                    func = cast(CubeNotificationHandlerWithParameter, func)
-                    func(payload, handler_info)
+        async with self.handler_semaphore:
+            for func, handler_info in self.notification_handler_dict.items():
+                if handler_info.is_async:
+                    if handler_info.num_of_args == 1:
+                        func = cast(CubeNotificationHandlerAsync, func)
+                        await func(payload)
+                    elif handler_info.num_of_args == 2:
+                        func = cast(CubeNotificationHandlerWithParameterAsync, func)
+                        await func(payload, handler_info)
+                else:
+                    if handler_info.num_of_args == 1:
+                        func = cast(CubeNotificationHandler, func)
+                        func(payload)
+                    elif handler_info.num_of_args == 2:
+                        func = cast(CubeNotificationHandlerWithParameter, func)
+                        func(payload, handler_info)
 
     async def register_notification_handler(
         self, handler: NotificationHandlerTypes, misc: Any = None
@@ -162,15 +165,16 @@ class CubeCharacteristic(metaclass=ABCMeta):
         Returns:
             bool:
         """
-        if handler in self.notification_handler_dict:
-            return False
-        handler_info = NotificationHandlerInfo(
-            func=handler, misc=misc, device=self.device, interface=self.interface
-        )
-        self.notification_handler_dict[handler] = handler_info
-        if not self.notification_handler_is_registered:
-            await self._register_notification_handler(self._root_notification_handler)
-            self.notification_handler_is_registered = True
+        async with self.handler_semaphore:
+            if handler in self.notification_handler_dict:
+                return False
+            handler_info = NotificationHandlerInfo(
+                func=handler, misc=misc, device=self.device, interface=self.interface
+            )
+            self.notification_handler_dict[handler] = handler_info
+            if not self.notification_handler_is_registered:
+                await self._register_notification_handler(self._root_notification_handler)
+                self.notification_handler_is_registered = True
         return True
 
     async def unregister_notification_handler(
@@ -178,15 +182,16 @@ class CubeCharacteristic(metaclass=ABCMeta):
         handler: NotificationHandlerTypes,
     ) -> bool:
         """User interface to GATT for unregistering handler function."""
-        if handler is None:
-            self.notification_handler_dict.clear()
-            return True
-        if handler in self.notification_handler_dict:
-            self.notification_handler_dict.pop(handler)
-        if (
-            len(self.notification_handler_dict) == 0
-            and self.notification_handler_is_registered
-        ):
-            await self._unregister_notification_handler()
-            self.notification_handler_is_registered = False
+        async with self.handler_semaphore:
+            if handler is None:
+                self.notification_handler_dict.clear()
+                return True
+            if handler in self.notification_handler_dict:
+                self.notification_handler_dict.pop(handler)
+            if (
+                len(self.notification_handler_dict) == 0
+                and self.notification_handler_is_registered
+            ):
+                await self._unregister_notification_handler()
+                self.notification_handler_is_registered = False
         return True
