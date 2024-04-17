@@ -14,6 +14,7 @@ import asyncio
 from typing_extensions import (
     TYPE_CHECKING,
     Any,
+    Awaitable,
     Dict,
     List,
     Optional,
@@ -80,6 +81,8 @@ class MultipleToioCoreCubes:
     >>>     beta.api....()
 
     """
+
+    OPERATION_INTERVAL: float = 0.5
 
     def __init__(
         self,
@@ -157,12 +160,24 @@ class MultipleToioCoreCubes:
             self._cubes = ToioCoreCube.create_cubes(device_list)
             self._scanning_required = False
 
+    async def _wait_and_exec(self, wait:float, func: Awaitable):
+        await asyncio.sleep(wait)
+        return await func
+
     async def connect(self):
         """
         connect to multiple cubes
+
+        cubes are connected at MultipleToioCoreCubes.OPERATION_INTERVAL
+        second interval.
         """
         self._assign_cubes()
-        connect_list = [cube.connect() for cube in self._cubes]
+
+        connect_list = []
+        wait = 0
+        for cube in self._cubes:
+            connect_list.append(self._wait_and_exec(wait, cube.connect()))
+            wait += self.OPERATION_INTERVAL
         result_list = await asyncio.gather(*connect_list)
         while False in result_list:
             logger.info("try to connect again")
@@ -174,8 +189,15 @@ class MultipleToioCoreCubes:
     async def disconnect(self):
         """
         disconnect to multiple cubes
+
+        cubes are disconnected at MultipleToioCoreCubes.OPERATION_INTERVAL
+        second interval.
         """
-        disconnect_list = [cube.disconnect() for cube in self._cubes]
+        disconnect_list = []
+        wait = 0.0
+        for cube in self._cubes:
+            disconnect_list.append(self._wait_and_exec(wait, cube.disconnect()))
+            wait += self.OPERATION_INTERVAL
         result_list = await asyncio.gather(*disconnect_list)
         while False in result_list:
             logger.info("try to disconnect again")
