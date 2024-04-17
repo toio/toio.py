@@ -19,7 +19,7 @@ logger = getLogger(__name__)
 
 @pytest.fixture(scope="function", autouse=True)
 def wait():
-    time.sleep(2)
+    time.sleep(3)
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -93,7 +93,7 @@ def post_confirm(pytestconfig):
 @pytest.fixture(scope="function")
 def get_result(pytestconfig):
     logger.info(
-        Fore.RED
+        Fore.YELLOW
         + "** You must check for yourself whether this test is a success or failure and enter the result **"
         + Style.RESET_ALL
     )

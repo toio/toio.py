@@ -59,5 +59,13 @@ async def test_sound2():
     await cube.api.sound.stop()
     await asyncio.sleep(2)
     logger.info("2.55[s]")
+    await asyncio.sleep(2)
+    note = MidiNote(2550, Note.C4, 255)
+    logger.info("sound:" + pprint.pformat(str(note)))
+    await cube.api.sound.play_midi(1, [note])
+    await asyncio.sleep(2.55)
+    logger.info("stop")
+    logger.info("2.55[s]")
     logger.info("** DISCONNECT")
     await cube.disconnect()
+
