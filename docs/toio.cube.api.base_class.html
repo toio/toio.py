@@ -233,10 +233,26 @@ CubeResponse object. Otherwise, it returns None.</p>
 <dd><p>User interface to GATT for registering handler function.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<dl class="simple">
-<dt>Type of the notification handler function must be</dt><dd><p>Callable[[bytearray, ToioNotificationHandlerInfo], None]</p>
+<dl>
+<dt>Type of the notification handler function must be</dt><dd><div class="line-block">
+<div class="line">Callable[[bytearray], None]</div>
+<div class="line"># sync without NotificationHandlerInfo (v1.0.0 or later)</div>
+</div>
 </dd>
-<dt>or</dt><dd><p>Callable[[bytearray, ToioNotificationHandlerInfo], Awaitable[None]]</p>
+<dt>or</dt><dd><div class="line-block">
+<div class="line">Callable[[bytearray], Awaitable[None]]</div>
+<div class="line"># async without NotificationHandlerInfo (v1.0.0 or later)</div>
+</div>
+</dd>
+<dt>or</dt><dd><div class="line-block">
+<div class="line">Callable[[bytearray, ToioNotificationHandlerInfo], None]</div>
+<div class="line"># sync with NotificationHandlerInfo (v1.1.0 or later)</div>
+</div>
+</dd>
+<dt>or</dt><dd><div class="line-block">
+<div class="line">Callable[[bytearray, ToioNotificationHandlerInfo], Awaitable[None]]</div>
+<div class="line"># async with NotificationHandlerInfo (v1.1.0 or later)</div>
+</div>
 </dd>
 </dl>
 <p><cite>NotificationHandlerInfo</cite> has <cite>device</cite>, <cite>interface</cite> and <cite>misc</cite> attributes.

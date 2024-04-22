@@ -196,6 +196,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="toio.cube.multi_cubes.html">toio.cube.multi_cubes module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="toio.cube.multi_cubes.html#toio.cube.multi_cubes.MultipleToioCoreCubes"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="toio.cube.multi_cubes.html#toio.cube.multi_cubes.MultipleToioCoreCubes.OPERATION_INTERVAL"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.OPERATION_INTERVAL</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="toio.cube.multi_cubes.html#toio.cube.multi_cubes.MultipleToioCoreCubes.__init__"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="toio.cube.multi_cubes.html#toio.cube.multi_cubes.MultipleToioCoreCubes.scan"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.scan()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="toio.cube.multi_cubes.html#toio.cube.multi_cubes.MultipleToioCoreCubes.connect"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.connect()</span></code></a></li>
@@ -230,10 +231,21 @@
 <p>Access to toio Core Cube</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>self.protocol_version is set after connecting to the cube.
-self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.2.0.</p>
-<p>In the next version, ToioCoreCube class will no longer have CubeInterface as an abstract base class.</p>
+<ul class="simple">
+<li><p>self.protocol_version is set after connecting to the cube.</p></li>
+<li><p>self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.1.0.</p></li>
+<li><p>basic scan function is supported since v1.1.0.</p></li>
+</ul>
 </div>
+<p>When Toio is initialized with no arguments, the scan() function can search for a cubes.
+scan() can be followed by a call to the connect() function to connect
+to multiple cubes.</p>
+<p>If you initialize ToioCoreCube with a CubeInfo or a CubeInterface,
+you can connect to specified cube by calling the connect() function.
+In this case, the scan() function does not work.</p>
+<p>ToioCoreCube is an asynchronous context manager.
+When ‘async with’ is used, ‘__aenter__’ handles the process up to connection,
+and ‘__aexit__’ handles the disconnection.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">interface</span></span></dt>
@@ -301,8 +313,8 @@ self.protocol_version and self.max_retry_to_get_protocol_version is supported si
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CubeInitializer</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">collections.Sequence</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ToioCoreCube</span></span></span><a class="reference internal" href="_modules/toio/cube.html#ToioCoreCube.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Supported toio.py versions: v1.2.0 or later</p>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initializer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ToioCoreCube</span></span></span><a class="reference internal" href="_modules/toio/cube.html#ToioCoreCube.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Supported toio.py versions: v1.1.0 or later</p>
 <p>Create a ToioCoreCube instance from a CubeInterface or CubeInfo</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -317,7 +329,7 @@ self.protocol_version and self.max_retry_to_get_protocol_version is supported si
 <dl class="py method">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_cubes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initializers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo" title="toio.device_interface.CubeInfo"><span class="pre">CubeInfo</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ToioCoreCube</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/toio/cube.html#ToioCoreCube.create_cubes"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Supported toio.py versions: v1.2.0 or later</p>
+<dd><p>Supported toio.py versions: v1.1.0 or later</p>
 <p>Create a ToioCoreCube instance list from a CubeInterface or CubeInfo list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -390,42 +402,68 @@ self.protocol_version and self.max_retry_to_get_protocol_version is supported si
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.</span></span><span class="sig-name descname"><span class="pre">NotificationHandlerInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/notification_handler_info.html#NotificationHandlerInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.</span></span><span class="sig-name descname"><span class="pre">NotificationHandlerInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/notification_handler_info.html#NotificationHandlerInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Information of registered notification handler function.</p>
+<dl class="simple">
+<dt>NotificationHandlerInfo includes several type of information:</dt><dd><ul class="simple">
+<li><p>Unique data given at registration (misc)</p></li>
+<li><p>Information about the device that received the notification (device, interface)</p></li>
+<li><p>Information used for internal use (rest of properties)</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/notification_handler_info.html#NotificationHandlerInfo.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">bytearray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/notification_handler_info.html#NotificationHandlerInfo.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>__init__.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>NotificationHandlerTypes</em>) – notification handler function</p></li>
+<li><p><strong>device</strong> (<em>NotificationReceivedDevice</em>) – device to be notified</p></li>
+<li><p><strong>interface</strong> (<a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><em>CubeInterface</em></a>) – interface of device</p></li>
+<li><p><strong>misc</strong> (<em>Any</em>) – user data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">misc</span></span></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">misc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em></dt>
+<dd><p>User data given when the notification handler function is registered.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device</span></span></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em></dt>
+<dd><p>The device that received the notification.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interface</span></span></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interface</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></em></dt>
+<dd><p>The interface of the device that received the notification. (equal to device.interface)</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_async</span></span></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_async</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em></dt>
+<dd><p>Whether the notification handler function is async or sync. (for internal use)</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_of_args</span></span></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_of_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em></dt>
+<dd><p>Number of arguments received by the registered notification handler function. (for internal use)</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">get_notified_cube</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ToioCoreCube</span></span></span><a class="reference internal" href="_modules/toio/cube/notification_handler_info.html#NotificationHandlerInfo.get_notified_cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd></dd></dl>
+<dd><p>Return self.device as ToioCoreCube</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -435,14 +473,14 @@ self.protocol_version and self.max_retry_to_get_protocol_version is supported si
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Multiple cube control class</p>
 <p>This class is a wrapper to control multiple cubes more easier.</p>
-<p>When MultipleCubes is initialized with an integer, the scan() function
+<p>When MultipleToioCoreCubes is initialized with an integer, the scan() function
 can search for a specified number of cubes.
 scan() can be followed by a call to the connect() function to connect
 to multiple cubes.</p>
-<p>If you initialize MultipleCubes with a list of CubeInfo,
+<p>If you initialize MultipleToioCoreCubes with a list of CubeInfo,
 you can connect to multiple cubes by calling the connect() function.
 In this case, the scan() function does not work.</p>
-<p>MultipleCubes is an asynchronous context manager.
+<p>MultipleToioCoreCubes is an asynchronous context manager.
 When ‘async with’ is used, ‘__aenter__’ handles the process up to connection,
 and ‘__aexit__’ handles the disconnection.</p>
 <p>Access to each cubes</p>
@@ -473,6 +511,11 @@ and ‘__aexit__’ handles the disconnection.</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">beta</span><span class="o">.</span><span class="n">api</span><span class="o">....</span><span class="p">()</span>
 </pre></div>
 </div>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">OPERATION_INTERVAL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.5</span></em></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">cubes:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">~typing.List[~toio.device_interface.CubeInfo],</span> <span class="pre">names:</span> <span class="pre">~typing.Sequence[str]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">scanner:</span> <span class="pre">~typing.Type[~toio.device_interface.ScannerInterface]</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'toio.scanner.ble.UniversalBleScanner'&gt;,</span> <span class="pre">scanner_args:</span> <span class="pre">~typing.Sequence[~typing.Any]</span> <span class="pre">=</span> <span class="pre">()</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/multi_cubes.html#MultipleToioCoreCubes.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -501,12 +544,16 @@ this function performs to scan the number of cubes.</p>
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/multi_cubes.html#MultipleToioCoreCubes.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>connect to multiple cubes</p>
+<p>cubes are connected at MultipleToioCoreCubes.OPERATION_INTERVAL
+second interval.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/multi_cubes.html#MultipleToioCoreCubes.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>disconnect to multiple cubes</p>
+<p>cubes are disconnected at MultipleToioCoreCubes.OPERATION_INTERVAL
+second interval.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1384,7 +1431,7 @@ Receive the result by notification.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_connection_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.request_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_to_change_connection_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.request_to_change_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Request the connected central device to change the connection interval.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1403,7 +1450,7 @@ one of the following occurs:
 </dd>
 </dl>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval">https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval</a>-</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1411,7 +1458,7 @@ one of the following occurs:
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_requested_connection_interval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.get_requested_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Get requested connection interval value.</p>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value</a>-</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1419,7 +1466,7 @@ one of the following occurs:
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current_connection_interval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.get_current_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Get current connection interval value.</p>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value</a>-</p>
 </dd></dl>
 
 </dd></dl>

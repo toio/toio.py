@@ -145,9 +145,17 @@ class CubeCharacteristic(metaclass=ABCMeta):
 
         Note:
             Type of the notification handler function must be
-                Callable[[bytearray, ToioNotificationHandlerInfo], None]
+                | Callable[[bytearray], None]
+                | # sync without NotificationHandlerInfo (v1.0.0 or later)
             or
-                Callable[[bytearray, ToioNotificationHandlerInfo], Awaitable[None]]
+                | Callable[[bytearray], Awaitable[None]]
+                | # async without NotificationHandlerInfo (v1.0.0 or later)
+            or
+                | Callable[[bytearray, ToioNotificationHandlerInfo], None]
+                | # sync with NotificationHandlerInfo (v1.1.0 or later)
+            or
+                | Callable[[bytearray, ToioNotificationHandlerInfo], Awaitable[None]]
+                | # async with NotificationHandlerInfo (v1.1.0 or later)
 
             `NotificationHandlerInfo` has `device`, `interface` and `misc` attributes.
             `device` attribute is the ToioCoreCube instance that received the notification.
@@ -169,11 +177,13 @@ class CubeCharacteristic(metaclass=ABCMeta):
             if handler in self.notification_handler_dict:
                 return False
             handler_info = NotificationHandlerInfo(
-                func=handler, misc=misc, device=self.device, interface=self.interface
+                func=handler, device=self.device, interface=self.interface, misc=misc
             )
             self.notification_handler_dict[handler] = handler_info
             if not self.notification_handler_is_registered:
-                await self._register_notification_handler(self._root_notification_handler)
+                await self._register_notification_handler(
+                    self._root_notification_handler
+                )
                 self.notification_handler_is_registered = True
         return True
 

@@ -243,11 +243,21 @@ class SetPostureAngleDetection(CubeCommand):
 
 
 class ConnectionInterval:
+    """
+    Representation of BLE connection interval
+
+    Attributes:
+        value (int): connection interval value
+    """
 
     BLE_MIN_INTERVAL = 6  # 7.5[ms]
+    """Minimum connection interval defined by BLE specifications"""
     BLE_MAX_INTERVAL = 3200  # 4.0[s]
+    """Maximum connection interval defined by BLE specifications"""
     BLE_INTERVAL_UNIT = 1.25  # 1.25[ms]
+    """Millisecond per unit"""
     BLE_INTERVAL_NONE = 0xFFFF
+    """This means 'connection interval is not specified'"""
 
     @staticmethod
     def _check_interval_value(interval_value: int) -> int:
@@ -264,6 +274,15 @@ class ConnectionInterval:
 
     @staticmethod
     def from_ms(interval_ms: float) -> int:
+        """
+        Convert millisecond to connection interval value.
+
+        Args:
+            interval_ms (float): interval (millisecond)
+
+        Returns:
+            int: connection interval value
+        """
         interval_value = ConnectionInterval._check_interval_value(
             int(round(interval_ms / ConnectionInterval.BLE_INTERVAL_UNIT))
         )
@@ -272,6 +291,15 @@ class ConnectionInterval:
 
     @staticmethod
     def to_ms(interval_value: int) -> float:
+        """
+        Convert connection interval value to millisecond.
+
+        Args:
+            interval_value (int): interval_value
+
+        Returns:
+            float: connection interval time (millisecond)
+        """
         return interval_value * ConnectionInterval.BLE_INTERVAL_UNIT
 
     def __init__(self, interval: int):
@@ -279,6 +307,12 @@ class ConnectionInterval:
 
     @property
     def value_ms(self):
+        """
+        Return the connection interval time of ConnectionInterval instance.
+
+        Returns:
+            float: connection interval time (millisecond)
+        """
         return ConnectionInterval.to_ms(self.value)
 
     def __int__(self):
@@ -293,7 +327,7 @@ class RequestConnectionInterval(CubeCommand):
     Request to change bluetooth Connection interval
 
     References:
-        https://
+        https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval-
     """
 
     _payload_id = 0x30
@@ -327,7 +361,7 @@ class GetRequestedConnectionIntervalValue(CubeCommand):
     Get requested connection interval value
 
     References:
-        https://
+        https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value-
     """
 
     _payload_id = 0x31
@@ -344,7 +378,7 @@ class GetCurrentConnectionIntervalValue(CubeCommand):
     Get current connection interval value
 
     References:
-        https://
+        https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value-
     """
 
     _payload_id = 0x32
@@ -541,7 +575,13 @@ class ResponsePostureAngleDetectionSettings(CubeResponse):
 
 class ResponseConnectionIntervalRequest(CubeResponse):
     """
-    Response of connection interval request
+    Protocol version response
+
+    Attributes:
+        result (bool): Result of the command
+
+    References:
+        https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-request-to-change-connection-interval-
     """
 
     _payload_id = 0xB0
@@ -565,6 +605,13 @@ class ResponseConnectionIntervalRequest(CubeResponse):
 class ResponseGettingRequestedConnectionInterval(CubeResponse):
     """
     Response of getting requested connection interval value
+
+    Attributes:
+        min_interval (ConnectionInterval): minimum connection interval
+        max_interval (ConnectionInterval): maximum connection interval
+
+    References:
+        https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-obtain-the-requested-connection-interval-value-
     """
 
     _payload_id = 0xB1
@@ -589,6 +636,13 @@ class ResponseGettingRequestedConnectionInterval(CubeResponse):
 class ResponseGettingCurrentConnectionInterval(CubeResponse):
     """
     Response of getting current connection interval value
+
+    Attributes:
+        min_interval (ConnectionInterval): minimum connection interval
+        max_interval (ConnectionInterval): maximum connection interval
+
+    References:
+        https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-obtain-the-actual-connection-interval-value-
     """
 
     _payload_id = 0xB2
@@ -823,7 +877,7 @@ class Configuration(CubeCharacteristic):
         command = SetPostureAngleDetection(detection_type, interval_ms, condition)
         await self._write(bytes(command))
 
-    async def request_connection_interval(
+    async def request_to_change_connection_interval(
         self, min_interval: int, max_interval: int
     ) -> None:
         """
@@ -843,7 +897,7 @@ class Configuration(CubeCharacteristic):
             max_interval (int): max_interval, from 6 to 3200, or 0xFFFF (0xFFFF means "to be determined by central")
 
         References:
-            https://
+            https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval-
         """
         command = RequestConnectionInterval(min_interval, max_interval)
         await self._write(bytes(command))
@@ -853,7 +907,7 @@ class Configuration(CubeCharacteristic):
         Get requested connection interval value.
 
         References:
-            https://
+            https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value-
         """
         command = GetRequestedConnectionIntervalValue()
         await self._write(bytes(command))
@@ -864,7 +918,7 @@ class Configuration(CubeCharacteristic):
 
 
         References:
-            https://
+            https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value-
         """
         command = GetCurrentConnectionIntervalValue()
         await self._write(bytes(command))

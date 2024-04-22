@@ -173,14 +173,14 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Multiple cube control class</p>
 <p>This class is a wrapper to control multiple cubes more easier.</p>
-<p>When MultipleCubes is initialized with an integer, the scan() function
+<p>When MultipleToioCoreCubes is initialized with an integer, the scan() function
 can search for a specified number of cubes.
 scan() can be followed by a call to the connect() function to connect
 to multiple cubes.</p>
-<p>If you initialize MultipleCubes with a list of CubeInfo,
+<p>If you initialize MultipleToioCoreCubes with a list of CubeInfo,
 you can connect to multiple cubes by calling the connect() function.
 In this case, the scan() function does not work.</p>
-<p>MultipleCubes is an asynchronous context manager.
+<p>MultipleToioCoreCubes is an asynchronous context manager.
 When ‘async with’ is used, ‘__aenter__’ handles the process up to connection,
 and ‘__aexit__’ handles the disconnection.</p>
 <p>Access to each cubes</p>
@@ -211,6 +211,11 @@ and ‘__aexit__’ handles the disconnection.</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">beta</span><span class="o">.</span><span class="n">api</span><span class="o">....</span><span class="p">()</span>
 </pre></div>
 </div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.multi_cubes.MultipleToioCoreCubes.OPERATION_INTERVAL">
+<span class="sig-name descname"><span class="pre">OPERATION_INTERVAL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.5</span></em><a class="headerlink" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.OPERATION_INTERVAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.multi_cubes.MultipleToioCoreCubes.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">cubes:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">~typing.List[~toio.device_interface.CubeInfo],</span> <span class="pre">names:</span> <span class="pre">~typing.Sequence[str]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">scanner:</span> <span class="pre">~typing.Type[~toio.device_interface.ScannerInterface]</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'toio.scanner.ble.UniversalBleScanner'&gt;,</span> <span class="pre">scanner_args:</span> <span class="pre">~typing.Sequence[~typing.Any]</span> <span class="pre">=</span> <span class="pre">()</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/multi_cubes.html#MultipleToioCoreCubes.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.__init__" title="Permalink to this definition">¶</a></dt>
@@ -239,12 +244,16 @@ this function performs to scan the number of cubes.</p>
 <dt class="sig sig-object py" id="toio.cube.multi_cubes.MultipleToioCoreCubes.connect">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/multi_cubes.html#MultipleToioCoreCubes.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>connect to multiple cubes</p>
+<p>cubes are connected at MultipleToioCoreCubes.OPERATION_INTERVAL
+second interval.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.multi_cubes.MultipleToioCoreCubes.disconnect">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/multi_cubes.html#MultipleToioCoreCubes.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.disconnect" title="Permalink to this definition">¶</a></dt>
 <dd><p>disconnect to multiple cubes</p>
+<p>cubes are disconnected at MultipleToioCoreCubes.OPERATION_INTERVAL
+second interval.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -283,6 +292,7 @@ this function performs to scan the number of cubes.</p>
                 <ul>
 <li><a class="reference internal" href="#">toio.cube.multi_cubes module</a><ul>
 <li><a class="reference internal" href="#toio.cube.multi_cubes.MultipleToioCoreCubes"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.OPERATION_INTERVAL"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.OPERATION_INTERVAL</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.__init__"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.scan"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.scan()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.multi_cubes.MultipleToioCoreCubes.connect"><code class="docutils literal notranslate"><span class="pre">MultipleToioCoreCubes.connect()</span></code></a></li>

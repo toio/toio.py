@@ -178,6 +178,7 @@
 <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">TYPE_CHECKING</span><span class="p">,</span>
     <span class="n">Any</span><span class="p">,</span>
+    <span class="n">Awaitable</span><span class="p">,</span>
     <span class="n">Dict</span><span class="p">,</span>
     <span class="n">List</span><span class="p">,</span>
     <span class="n">Optional</span><span class="p">,</span>
@@ -202,16 +203,16 @@
 
 <span class="sd">    This class is a wrapper to control multiple cubes more easier.</span>
 
-<span class="sd">    When MultipleCubes is initialized with an integer, the scan() function</span>
+<span class="sd">    When MultipleToioCoreCubes is initialized with an integer, the scan() function</span>
 <span class="sd">    can search for a specified number of cubes.</span>
 <span class="sd">    scan() can be followed by a call to the connect() function to connect</span>
 <span class="sd">    to multiple cubes.</span>
 
-<span class="sd">    If you initialize MultipleCubes with a list of CubeInfo,</span>
+<span class="sd">    If you initialize MultipleToioCoreCubes with a list of CubeInfo,</span>
 <span class="sd">    you can connect to multiple cubes by calling the connect() function.</span>
 <span class="sd">    In this case, the scan() function does not work.</span>
 
-<span class="sd">    MultipleCubes is an asynchronous context manager.</span>
+<span class="sd">    MultipleToioCoreCubes is an asynchronous context manager.</span>
 <span class="sd">    When &#39;async with&#39; is used, &#39;__aenter__&#39; handles the process up to connection,</span>
 <span class="sd">    and &#39;__aexit__&#39; handles the disconnection.</span>
 
@@ -245,6 +246,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">OPERATION_INTERVAL</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
+
 <div class="viewcode-block" id="MultipleToioCoreCubes.__init__"><a class="viewcode-back" href="../../../toio.cube.multi_cubes.html#toio.MultipleToioCoreCubes.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">cubes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">CubeInfo</span><span class="p">]],</span>
@@ -277,7 +280,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_scanner_args</span> <span class="o">=</span> <span class="n">scanner_args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cube_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ToioCoreCube</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></div>
 
-    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ToioCoreCube</span><span class="p">:</span>
         <span class="n">cube</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cube_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cube</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cube</span>
@@ -321,12 +324,24 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_cubes</span> <span class="o">=</span> <span class="n">ToioCoreCube</span><span class="o">.</span><span class="n">create_cubes</span><span class="p">(</span><span class="n">device_list</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_scanning_required</span> <span class="o">=</span> <span class="kc">False</span></div>
 
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_wait_and_exec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wait</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Awaitable</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">func</span>
+
 <div class="viewcode-block" id="MultipleToioCoreCubes.connect"><a class="viewcode-back" href="../../../toio.cube.multi_cubes.html#toio.MultipleToioCoreCubes.connect">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        connect to multiple cubes</span>
+
+<span class="sd">        cubes are connected at MultipleToioCoreCubes.OPERATION_INTERVAL</span>
+<span class="sd">        second interval.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assign_cubes</span><span class="p">()</span>
-        <span class="n">connect_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">cube</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cubes</span><span class="p">]</span>
+
+        <span class="n">connect_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">wait</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cubes</span><span class="p">:</span>
+            <span class="n">connect_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wait_and_exec</span><span class="p">(</span><span class="n">wait</span><span class="p">,</span> <span class="n">cube</span><span class="o">.</span><span class="n">connect</span><span class="p">()))</span>
+            <span class="n">wait</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPERATION_INTERVAL</span>
         <span class="n">result_list</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">connect_list</span><span class="p">)</span>
         <span class="k">while</span> <span class="kc">False</span> <span class="ow">in</span> <span class="n">result_list</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;try to connect again&quot;</span><span class="p">)</span>
@@ -338,8 +353,15 @@
 <div class="viewcode-block" id="MultipleToioCoreCubes.disconnect"><a class="viewcode-back" href="../../../toio.cube.multi_cubes.html#toio.MultipleToioCoreCubes.disconnect">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        disconnect to multiple cubes</span>
+
+<span class="sd">        cubes are disconnected at MultipleToioCoreCubes.OPERATION_INTERVAL</span>
+<span class="sd">        second interval.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">disconnect_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">cube</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span> <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cubes</span><span class="p">]</span>
+        <span class="n">disconnect_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">wait</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cubes</span><span class="p">:</span>
+            <span class="n">disconnect_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wait_and_exec</span><span class="p">(</span><span class="n">wait</span><span class="p">,</span> <span class="n">cube</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()))</span>
+            <span class="n">wait</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPERATION_INTERVAL</span>
         <span class="n">result_list</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">disconnect_list</span><span class="p">)</span>
         <span class="k">while</span> <span class="kc">False</span> <span class="ow">in</span> <span class="n">result_list</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;try to disconnect again&quot;</span><span class="p">)</span>

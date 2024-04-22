@@ -540,35 +540,75 @@
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ConnectionInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ConnectionInterval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representation of BLE connection interval</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>connection interval value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.BLE_MIN_INTERVAL">
 <span class="sig-name descname"><span class="pre">BLE_MIN_INTERVAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.BLE_MIN_INTERVAL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Minimum connection interval defined by BLE specifications</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.BLE_MAX_INTERVAL">
 <span class="sig-name descname"><span class="pre">BLE_MAX_INTERVAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3200</span></em><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.BLE_MAX_INTERVAL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Maximum connection interval defined by BLE specifications</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.BLE_INTERVAL_UNIT">
 <span class="sig-name descname"><span class="pre">BLE_INTERVAL_UNIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.25</span></em><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.BLE_INTERVAL_UNIT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Millisecond per unit</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.BLE_INTERVAL_NONE">
 <span class="sig-name descname"><span class="pre">BLE_INTERVAL_NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">65535</span></em><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.BLE_INTERVAL_NONE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This means ‘connection interval is not specified’</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.from_ms">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ConnectionInterval.from_ms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.from_ms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Convert millisecond to connection interval value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>interval_ms</strong> (<em>float</em>) – interval (millisecond)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>connection interval value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.to_ms">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_ms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ConnectionInterval.to_ms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.to_ms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Convert connection interval value to millisecond.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>interval_value</strong> (<em>int</em>) – interval_value</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>connection interval time (millisecond)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.__init__">
@@ -578,7 +618,16 @@
 <dl class="py property">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.value_ms">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value_ms</span></span><a class="headerlink" href="#toio.cube.api.configuration.ConnectionInterval.value_ms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Return the connection interval time of ConnectionInterval instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>connection interval time (millisecond)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ConnectionInterval.__str__">
@@ -594,7 +643,7 @@
 <dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
 <p>Request to change bluetooth Connection interval</p>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval">https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval</a>-</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.RequestConnectionInterval.is_myself">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#RequestConnectionInterval.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.RequestConnectionInterval.is_myself" title="Permalink to this definition">¶</a></dt>
@@ -627,7 +676,7 @@
 <dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
 <p>Get requested connection interval value</p>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value</a>-</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.GetRequestedConnectionIntervalValue.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#GetRequestedConnectionIntervalValue.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.GetRequestedConnectionIntervalValue.__init__" title="Permalink to this definition">¶</a></dt>
@@ -655,7 +704,7 @@
 <dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
 <p>Get current connection interval value</p>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value</a>-</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.GetCurrentConnectionIntervalValue.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#GetCurrentConnectionIntervalValue.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.GetCurrentConnectionIntervalValue.__init__" title="Permalink to this definition">¶</a></dt>
@@ -945,7 +994,20 @@ and returns it.</p>
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseConnectionIntervalRequest">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponseConnectionIntervalRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseConnectionIntervalRequest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
-<p>Response of connection interval request</p>
+<p>Protocol version response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseConnectionIntervalRequest.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result of the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-request-to-change-connection-interval">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-request-to-change-connection-interval</a>-</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseConnectionIntervalRequest.is_myself">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseConnectionIntervalRequest.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest.is_myself" title="Permalink to this definition">¶</a></dt>
@@ -977,6 +1039,30 @@ and returns it.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponseGettingRequestedConnectionInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseGettingRequestedConnectionInterval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
 <p>Response of getting requested connection interval value</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.min_interval">
+<span class="sig-name descname"><span class="pre">min_interval</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.min_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>minimum connection interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval" title="toio.cube.api.configuration.ConnectionInterval">ConnectionInterval</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.max_interval">
+<span class="sig-name descname"><span class="pre">max_interval</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.max_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum connection interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval" title="toio.cube.api.configuration.ConnectionInterval">ConnectionInterval</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-obtain-the-requested-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-obtain-the-requested-connection-interval-value</a>-</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.is_myself">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseGettingRequestedConnectionInterval.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.is_myself" title="Permalink to this definition">¶</a></dt>
@@ -1008,6 +1094,30 @@ and returns it.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.configuration.</span></span><span class="sig-name descname"><span class="pre">ResponseGettingCurrentConnectionInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseGettingCurrentConnectionInterval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
 <p>Response of getting current connection interval value</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.min_interval">
+<span class="sig-name descname"><span class="pre">min_interval</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.min_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>minimum connection interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval" title="toio.cube.api.configuration.ConnectionInterval">ConnectionInterval</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.max_interval">
+<span class="sig-name descname"><span class="pre">max_interval</span></span><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.max_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum connection interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval" title="toio.cube.api.configuration.ConnectionInterval">ConnectionInterval</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-obtain-the-actual-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#responses-to-obtain-the-actual-connection-interval-value</a>-</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.is_myself">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#ResponseGettingCurrentConnectionInterval.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.is_myself" title="Permalink to this definition">¶</a></dt>
@@ -1207,8 +1317,8 @@ Receive the result by notification.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.request_connection_interval">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_connection_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.request_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.request_connection_interval" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="toio.cube.api.configuration.Configuration.request_to_change_connection_interval">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_to_change_connection_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.request_to_change_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.request_to_change_connection_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request the connected central device to change the connection interval.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1227,7 +1337,7 @@ one of the following occurs:
 </dd>
 </dl>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval">https://toio.github.io/toio-spec/en/docs/ble_configuration#request-to-change-connection-interval</a>-</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1235,7 +1345,7 @@ one of the following occurs:
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_requested_connection_interval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.get_requested_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.get_requested_connection_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get requested connection interval value.</p>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-requested-connection-interval-value</a>-</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1243,7 +1353,7 @@ one of the following occurs:
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current_connection_interval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/configuration.html#Configuration.get_current_connection_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.configuration.Configuration.get_current_connection_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get current connection interval value.</p>
 <p class="rubric">References</p>
-<p><a class="reference external" href="https://">https://</a></p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value">https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value</a>-</p>
 </dd></dl>
 
 </dd></dl>
@@ -1342,6 +1452,7 @@ one of the following occurs:
 </ul>
 </li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval"><code class="docutils literal notranslate"><span class="pre">ConnectionInterval</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval.value"><code class="docutils literal notranslate"><span class="pre">ConnectionInterval.value</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval.BLE_MIN_INTERVAL"><code class="docutils literal notranslate"><span class="pre">ConnectionInterval.BLE_MIN_INTERVAL</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval.BLE_MAX_INTERVAL"><code class="docutils literal notranslate"><span class="pre">ConnectionInterval.BLE_MAX_INTERVAL</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ConnectionInterval.BLE_INTERVAL_UNIT"><code class="docutils literal notranslate"><span class="pre">ConnectionInterval.BLE_INTERVAL_UNIT</span></code></a></li>
@@ -1412,18 +1523,23 @@ one of the following occurs:
 </ul>
 </li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest"><code class="docutils literal notranslate"><span class="pre">ResponseConnectionIntervalRequest</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest.result"><code class="docutils literal notranslate"><span class="pre">ResponseConnectionIntervalRequest.result</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest.is_myself"><code class="docutils literal notranslate"><span class="pre">ResponseConnectionIntervalRequest.is_myself()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest.__init__"><code class="docutils literal notranslate"><span class="pre">ResponseConnectionIntervalRequest.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseConnectionIntervalRequest.__str__"><code class="docutils literal notranslate"><span class="pre">ResponseConnectionIntervalRequest.__str__()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval"><code class="docutils literal notranslate"><span class="pre">ResponseGettingRequestedConnectionInterval</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.min_interval"><code class="docutils literal notranslate"><span class="pre">ResponseGettingRequestedConnectionInterval.min_interval</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.max_interval"><code class="docutils literal notranslate"><span class="pre">ResponseGettingRequestedConnectionInterval.max_interval</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.is_myself"><code class="docutils literal notranslate"><span class="pre">ResponseGettingRequestedConnectionInterval.is_myself()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.__init__"><code class="docutils literal notranslate"><span class="pre">ResponseGettingRequestedConnectionInterval.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingRequestedConnectionInterval.__str__"><code class="docutils literal notranslate"><span class="pre">ResponseGettingRequestedConnectionInterval.__str__()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval"><code class="docutils literal notranslate"><span class="pre">ResponseGettingCurrentConnectionInterval</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.min_interval"><code class="docutils literal notranslate"><span class="pre">ResponseGettingCurrentConnectionInterval.min_interval</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.max_interval"><code class="docutils literal notranslate"><span class="pre">ResponseGettingCurrentConnectionInterval.max_interval</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.is_myself"><code class="docutils literal notranslate"><span class="pre">ResponseGettingCurrentConnectionInterval.is_myself()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.__init__"><code class="docutils literal notranslate"><span class="pre">ResponseGettingCurrentConnectionInterval.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.ResponseGettingCurrentConnectionInterval.__str__"><code class="docutils literal notranslate"><span class="pre">ResponseGettingCurrentConnectionInterval.__str__()</span></code></a></li>
@@ -1442,7 +1558,7 @@ one of the following occurs:
 <li><a class="reference internal" href="#toio.cube.api.configuration.Configuration.set_magnetic_sensor"><code class="docutils literal notranslate"><span class="pre">Configuration.set_magnetic_sensor()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.Configuration.set_motor_speed_information_acquisition"><code class="docutils literal notranslate"><span class="pre">Configuration.set_motor_speed_information_acquisition()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.Configuration.set_posture_angle_detection"><code class="docutils literal notranslate"><span class="pre">Configuration.set_posture_angle_detection()</span></code></a></li>
-<li><a class="reference internal" href="#toio.cube.api.configuration.Configuration.request_connection_interval"><code class="docutils literal notranslate"><span class="pre">Configuration.request_connection_interval()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.configuration.Configuration.request_to_change_connection_interval"><code class="docutils literal notranslate"><span class="pre">Configuration.request_to_change_connection_interval()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.Configuration.get_requested_connection_interval"><code class="docutils literal notranslate"><span class="pre">Configuration.get_requested_connection_interval()</span></code></a></li>
 <li><a class="reference internal" href="#toio.cube.api.configuration.Configuration.get_current_connection_interval"><code class="docutils literal notranslate"><span class="pre">Configuration.get_current_connection_interval()</span></code></a></li>
 </ul>

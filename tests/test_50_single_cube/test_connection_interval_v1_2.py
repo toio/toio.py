@@ -101,7 +101,7 @@ async def test_connection_interval_3():
     await cube.api.configuration.register_notification_handler(notification_handler)
 
     logger.info("-- request min:10, max:10")
-    await cube.api.configuration.request_connection_interval(
+    await cube.api.configuration.request_to_change_connection_interval(
         ConnectionInterval.from_ms(10), ConnectionInterval.from_ms(10)
     )
     await asyncio.sleep(1)
@@ -111,7 +111,7 @@ async def test_connection_interval_3():
     await asyncio.sleep(2)
 
     logger.info("-- request min:0xffff, max:80")
-    await cube.api.configuration.request_connection_interval(
+    await cube.api.configuration.request_to_change_connection_interval(
         0xFFFF, ConnectionInterval.from_ms(80)
     )
     await asyncio.sleep(1)
@@ -121,7 +121,7 @@ async def test_connection_interval_3():
     await asyncio.sleep(2)
 
     logger.info("-- request min:0x10, max:0xffff")
-    await cube.api.configuration.request_connection_interval(
+    await cube.api.configuration.request_to_change_connection_interval(
         ConnectionInterval.from_ms(10), 0xFFFF
     )
     await asyncio.sleep(1)
@@ -131,7 +131,7 @@ async def test_connection_interval_3():
     await asyncio.sleep(2)
 
     logger.info("-- request min:10, max:80")
-    await cube.api.configuration.request_connection_interval(
+    await cube.api.configuration.request_to_change_connection_interval(
         ConnectionInterval.from_ms(10), ConnectionInterval.from_ms(80)
     )
     await asyncio.sleep(1)

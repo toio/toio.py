@@ -173,7 +173,6 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
 
 <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="p">(</span>
@@ -264,10 +263,22 @@
 <span class="sd">    Access to toio Core Cube</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">       self.protocol_version is set after connecting to the cube.</span>
-<span class="sd">       self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.2.0.</span>
+<span class="sd">       - self.protocol_version is set after connecting to the cube.</span>
+<span class="sd">       - self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.1.0.</span>
+<span class="sd">       - basic scan function is supported since v1.1.0.</span>
 
-<span class="sd">       In the next version, ToioCoreCube class will no longer have CubeInterface as an abstract base class.</span>
+<span class="sd">    When Toio is initialized with no arguments, the scan() function can search for a cubes.</span>
+<span class="sd">    scan() can be followed by a call to the connect() function to connect</span>
+<span class="sd">    to multiple cubes.</span>
+
+<span class="sd">    If you initialize ToioCoreCube with a CubeInfo or a CubeInterface,</span>
+<span class="sd">    you can connect to specified cube by calling the connect() function.</span>
+<span class="sd">    In this case, the scan() function does not work.</span>
+
+<span class="sd">    ToioCoreCube is an asynchronous context manager.</span>
+<span class="sd">    When &#39;async with&#39; is used, &#39;__aenter__&#39; handles the process up to connection,</span>
+<span class="sd">    and &#39;__aexit__&#39; handles the disconnection.</span>
+
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        interface (CubeInterface): control interface (e.g. BleCube)</span>
@@ -282,11 +293,9 @@
     <span class="n">SUPPORTED_MINOR_VERSION</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
 
 <div class="viewcode-block" id="ToioCoreCube.create"><a class="viewcode-back" href="../../toio.cube.html#toio.ToioCoreCube.create">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
-        <span class="n">initializer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">CubeInitializer</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Sequence</span><span class="p">]</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ToioCoreCube</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">initializer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">CubeInitializer</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ToioCoreCube</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Supported toio.py versions: v1.2.0 or later</span>
+<span class="sd">        Supported toio.py versions: v1.1.0 or later</span>
 
 <span class="sd">        Create a ToioCoreCube instance from a CubeInterface or CubeInfo</span>
 
@@ -319,7 +328,7 @@
 <div class="viewcode-block" id="ToioCoreCube.create_cubes"><a class="viewcode-back" href="../../toio.cube.html#toio.ToioCoreCube.create_cubes">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">create_cubes</span><span class="p">(</span><span class="n">initializers</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">CubeInitializer</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ToioCoreCube</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Supported toio.py versions: v1.2.0 or later</span>
+<span class="sd">        Supported toio.py versions: v1.1.0 or later</span>
 
 <span class="sd">        Create a ToioCoreCube instance list from a CubeInterface or CubeInfo list</span>
 

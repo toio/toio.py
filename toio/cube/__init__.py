@@ -9,7 +9,6 @@
 
 from __future__ import annotations
 
-import collections
 from uuid import UUID
 
 from typing_extensions import (
@@ -100,10 +99,22 @@ class ToioCoreCube(CubeInterface):
     Access to toio Core Cube
 
     Note:
-       self.protocol_version is set after connecting to the cube.
-       self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.2.0.
+       - self.protocol_version is set after connecting to the cube.
+       - self.protocol_version and self.max_retry_to_get_protocol_version is supported since v1.1.0.
+       - basic scan function is supported since v1.1.0.
 
-       In the next version, ToioCoreCube class will no longer have CubeInterface as an abstract base class.
+    When Toio is initialized with no arguments, the scan() function can search for a cubes.
+    scan() can be followed by a call to the connect() function to connect
+    to multiple cubes.
+
+    If you initialize ToioCoreCube with a CubeInfo or a CubeInterface,
+    you can connect to specified cube by calling the connect() function.
+    In this case, the scan() function does not work.
+
+    ToioCoreCube is an asynchronous context manager.
+    When 'async with' is used, '__aenter__' handles the process up to connection,
+    and '__aexit__' handles the disconnection.
+
 
     Attributes:
         interface (CubeInterface): control interface (e.g. BleCube)
@@ -118,11 +129,9 @@ class ToioCoreCube(CubeInterface):
     SUPPORTED_MINOR_VERSION: int = 4
 
     @staticmethod
-    def create(
-        initializer: Union[CubeInitializer, collections.Sequence]
-    ) -> ToioCoreCube:
+    def create(initializer: Union[CubeInitializer, Sequence]) -> ToioCoreCube:
         """
-        Supported toio.py versions: v1.2.0 or later
+        Supported toio.py versions: v1.1.0 or later
 
         Create a ToioCoreCube instance from a CubeInterface or CubeInfo
 
@@ -155,7 +164,7 @@ class ToioCoreCube(CubeInterface):
     @staticmethod
     def create_cubes(initializers: Iterable[CubeInitializer]) -> List[ToioCoreCube]:
         """
-        Supported toio.py versions: v1.2.0 or later
+        Supported toio.py versions: v1.1.0 or later
 
         Create a ToioCoreCube instance list from a CubeInterface or CubeInfo list
 

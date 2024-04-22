@@ -16,7 +16,6 @@ from typing_extensions import (
     Any,
     Awaitable,
     Callable,
-    Optional,
     TypeAlias,
     Union,
     cast,
@@ -45,40 +44,75 @@ NotificationReceivedDevice: TypeAlias = Any
 
 
 class NotificationHandlerInfo:
+    """
+    Information of registered notification handler function.
+
+    NotificationHandlerInfo includes several type of information:
+        - Unique data given at registration (misc)
+        - Information about the device that received the notification (device, interface)
+        - Information used for internal use (rest of properties)
+    """
+
     def __init__(
         self,
         func: NotificationHandlerTypes,
+        device: NotificationReceivedDevice,
+        interface: CubeInterface,
         misc: Any = None,
-        device: Optional[NotificationReceivedDevice] = None,
-        interface: Optional[CubeInterface] = None,
     ):
+        """__init__.
+
+        Args:
+            func (NotificationHandlerTypes): notification handler function
+            device (NotificationReceivedDevice): device to be notified
+            interface (CubeInterface): interface of device
+            misc (Any): user data
+        """
+        self._device: NotificationReceivedDevice = device
+        self._interface: CubeInterface = interface
         self._misc: Any = misc
-        self._device: Optional[NotificationReceivedDevice] = device
-        self._interface: Optional[CubeInterface] = interface
         self._is_async: bool = inspect.iscoroutinefunction(func)
         self._num_of_args = len(inspect.signature(func).parameters)
 
     @property
-    def misc(self):
+    def misc(self) -> Any:
+        """
+        User data given when the notification handler function is registered.
+        """
         return self._misc
 
     @property
-    def device(self):
+    def device(self) -> NotificationReceivedDevice:
+        """
+        The device that received the notification.
+        """
         return self._device
 
     @property
-    def interface(self):
+    def interface(self) -> CubeInterface:
+        """
+        The interface of the device that received the notification. (equal to device.interface)
+        """
         return self._interface
 
     @property
-    def is_async(self):
+    def is_async(self) -> bool:
+        """
+        Whether the notification handler function is async or sync. (for internal use)
+        """
         return self._is_async
 
     @property
-    def num_of_args(self):
+    def num_of_args(self) -> int:
+        """
+        Number of arguments received by the registered notification handler function. (for internal use)
+        """
         return self._num_of_args
 
     def get_notified_cube(self) -> ToioCoreCube:
+        """
+        Return self.device as ToioCoreCube
+        """
         from toio.cube import ToioCoreCube
 
         return cast(ToioCoreCube, self.device)

@@ -258,6 +258,15 @@
     <span class="n">CELL_SIZE</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">43.43</span>
     <span class="n">MONITORING_CYCLE</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.01</span>
 
+<div class="viewcode-block" id="SimpleCube.ensure_event_loop"><a class="viewcode-back" href="../../toio.simple.html#toio.simple.SimpleCube.ensure_event_loop">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">ensure_event_loop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">AbstractEventLoop</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+            <span class="n">event_loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">new_event_loop</span><span class="p">()</span>
+            <span class="n">asyncio</span><span class="o">.</span><span class="n">set_event_loop</span><span class="p">(</span><span class="n">event_loop</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">event_loop</span></div>
+
 <div class="viewcode-block" id="SimpleCube.search"><a class="viewcode-back" href="../../toio.simple.html#toio.simple.SimpleCube.search">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ToioCoreCube</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -302,7 +311,7 @@
             <span class="n">log_handler</span> <span class="o">=</span> <span class="n">StreamHandler</span><span class="p">()</span>
             <span class="n">log_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">log_level</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">log_handler</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ensure_event_loop</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cube</span><span class="p">:</span> <span class="n">ToioCoreCube</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
         <span class="p">)</span>

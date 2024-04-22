@@ -60,6 +60,7 @@ testpaths =  ["tests"]
 
 [tool.mypy]
 python_version = "3.8"
+exclude = ["pythonista3corebluetooth"]
 
 [tool.ruff]
 line-length = 88

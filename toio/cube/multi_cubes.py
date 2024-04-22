@@ -39,16 +39,16 @@ class MultipleToioCoreCubes:
 
     This class is a wrapper to control multiple cubes more easier.
 
-    When MultipleCubes is initialized with an integer, the scan() function
+    When MultipleToioCoreCubes is initialized with an integer, the scan() function
     can search for a specified number of cubes.
     scan() can be followed by a call to the connect() function to connect
     to multiple cubes.
 
-    If you initialize MultipleCubes with a list of CubeInfo,
+    If you initialize MultipleToioCoreCubes with a list of CubeInfo,
     you can connect to multiple cubes by calling the connect() function.
     In this case, the scan() function does not work.
 
-    MultipleCubes is an asynchronous context manager.
+    MultipleToioCoreCubes is an asynchronous context manager.
     When 'async with' is used, '__aenter__' handles the process up to connection,
     and '__aexit__' handles the disconnection.
 
@@ -116,7 +116,7 @@ class MultipleToioCoreCubes:
         self._scanner_args = scanner_args
         self._cube_dict: Dict[str, ToioCoreCube] = {}
 
-    def __getattr__(self, name: str) -> Any:
+    def __getattr__(self, name: str) -> ToioCoreCube:
         cube = self._cube_dict.get(name)
         if cube:
             return cube
@@ -160,7 +160,7 @@ class MultipleToioCoreCubes:
             self._cubes = ToioCoreCube.create_cubes(device_list)
             self._scanning_required = False
 
-    async def _wait_and_exec(self, wait:float, func: Awaitable):
+    async def _wait_and_exec(self, wait: float, func: Awaitable):
         await asyncio.sleep(wait)
         return await func
 
