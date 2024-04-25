@@ -83,6 +83,7 @@ class MultipleToioCoreCubes:
     """
 
     OPERATION_INTERVAL: float = 0.5
+    _LOCK: Optional[asyncio.Lock] = None
 
     def __init__(
         self,
@@ -100,6 +101,9 @@ class MultipleToioCoreCubes:
             scanner (Type[ScannerInterface]): scanner interface (default is UniversalBleScanner)
             scanner_args (Sequence[Any]): arguments given to the scanner.scan() function
         """
+        if MultipleToioCoreCubes._LOCK is None:
+            MultipleToioCoreCubes._LOCK = asyncio.Lock()
+
         from ..cube import ToioCoreCube
 
         self._cube_num: Optional[int] = None
@@ -124,8 +128,10 @@ class MultipleToioCoreCubes:
             raise AttributeError("'%s' is not found" % name)
 
     async def __aenter__(self):
-        await self.scan()
-        await self.connect()
+        assert MultipleToioCoreCubes._LOCK is not None
+        async with MultipleToioCoreCubes._LOCK:
+            await self.scan()
+            await self.connect()
         return self
 
     async def __aexit__(self, exc_type, exc, tb):

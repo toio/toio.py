@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import asyncio
 import math
+import threading
 import time
 from enum import Enum, auto
 from logging import NOTSET, NullHandler, StreamHandler, getLogger
@@ -93,6 +94,8 @@ class SimpleCube(object):
     DEFAULT_ONE_STEP: ClassVar[int] = 1
     CELL_SIZE: ClassVar[float] = 43.43
     MONITORING_CYCLE: ClassVar[float] = 0.01
+    _T_LOCK = threading.Lock()
+    _LOCK: Optional[asyncio.Lock] = None
 
     @staticmethod
     def ensure_event_loop() -> asyncio.AbstractEventLoop:
@@ -123,6 +126,23 @@ class SimpleCube(object):
             raise ValueError
         return ToioCoreCube(interface=devices[0].interface, name=devices[0].name)
 
+    async def _scan_and_connect(
+        self, name: Optional[str], timeout: int
+    ) -> ToioCoreCube:
+        assert SimpleCube._LOCK is not None
+        print(self._dbg_name, "try to get async lock")
+        async with SimpleCube._LOCK:
+            print(self._dbg_name, "got async lock")
+            print(self._dbg_name, "scan_and_connect")
+            logger.debug("scanning")
+            cube: ToioCoreCube = await self.search(name=name, timeout=timeout)
+            logger.debug("connecting")
+            await cube.connect()
+            print(self._dbg_name, "connected", cube.name)
+            logger.debug(f"connected ({cube.name})")
+            print(self._dbg_name, "release async lock")
+        return cube
+
     def __init__(
         self,
         name: Optional[str] = None,
@@ -131,7 +151,19 @@ class SimpleCube(object):
             LocalCoordinateSystem
         ] = VisualProgrammingCoordinateSystem,
         log_level: int = NOTSET,
+        dbg_name: str = "",
     ) -> None:
+        self._event_loop = self.ensure_event_loop()
+        self._dbg_name = dbg_name
+        print(self._dbg_name, "check lock")
+        with SimpleCube._T_LOCK:
+            if SimpleCube._LOCK is None:
+                print(self._dbg_name, "create async lock")
+                SimpleCube._LOCK = asyncio.Lock()
+            else:
+                print(self._dbg_name, "async lock is already created")
+
+        print(self._dbg_name, "__init__ start")
         self._native_location: Optional[CubeLocation] = None
         self._location: Optional[RelativeCubeLocation] = None
         self._standard_id: Optional[StandardId] = None
@@ -142,22 +174,22 @@ class SimpleCube(object):
         self._coordinate_system_class: Type[LocalCoordinateSystem] = (
             coordinate_system_class
         )
+
         if log_level is not NOTSET:
             logger.setLevel(log_level)
             log_handler = StreamHandler()
             log_handler.setLevel(log_level)
             logger.addHandler(log_handler)
-        self._event_loop = self.ensure_event_loop()
-        self._cube: ToioCoreCube = self._event_loop.run_until_complete(
-            self.search(name=name, timeout=timeout)
-        )
+
         self._motion: Optional[MotionDetectionData] = None
         self._cube_angle: Optional[PostureAngleEulerData] = None
         self._magnet: Optional[MagneticSensorData] = None
 
-        logger.debug("connecting")
-        self._event_loop.run_until_complete(self._cube.connect())
-        logger.debug(f"connected ({self._cube.name})")
+        with SimpleCube._T_LOCK:
+            self._cube = self._event_loop.run_until_complete(
+                self._scan_and_connect(name, timeout)
+            )
+            print(self._dbg_name, "release thread lock")
 
         self._button: Optional[ButtonInformation] = self._event_loop.run_until_complete(
             self._cube.api.button.read()
@@ -227,7 +259,12 @@ class SimpleCube(object):
         logger.debug("disconnected")
 
     def sleep(self, sleep_second: float):
-        self._event_loop.run_until_complete(asyncio.sleep(sleep_second))
+        start = time.time()
+        while True:
+            self._event_loop.run_until_complete(asyncio.sleep(0))
+            time.sleep(0)
+            if (time.time() - start) >= sleep_second:
+                break
 
     def _id_notification_handler(self, payload: bytearray) -> None:
         id_info = IdInformation.is_my_data(payload)

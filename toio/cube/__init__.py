@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from uuid import UUID
 
 from typing_extensions import (
@@ -127,6 +128,7 @@ class ToioCoreCube(CubeInterface):
 
     SUPPORTED_MAJOR_VERSION: int = 2
     SUPPORTED_MINOR_VERSION: int = 4
+    _LOCK: Optional[asyncio.Lock] = None
 
     @staticmethod
     def create(initializer: Union[CubeInitializer, Sequence]) -> ToioCoreCube:
@@ -187,6 +189,9 @@ class ToioCoreCube(CubeInterface):
         scanner: Type[ScannerInterface] = UniversalBleScanner,
         scanner_args: Sequence[Any] = (),
     ):
+        if ToioCoreCube._LOCK is None:
+            ToioCoreCube._LOCK = asyncio.Lock()
+
         if interface is None:
             self._scanning_required = True
             self.interface = None
@@ -201,8 +206,10 @@ class ToioCoreCube(CubeInterface):
         self.max_retry_to_get_protocol_version: int = 10
 
     async def __aenter__(self):
-        await self.scan()
-        await self.connect()
+        assert ToioCoreCube._LOCK is not None
+        async with ToioCoreCube._LOCK:
+            await self.scan()
+            await self.connect()
         return self
 
     async def __aexit__(self, exc_type, exc, tb):
