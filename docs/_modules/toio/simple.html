@@ -17,12 +17,12 @@
           <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
           <!-- add (1) pathto "_static/pygments_dark.css" -->
           <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../_static/pygments_dark.css" />
-          <!-- add (1) pathto "_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" -->
-          <link rel="stylesheet" type="text/css" href="../../_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" />
-          <!-- add (1) pathto "_static/fonts/nunito/stylesheet.css" -->
-          <link rel="stylesheet" type="text/css" href="../../_static/fonts/nunito/stylesheet.css" />
-          <!-- add (1) pathto "_static/fonts/red-hat-mono/stylesheet.css" -->
-          <link rel="stylesheet" type="text/css" href="../../_static/fonts/red-hat-mono/stylesheet.css" />
+          <!-- add (1) pathto "_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="../../_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts\nunito\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../_static/fonts\nunito\stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts\red-hat-mono\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../_static/fonts\red-hat-mono\stylesheet.css" />
           <!-- add (1) pathto "_static/pygments_dark.css" -->
           <link rel="stylesheet" type="text/css" href="../../_static/pygments_dark.css" />
         <link rel="index" title="Index" href="../../genindex.html" />
@@ -175,6 +175,7 @@
 
 <span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
 <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">NOTSET</span><span class="p">,</span> <span class="n">NullHandler</span><span class="p">,</span> <span class="n">StreamHandler</span><span class="p">,</span> <span class="n">getLogger</span>
@@ -257,6 +258,8 @@
     <span class="n">DEFAULT_ONE_STEP</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">CELL_SIZE</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">43.43</span>
     <span class="n">MONITORING_CYCLE</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="n">_T_LOCK</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+    <span class="n">_LOCK</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">Lock</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="SimpleCube.ensure_event_loop"><a class="viewcode-back" href="../../toio.simple.html#toio.simple.SimpleCube.ensure_event_loop">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">ensure_event_loop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">AbstractEventLoop</span><span class="p">:</span>
@@ -287,6 +290,23 @@
             <span class="k">raise</span> <span class="ne">ValueError</span>
         <span class="k">return</span> <span class="n">ToioCoreCube</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">interface</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_scan_and_connect</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ToioCoreCube</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">SimpleCube</span><span class="o">.</span><span class="n">_LOCK</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;try to get async lock&quot;</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">SimpleCube</span><span class="o">.</span><span class="n">_LOCK</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;got async lock&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;scan_and_connect&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;scanning&quot;</span><span class="p">)</span>
+            <span class="n">cube</span><span class="p">:</span> <span class="n">ToioCoreCube</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;connecting&quot;</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">cube</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;connected&quot;</span><span class="p">,</span> <span class="n">cube</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;connected (</span><span class="si">{</span><span class="n">cube</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;release async lock&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cube</span>
+
 <div class="viewcode-block" id="SimpleCube.__init__"><a class="viewcode-back" href="../../toio.simple.html#toio.simple.SimpleCube.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -295,7 +315,19 @@
             <span class="n">LocalCoordinateSystem</span>
         <span class="p">]</span> <span class="o">=</span> <span class="n">VisualProgrammingCoordinateSystem</span><span class="p">,</span>
         <span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">NOTSET</span><span class="p">,</span>
+        <span class="n">dbg_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ensure_event_loop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span> <span class="o">=</span> <span class="n">dbg_name</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;check lock&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">SimpleCube</span><span class="o">.</span><span class="n">_T_LOCK</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">SimpleCube</span><span class="o">.</span><span class="n">_LOCK</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;create async lock&quot;</span><span class="p">)</span>
+                <span class="n">SimpleCube</span><span class="o">.</span><span class="n">_LOCK</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;async lock is already created&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;__init__ start&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_native_location</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CubeLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_location</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RelativeCubeLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_standard_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StandardId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -306,22 +338,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_coordinate_system_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">LocalCoordinateSystem</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">coordinate_system_class</span>
         <span class="p">)</span>
+
         <span class="k">if</span> <span class="n">log_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">NOTSET</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">log_level</span><span class="p">)</span>
             <span class="n">log_handler</span> <span class="o">=</span> <span class="n">StreamHandler</span><span class="p">()</span>
             <span class="n">log_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">log_level</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">log_handler</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ensure_event_loop</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cube</span><span class="p">:</span> <span class="n">ToioCoreCube</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_motion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MotionDetectionData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cube_angle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PostureAngleEulerData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_magnet</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MagneticSensorData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;connecting&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cube</span><span class="o">.</span><span class="n">connect</span><span class="p">())</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;connected (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_cube</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">SimpleCube</span><span class="o">.</span><span class="n">_T_LOCK</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cube</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_scan_and_connect</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dbg_name</span><span class="p">,</span> <span class="s2">&quot;release thread lock&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_button</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ButtonInformation</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_cube</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -391,7 +423,12 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;disconnected&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SimpleCube.sleep"><a class="viewcode-back" href="../../toio.simple.html#toio.simple.SimpleCube.sleep">[docs]</a>    <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sleep_second</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep_second</span><span class="p">))</span></div>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_event_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">sleep_second</span><span class="p">:</span>
+                <span class="k">break</span></div>
 
     <span class="k">def</span> <span class="nf">_id_notification_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">id_info</span> <span class="o">=</span> <span class="n">IdInformation</span><span class="o">.</span><span class="n">is_my_data</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>

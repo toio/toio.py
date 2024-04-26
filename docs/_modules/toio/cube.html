@@ -17,12 +17,12 @@
           <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
           <!-- add (1) pathto "_static/pygments_dark.css" -->
           <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../_static/pygments_dark.css" />
-          <!-- add (1) pathto "_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" -->
-          <link rel="stylesheet" type="text/css" href="../../_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" />
-          <!-- add (1) pathto "_static/fonts/nunito/stylesheet.css" -->
-          <link rel="stylesheet" type="text/css" href="../../_static/fonts/nunito/stylesheet.css" />
-          <!-- add (1) pathto "_static/fonts/red-hat-mono/stylesheet.css" -->
-          <link rel="stylesheet" type="text/css" href="../../_static/fonts/red-hat-mono/stylesheet.css" />
+          <!-- add (1) pathto "_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="../../_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts\nunito\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../_static/fonts\nunito\stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts\red-hat-mono\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../_static/fonts\red-hat-mono\stylesheet.css" />
           <!-- add (1) pathto "_static/pygments_dark.css" -->
           <link rel="stylesheet" type="text/css" href="../../_static/pygments_dark.css" />
         <link rel="index" title="Index" href="../../genindex.html" />
@@ -173,6 +173,7 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
 
 <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="p">(</span>
@@ -291,6 +292,7 @@
 
     <span class="n">SUPPORTED_MAJOR_VERSION</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">SUPPORTED_MINOR_VERSION</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">_LOCK</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">Lock</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="ToioCoreCube.create"><a class="viewcode-back" href="../../toio.cube.html#toio.ToioCoreCube.create">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">initializer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">CubeInitializer</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ToioCoreCube</span><span class="p">:</span>
@@ -351,6 +353,9 @@
         <span class="n">scanner</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">ScannerInterface</span><span class="p">]</span> <span class="o">=</span> <span class="n">UniversalBleScanner</span><span class="p">,</span>
         <span class="n">scanner_args</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
     <span class="p">):</span>
+        <span class="k">if</span> <span class="n">ToioCoreCube</span><span class="o">.</span><span class="n">_LOCK</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ToioCoreCube</span><span class="o">.</span><span class="n">_LOCK</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
         <span class="k">if</span> <span class="n">interface</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_scanning_required</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="kc">None</span>
@@ -365,8 +370,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_retry_to_get_protocol_version</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span></div>
 
     <span class="k">async</span> <span class="k">def</span> <span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">scan</span><span class="p">()</span>
-        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">ToioCoreCube</span><span class="o">.</span><span class="n">_LOCK</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">ToioCoreCube</span><span class="o">.</span><span class="n">_LOCK</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">scan</span><span class="p">()</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="fm">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span><span class="p">):</span>
