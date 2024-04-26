@@ -19,13 +19,12 @@ import asyncio
 import signal
 import sys
 
-from toio.cube import IdInformation, ToioCoreCube
-from toio.scanner import BLEScanner
+from toio.cube import IdInformation, ToioCoreCube, NotificationHandlerInfo
 
 
-def notification_handler(payload: bytearray):
+def notification_handler(payload: bytearray, info: NotificationHandlerInfo):
     id_info = IdInformation.is_my_data(payload)
-    print(str(id_info))
+    print(info.get_notified_cube().name, str(id_info))
 
 
 LOOP = True

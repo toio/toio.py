@@ -17,21 +17,14 @@ import asyncio
 import sys
 
 from toio.cube import ToioCoreCube
-from toio.scanner import BLEScanner
 
 
 async def scan_and_connect():
-    cube = ToioCoreCube()
-
     print("connecting...")
-    await cube.scan()
-    await cube.connect()
-    print("connected")
-
-    await asyncio.sleep(3)
-
-    print("disconnecting...")
-    await cube.disconnect()
+    async with ToioCoreCube() as _cube:
+        print("connected")
+        await asyncio.sleep(3)
+        print("disconnecting...")
     print("disconnected")
 
     return 0

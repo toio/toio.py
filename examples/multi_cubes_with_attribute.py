@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # ************************************************************
 #
-#     multi.py
+#     multi_cubes_with_attribute.py
 #
 #     Copyright 2024 Sony Interactive Entertainment Inc.
 #

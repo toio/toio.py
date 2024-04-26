@@ -18,13 +18,13 @@ import sys
 from toio import *
 
 
-def notification_handler(payload: bytearray):
+def notification_handler(payload: bytearray, info: NotificationHandlerInfo):
     id_info = IdInformation.is_my_data(payload)
     if isinstance(id_info, PositionId):
         point = id_info.center.point
         for mat in ToioMat.mats:
             if point in mat:
-                print(str(mat))
+                print(info.get_notified_cube().name, "on", str(mat), "mat")
     print(str(id_info))
 
 

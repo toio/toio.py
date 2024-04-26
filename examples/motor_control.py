@@ -13,9 +13,9 @@ import asyncio
 from toio import *
 
 
-def notification_handler(payload: bytearray):
+def notification_handler(payload: bytearray, info: NotificationHandlerInfo):
     motor_info = Motor.is_my_data(payload)
-    print(type(motor_info), str(motor_info))
+    print(info.get_notified_cube().name, type(motor_info), str(motor_info))
 
 
 async def test_motor_1():
