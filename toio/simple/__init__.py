@@ -10,12 +10,14 @@
 from __future__ import annotations
 
 import asyncio
+import inspect
 import math
 import threading
 import time
-from enum import Enum, auto
+from enum import Enum
 from logging import NOTSET, NullHandler, StreamHandler, getLogger
-from typing import ClassVar, Optional, Tuple, Type
+
+from typing_extensions import ClassVar, Optional, Tuple, Type
 
 from ..coordinate_systems import (
     LocalCoordinateSystem,
@@ -67,6 +69,7 @@ from ..position import (
 from ..scanner import BLEScanner
 from ..standard_id import StandardIdCard
 from ..utility import clip
+from .async_simple import AsyncSimpleCube, Direction
 
 logger = getLogger(__name__)
 logger.setLevel(NOTSET)
@@ -75,14 +78,7 @@ handler.setLevel(NOTSET)
 logger.addHandler(handler)
 
 
-class Direction(Enum):
-    Forward = auto()
-    Backward = auto()
-    Right = auto()
-    Left = auto()
-
-
-class SimpleCube(object):
+class SimpleCube_v1_0:
     """
     Access to toio core cube by easier method
     Functions that like blocks in visual programming
@@ -129,9 +125,9 @@ class SimpleCube(object):
     async def _scan_and_connect(
         self, name: Optional[str], timeout: int
     ) -> ToioCoreCube:
-        assert SimpleCube._LOCK is not None
+        assert SimpleCube_v1_0._LOCK is not None
         print(self._dbg_name, "try to get async lock")
-        async with SimpleCube._LOCK:
+        async with SimpleCube_v1_0._LOCK:
             print(self._dbg_name, "got async lock")
             print(self._dbg_name, "scan_and_connect")
             logger.debug("scanning")
@@ -156,10 +152,10 @@ class SimpleCube(object):
         self._event_loop = self.ensure_event_loop()
         self._dbg_name = dbg_name
         print(self._dbg_name, "check lock")
-        with SimpleCube._T_LOCK:
-            if SimpleCube._LOCK is None:
+        with SimpleCube_v1_0._T_LOCK:
+            if SimpleCube_v1_0._LOCK is None:
                 print(self._dbg_name, "create async lock")
-                SimpleCube._LOCK = asyncio.Lock()
+                SimpleCube_v1_0._LOCK = asyncio.Lock()
             else:
                 print(self._dbg_name, "async lock is already created")
 
@@ -668,3 +664,179 @@ class SimpleCube(object):
             return None
         else:
             return self._magnet.state
+
+
+class SimpleCube:
+    """
+    Access to toio core cube by easier method
+    Functions that like blocks in visual programming
+    """
+
+    _T_LOCK: threading.Lock = threading.Lock()
+
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        timeout: int = 5,
+        coordinate_system_class: Type[
+            LocalCoordinateSystem
+        ] = VisualProgrammingCoordinateSystem,
+        log_level: int = NOTSET,
+    ) -> None:
+        self._event_loop = AsyncSimpleCube.ensure_event_loop()
+        self._async = AsyncSimpleCube(
+            name=name,
+            timeout=timeout,
+            coordinate_system_class=coordinate_system_class,
+            log_level=log_level,
+        )
+        with SimpleCube._T_LOCK:
+            self._event_loop.run_until_complete(self._async.__aenter__())
+        self._cube = self._async._cube
+
+    def __getattr__(self, attr):
+        try:
+            f = self._async.__getattribute__(attr)
+        except AttributeError as ex:
+            raise ex
+
+        if inspect.iscoroutinefunction(f):
+
+            def synchronizer(async_attr):
+                def wrap_f(*args, **kwargs):
+                    return self._event_loop.run_until_complete(
+                        async_attr(*args, **kwargs)
+                    )
+
+                return wrap_f
+
+            return synchronizer(f)
+        else:
+            return f
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, _exc_type, _exc_value, _traceback):
+        with SimpleCube._T_LOCK:
+            self._event_loop.run_until_complete(self._async.disconnect())
+
+    def move(self, speed: int, duration: float, wait_to_complete: bool = True) -> None:
+        return self._event_loop.run_until_complete(
+            self._async.move(speed, duration, wait_to_complete)
+        )
+
+    def spin(self, speed: int, duration: float, wait_to_complete: bool = True) -> None:
+        return self._event_loop.run_until_complete(
+            self._async.spin(speed, duration, wait_to_complete)
+        )
+
+    def run_motor(
+        self,
+        left_speed: int,
+        right_speed: int,
+        duration: float,
+        wait_to_complete: bool = True,
+    ) -> None:
+        return self._event_loop.run_until_complete(
+            self._async.run_motor(left_speed, right_speed, duration, wait_to_complete)
+        )
+
+    def stop_motor(self) -> None:
+        return self._event_loop.run_until_complete(self._async.stop_motor())
+
+    def move_steps(self, direction: Direction, speed: int, step: int) -> bool:
+        return self._event_loop.run_until_complete(
+            self._async.move_steps(direction, speed, step)
+        )
+
+    def turn(self, speed: int, degree: int) -> bool:
+        return self._event_loop.run_until_complete(self._async.turn(speed, degree))
+
+    def move_to(self, speed: int, x: int, y: int) -> bool:
+        return self._event_loop.run_until_complete(self._async.move_to(speed, x, y))
+
+    def set_orientation(self, speed: int, degree: int) -> bool:
+        return self._event_loop.run_until_complete(
+            self._async.set_orientation(speed, degree)
+        )
+
+    def move_to_the_grid_cell(self, speed: int, cell_x: int, cell_y: int) -> bool:
+        return self._event_loop.run_until_complete(
+            self._async.move_to_the_grid_cell(speed, cell_x, cell_y)
+        )
+
+    def get_current_position(self) -> Optional[Tuple[int, int]]:
+        return self._event_loop.run_until_complete(self._async.get_current_position())
+
+    def get_x(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_x())
+
+    def get_y(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_y())
+
+    def get_orientation(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_orientation())
+
+    def get_grid(self) -> Optional[Tuple[int, int]]:
+        return self._event_loop.run_until_complete(self._async.get_grid())
+
+    def get_grid_x(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_grid_x())
+
+    def get_grid_y(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_grid_y())
+
+    def is_on_the_gird_cell(self, cell_x: int, cell_y: int) -> bool:
+        return self._event_loop.run_until_complete(
+            self._async.is_on_the_gird_cell(cell_x, cell_y)
+        )
+
+    def is_touched(self, item: StandardIdCard) -> bool:
+        return self._event_loop.run_until_complete(self._async.is_touched(item))
+
+    def get_touched_card(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_touched_card())
+
+    def get_cube_name(self) -> Optional[str]:
+        return self._event_loop.run_until_complete(self._async.get_cube_name())
+
+    def get_battery_level(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_battery_level())
+
+    def get_3d_angle(self) -> Optional[Tuple[int, int, int]]:
+        return self._event_loop.run_until_complete(self._async.get_3d_angle())
+
+    def get_posture(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.get_posture())
+
+    def is_button_pressed(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.is_button_pressed())
+
+    def turn_on_cube_lamp(self, r: int, g: int, b: int, duration: float) -> None:
+        return self._event_loop.run_until_complete(
+            self._async.turn_on_cube_lamp(r, g, b, duration)
+        )
+
+    def turn_off_cube_lamp(self) -> None:
+        return self._event_loop.run_until_complete(self._async.turn_off_cube_lamp())
+
+    def play_sound(
+        self, note: int, duration: float, wait_to_complete: bool = True
+    ) -> bool:
+        return self._event_loop.run_until_complete(
+            self._async.play_sound(note, duration, wait_to_complete)
+        )
+
+    def stop_sound(self) -> None:
+        return self._event_loop.run_until_complete(self._async.stop_sound())
+
+    def is_magnet_in_contact(self) -> Optional[int]:
+        return self._event_loop.run_until_complete(self._async.is_magnet_in_contact())
+
+
+__all__ = [
+    "SimpleCube",
+    "AsyncSimpleCube",
+    "SimpleCube_v1_0",
+]

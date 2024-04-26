@@ -10,8 +10,8 @@
 
 import asyncio
 
-from toio.cube.multi_cubes import MultipleToioCoreCubes
 from toio.cube.api.button import ButtonState
+from toio.cube.multi_cubes import MultipleToioCoreCubes
 
 
 async def cube1():

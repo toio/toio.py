@@ -205,7 +205,8 @@ class BaseBleScanner(ScannerInterface):
 
         # scan ble devices
         async with BleakScanner(
-            detection_callback=check_condition, backend=_get_platform_scanner_backend()
+            detection_callback=check_condition,
+            backend=_get_platform_scanner_backend(),
         ):
             try:
                 await asyncio.wait_for(condition_met.wait(), timeout=timeout)

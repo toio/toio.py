@@ -227,6 +227,8 @@ class ToioCoreCube(CubeInterface):
         assert self.interface is not None
         self.api = ToioCoreCubeLowLevelAPI(interface=self.interface, root_device=self)
         connect_result = await self.interface.connect()
+        while not self.interface.is_connect():
+            await asyncio.sleep(0.1)
         if connect_result is True:
             self.protocol_version = None
             await self.api.configuration.request_protocol_version()
@@ -239,8 +241,6 @@ class ToioCoreCube(CubeInterface):
                 received_data = await self.api.configuration._read()
                 if ProtocolVersion.is_myself(received_data):
                     self.protocol_version = ProtocolVersion(received_data)
-                    import asyncio
-
                     await asyncio.sleep(0.1)
             if self.protocol_version is not None:
                 if (

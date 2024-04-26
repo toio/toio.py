@@ -124,7 +124,7 @@ async def test_sensor_1(interactive, confirm):
     logger.info("** CONNECTED")
     await cube.api.configuration.set_posture_angle_detection(
         PostureAngleDetectionType.Euler,
-        100,
+        50,
         PostureAngleDetectionCondition.Always,
     )
     await cube.api.sensor.register_notification_handler(sensor_handler)
@@ -233,7 +233,7 @@ async def test_sensor_2(interactive, confirm):
     logger.info("** CONNECTED")
     await cube.api.configuration.set_posture_angle_detection(
         PostureAngleDetectionType.HighPrecisionEuler,
-        100,
+        50,
         PostureAngleDetectionCondition.Always,
     )
     await cube.api.sensor.register_notification_handler(sensor_handler)
@@ -381,7 +381,7 @@ async def test_sensor_3(interactive, confirm):
     logger.info("** CONNECTED")
     await cube.api.configuration.set_posture_angle_detection(
         PostureAngleDetectionType.Quaternions,
-        100,
+        50,
         PostureAngleDetectionCondition.Always,
     )
     await cube.api.sensor.register_notification_handler(sensor_handler)
@@ -479,7 +479,7 @@ async def test_sensor_5():
     logger.info("** CONNECTED")
     await cube.api.configuration.set_posture_angle_detection(
         PostureAngleDetectionType.HighPrecisionEuler,
-        100,
+        50,
         PostureAngleDetectionCondition.Always,
     )
     read_test = 10
@@ -505,7 +505,7 @@ async def test_sensor_6():
     logger.info("** CONNECTED")
     await cube.api.configuration.set_posture_angle_detection(
         PostureAngleDetectionType.Quaternions,
-        100,
+        50,
         PostureAngleDetectionCondition.Always,
     )
     read_test = 10
