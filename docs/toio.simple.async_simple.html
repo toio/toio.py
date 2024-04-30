@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="docsearch:name" content="toio.py" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="" />
+    <meta name="docsearch:version" content="" />
+    
+      <title>toio.simple.async_simple module &mdash; toio.py  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-icons.css" type="text/css" />
+          <!-- add (1) pathto "_static/pygments.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css" />
+          <!-- add (1) pathto "_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts/nunito/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts/nunito/stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts/red-hat-mono/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts/red-hat-mono/stylesheet.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/pygments_dark.css" />
+        <link rel="index" title="Index" href="genindex.html" />
+        <link rel="search" title="Search" href="search.html" />
+        <link rel="top" title="toio.py  documentation" href="#" />
+        <link rel="up" title="toio.simple package" href="toio.simple.html" />
+        <link rel="next" title="toio.coordinate_systems module" href="toio.coordinate_systems.html" />
+        <link rel="prev" title="toio.simple package" href="toio.simple.html" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Red Hat Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+      h1 *, h2 *, h3 *, h4 *, h5 *, h6 * { font-size: inherit; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to docs navigation</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-wrap flex-xl-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="index.html"
+              
+              class="navbar-brand p-0 me-0 md-lg-2"
+          ><span class="brand-text">toio.py</span></a>
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search docs" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-text">Nefertiti for Sphinx</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              <!-- version_dropdown.html -->
+
+              
+              <!-- colorscheme_dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Toggle light/dark">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none small ms-2">Toggle light/dark</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Light/dark</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="small ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="small ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="small ms-3">Default</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-block">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- danirus sidebartemplate: "version.html" -->
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+    <section id="module-toio.simple.async_simple">
+<span id="toio-simple-async-simple-module"></span><h1>toio.simple.async_simple module<a class="headerlink" href="#module-toio.simple.async_simple" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.simple.async_simple.Direction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.simple.async_simple.</span></span><span class="sig-name descname"><span class="pre">Direction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/simple/async_simple.html#Direction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.Direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.Direction.Forward">
+<span class="sig-name descname"><span class="pre">Forward</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.simple.async_simple.Direction.Forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.Direction.Backward">
+<span class="sig-name descname"><span class="pre">Backward</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.simple.async_simple.Direction.Backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.Direction.Right">
+<span class="sig-name descname"><span class="pre">Right</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#toio.simple.async_simple.Direction.Right" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.Direction.Left">
+<span class="sig-name descname"><span class="pre">Left</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#toio.simple.async_simple.Direction.Left" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.simple.async_simple.</span></span><span class="sig-name descname"><span class="pre">AsyncSimpleCube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate_system_class:</span> <span class="pre">~typing.Type[~toio.coordinate_systems.ToioRelativeCoordinateSystem</span> <span class="pre">|</span> <span class="pre">~toio.coordinate_systems.VisualProgrammingCoordinateSystem]</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'toio.coordinate_systems.VisualProgrammingCoordinateSystem'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube:</span> <span class="pre">~toio.cube.ToioCoreCube</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Access to toio core cube by easier method
+Functions that like blocks in visual programming</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.DEFAULT_ROTATION_OPTION">
+<span class="sig-name descname"><span class="pre">DEFAULT_ROTATION_OPTION</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.cube.api.motor.html#toio.cube.api.motor.RotationOption" title="toio.cube.api.motor.RotationOption"><span class="pre">RotationOption</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_ROTATION_OPTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.DEFAULT_MOVEMENT_TYPE">
+<span class="sig-name descname"><span class="pre">DEFAULT_MOVEMENT_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="toio.cube.api.motor.html#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><span class="pre">MovementType</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_MOVEMENT_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.DEFAULT_TIMEOUT">
+<span class="sig-name descname"><span class="pre">DEFAULT_TIMEOUT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.DEFAULT_ONE_STEP">
+<span class="sig-name descname"><span class="pre">DEFAULT_ONE_STEP</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_ONE_STEP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.CELL_SIZE">
+<span class="sig-name descname"><span class="pre">CELL_SIZE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">43.43</span></em><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.CELL_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.MONITORING_CYCLE">
+<span class="sig-name descname"><span class="pre">MONITORING_CYCLE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.01</span></em><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.MONITORING_CYCLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.ensure_event_loop">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ensure_event_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AbstractEventLoop</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.ensure_event_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.ensure_event_loop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.search">
+<em class="property"><span class="pre">async</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ToioCoreCube</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.search" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate_system_class:</span> <span class="pre">~typing.Type[~toio.coordinate_systems.ToioRelativeCoordinateSystem</span> <span class="pre">|</span> <span class="pre">~toio.coordinate_systems.VisualProgrammingCoordinateSystem]</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'toio.coordinate_systems.VisualProgrammingCoordinateSystem'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube:</span> <span class="pre">~toio.cube.ToioCoreCube</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.connect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.connect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.disconnect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.sleep">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sleep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sleep_second</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.sleep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.sleep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.move">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_to_complete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.spin">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_to_complete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>speed: (negative value: anticlockwise)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.run_motor">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_to_complete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.run_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.run_motor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.stop_motor">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_motor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.stop_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.stop_motor" title="Permalink to this definition">¶</a></dt>
+<dd><p>stop_motor.</p>
+<p>Args:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.move_steps">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">move_steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.simple.async_simple.Direction" title="toio.simple.async_simple.Direction"><span class="pre">Direction</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.move_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.move_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.turn">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">turn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.turn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.turn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.move_to">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">move_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.move_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.move_to" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.set_orientation">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_orientation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.set_orientation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.set_orientation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.move_to_the_grid_cell">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">move_to_the_grid_cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.move_to_the_grid_cell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.move_to_the_grid_cell" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_current_position">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current_position</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_current_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_current_position" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_x">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_x</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_y">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_y</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_orientation">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_orientation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_orientation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_orientation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_grid">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_grid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_grid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_grid_x">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_grid_x</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_grid_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_grid_x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_grid_y">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_grid_y</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_grid_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_grid_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.is_on_the_gird_cell">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_on_the_gird_cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.is_on_the_gird_cell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.is_on_the_gird_cell" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.is_touched">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_touched</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard" title="toio.standard_id.StandardIdCard"><span class="pre">StandardIdCard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.is_touched"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.is_touched" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_touched_card">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_touched_card</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_touched_card"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_touched_card" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_cube_name">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_cube_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_cube_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_cube_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_battery_level">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_battery_level</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_battery_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_battery_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_3d_angle">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_3d_angle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_3d_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_3d_angle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.get_posture">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_posture</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.get_posture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.get_posture" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.is_button_pressed">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_button_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.is_button_pressed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.is_button_pressed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.turn_on_cube_lamp">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">turn_on_cube_lamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.turn_on_cube_lamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.turn_on_cube_lamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.turn_off_cube_lamp">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">turn_off_cube_lamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.turn_off_cube_lamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.turn_off_cube_lamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.play_sound">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">play_sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_to_complete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.play_sound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.play_sound" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.stop_sound">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_sound</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.stop_sound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.stop_sound" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.simple.async_simple.AsyncSimpleCube.is_magnet_in_contact">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_magnet_in_contact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/simple/async_simple.html#AsyncSimpleCube.is_magnet_in_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.simple.async_simple.AsyncSimpleCube.is_magnet_in_contact" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+</article>
+        <aside class="nftt-toc">
+          
+          <div class="mt-3 mb-1 my-lg-0 ps-xl-3 text-muted">
+            <button class="btn btn-link link-dark p-lg-0 mb-2 mb-lg-0 text-decoration-none nftt-toc-toggle d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents"
+            >On this page <i class="ms-2 bi bi-chevron-expand"></i></button>
+            <div class="title d-none d-lg-block">
+              <i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;<span class="small">On this page</span>
+            </div>
+            <div class="collapse nftt-toc-collapse" id="tocContents">
+              <nav id="TableOfContents">
+                <ul>
+<li><a class="reference internal" href="#">toio.simple.async_simple module</a><ul>
+<li><a class="reference internal" href="#toio.simple.async_simple.Direction"><code class="docutils literal notranslate"><span class="pre">Direction</span></code></a><ul>
+<li><a class="reference internal" href="#toio.simple.async_simple.Direction.Forward"><code class="docutils literal notranslate"><span class="pre">Direction.Forward</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.Direction.Backward"><code class="docutils literal notranslate"><span class="pre">Direction.Backward</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.Direction.Right"><code class="docutils literal notranslate"><span class="pre">Direction.Right</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.Direction.Left"><code class="docutils literal notranslate"><span class="pre">Direction.Left</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube</span></code></a><ul>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_ROTATION_OPTION"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.DEFAULT_ROTATION_OPTION</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_MOVEMENT_TYPE"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.DEFAULT_MOVEMENT_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_TIMEOUT"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.DEFAULT_TIMEOUT</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.DEFAULT_ONE_STEP"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.DEFAULT_ONE_STEP</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.CELL_SIZE"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.CELL_SIZE</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.MONITORING_CYCLE"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.MONITORING_CYCLE</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.ensure_event_loop"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.ensure_event_loop()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.search"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.search()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.__init__"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.connect"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.connect()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.disconnect"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.disconnect()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.sleep"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.sleep()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.move"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.move()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.spin"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.spin()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.run_motor"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.run_motor()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.stop_motor"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.stop_motor()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.move_steps"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.move_steps()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.turn"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.turn()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.move_to"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.move_to()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.set_orientation"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.set_orientation()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.move_to_the_grid_cell"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.move_to_the_grid_cell()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_current_position"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_current_position()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_x"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_x()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_y"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_y()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_orientation"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_orientation()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_grid"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_grid()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_grid_x"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_grid_x()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_grid_y"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_grid_y()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.is_on_the_gird_cell"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.is_on_the_gird_cell()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.is_touched"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.is_touched()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_touched_card"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_touched_card()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_cube_name"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_cube_name()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_battery_level"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_battery_level()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_3d_angle"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_3d_angle()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.get_posture"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.get_posture()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.is_button_pressed"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.is_button_pressed()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.turn_on_cube_lamp"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.turn_on_cube_lamp()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.turn_off_cube_lamp"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.turn_off_cube_lamp()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.play_sound"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.play_sound()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.stop_sound"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.stop_sound()</span></code></a></li>
+<li><a class="reference internal" href="#toio.simple.async_simple.AsyncSimpleCube.is_magnet_in_contact"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleCube.is_magnet_in_contact()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </nav>
+            </div>
+          </div>
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      <nav id="paginator" class="py-4" aria-label="Documentation navigation">
+    <div class="container">
+      <ul class="pagination justify-content-between mb-0"><li class="page-item">
+            <a href="toio.simple.html" class="d-flex px-5 align-items-end" rel="prev" aria-label="Previous page: toio.simple package">
+              <span class="prev-page"><i class="bi bi-caret-left"></i></span>
+              <div class="d-flex flex-column">
+                <span class="text-small text-start text-muted">Previous</span>
+                <span class="underline">toio.simple package</span>
+              </div>
+            </a>
+          </li>
+        <li class="page-item ms-auto">
+            <a href="toio.coordinate_systems.html" class="d-flex px-5 align-items-end" rel="next" aria-label="Next page: toio.coordinate_systems module">
+              <div class="d-flex flex-column">
+                <span class="text-small text-end text-start text-muted">Next</span>
+                <span class="underline">toio.coordinate_systems module</span>
+              </div>
+              <span class="next-page"><i class="bi bi-caret-right"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Nefertiti-for-Sphinx">
+          <span class="fs-6 fw-bold">toio.py</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2022, Sony Interactive Entertainment</li>
+          </ul>
+        
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 6.2.1</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+
+    <script type="text/javascript" src="_static/sphinx-nefertiti-0.3.2.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.bundle-0.3.2.min.js"></script>
+    
+    <script type="text/javascript" src="_static/doc_versions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+../../examples-simple/get_information_2.py

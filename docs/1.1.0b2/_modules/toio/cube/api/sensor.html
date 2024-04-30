@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="docsearch:name" content="toio.py" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="" />
+    <meta name="docsearch:version" content="" />
+    
+      <title>toio.cube.api.sensor &mdash; toio.py  documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/bootstrap-icons.css" type="text/css" />
+          <!-- add (1) pathto "_static/pygments.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../../_static/pygments_dark.css" />
+          <!-- add (1) pathto "_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../../_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts/nunito/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../../_static/fonts/nunito/stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts/red-hat-mono/stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../../_static/fonts/red-hat-mono/stylesheet.css" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../../_static/pygments_dark.css" />
+        <link rel="index" title="Index" href="../../../../genindex.html" />
+        <link rel="search" title="Search" href="../../../../search.html" />
+        <link rel="top" title="toio.py  documentation" href="#" />
+        <link rel="up" title="toio.cube.api" href="../api.html" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Red Hat Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+      h1 *, h2 *, h3 *, h4 *, h5 *, h6 * { font-size: inherit; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to docs navigation</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-wrap flex-xl-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="../../../../index.html"
+              
+              class="navbar-brand p-0 me-0 md-lg-2"
+          ><span class="brand-text">toio.py</span></a>
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="../../../../search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search docs" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-text">Nefertiti for Sphinx</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              <!-- version_dropdown.html -->
+
+              
+              <!-- colorscheme_dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Toggle light/dark">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none small ms-2">Toggle light/dark</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Light/dark</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="small ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="small ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="small ms-3">Default</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-block">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- danirus sidebartemplate: "version.html" -->
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../../../1.0.1/index.html">1.0.1</a></li>
+  <li><a href="../../../../../1.0.2/index.html">1.0.2</a></li>
+  <li><a href="../../../../../1.1.0a1/index.html">1.1.0a1</a></li>
+  <li><a href="../../../../../1.1.0a2/index.html">1.1.0a2</a></li>
+  <li><a href="../../../../../1.1.0b1/index.html">1.1.0b1</a></li>
+  <li><a href="sensor.html">1.1.0b2</a></li>
+</ul>
+
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+    <h1>Source code for toio.cube.api.sensor</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># ************************************************************</span>
+<span class="c1">#</span>
+<span class="c1">#     sensor.py</span>
+<span class="c1">#</span>
+<span class="c1">#     Copyright 2022 Sony Interactive Entertainment Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># ************************************************************</span>
+
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeAlias</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">...device_interface</span> <span class="kn">import</span> <span class="n">CubeInterface</span><span class="p">,</span> <span class="n">GattReadData</span>
+<span class="kn">from</span> <span class="nn">...logger</span> <span class="kn">import</span> <span class="n">get_toio_logger</span>
+<span class="kn">from</span> <span class="nn">...toio_uuid</span> <span class="kn">import</span> <span class="n">ToioUuid</span>
+<span class="kn">from</span> <span class="nn">..api.base_class</span> <span class="kn">import</span> <span class="n">CubeCharacteristic</span><span class="p">,</span> <span class="n">CubeCommand</span><span class="p">,</span> <span class="n">CubeResponse</span>
+<span class="kn">from</span> <span class="nn">..notification_handler_info</span> <span class="kn">import</span> <span class="n">NotificationReceivedDevice</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_toio_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="RequestMotionDetection"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestMotionDetection">[docs]</a><span class="k">class</span> <span class="nc">RequestMotionDetection</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Motion information request command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_sensor#requesting-motion-detection-information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x81</span>
+
+<div class="viewcode-block" id="RequestMotionDetection.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestMotionDetection.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="RequestMotionDetection.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestMotionDetection.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,))</span></div></div>
+
+
+<div class="viewcode-block" id="PostureDataType"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureDataType">[docs]</a><span class="k">class</span> <span class="nc">PostureDataType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="n">Euler</span> <span class="o">=</span> <span class="mh">0x01</span>
+    <span class="n">Quaternions</span> <span class="o">=</span> <span class="mh">0x02</span>
+    <span class="n">HighPrecisionEuler</span> <span class="o">=</span> <span class="mh">0x03</span></div>
+
+
+<div class="viewcode-block" id="RequestPostureAngleDetection"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestPostureAngleDetection">[docs]</a><span class="k">class</span> <span class="nc">RequestPostureAngleDetection</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Posture angle information request command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#requesting-posture-angle-detection</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x83</span>
+
+<div class="viewcode-block" id="RequestPostureAngleDetection.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestPostureAngleDetection.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="n">PostureDataType</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_type</span> <span class="o">=</span> <span class="n">data_type</span></div>
+
+<div class="viewcode-block" id="RequestPostureAngleDetection.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestPostureAngleDetection.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_type</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="RequestMagneticSensor"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestMagneticSensor">[docs]</a><span class="k">class</span> <span class="nc">RequestMagneticSensor</span><span class="p">(</span><span class="n">CubeCommand</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Magnetic sensor information request command</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_magnetic_sensor#requests-for-magnetic-sensor-information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x82</span>
+
+<div class="viewcode-block" id="RequestMagneticSensor.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestMagneticSensor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="RequestMagneticSensor.__bytes__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.RequestMagneticSensor.__bytes__">[docs]</a>    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_payload_id</span><span class="p">,))</span></div></div>
+
+
+<div class="viewcode-block" id="Posture"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Posture">[docs]</a><span class="k">class</span> <span class="nc">Posture</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Posture</span>
+<span class="sd">    Orientation of the cube.</span>
+
+<span class="sd">    Reference:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_sensor/#posture-detection</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Unknown</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Top</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Bottom</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">Rear</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">Front</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">Right</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">Left</span> <span class="o">=</span> <span class="mi">6</span></div>
+
+
+<div class="viewcode-block" id="MotionDetectionData"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.MotionDetectionData">[docs]</a><span class="k">class</span> <span class="nc">MotionDetectionData</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;MotionDetectionData</span>
+<span class="sd">    Information on the cube&#39;s motion detection.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        horizontal (bool): Horizontal detection</span>
+<span class="sd">        collision (bool): Collision detection</span>
+<span class="sd">        double_tap (bool): Double-tap detection</span>
+<span class="sd">        posture (Posture): Posture detection</span>
+<span class="sd">        shake (int): Shake detection (0:no shake, 1:Level1 - 10:Level10)</span>
+
+<span class="sd">    Reference:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_sensor/#obtaining-motion-detection-information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x01</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBBBBB&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MotionDetectionData.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.MotionDetectionData.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">MotionDetectionData</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+<div class="viewcode-block" id="MotionDetectionData.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.MotionDetectionData.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">MotionDetectionData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="p">(</span>
+                <span class="n">_</span><span class="p">,</span>
+                <span class="n">horizontal</span><span class="p">,</span>
+                <span class="n">collision</span><span class="p">,</span>
+                <span class="n">double_tap</span><span class="p">,</span>
+                <span class="n">posture</span><span class="p">,</span>
+                <span class="n">shake</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">horizontal</span> <span class="o">=</span> <span class="n">horizontal</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collision</span> <span class="o">=</span> <span class="n">collision</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">double_tap</span> <span class="o">=</span> <span class="n">double_tap</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">posture</span> <span class="o">=</span> <span class="n">Posture</span><span class="p">(</span><span class="n">posture</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shake</span> <span class="o">=</span> <span class="n">shake</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MotionDetectionData.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.MotionDetectionData.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="PostureAngleEulerData"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleEulerData">[docs]</a><span class="k">class</span> <span class="nc">PostureAngleEulerData</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;PostureAngleEulerData</span>
+
+<span class="sd">    Information of posture angle (Euler angle)</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        roll (int): Roll (X axis)</span>
+<span class="sd">        pitch (int): Pitch (Y axis)</span>
+<span class="sd">        yaw (int): Yaw (Z axis)</span>
+
+<span class="sd">    References:</span>
+<span class="sd">       https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBhhh&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PostureAngleEulerData.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleEulerData.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureAngleEulerData</span><span class="o">.</span><span class="n">_payload_id</span>
+            <span class="ow">and</span> <span class="n">payload</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureDataType</span><span class="o">.</span><span class="n">Euler</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleEulerData.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleEulerData.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">PostureAngleEulerData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleEulerData.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleEulerData.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="PostureAngleQuaternionsData"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleQuaternionsData">[docs]</a><span class="k">class</span> <span class="nc">PostureAngleQuaternionsData</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;PostureAngleQuaternionData</span>
+
+<span class="sd">    Information of posture angle (Quaternion)</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        w (float):</span>
+<span class="sd">        x (float):</span>
+<span class="sd">        y (float):</span>
+<span class="sd">        z (float):</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-quaternions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBffff&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PostureAngleQuaternionsData.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleQuaternionsData.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureAngleQuaternionsData</span><span class="o">.</span><span class="n">_payload_id</span>
+            <span class="ow">and</span> <span class="n">payload</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureDataType</span><span class="o">.</span><span class="n">Quaternions</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleQuaternionsData.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleQuaternionsData.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">PostureAngleQuaternionsData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleQuaternionsData.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleQuaternionsData.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData">[docs]</a><span class="k">class</span> <span class="nc">PostureAngleHighPrecisionEulerData</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;PostureAngleHighPrecisionEulerData</span>
+
+<span class="sd">    Information of high precision posture angle (Euler angle)</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        roll (float): Roll (X axis)</span>
+<span class="sd">        pitch (float): Pitch (Y axis)</span>
+<span class="sd">        yaw (float): Yaw (Z axis)</span>
+
+<span class="sd">    References:</span>
+<span class="sd">       https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor#obtaining-posture-angle-information-notifications-in-euler-angles</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x03</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBfff&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureAngleEulerData</span><span class="o">.</span><span class="n">_payload_id</span>
+            <span class="ow">and</span> <span class="n">payload</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">PostureDataType</span><span class="o">.</span><span class="n">HighPrecisionEuler</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">PostureAngleHighPrecisionEulerData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PostureAngleHighPrecisionEulerData.__str__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.PostureAngleHighPrecisionEulerData.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="MagneticSensorData"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.MagneticSensorData">[docs]</a><span class="k">class</span> <span class="nc">MagneticSensorData</span><span class="p">(</span><span class="n">CubeResponse</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;MagneticSensorData</span>
+
+<span class="sd">    Information of magnetic sensor</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        state (int): Magnet state</span>
+<span class="sd">        strength (int): Magnetic force strength</span>
+<span class="sd">        x (int): Magnetic force direction (X axis)</span>
+<span class="sd">        y (int): Magnetic force direction (Y axis)</span>
+<span class="sd">        z (int): Magnetic force direction (Z axis)</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        https://toio.github.io/toio-spec/en/docs/ble_magnetic_sensor/#obtaining-magnetic-sensor-information-</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_payload_id</span> <span class="o">=</span> <span class="mh">0x02</span>
+    <span class="n">_converter</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&lt;BBBbbb&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MagneticSensorData.is_myself"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.MagneticSensorData.is_myself">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">MagneticSensorData</span><span class="o">.</span><span class="n">_payload_id</span></div>
+
+<div class="viewcode-block" id="MagneticSensorData.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.MagneticSensorData.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">MagneticSensorData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="p">(</span>
+                <span class="n">_</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">strength</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_converter</span><span class="o">.</span><span class="n">unpack_from</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong payload&quot;</span><span class="p">)</span></div></div>
+
+
+<span class="n">SensorResponseType</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span>
+    <span class="n">MotionDetectionData</span><span class="p">,</span>
+    <span class="n">PostureAngleEulerData</span><span class="p">,</span>
+    <span class="n">PostureAngleQuaternionsData</span><span class="p">,</span>
+    <span class="n">PostureAngleHighPrecisionEulerData</span><span class="p">,</span>
+    <span class="n">MagneticSensorData</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Response types of Sensor characteristic</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="Sensor"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Sensor">[docs]</a><span class="k">class</span> <span class="nc">Sensor</span><span class="p">(</span><span class="n">CubeCharacteristic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sensor information characteristic</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        `Motion detection &lt;https://toio.github.io/toio-spec/en/docs/ble_sensor&gt;`_</span>
+
+<span class="sd">        `Posture angle detection &lt;https://toio.github.io/toio-spec/en/docs/ble_high_precision_tilt_sensor&gt;`_</span>
+
+<span class="sd">        `Magnetic sensor &lt;https://toio.github.io/toio-spec/en/docs/ble_magnetic_sensor&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sensor.is_my_data"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Sensor.is_my_data">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_my_data</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">GattReadData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SensorResponseType</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">MotionDetectionData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">MotionDetectionData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">PostureAngleEulerData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">PostureAngleEulerData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">PostureAngleQuaternionsData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">PostureAngleQuaternionsData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">PostureAngleHighPrecisionEulerData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">PostureAngleHighPrecisionEulerData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">MagneticSensorData</span><span class="o">.</span><span class="n">is_myself</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">MagneticSensorData</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Sensor.__init__"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Sensor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">:</span> <span class="n">CubeInterface</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">NotificationReceivedDevice</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">ToioUuid</span><span class="o">.</span><span class="n">Sensor</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sensor.read"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Sensor.read">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SensorResponseType</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read sensor information response</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            One of SensorInformationData or None</span>
+<span class="sd">            (None returns when read fails)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_my_data</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sensor.request_motion_information"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Sensor.request_motion_information">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">request_motion_information</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send motion information request command</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">RequestMotionDetection</span><span class="p">()</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sensor.request_posture_angle_information"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Sensor.request_posture_angle_information">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">request_posture_angle_information</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="n">PostureDataType</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send posture angle information request command</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">RequestPostureAngleDetection</span><span class="p">(</span><span class="n">data_type</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sensor.request_magnetic_sensor_information"><a class="viewcode-back" href="../../../../toio.cube.api.sensor.html#toio.Sensor.request_magnetic_sensor_information">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">request_magnetic_sensor_information</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send magnetic sensor information request</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">RequestMagneticSensor</span><span class="p">()</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div></div>
+</pre></div>
+</article>
+        <aside class="nftt-toc">
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      
+<nav id="paginator"></nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Nefertiti-for-Sphinx">
+          <span class="fs-6 fw-bold">toio.py</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2022, Sony Interactive Entertainment</li>
+          </ul>
+        
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 6.2.1</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+
+    <script type="text/javascript" src="../../../../_static/sphinx-nefertiti-0.3.2.min.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap.bundle-0.3.2.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/doc_versions.js"></script>
+  </body>
+</html>

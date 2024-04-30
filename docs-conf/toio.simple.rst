@@ -1,6 +1,14 @@
 toio.simple package
 ===================
 
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 3
+
+   toio.simple.async_simple
+
 Module contents
 ---------------
 

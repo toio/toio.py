@@ -16,6 +16,9 @@ if [ ! -d ./docs-conf ] ; then
 
   cp ./mkdocs/conf.py ./docs-conf
   cp ./mkdocs/_templates/version.html ./docs-conf/_templates/
+
+  m2r --overwrite ./pythonista3/*.md
+  mv ./pythonista3/*.rst ./docs-conf
 fi
 
 poetry run sphinx-build docs-conf docs
@@ -26,4 +29,10 @@ LATEST=`git tag --sort=committerdate | egrep -e '^\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|
 cp ./mkdocs/index.html ./docs/index.html
 pushd docs
 ln -s ${LATEST} latest
+mkdir examples
+pushd examples
+ln -s ../../examples/*.py .
+ln -s ../../examples-simple/*.py .
+popd
+../pythonista3/make_install_script.sh install_toio.py
 popd

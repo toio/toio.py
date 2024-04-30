@@ -27,24 +27,31 @@
 
 - Linux: Ubuntu22.04
 - macOS: macOS 13(Ventura)
+
+### 実験的な実装
+
 - iOS, iPadOS: 17
+
+toio.py は Pythonista3 上で動作します。  
+[インストール方法: INSTALL_TO_PYTHONISTA3.ja.md](https://toio.github.io/toio.py/INSTALL_TO_PYTHONISTA3.ja.html)
+
 
 ## セットアップとチュートリアル
 
 セットアップの方法とチュートリアルの実行については下記を参照してください。
 
-- [セットアップガイド （日本語）](https://github.com/toio/toio.py/blob/main/SETUP_GUIDE.ja.md)
-- [セットアップガイド （英語）](https://github.com/toio/toio.py/blob/main/SETUP_GUIDE.en.md)
+- [セットアップガイド （日本語）](./blob/main/SETUP_GUIDE.ja.md)
+- [セットアップガイド （英語）](./blob/main/SETUP_GUIDE.en.md)
 
 
 ---
 
 ## SimpleCube API
 
-簡単に toio コアキューブを制御するための SimpleCube API に関する情報は[SIMPLE_API.ja.md](https://github.com/toio/toio.py/blob/main/SIMPLE_API.ja.md)を参照してください。
+簡単に toio コアキューブを制御するための SimpleCube API に関する情報は[SIMPLE_API.ja.md](./blob/main/SIMPLE_API.ja.md)を参照してください。
 
-- [SIMPLE_API.ja.md （日本語）](https://github.com/toio/toio.py/blob/main/SIMPLE_API.ja.md)
-- [SIMPLE_API.en.md （英語）](https://github.com/toio/toio.py/blob/main/SIMPLE_API.en.md)
+- [SIMPLE_API.ja.md （日本語）](./blob/main/SIMPLE_API.ja.md)
+- [SIMPLE_API.en.md （英語）](./blob/main/SIMPLE_API.en.md)
 
 ---
 

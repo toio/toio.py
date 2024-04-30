@@ -1,5 +1,5 @@
 .. toio.py documentation master file, created by
-   sphinx-quickstart on Fri Apr 26 14:32:30 2024.
+   sphinx-quickstart on Tue Apr 30 15:30:35 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 

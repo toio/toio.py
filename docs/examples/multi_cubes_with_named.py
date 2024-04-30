@@ -1,0 +1,1 @@
+../../examples/multi_cubes_with_named.py

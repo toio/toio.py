@@ -6,7 +6,7 @@ This is a library for controlling [toio™Core Cube](https://toio.io/platform/cu
 
 Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v2.4.0.
 
-**（日本語版 README.md は[こちら](https://github.com/toio/toio.py/blob/main/README.ja.md)）**
+**（日本語版 README.md は[こちら](./blob/main/README.ja.md)）**
 
 ## Features
 
@@ -29,24 +29,31 @@ Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v
 
 - Linux: Ubuntu22.04
 - macOS: macOS 13(Ventura)
+
+### Experimental implementation
+
 - iOS, iPadOS: 17
+
+toio.py works on Pythonista3.  
+[How to install: INSTALL_TO_PYTHONISTA3.en.md](https://toio.github.io/toio.py/INSTALL_TO_PYTHONISTA3.en.html)
+
 
 ## Setup and tutorial
 
 See below for instructions on how to set up and run the tutorial.
 
-- [Setup Guide (English)](https://github.com/toio/toio.py/blob/main/SETUP_GUIDE.en.md)
-- [Setup Guide (Japanese)](https://github.com/toio/toio.py/blob/main/SETUP_GUIDE.ja.md)
-- [Setup Guide (Chinese)](https://github.com/toio/toio.py/blob/main/SETUP_GUIDE.zh.md)
+- [Setup Guide (English)](./blob/main/SETUP_GUIDE.en.md)
+- [Setup Guide (Japanese)](./blob/main/SETUP_GUIDE.ja.md)
+- [Setup Guide (Chinese)](./blob/main/SETUP_GUIDE.zh.md)
 
 ---
 
 ## SimpleCube API
 
-See [SIMPLE_API.en.md](https://github.com/toio/toio.py/blob/main/SIMPLE_API.en.md) for information on the SimpleCube API for easily controlling toio Core Cubes.
+See [SIMPLE_API.en.md](./blob/main/SIMPLE_API.en.md) for information on the SimpleCube API for easily controlling toio Core Cubes.
 
-- [SIMPLE_API.en.md (English)](https://github.com/toio/toio.py/blob/main/SIMPLE_API.en.md)
-- [SIMPLE_API.ja.md (Japanese)](https://github.com/toio/toio.py/blob/main/SIMPLE_API.ja.md)
+- [SIMPLE_API.en.md (English)](./blob/main/SIMPLE_API.en.md)
+- [SIMPLE_API.ja.md (Japanese)](./blob/main/SIMPLE_API.ja.md)
 
 ---
 
