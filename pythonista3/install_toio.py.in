@@ -62,9 +62,8 @@ def get_latest_toio_py(min="1.1.0a1", max="1.2.0"):
 
 REQUIRED_WHLS = (
     "https://files.pythonhosted.org/packages/01/f3/936e209267d6ef7510322191003885de524fc48d1b43269810cd589ceaf5/typing_extensions-4.11.0-py3-none-any.whl",
-    "https://files.pythonhosted.org/packages/08/4a/7b6ff6710ec58f6709000b1fbc27b763e3921a1e5f23032aebe2531366fa/bleak-0.21.1-py3-none-any.whl",
+    "https://files.pythonhosted.org/packages/ac/c8/576a25c20d5619576a82b6ec28df9f1d4c867e4fe801531f7d9bb9f49db7/bleak-0.22.1-py3-none-any.whl",
     get_latest_toio_py()
-#    "https://toio.github.io/p3preview/assets/toio_py-1.1.0a2-py3-none-any.whl",
 )
 
 CLEANUP_TARGETS = (
