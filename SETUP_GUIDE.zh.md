@@ -26,11 +26,11 @@
 python -m pip install setuptools --upgrade
 ```
 
-#### toio.py
-#### 安装toio.py软件包，命令如下：
+#### typing-extensions
+#### 安装typing-extensions软件包，命令如下：
 
 ```
-python -m pip install toio-py --upgrade
+python -m pip install typing-extensions
 ```
 
 #### bleak
@@ -38,6 +38,13 @@ python -m pip install toio-py --upgrade
 
 ```
 python -m pip install bleak
+```
+
+#### toio.py
+#### 安装toio.py软件包，命令如下：
+
+```
+python -m pip install toio-py --upgrade
 ```
 
 #### ipykernel

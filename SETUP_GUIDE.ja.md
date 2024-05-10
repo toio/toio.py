@@ -37,10 +37,10 @@ setuptoolsを最新版にします。
 python -m pip install setuptools --upgrade
 ```
 
-#### toio.py
+#### typing-extensions
 
 ```
-python -m pip install toio-py --upgrade
+python -m pip install typing-extensions
 ```
 
 #### bleak
@@ -49,6 +49,11 @@ python -m pip install toio-py --upgrade
 python -m pip install bleak
 ```
 
+#### toio.py
+
+```
+python -m pip install toio-py --upgrade
+```
 
 #### ipykernel
 

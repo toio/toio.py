@@ -28,9 +28,9 @@
 #
 
 !pip install setuptools --upgrade
-!pip install toio-py --upgrade
 !pip install typing-extensions
 !pip install bleak
+!pip install toio-py --upgrade
 !pip install ipykernel
 
 
