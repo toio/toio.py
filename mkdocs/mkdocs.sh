@@ -24,7 +24,13 @@ fi
 poetry run sphinx-build docs-conf docs
 poetry run sphinx-multiversion docs-conf docs
 
-LATEST=`git tag --sort=committerdate | egrep -e '^\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|\d+\.post\d+)$' | tail -1`
+if `grep --version | grep BSD` ; then
+    GREP="grep -E"
+else
+    GREP="grep -P"
+fi
+
+LATEST=`git tag --sort=committerdate | ${GREP} '^\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|\d+\.post\d+)$' | tail -1`
 
 cp ./mkdocs/index.html ./docs/index.html
 pushd docs
@@ -32,6 +38,9 @@ ln -s ${LATEST} latest
 mkdir examples
 pushd examples
 ln -s ../../examples/*.py .
+popd
+mkdir examples-simple
+pushd examples-simple
 ln -s ../../examples-simple/*.py .
 popd
 ../pythonista3/make_install_script.sh install_toio.py

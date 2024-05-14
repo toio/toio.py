@@ -42,8 +42,8 @@ Chrome でダウンロードした場合
 * Pythonista3のハンバーガーボタンを押します
 * "Open" を選びます
 * "Folder..." を選びます
-* "Download" を選びます
-* "chrome" を選びます
+* "このiPad内" （または "このiPhone内"） を選びます
+* "Chrome" を選びます
 * "install_toio.py" を選びます
 
 右上の三角ボタンを押すとスクリプトが実行されます。
@@ -67,5 +67,5 @@ Bluetoothを許可後にサンプルコードを再実行してください。
 
 * Pythonista3のハンバーガーボタンを押します
 * "This iPad" （または "This iPhone"） を選びます
-* "example_toio_py" を選びます
+* "examples_toio_py" または "examples_simple_toio_py" を選びます
 * 動かしたいサンプルコードを選びます

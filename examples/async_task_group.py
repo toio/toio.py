@@ -9,12 +9,14 @@
 # ************************************************************
 
 import asyncio
+import sys
 
 from toio.cube import ToioCoreCube
 from toio.cube.api.button import ButtonState
 
 
 async def cube1():
+    print("cube1 connecting...")
     async with ToioCoreCube() as cube:
         print("cube1", cube.name)
         await cube.api.indicator.turn_on((0, 0xFF, 0xFF, 0x00))
@@ -27,6 +29,7 @@ async def cube1():
 
 
 async def cube2():
+    print("cube2 connecting...")
     async with ToioCoreCube() as cube:
         print("cube2", cube.name)
         await cube.api.indicator.turn_on((0, 0x00, 0xFF, 0xFF))
@@ -39,9 +42,13 @@ async def cube2():
 
 
 async def main():
-    async with asyncio.TaskGroup() as tg:
-        tg.create_task(cube1())
-        tg.create_task(cube2())
+    if sys.version_info.major == 3 and sys.version_info.minor >= 11:
+        async with asyncio.TaskGroup() as tg:
+            tg.create_task(cube1())
+            tg.create_task(cube2())
+    else:
+        print("TaskGroup is not supported python %d.%d" % (sys.version_info.major, sys.version_info.minor))
+        print("Supported by Python 3.11 or later")
 
 
 asyncio.run(main())

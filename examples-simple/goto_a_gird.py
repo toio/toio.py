@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # ************************************************************
 #
-#     goto_a_cell.py
+#     goto_a_grid.py
 #
 #     Copyright 2023 Sony Interactive Entertainment Inc.
 #

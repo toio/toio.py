@@ -5,6 +5,7 @@ REPO_TOP=$(git rev-parse --show-toplevel)
 # DOWNLOAD_URL="https://toio.github.io/toio.py"
 DOWNLOAD_URL="https://toio.github.io/internal-toio.py/examples"
 EXAMPLES_DIR="${REPO_TOP}/docs/examples"
+EXAMPLES_SIMPLE_DIR="${REPO_TOP}/docs/examples-simple"
 
 function examples() {
     for pyfile in *.py ; do
@@ -14,6 +15,9 @@ function examples() {
 
 pushd ${EXAMPLES_DIR}
 export EXAMPLE_FILES=`examples`
+popd
+pushd ${EXAMPLES_SIMPLE_DIR}
+export EXAMPLE_SIMPLE_FILES=`examples`
 popd
 
 cat ${SCRIPT_DIR}/install_toio.py.in | envsubst > $1

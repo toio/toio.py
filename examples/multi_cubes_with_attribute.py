@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 async def scan_and_connect():
+    print("connecting...")
     async with MultipleToioCoreCubes(cubes=2, names=("taro", "jiro")) as cubes:
         logger.info("connected")
         await cubes.taro.api.indicator.turn_on(

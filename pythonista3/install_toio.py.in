@@ -76,6 +76,10 @@ EXAMPLES = (
 ${EXAMPLE_FILES}
 )
 
+EXAMPLES_SIMPLE = (
+${EXAMPLE_FILES}
+)
+
 
 if not DEVELOPMENT_MODE:
     for p in sys.path:
@@ -87,11 +91,13 @@ if not DEVELOPMENT_MODE:
 assert site_packages_dir != ""
 document_dir_index = site_packages_dir.split("/").index("Documents")
 document_dir = "/".join(site_packages_dir.split("/")[: (document_dir_index + 1)])
-example_dir = os.path.join(document_dir, "example_toio_py")
+examples_dir = os.path.join(document_dir, "examples_toio_py")
+examples_simple_dir = os.path.join(document_dir, "examples_simple_toio_py")
 print("------------------------------------------------------------")
-print("site package dir   : %s" % site_packages_dir)
-print("document dir       : %s" % document_dir)
-print("toio.py example dir: %s" % example_dir)
+print("site package dir          : %s" % site_packages_dir)
+print("document dir              : %s" % document_dir)
+print("toio.py examples dir       : %s" % examples_dir)
+print("toio.py examples-simple dir: %s" % examples_simple_dir)
 print("------------------------------------------------------------")
 os.makedirs(site_packages_dir, exist_ok=True)
 print("clean previous installation")
@@ -112,13 +118,25 @@ for whl in REQUIRED_WHLS:
         zipfile.ZipFile(io.BytesIO(requests.get(whl).content)).extractall(site_packages_dir)
 print("------------------------------------------------------------")
 print("install examples")
-if not os.path.isdir(example_dir):
-    os.makedirs(example_dir, exist_ok=True)
+if not os.path.isdir(examples_dir):
+    os.makedirs(examples_dir, exist_ok=True)
     for example in EXAMPLES:
         filename = example.split("/")[-1]
         print("install toio.py example: %s" % filename)
         data = requests.get(example).content
-        with open(os.path.join(example_dir, filename), "wb") as wfh:
+        with open(os.path.join(examples_dir, filename), "wb") as wfh:
+            wfh.write(data)
+else:
+    print("SKIP: example files are already installed")
+print("------------------------------------------------------------")
+print("install examples-simple")
+if not os.path.isdir(examples_simple_dir):
+    os.makedirs(examples_simple_dir, exist_ok=True)
+    for example in EXAMPLES_SIMPLE:
+        filename = example.split("/")[-1]
+        print("install toio.py example (simple API): %s" % filename)
+        data = requests.get(example).content
+        with open(os.path.join(examples_simple_dir, filename), "wb") as wfh:
             wfh.write(data)
 else:
     print("SKIP: example files are already installed")

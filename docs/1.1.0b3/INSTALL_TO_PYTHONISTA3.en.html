@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="docsearch:name" content="toio.py" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="" />
+    <meta name="docsearch:version" content="" />
+    
+      <title>How to install toio.py to Pythonista3 &mdash; toio.py  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-icons.css" type="text/css" />
+          <!-- add (1) pathto "_static/pygments.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=b20cc3f5" />
+          <!-- add (1) pathto "_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts\nunito\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts\nunito\stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts\red-hat-mono\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts\red-hat-mono\stylesheet.css" />
+        <link rel="index" title="Index" href="genindex.html" />
+        <link rel="search" title="Search" href="search.html" />
+        <link rel="top" title="toio.py  documentation" href="#" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Red Hat Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+      h1 *, h2 *, h3 *, h4 *, h5 *, h6 * { font-size: inherit; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to docs navigation</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-wrap flex-xl-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="index.html"
+              
+              class="navbar-brand p-0 me-0 md-lg-2"
+          ><span class="brand-text">toio.py</span></a>
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search docs" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-text">Nefertiti for Sphinx</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              <!-- version_dropdown.html -->
+
+              
+              <!-- colorscheme_dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Toggle light/dark">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none small ms-2">Toggle light/dark</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Light/dark</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="small ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="small ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="small ms-3">Default</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-block">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- danirus sidebartemplate: "version.html" -->
+<h3>Versions</h3>
+<ul>
+  <li><a href="../1.0.1/index.html">1.0.1</a></li>
+  <li><a href="../1.0.2/index.html">1.0.2</a></li>
+  <li><a href="../1.1.0a1/index.html">1.1.0a1</a></li>
+  <li><a href="../1.1.0b1/index.html">1.1.0b1</a></li>
+  <li><a href="../1.1.0b2/index.html">1.1.0b2</a></li>
+  <li><a href="INSTALL_TO_PYTHONISTA3.en.html">1.1.0b3</a></li>
+  <li><a href="../1.1.0b4/INSTALL_TO_PYTHONISTA3.en.html">1.1.0b4</a></li>
+  <li><a href="../1.1.0b5/INSTALL_TO_PYTHONISTA3.en.html">1.1.0b5</a></li>
+</ul>
+
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+    <section id="how-to-install-toio-py-to-pythonista3">
+<h1>How to install toio.py to Pythonista3<a class="headerlink" href="#how-to-install-toio-py-to-pythonista3" title="Permalink to this heading">¶</a></h1>
+<section id="important-note">
+<h2>IMPORTANT NOTE<a class="headerlink" href="#important-note" title="Permalink to this heading">¶</a></h2>
+<p>THIS IS AN EXPERIMENTAL IMPLEMENTATION.<span class="raw-html-m2r"><br></span>
+TOIO.PY WORKS ON PYTHONISTA3 VERSION 3.4 ONLY.<span class="raw-html-m2r"><br></span>
+NOT CONFIRMED TO WORK WITH ANOTHER VERSION OF PYTHONISTA3.</p>
+</section>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">¶</a></h2>
+<p>Install <a class="reference external" href="https://apps.apple.com/jp/app/pythonista-3/id1085978097">Pythonista3</a>.</p>
+</section>
+<section id="how-to-install">
+<h2>How to install<a class="headerlink" href="#how-to-install" title="Permalink to this heading">¶</a></h2>
+<p>To install toio.py and related packages, download
+<span class="raw-html-m2r"><a href="./install_toio.py" download="install_toio.py">install_toio.py</a></span>
+and run on Pythonista3.</p>
+<p>You can open <code class="docutils literal notranslate"><span class="pre">install_toio.py</span></code> by following these steps:</p>
+<section id="downloaded-by-safari">
+<h3>Downloaded by Safari<a class="headerlink" href="#downloaded-by-safari" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Press the hamburger button</p></li>
+<li><p>Select “Open”</p></li>
+<li><p>Select “Folder…”</p></li>
+<li><p>Select “Download”</p></li>
+<li><p>Pick “install_toio.py”</p></li>
+</ul>
+</section>
+<section id="downloaded-by-chrome">
+<h3>Downloaded by Chrome<a class="headerlink" href="#downloaded-by-chrome" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Press the hamburger button</p></li>
+<li><p>Select “Open”</p></li>
+<li><p>Select “Folder…”</p></li>
+<li><p>Select “Download”</p></li>
+<li><p>Select “chrome”</p></li>
+<li><p>Pick “install_toio.py”</p></li>
+</ul>
+<p>Press the triangle button in the upper right corner to start.</p>
+<p>After installation, restart Pythonista3.</p>
+</section>
+</section>
+<section id="run-examples">
+<h2>Run examples<a class="headerlink" href="#run-examples" title="Permalink to this heading">¶</a></h2>
+<p>You can run the example code in the <code class="docutils literal notranslate"><span class="pre">example_toio_py</span></code> folder.</p>
+<section id="note">
+<h3>Note:<a class="headerlink" href="#note" title="Permalink to this heading">¶</a></h3>
+<p><strong>The first time you run the example code, it will confirm the use of Bluetooth and
+terminate with an error.:raw-html-m2r:`&lt;br&gt;`
+Please allow Bluetooth and re-run the example code.</strong></p>
+</section>
+<section id="how-to-select-example-code">
+<h3>How to select example code<a class="headerlink" href="#how-to-select-example-code" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Press the hamburger button</p></li>
+<li><p>Select “This iPad” (or “This iPhone”)</p></li>
+<li><p>Select “example_toio_py”</p></li>
+<li><p>Pick an example code you want to run</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+</article>
+        <aside class="nftt-toc">
+          
+          <div class="mt-3 mb-1 my-lg-0 ps-xl-3 text-muted">
+            <button class="btn btn-link link-dark p-lg-0 mb-2 mb-lg-0 text-decoration-none nftt-toc-toggle d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents"
+            >On this page <i class="ms-2 bi bi-chevron-expand"></i></button>
+            <div class="title d-none d-lg-block">
+              <i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;<span class="small">On this page</span>
+            </div>
+            <div class="collapse nftt-toc-collapse" id="tocContents">
+              <nav id="TableOfContents">
+                <ul>
+<li><a class="reference internal" href="#">How to install toio.py to Pythonista3</a><ul>
+<li><a class="reference internal" href="#important-note">IMPORTANT NOTE</a></li>
+<li><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li><a class="reference internal" href="#how-to-install">How to install</a><ul>
+<li><a class="reference internal" href="#downloaded-by-safari">Downloaded by Safari</a></li>
+<li><a class="reference internal" href="#downloaded-by-chrome">Downloaded by Chrome</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-examples">Run examples</a><ul>
+<li><a class="reference internal" href="#note">Note:</a></li>
+<li><a class="reference internal" href="#how-to-select-example-code">How to select example code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </nav>
+            </div>
+          </div>
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      
+<nav id="paginator"></nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Nefertiti-for-Sphinx">
+          <span class="fs-6 fw-bold">toio.py</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2022, Sony Interactive Entertainment</li>
+          </ul>
+        
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 7.1.2</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+
+    <script type="text/javascript" src="_static/sphinx-nefertiti-0.3.2.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.bundle-0.3.2.min.js"></script>
+    
+    <script type="text/javascript" src="_static/doc_versions.js"></script>
+  </body>
+</html>

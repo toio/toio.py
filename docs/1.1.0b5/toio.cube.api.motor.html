@@ -1,0 +1,1076 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="docsearch:name" content="toio.py" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="" />
+    <meta name="docsearch:version" content="" />
+    
+      <title>toio.cube.api.motor module &mdash; toio.py  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-icons.css" type="text/css" />
+          <!-- add (1) pathto "_static/pygments.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=b20cc3f5" />
+          <!-- add (1) pathto "_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts\nunito\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts\nunito\stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts\red-hat-mono\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts\red-hat-mono\stylesheet.css" />
+        <link rel="index" title="Index" href="genindex.html" />
+        <link rel="search" title="Search" href="search.html" />
+        <link rel="top" title="toio.py  documentation" href="#" />
+        <link rel="up" title="toio.cube.api package" href="toio.cube.api.html" />
+        <link rel="next" title="toio.cube.api.sensor module" href="toio.cube.api.sensor.html" />
+        <link rel="prev" title="toio.cube.api.indicator module" href="toio.cube.api.indicator.html" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Red Hat Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+      h1 *, h2 *, h3 *, h4 *, h5 *, h6 * { font-size: inherit; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to docs navigation</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-wrap flex-xl-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="index.html"
+              
+              class="navbar-brand p-0 me-0 md-lg-2"
+          ><span class="brand-text">toio.py</span></a>
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search docs" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-text">Nefertiti for Sphinx</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              <!-- version_dropdown.html -->
+
+              
+              <!-- colorscheme_dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Toggle light/dark">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none small ms-2">Toggle light/dark</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Light/dark</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="small ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="small ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="small ms-3">Default</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-block">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- danirus sidebartemplate: "version.html" -->
+<h3>Versions</h3>
+<ul>
+  <li><a href="../1.0.1/toio.cube.api.motor.html">1.0.1</a></li>
+  <li><a href="../1.0.2/toio.cube.api.motor.html">1.0.2</a></li>
+  <li><a href="../1.1.0a1/toio.cube.api.motor.html">1.1.0a1</a></li>
+  <li><a href="../1.1.0b1/toio.cube.api.motor.html">1.1.0b1</a></li>
+  <li><a href="../1.1.0b2/toio.cube.api.motor.html">1.1.0b2</a></li>
+  <li><a href="../1.1.0b3/toio.cube.api.motor.html">1.1.0b3</a></li>
+  <li><a href="../1.1.0b4/toio.cube.api.motor.html">1.1.0b4</a></li>
+  <li><a href="toio.cube.api.motor.html">1.1.0b5</a></li>
+</ul>
+
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+    <section id="module-toio.cube.api.motor">
+<span id="toio-cube-api-motor-module"></span><h1>toio.cube.api.motor module<a class="headerlink" href="#module-toio.cube.api.motor" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControl">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">MotorControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Motor control command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control">https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControl.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControl.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControl.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControl.speed_to_param">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">speed_to_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControl.speed_to_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControl.speed_to_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControl.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControl.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControl.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControl.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControl.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControl.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MovementType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">MovementType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MovementType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MovementType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Movement type</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#movement-type">https://toio.github.io/toio-spec/en/docs/ble_motor#movement-type</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MovementType.Curve">
+<span class="sig-name descname"><span class="pre">Curve</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.MovementType.Curve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MovementType.CurveWithoutReverse">
+<span class="sig-name descname"><span class="pre">CurveWithoutReverse</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.MovementType.CurveWithoutReverse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MovementType.Linear">
+<span class="sig-name descname"><span class="pre">Linear</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.motor.MovementType.Linear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">RotationOption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#RotationOption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.RotationOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Rotation Option</p>
+<p>Angle of the cube at the target point</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#%CE%B8-angle-of-the-cube-at-the-target-point">https://toio.github.io/toio-spec/en/docs/ble_motor#%CE%B8-angle-of-the-cube-at-the-target-point</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption.AbsoluteOptimal">
+<span class="sig-name descname"><span class="pre">AbsoluteOptimal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.RotationOption.AbsoluteOptimal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption.AbsolutePositive">
+<span class="sig-name descname"><span class="pre">AbsolutePositive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.RotationOption.AbsolutePositive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption.AbsoluteNegative">
+<span class="sig-name descname"><span class="pre">AbsoluteNegative</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.motor.RotationOption.AbsoluteNegative" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption.RelativePositive">
+<span class="sig-name descname"><span class="pre">RelativePositive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#toio.cube.api.motor.RotationOption.RelativePositive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption.RelativeNegative">
+<span class="sig-name descname"><span class="pre">RelativeNegative</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#toio.cube.api.motor.RotationOption.RelativeNegative" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption.WithoutRotation">
+<span class="sig-name descname"><span class="pre">WithoutRotation</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#toio.cube.api.motor.RotationOption.WithoutRotation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.RotationOption.SameAsAtWriting">
+<span class="sig-name descname"><span class="pre">SameAsAtWriting</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#toio.cube.api.motor.RotationOption.SameAsAtWriting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.TargetPosition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">TargetPosition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_option</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.RotationOption" title="toio.cube.api.motor.RotationOption"><span class="pre">RotationOption</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">RotationOption.AbsoluteOptimal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#TargetPosition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.TargetPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Target position parameter</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.TargetPosition.cube_location">
+<span class="sig-name descname"><span class="pre">cube_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="toio.position.html#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></em><a class="headerlink" href="#toio.cube.api.motor.TargetPosition.cube_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target position of the cube</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.TargetPosition.rotation_option">
+<span class="sig-name descname"><span class="pre">rotation_option</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.motor.RotationOption" title="toio.cube.api.motor.RotationOption"><span class="pre">RotationOption</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.TargetPosition.rotation_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotation option</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.TargetPosition.from_int">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_option</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><span class="pre">TargetPosition</span></a></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#TargetPosition.from_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.TargetPosition.from_int" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.TargetPosition.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#TargetPosition.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.TargetPosition.flatten" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.TargetPosition.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation" title="toio.position.CubeLocation"><span class="pre">CubeLocation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_option</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.RotationOption" title="toio.cube.api.motor.RotationOption"><span class="pre">RotationOption</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">RotationOption.AbsoluteOptimal</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.cube.api.motor.TargetPosition.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.SpeedChangeType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">SpeedChangeType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#SpeedChangeType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.SpeedChangeType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Speed change type</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#motor-speed-change-types">https://toio.github.io/toio-spec/en/docs/ble_motor#motor-speed-change-types</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.SpeedChangeType.Constant">
+<span class="sig-name descname"><span class="pre">Constant</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.SpeedChangeType.Constant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.SpeedChangeType.Acceleration">
+<span class="sig-name descname"><span class="pre">Acceleration</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.SpeedChangeType.Acceleration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.SpeedChangeType.Deceleration">
+<span class="sig-name descname"><span class="pre">Deceleration</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.motor.SpeedChangeType.Deceleration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.SpeedChangeType.AccelerationAndDeceleration">
+<span class="sig-name descname"><span class="pre">AccelerationAndDeceleration</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#toio.cube.api.motor.SpeedChangeType.AccelerationAndDeceleration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Speed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">Speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_change_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType" title="toio.cube.api.motor.SpeedChangeType"><span class="pre">SpeedChangeType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SpeedChangeType.Constant</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Speed parameter</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Speed.max">
+<span class="sig-name descname"><span class="pre">max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.Speed.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max speed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Speed.speed_change_type">
+<span class="sig-name descname"><span class="pre">speed_change_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType" title="toio.cube.api.motor.SpeedChangeType"><span class="pre">SpeedChangeType</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.Speed.speed_change_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Speed change type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Speed.from_int">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_change_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><span class="pre">Speed</span></a></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Speed.from_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Speed.from_int" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Speed.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Speed.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Speed.flatten" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Speed.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_change_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType" title="toio.cube.api.motor.SpeedChangeType"><span class="pre">SpeedChangeType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SpeedChangeType.Constant</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#toio.cube.api.motor.Speed.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlTarget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">MotorControlTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><span class="pre">MovementType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><span class="pre">Speed</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><span class="pre">TargetPosition</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlTarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Target specified motor control command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified">https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlTarget.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><span class="pre">MovementType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><span class="pre">Speed</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><span class="pre">TargetPosition</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlTarget.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlTarget.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlTarget.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlTarget.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlTarget.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlTarget.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlTarget.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlTarget.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.WriteMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">WriteMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#WriteMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.WriteMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Write mode of MotorControlMultipleTargets()</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#additional-write-operation-settings">https://toio.github.io/toio-spec/en/docs/ble_motor#additional-write-operation-settings</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.WriteMode.Overwrite">
+<span class="sig-name descname"><span class="pre">Overwrite</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.WriteMode.Overwrite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.WriteMode.Append">
+<span class="sig-name descname"><span class="pre">Append</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.WriteMode.Append" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlMultipleTargets">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">MotorControlMultipleTargets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><span class="pre">MovementType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><span class="pre">Speed</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.WriteMode" title="toio.cube.api.motor.WriteMode"><span class="pre">WriteMode</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><span class="pre">TargetPosition</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlMultipleTargets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlMultipleTargets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Multiple targets specified motor control command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-multiple-targets-specified">https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-multiple-targets-specified</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlMultipleTargets.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><span class="pre">MovementType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><span class="pre">Speed</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.WriteMode" title="toio.cube.api.motor.WriteMode"><span class="pre">WriteMode</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><span class="pre">TargetPosition</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlMultipleTargets.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlMultipleTargets.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlMultipleTargets.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlMultipleTargets.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlMultipleTargets.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlMultipleTargets.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlMultipleTargets.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlMultipleTargets.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationRotation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">AccelerationRotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#AccelerationRotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.AccelerationRotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Rotational direction when the cube is changing orientation</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor/#rotational-direction-when-cube-changes-orientation">https://toio.github.io/toio-spec/en/docs/ble_motor/#rotational-direction-when-cube-changes-orientation</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationRotation.Positive">
+<span class="sig-name descname"><span class="pre">Positive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.AccelerationRotation.Positive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationRotation.Negative">
+<span class="sig-name descname"><span class="pre">Negative</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.AccelerationRotation.Negative" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationDirection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">AccelerationDirection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#AccelerationDirection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.AccelerationDirection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Direction of cube travel</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor/#direction-of-cube-travel">https://toio.github.io/toio-spec/en/docs/ble_motor/#direction-of-cube-travel</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationDirection.Forward">
+<span class="sig-name descname"><span class="pre">Forward</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.AccelerationDirection.Forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationDirection.Backward">
+<span class="sig-name descname"><span class="pre">Backward</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.AccelerationDirection.Backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationPriority">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">AccelerationPriority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#AccelerationPriority"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.AccelerationPriority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Priority to the translational speed or the rotational velocity</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor/#priority-designation">https://toio.github.io/toio-spec/en/docs/ble_motor/#priority-designation</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationPriority.TranslationalVelocity">
+<span class="sig-name descname"><span class="pre">TranslationalVelocity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.AccelerationPriority.TranslationalVelocity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.AccelerationPriority.RotationalVelocity">
+<span class="sig-name descname"><span class="pre">RotationalVelocity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.AccelerationPriority.RotationalVelocity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlAcceleration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">MotorControlAcceleration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_velocity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationRotation" title="toio.cube.api.motor.AccelerationRotation"><span class="pre">AccelerationRotation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube_direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationDirection" title="toio.cube.api.motor.AccelerationDirection"><span class="pre">AccelerationDirection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationPriority" title="toio.cube.api.motor.AccelerationPriority"><span class="pre">AccelerationPriority</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlAcceleration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlAcceleration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCommand" title="toio.cube.api.base_class.CubeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCommand</span></code></a></p>
+<p>Acceleration specified motor control command</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor/#motor-control-with-acceleration-specified">https://toio.github.io/toio-spec/en/docs/ble_motor/#motor-control-with-acceleration-specified</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlAcceleration.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_velocity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationRotation" title="toio.cube.api.motor.AccelerationRotation"><span class="pre">AccelerationRotation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube_direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationDirection" title="toio.cube.api.motor.AccelerationDirection"><span class="pre">AccelerationDirection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationPriority" title="toio.cube.api.motor.AccelerationPriority"><span class="pre">AccelerationPriority</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlAcceleration.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlAcceleration.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlAcceleration.__bytes__">
+<span class="sig-name descname"><span class="pre">__bytes__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlAcceleration.__bytes__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlAcceleration.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the byte representation of this class to be sent to cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>byte representation of this class to be sent to cube.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorControlAcceleration.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorControlAcceleration.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorControlAcceleration.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">MotorResponseCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#MotorResponseCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Response code of motor control APIs</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#response-content">https://toio.github.io/toio-spec/en/docs/ble_motor#response-content</a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.SUCCESS">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.SUCCESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.ERROR_TIMEOUT">
+<span class="sig-name descname"><span class="pre">ERROR_TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.ERROR_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.ERROR_ID_MISSED">
+<span class="sig-name descname"><span class="pre">ERROR_ID_MISSED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.ERROR_ID_MISSED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.ERROR_INVALID_PARAMETER">
+<span class="sig-name descname"><span class="pre">ERROR_INVALID_PARAMETER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.ERROR_INVALID_PARAMETER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.ERROR_INVALID_CUBE_STATE">
+<span class="sig-name descname"><span class="pre">ERROR_INVALID_CUBE_STATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.ERROR_INVALID_CUBE_STATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.SUCCESS_WITH_OVERWRITE">
+<span class="sig-name descname"><span class="pre">SUCCESS_WITH_OVERWRITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.SUCCESS_WITH_OVERWRITE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.ERROR_NOT_SUPPORTED">
+<span class="sig-name descname"><span class="pre">ERROR_NOT_SUPPORTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.ERROR_NOT_SUPPORTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseCode.ERROR_FAILED_TO_APPEND">
+<span class="sig-name descname"><span class="pre">ERROR_FAILED_TO_APPEND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#toio.cube.api.motor.MotorResponseCode.ERROR_FAILED_TO_APPEND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlTarget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">ResponseMotorControlTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlTarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Target specified motor control response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlTarget.response_code">
+<span class="sig-name descname"><span class="pre">response_code</span></span><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlTarget.response_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Response code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode" title="toio.cube.api.motor.MotorResponseCode">MotorResponseCode</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#responses-to-motor-control-with-target-specified">https://toio.github.io/toio-spec/en/docs/ble_motor#responses-to-motor-control-with-target-specified</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlTarget.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlTarget.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlTarget.is_myself" title="Permalink to this definition">¶</a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlTarget.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlTarget.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlTarget.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlTarget.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlTarget.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlTarget.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlMultipleTargets">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">ResponseMotorControlMultipleTargets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlMultipleTargets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Multiple target specified motor control response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlMultipleTargets.response_code">
+<span class="sig-name descname"><span class="pre">response_code</span></span><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.response_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Response code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode" title="toio.cube.api.motor.MotorResponseCode">MotorResponseCode</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#responses-to-motor-control-with-multiple-targets-specified">https://toio.github.io/toio-spec/en/docs/ble_motor#responses-to-motor-control-with-multiple-targets-specified</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlMultipleTargets.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlMultipleTargets.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.is_myself" title="Permalink to this definition">¶</a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlMultipleTargets.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlMultipleTargets.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorControlMultipleTargets.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorControlMultipleTargets.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorSpeed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">ResponseMotorSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorSpeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorSpeed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeResponse" title="toio.cube.api.base_class.CubeResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeResponse</span></code></a></p>
+<p>Motor speed response</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorSpeed.left">
+<span class="sig-name descname"><span class="pre">left</span></span><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorSpeed.left" title="Permalink to this definition">¶</a></dt>
+<dd><p>motor speed (left)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorSpeed.right">
+<span class="sig-name descname"><span class="pre">right</span></span><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorSpeed.right" title="Permalink to this definition">¶</a></dt>
+<dd><p>motor speed (right)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#obtaining-motor-speed-information">https://toio.github.io/toio-spec/en/docs/ble_motor#obtaining-motor-speed-information</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorSpeed.is_myself">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_myself</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorSpeed.is_myself"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorSpeed.is_myself" title="Permalink to this definition">¶</a></dt>
+<dd><p>If argument data is a byte representation of this class,
+this function converts the byte representation to an object
+and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorSpeed.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorSpeed.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorSpeed.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.ResponseMotorSpeed.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#ResponseMotorSpeed.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.ResponseMotorSpeed.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="toio.cube.api.motor.MotorResponseType">
+<span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">MotorResponseType</span></span><a class="headerlink" href="#toio.cube.api.motor.MotorResponseType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Response types of motor characteristic</p>
+<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlTarget" title="toio.cube.api.motor.ResponseMotorControlTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseMotorControlTarget</span></code></a>, <a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets" title="toio.cube.api.motor.ResponseMotorControlMultipleTargets"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseMotorControlMultipleTargets</span></code></a>, <a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed" title="toio.cube.api.motor.ResponseMotorSpeed"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseMotorSpeed</span></code></a>]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Motor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toio.cube.api.motor.</span></span><span class="sig-name descname"><span class="pre">Motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Motor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="toio.cube.api.base_class.html#toio.cube.api.base_class.CubeCharacteristic" title="toio.cube.api.base_class.CubeCharacteristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">CubeCharacteristic</span></code></a></p>
+<p>Motor characteristic</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor">https://toio.github.io/toio-spec/en/docs/ble_motor</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Motor.is_my_data">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_my_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlTarget" title="toio.cube.api.motor.ResponseMotorControlTarget"><span class="pre">ResponseMotorControlTarget</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets" title="toio.cube.api.motor.ResponseMotorControlMultipleTargets"><span class="pre">ResponseMotorControlMultipleTargets</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed" title="toio.cube.api.motor.ResponseMotorSpeed"><span class="pre">ResponseMotorSpeed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Motor.is_my_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Motor.is_my_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>If payload is my characteristic response, this function returns
+CubeResponse object. Otherwise, it returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>GattReadData</em>) – received data from the cube.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Motor.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface" title="toio.device_interface.CubeInterface"><span class="pre">CubeInterface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Motor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Motor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Motor.motor_control">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">motor_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Motor.motor_control"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Motor.motor_control" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send motor control command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left</strong> (<em>int</em>) – Motor speed (left)</p></li>
+<li><p><strong>right</strong> (<em>int</em>) – Motor speed (right)</p></li>
+<li><p><strong>duration_ms</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Motor driving period [ms]. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control">https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Motor.motor_control_target">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">motor_control_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><span class="pre">MovementType</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><span class="pre">Speed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><span class="pre">TargetPosition</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Motor.motor_control_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Motor.motor_control_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send target specified motor control command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout [s] (Note: not [ms])</p></li>
+<li><p><strong>movement_type</strong> (<a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><em>MovementType</em></a>) – Movement type</p></li>
+<li><p><strong>speed</strong> (<a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><em>Speed</em></a>) – Speed parameter</p></li>
+<li><p><strong>target</strong> (<a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><em>TargetPosition</em></a>) – Target parameter</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified">https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Motor.motor_control_multiple_targets">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">motor_control_multiple_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><span class="pre">MovementType</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><span class="pre">Speed</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.WriteMode" title="toio.cube.api.motor.WriteMode"><span class="pre">WriteMode</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><span class="pre">TargetPosition</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Motor.motor_control_multiple_targets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Motor.motor_control_multiple_targets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send multiple target specified motor control command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout [s] (Note: not [ms])</p></li>
+<li><p><strong>movement_type</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#toio.cube.api.motor.MovementType" title="toio.cube.api.motor.MovementType"><em>MovementType</em></a><em>, </em><em>int</em><em>]</em>) – Movement type</p></li>
+<li><p><strong>speed</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#toio.cube.api.motor.Speed" title="toio.cube.api.motor.Speed"><em>Speed</em></a><em>, </em><em>Sequence</em><em>[</em><em>int</em><em>]</em><em>]</em>) – Speed parameter</p></li>
+<li><p><strong>mode</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#toio.cube.api.motor.WriteMode" title="toio.cube.api.motor.WriteMode"><em>WriteMode</em></a><em>, </em><em>int</em><em>]</em>) – Write mode</p></li>
+<li><p><strong>target_list</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#toio.cube.api.motor.TargetPosition" title="toio.cube.api.motor.TargetPosition"><em>TargetPosition</em></a><em>, </em><em>Sequence</em><em>[</em><em>int</em><em>]</em><em>]</em><em>]</em>) – Target parameter list</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-multiple-targets-specified">https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-multiple-targets-specified</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toio.cube.api.motor.Motor.motor_control_acceleration">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">motor_control_acceleration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_velocity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationRotation" title="toio.cube.api.motor.AccelerationRotation"><span class="pre">AccelerationRotation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube_direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationDirection" title="toio.cube.api.motor.AccelerationDirection"><span class="pre">AccelerationDirection</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#toio.cube.api.motor.AccelerationPriority" title="toio.cube.api.motor.AccelerationPriority"><span class="pre">AccelerationPriority</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/toio/cube/api/motor.html#Motor.motor_control_acceleration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toio.cube.api.motor.Motor.motor_control_acceleration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send acceleration specified motor control command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>translation</strong> (<em>int</em>) – Speed at which the cube moves in relation to the direction of travel.</p></li>
+<li><p><strong>acceleration</strong> (<em>int</em>) – Specify the increment (or decrement) in speed every 100 milliseconds.</p></li>
+<li><p><strong>rotation_velocity</strong> (<em>int</em>) – Rotational velocity when the cube is changing orientation.</p></li>
+<li><p><strong>rotation_direction</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#toio.cube.api.motor.AccelerationRotation" title="toio.cube.api.motor.AccelerationRotation"><em>AccelerationRotation</em></a><em>, </em><em>int</em><em>]</em>) – Rotational direction when the cube is changing orientation.</p></li>
+<li><p><strong>cube_direction</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#toio.cube.api.motor.AccelerationDirection" title="toio.cube.api.motor.AccelerationDirection"><em>AccelerationDirection</em></a><em>, </em><em>int</em><em>]</em>) – Direction the cube travels.</p></li>
+<li><p><strong>priority</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#toio.cube.api.motor.AccelerationPriority" title="toio.cube.api.motor.AccelerationPriority"><em>AccelerationPriority</em></a><em>, </em><em>int</em><em>]</em>) – Priority to the translational speed or the rotational velocity.</p></li>
+<li><p><strong>duration_ms</strong> (<em>int</em>) – Motor driving period [ms].</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://toio.github.io/toio-spec/en/docs/ble_motor/#motor-control-with-acceleration-specified">https://toio.github.io/toio-spec/en/docs/ble_motor/#motor-control-with-acceleration-specified</a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+</article>
+        <aside class="nftt-toc">
+          
+          <div class="mt-3 mb-1 my-lg-0 ps-xl-3 text-muted">
+            <button class="btn btn-link link-dark p-lg-0 mb-2 mb-lg-0 text-decoration-none nftt-toc-toggle d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents"
+            >On this page <i class="ms-2 bi bi-chevron-expand"></i></button>
+            <div class="title d-none d-lg-block">
+              <i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;<span class="small">On this page</span>
+            </div>
+            <div class="collapse nftt-toc-collapse" id="tocContents">
+              <nav id="TableOfContents">
+                <ul>
+<li><a class="reference internal" href="#">toio.cube.api.motor module</a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControl"><code class="docutils literal notranslate"><span class="pre">MotorControl</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControl.__init__"><code class="docutils literal notranslate"><span class="pre">MotorControl.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControl.speed_to_param"><code class="docutils literal notranslate"><span class="pre">MotorControl.speed_to_param()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControl.__bytes__"><code class="docutils literal notranslate"><span class="pre">MotorControl.__bytes__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControl.__str__"><code class="docutils literal notranslate"><span class="pre">MotorControl.__str__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MovementType"><code class="docutils literal notranslate"><span class="pre">MovementType</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.MovementType.Curve"><code class="docutils literal notranslate"><span class="pre">MovementType.Curve</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MovementType.CurveWithoutReverse"><code class="docutils literal notranslate"><span class="pre">MovementType.CurveWithoutReverse</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MovementType.Linear"><code class="docutils literal notranslate"><span class="pre">MovementType.Linear</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption"><code class="docutils literal notranslate"><span class="pre">RotationOption</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption.AbsoluteOptimal"><code class="docutils literal notranslate"><span class="pre">RotationOption.AbsoluteOptimal</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption.AbsolutePositive"><code class="docutils literal notranslate"><span class="pre">RotationOption.AbsolutePositive</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption.AbsoluteNegative"><code class="docutils literal notranslate"><span class="pre">RotationOption.AbsoluteNegative</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption.RelativePositive"><code class="docutils literal notranslate"><span class="pre">RotationOption.RelativePositive</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption.RelativeNegative"><code class="docutils literal notranslate"><span class="pre">RotationOption.RelativeNegative</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption.WithoutRotation"><code class="docutils literal notranslate"><span class="pre">RotationOption.WithoutRotation</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.RotationOption.SameAsAtWriting"><code class="docutils literal notranslate"><span class="pre">RotationOption.SameAsAtWriting</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.TargetPosition"><code class="docutils literal notranslate"><span class="pre">TargetPosition</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.TargetPosition.cube_location"><code class="docutils literal notranslate"><span class="pre">TargetPosition.cube_location</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.TargetPosition.rotation_option"><code class="docutils literal notranslate"><span class="pre">TargetPosition.rotation_option</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.TargetPosition.from_int"><code class="docutils literal notranslate"><span class="pre">TargetPosition.from_int()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.TargetPosition.flatten"><code class="docutils literal notranslate"><span class="pre">TargetPosition.flatten()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.TargetPosition.__init__"><code class="docutils literal notranslate"><span class="pre">TargetPosition.__init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType"><code class="docutils literal notranslate"><span class="pre">SpeedChangeType</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType.Constant"><code class="docutils literal notranslate"><span class="pre">SpeedChangeType.Constant</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType.Acceleration"><code class="docutils literal notranslate"><span class="pre">SpeedChangeType.Acceleration</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType.Deceleration"><code class="docutils literal notranslate"><span class="pre">SpeedChangeType.Deceleration</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.SpeedChangeType.AccelerationAndDeceleration"><code class="docutils literal notranslate"><span class="pre">SpeedChangeType.AccelerationAndDeceleration</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Speed"><code class="docutils literal notranslate"><span class="pre">Speed</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.Speed.max"><code class="docutils literal notranslate"><span class="pre">Speed.max</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Speed.speed_change_type"><code class="docutils literal notranslate"><span class="pre">Speed.speed_change_type</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Speed.from_int"><code class="docutils literal notranslate"><span class="pre">Speed.from_int()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Speed.flatten"><code class="docutils literal notranslate"><span class="pre">Speed.flatten()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Speed.__init__"><code class="docutils literal notranslate"><span class="pre">Speed.__init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlTarget"><code class="docutils literal notranslate"><span class="pre">MotorControlTarget</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlTarget.__init__"><code class="docutils literal notranslate"><span class="pre">MotorControlTarget.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlTarget.__bytes__"><code class="docutils literal notranslate"><span class="pre">MotorControlTarget.__bytes__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlTarget.__str__"><code class="docutils literal notranslate"><span class="pre">MotorControlTarget.__str__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.WriteMode"><code class="docutils literal notranslate"><span class="pre">WriteMode</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.WriteMode.Overwrite"><code class="docutils literal notranslate"><span class="pre">WriteMode.Overwrite</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.WriteMode.Append"><code class="docutils literal notranslate"><span class="pre">WriteMode.Append</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlMultipleTargets"><code class="docutils literal notranslate"><span class="pre">MotorControlMultipleTargets</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlMultipleTargets.__init__"><code class="docutils literal notranslate"><span class="pre">MotorControlMultipleTargets.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlMultipleTargets.__bytes__"><code class="docutils literal notranslate"><span class="pre">MotorControlMultipleTargets.__bytes__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlMultipleTargets.__str__"><code class="docutils literal notranslate"><span class="pre">MotorControlMultipleTargets.__str__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationRotation"><code class="docutils literal notranslate"><span class="pre">AccelerationRotation</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationRotation.Positive"><code class="docutils literal notranslate"><span class="pre">AccelerationRotation.Positive</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationRotation.Negative"><code class="docutils literal notranslate"><span class="pre">AccelerationRotation.Negative</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationDirection"><code class="docutils literal notranslate"><span class="pre">AccelerationDirection</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationDirection.Forward"><code class="docutils literal notranslate"><span class="pre">AccelerationDirection.Forward</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationDirection.Backward"><code class="docutils literal notranslate"><span class="pre">AccelerationDirection.Backward</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationPriority"><code class="docutils literal notranslate"><span class="pre">AccelerationPriority</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationPriority.TranslationalVelocity"><code class="docutils literal notranslate"><span class="pre">AccelerationPriority.TranslationalVelocity</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.AccelerationPriority.RotationalVelocity"><code class="docutils literal notranslate"><span class="pre">AccelerationPriority.RotationalVelocity</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlAcceleration"><code class="docutils literal notranslate"><span class="pre">MotorControlAcceleration</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlAcceleration.__init__"><code class="docutils literal notranslate"><span class="pre">MotorControlAcceleration.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlAcceleration.__bytes__"><code class="docutils literal notranslate"><span class="pre">MotorControlAcceleration.__bytes__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorControlAcceleration.__str__"><code class="docutils literal notranslate"><span class="pre">MotorControlAcceleration.__str__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.SUCCESS"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.SUCCESS</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.ERROR_TIMEOUT"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.ERROR_TIMEOUT</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.ERROR_ID_MISSED"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.ERROR_ID_MISSED</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.ERROR_INVALID_PARAMETER"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.ERROR_INVALID_PARAMETER</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.ERROR_INVALID_CUBE_STATE"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.ERROR_INVALID_CUBE_STATE</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.SUCCESS_WITH_OVERWRITE"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.SUCCESS_WITH_OVERWRITE</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.ERROR_NOT_SUPPORTED"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.ERROR_NOT_SUPPORTED</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseCode.ERROR_FAILED_TO_APPEND"><code class="docutils literal notranslate"><span class="pre">MotorResponseCode.ERROR_FAILED_TO_APPEND</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlTarget"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlTarget</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlTarget.response_code"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlTarget.response_code</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlTarget.is_myself"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlTarget.is_myself()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlTarget.__init__"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlTarget.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlTarget.__str__"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlTarget.__str__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlMultipleTargets</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.response_code"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlMultipleTargets.response_code</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.is_myself"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlMultipleTargets.is_myself()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.__init__"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlMultipleTargets.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorControlMultipleTargets.__str__"><code class="docutils literal notranslate"><span class="pre">ResponseMotorControlMultipleTargets.__str__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed"><code class="docutils literal notranslate"><span class="pre">ResponseMotorSpeed</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed.left"><code class="docutils literal notranslate"><span class="pre">ResponseMotorSpeed.left</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed.right"><code class="docutils literal notranslate"><span class="pre">ResponseMotorSpeed.right</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed.is_myself"><code class="docutils literal notranslate"><span class="pre">ResponseMotorSpeed.is_myself()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed.__init__"><code class="docutils literal notranslate"><span class="pre">ResponseMotorSpeed.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.ResponseMotorSpeed.__str__"><code class="docutils literal notranslate"><span class="pre">ResponseMotorSpeed.__str__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#toio.cube.api.motor.MotorResponseType"><code class="docutils literal notranslate"><span class="pre">MotorResponseType</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Motor"><code class="docutils literal notranslate"><span class="pre">Motor</span></code></a><ul>
+<li><a class="reference internal" href="#toio.cube.api.motor.Motor.is_my_data"><code class="docutils literal notranslate"><span class="pre">Motor.is_my_data()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Motor.__init__"><code class="docutils literal notranslate"><span class="pre">Motor.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Motor.motor_control"><code class="docutils literal notranslate"><span class="pre">Motor.motor_control()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Motor.motor_control_target"><code class="docutils literal notranslate"><span class="pre">Motor.motor_control_target()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Motor.motor_control_multiple_targets"><code class="docutils literal notranslate"><span class="pre">Motor.motor_control_multiple_targets()</span></code></a></li>
+<li><a class="reference internal" href="#toio.cube.api.motor.Motor.motor_control_acceleration"><code class="docutils literal notranslate"><span class="pre">Motor.motor_control_acceleration()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </nav>
+            </div>
+          </div>
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      <nav id="paginator" class="py-4" aria-label="Documentation navigation">
+    <div class="container">
+      <ul class="pagination justify-content-between mb-0"><li class="page-item">
+            <a href="toio.cube.api.indicator.html" class="d-flex px-5 align-items-end" rel="prev" aria-label="Previous page: toio.cube.api.indicator module">
+              <span class="prev-page"><i class="bi bi-caret-left"></i></span>
+              <div class="d-flex flex-column">
+                <span class="text-small text-start text-muted">Previous</span>
+                <span class="underline">toio.cube.api.indicator module</span>
+              </div>
+            </a>
+          </li>
+        <li class="page-item ms-auto">
+            <a href="toio.cube.api.sensor.html" class="d-flex px-5 align-items-end" rel="next" aria-label="Next page: toio.cube.api.sensor module">
+              <div class="d-flex flex-column">
+                <span class="text-small text-end text-start text-muted">Next</span>
+                <span class="underline">toio.cube.api.sensor module</span>
+              </div>
+              <span class="next-page"><i class="bi bi-caret-right"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Nefertiti-for-Sphinx">
+          <span class="fs-6 fw-bold">toio.py</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2022, Sony Interactive Entertainment</li>
+          </ul>
+        
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 7.1.2</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+
+    <script type="text/javascript" src="_static/sphinx-nefertiti-0.3.2.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.bundle-0.3.2.min.js"></script>
+    
+    <script type="text/javascript" src="_static/doc_versions.js"></script>
+  </body>
+</html>

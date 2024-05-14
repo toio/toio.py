@@ -35,9 +35,12 @@ def cube2():
 
 
 def main():
+    print("** ACTIVATE")
     with futures.ThreadPoolExecutor() as executor:
         executor.submit(cube1)
         executor.submit(cube2)
+    print("** DISCONNECTED")
+    print("** END")
 
 
 main()

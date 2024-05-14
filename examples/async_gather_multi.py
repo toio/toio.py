@@ -15,11 +15,12 @@ from toio.cube.multi_cubes import MultipleToioCoreCubes
 
 
 async def cube1():
+    print("cube group 1 connecting...")
     async with MultipleToioCoreCubes(2) as cubes:
         print("cube1-0", cubes[0].name)
         print("cube1-1", cubes[1].name)
-        await cubes[0].api.indicator.turn_on((0, 0x80, 0x80, 0x00))
-        await cubes[1].api.indicator.turn_on((0, 0xFF, 0xFF, 0x00))
+        await cubes[0].api.indicator.turn_on((0, 0xFF, 0xFF, 0x00))
+        await cubes[1].api.indicator.turn_on((0, 0x10, 0x10, 0x00))
         button = None
         while button is None or button.state == ButtonState.RELEASED:
             button = await cubes[0].api.button.read()
@@ -29,11 +30,12 @@ async def cube1():
 
 
 async def cube2():
+    print("cube group 2 connecting...")
     async with MultipleToioCoreCubes(2) as cubes:
         print("cube2-0", cubes[0].name)
         print("cube2-1", cubes[1].name)
-        await cubes[0].api.indicator.turn_on((0, 0x00, 0x80, 0x80))
-        await cubes[1].api.indicator.turn_on((0, 0x00, 0xFF, 0xFF))
+        await cubes[0].api.indicator.turn_on((0, 0x00, 0xFF, 0xFF))
+        await cubes[1].api.indicator.turn_on((0, 0x00, 0x10, 0x10))
         button = None
         while button is None or button.state == ButtonState.RELEASED:
             button = await cubes[0].api.button.read()

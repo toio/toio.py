@@ -33,7 +33,7 @@ Downloaded by Safari
 * Press the hamburger button
 * Select "Open"
 * Select "Folder..."
-* Select "Download"
+* Select "Downloads"
 * Pick "install_toio.py"
 
 Downloaded by Chrome
@@ -43,8 +43,8 @@ Downloaded by Chrome
 * Press the hamburger button
 * Select "Open"
 * Select "Folder..."
-* Select "Download"
-* Select "chrome"
+* Select "On My iPad" (or "On My iPhone")
+* Select "Chrome"
 * Pick "install_toio.py"
 
 Press the triangle button in the upper right corner to start.
@@ -69,5 +69,5 @@ How to select example code
 
 * Press the hamburger button
 * Select "This iPad" (or "This iPhone")
-* Select "example_toio_py"
+* Select "examples_toio_py" or "examples_simple_toio_py"
 * Pick an example code you want to run

@@ -14,17 +14,15 @@
     
     <link rel="stylesheet" href="../../../_static/bootstrap-icons.css" type="text/css" />
           <!-- add (1) pathto "_static/pygments.css" -->
-          <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+          <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=83e35b93" />
           <!-- add (1) pathto "_static/pygments_dark.css" -->
-          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
-          <!-- add (1) pathto "_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" -->
-          <link rel="stylesheet" type="text/css" href="../../../_static/colorsets/sphinx-nefertiti-default-0.3.2.min.css" />
-          <!-- add (1) pathto "_static/fonts/nunito/stylesheet.css" -->
-          <link rel="stylesheet" type="text/css" href="../../../_static/fonts/nunito/stylesheet.css" />
-          <!-- add (1) pathto "_static/fonts/red-hat-mono/stylesheet.css" -->
-          <link rel="stylesheet" type="text/css" href="../../../_static/fonts/red-hat-mono/stylesheet.css" />
-          <!-- add (1) pathto "_static/pygments_dark.css" -->
-          <link rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css?v=b20cc3f5" />
+          <!-- add (1) pathto "_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts\nunito\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/fonts\nunito\stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts\red-hat-mono\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="../../../_static/fonts\red-hat-mono\stylesheet.css" />
         <link rel="index" title="Index" href="../../../genindex.html" />
         <link rel="search" title="Search" href="../../../search.html" />
         <link rel="top" title="toio.py  documentation" href="#" />
@@ -175,6 +173,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
@@ -229,6 +228,12 @@
 
 <div class="viewcode-block" id="BleCube.__init__"><a class="viewcode-back" href="../../../toio.device_interface.ble.html#toio.device_interface.ble.BleCube.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">CubeDevice</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">bleak.backends.winrt.scanner</span> <span class="kn">import</span> <span class="n">_RawAdvData</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">CubeDevice</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">device</span><span class="o">.</span><span class="n">details</span><span class="o">.</span><span class="n">adv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">device</span><span class="o">.</span><span class="n">details</span> <span class="o">=</span> <span class="n">_RawAdvData</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">details</span><span class="o">.</span><span class="n">scan</span><span class="p">,</span> <span class="n">device</span><span class="o">.</span><span class="n">details</span><span class="o">.</span><span class="n">scan</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;copy scan to adv&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">BleakClient</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">_get_platform_client_backend_type</span><span class="p">())</span></div>
 
     <span class="k">async</span> <span class="k">def</span> <span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -439,7 +444,7 @@
         
         
         <div class="built-with pt-2">
-          Built with <a href="http://sphinx-doc.org">Sphinx 6.2.1</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+          Built with <a href="http://sphinx-doc.org">Sphinx 7.1.2</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
         </div>
         
       </div>
@@ -447,9 +452,9 @@
   </div>
 </div>
     </footer>
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
 
     <script type="text/javascript" src="../../../_static/sphinx-nefertiti-0.3.2.min.js"></script>
     <script type="text/javascript" src="../../../_static/bootstrap.bundle-0.3.2.min.js"></script>
