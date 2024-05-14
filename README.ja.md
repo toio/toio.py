@@ -21,12 +21,13 @@
 
 ### 主な確認環境
 
-- Windows: Windows10 (21H2)
+- Windows: Windows10 (22H2)
 
 ### 補助的な確認環境
 
-- Linux: Ubuntu22.04
-- macOS: macOS 13(Ventura)
+- Windows: Windows11 (23H2)
+- Linux: Ubuntu24.04
+- macOS: macOS 14(Sonoma)
 
 ### 実験的な実装
 

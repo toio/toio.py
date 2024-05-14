@@ -23,12 +23,13 @@ Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v
 
 ### Primary tested environment
 
-- Windows: Windows 10 (21H2)
+- Windows: Windows 10 (22H2)
 
 ### Secondary tested environment
 
-- Linux: Ubuntu22.04
-- macOS: macOS 13(Ventura)
+- Windows: Windows 11 (23H2)
+- Linux: Ubuntu24.04
+- macOS: macOS 14(Sonoma)
 
 ### Experimental implementation
 

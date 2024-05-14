@@ -6,12 +6,17 @@ This is a setup guide of toio.py (library for controlling [toio™Core Cube](htt
 
 ### Primary tested environment
 
-- Windows: Windows10 (21H2)
+- Windows: Windows10 (22H2)
 
 ### Secondary tested environment
 
-- Linux: Ubuntu22.04
-- macOS: macOS 12 (Monterey)
+- Windows: Windows11 (23H2)
+- Linux: Ubuntu24.04
+- macOS: macOS 14(Sonoma)
+
+### Experimental implementation
+
+- iOS, iPadOS: 17
 
 ## Install (Windows)
 

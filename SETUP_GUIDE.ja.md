@@ -7,12 +7,17 @@ toio.py は Python から[toio コアキューブ](https://toio.io/platform/cube
 
 ### 主な確認環境
 
-- Windows: Windows10 (21H2)
+- Windows: Windows10 (22H2)
 
 ### 補助的な確認環境
 
-- Linux: Ubuntu22.04
-- macOS: macOS 12(Monterey)
+- Windows: Windows11 (23H2)
+- Linux: Ubuntu24.04
+- macOS: macOS 14(Sonoma)
+
+### 実験的な実装
+
+- iOS, iPadOS: 17
 
 ## インストール（Windows）
 
