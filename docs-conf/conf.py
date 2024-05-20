@@ -61,6 +61,6 @@ autosummary_generate = True
 
 # -- Options for multiversion ------------------------------------------------
 
-smv_tag_whitelist = r"^\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|\d+\.post\d+)$"
+smv_tag_whitelist = r"^\d+\.\d+\.(\d+|\d(rc)*\d+|\d+\.post\d+)$"
 smv_branch_whitelist = "__DOCUMENT_FOR_BRANCH_IS_NOT_GENERATED__"
 

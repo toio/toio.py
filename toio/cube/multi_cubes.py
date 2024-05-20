@@ -37,7 +37,7 @@ class MultipleToioCoreCubes:
     """
     Multiple cube control class
 
-    This class is a wrapper to control multiple cubes more easier.
+    This class is a wrapper to control multiple cubes easier.
 
     When MultipleToioCoreCubes is initialized with an integer, the scan() function
     can search for a specified number of cubes.

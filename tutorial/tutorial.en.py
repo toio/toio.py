@@ -242,7 +242,7 @@ async with ToioCoreCube() as cube:
 # Read from the [ID Information characteristic](https://toio.github.io/toio-spec/en/docs/ble_id).
 #
 # 'read_data' can be one of the following objects or a `None`:
-# If 'read_data' does not match the format of any of the objects listed below, the return value of `read()` will be`None`.
+# If 'read_data' does not match the format of the objects listed below, the return value of `read()` will be`None`.
 #
 # (`id_information.read()` internally calls the characteristic static method`IdInformation.is_my_data()`)
 #
@@ -433,7 +433,7 @@ async with ToioCoreCube() as cube:
 #
 # #### max
 #
-# Specifies the maximum maximum speed. The speed can be specified in the range 0 to 255.
+# Specifies the maximum speed. The speed can be specified in the range 0 to 255.
 #
 # #### speed_change_type
 #
@@ -470,15 +470,15 @@ async with ToioCoreCube() as cube:
 #
 # Specifies additional information about the angle of the cube at the target location.
 #
-# | Value                           | Angle                           | Direction of rotation                 |
-# | --------------------------------| ------------------------------- | ------------------------------------- |
-# | RotationOption.AbsoluteOptimal  | Absolute                        | Direction of least amount of rotation |
-# | RotationOption.AbsolutePositive | Absolute                        | Forward direction                     |
-# | RotationOption.AbsoluteNegative | Absolute                        | Negative direction                    |
-# | RotationOption.RelativePositive | Relative                        | Forward direction                     |
-# | RotationOption.RelativeNegative | Relative                        | Negative direction                    |
-# | RotationOption.WithoutRotation  | (No angle specified)            | No rotation                           |
-# | RotationOption.SameAsWriting    | (Same as with write operation)  | Direction of least amount of rotation |
+# | Value                           | Angle                           | Direction of rotation                   |
+# | --------------------------------| ------------------------------- | --------------------------------------- |
+# | RotationOption.AbsoluteOptimal  | Absolute                        | Direction with small amount of rotation |
+# | RotationOption.AbsolutePositive | Absolute                        | Forward direction                       |
+# | RotationOption.AbsoluteNegative | Absolute                        | Negative direction                      |
+# | RotationOption.RelativePositive | Relative                        | Forward direction                       |
+# | RotationOption.RelativeNegative | Relative                        | Negative direction                      |
+# | RotationOption.WithoutRotation  | (No angle specified)            | No rotation                             |
+# | RotationOption.SameAsWriting    | (Same as with write operation)  | Direction with small amount of rotation |
 #
 # The code below will move the cube to coordinates (200, 200) on the Developer Mat.
 #
