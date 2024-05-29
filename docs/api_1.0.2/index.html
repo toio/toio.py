@@ -1,0 +1,599 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="docsearch:name" content="toio.py" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="" />
+    <meta name="docsearch:version" content="" />
+    
+      <title>Welcome to toio.py’s documentation! &mdash; toio.py  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-icons.css" type="text/css" />
+          <!-- add (1) pathto "_static/pygments.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
+          <!-- add (1) pathto "_static/pygments_dark.css" -->
+          <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=b20cc3f5" />
+          <!-- add (1) pathto "_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/colorsets\sphinx-nefertiti-default-0.3.2.min.css" />
+          <!-- add (1) pathto "_static/fonts\nunito\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts\nunito\stylesheet.css" />
+          <!-- add (1) pathto "_static/fonts\red-hat-mono\stylesheet.css" -->
+          <link rel="stylesheet" type="text/css" href="_static/fonts\red-hat-mono\stylesheet.css" />
+        <link rel="index" title="Index" href="genindex.html" />
+        <link rel="search" title="Search" href="search.html" />
+        <link rel="top" title="toio.py  documentation" href="#" />
+        <link rel="next" title="toio package" href="toio.html" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Red Hat Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+      h1 *, h2 *, h3 *, h4 *, h5 *, h6 * { font-size: inherit; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to docs navigation</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-wrap flex-xl-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="#"
+              
+              class="navbar-brand p-0 me-0 md-lg-2"
+          ><span class="brand-text">toio.py</span></a>
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search docs" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-text">Nefertiti for Sphinx</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              <!-- version_dropdown.html -->
+
+              
+              <!-- colorscheme_dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Toggle light/dark">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none small ms-2">Toggle light/dark</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Light/dark</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="small ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="small ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span class="small">
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="small ms-3">Default</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-block">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- danirus sidebartemplate: "version.html" -->
+<h3>Versions</h3>
+<ul>
+  <li><a href="index.html">api_1.0.2</a></li>
+  <li><a href="../api_1.1.0/index.html">api_1.1.0</a></li>
+</ul>
+
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+    <section id="welcome-to-toio-py-s-documentation">
+<h1>Welcome to toio.py’s documentation!<a class="headerlink" href="#welcome-to-toio-py-s-documentation" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="toio.html">toio package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="toio.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="toio.cube.html">toio.cube package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.cube.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.cube.api.html">toio.cube.api package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="toio.cube.api.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.device_interface.html">toio.device_interface package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface"><code class="docutils literal notranslate"><span class="pre">CubeInterface</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface.connect"><code class="docutils literal notranslate"><span class="pre">CubeInterface.connect()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface.disconnect"><code class="docutils literal notranslate"><span class="pre">CubeInterface.disconnect()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface.read"><code class="docutils literal notranslate"><span class="pre">CubeInterface.read()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface.write"><code class="docutils literal notranslate"><span class="pre">CubeInterface.write()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface.register_notification_handler"><code class="docutils literal notranslate"><span class="pre">CubeInterface.register_notification_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInterface.unregister_notification_handler"><code class="docutils literal notranslate"><span class="pre">CubeInterface.unregister_notification_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo"><code class="docutils literal notranslate"><span class="pre">CubeInfo</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo.name"><code class="docutils literal notranslate"><span class="pre">CubeInfo.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo.device"><code class="docutils literal notranslate"><span class="pre">CubeInfo.device</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo.interface"><code class="docutils literal notranslate"><span class="pre">CubeInfo.interface</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.CubeInfo.advertisement"><code class="docutils literal notranslate"><span class="pre">CubeInfo.advertisement</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.ScannerInterface"><code class="docutils literal notranslate"><span class="pre">ScannerInterface</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.html#toio.device_interface.ScannerInterface.scan"><code class="docutils literal notranslate"><span class="pre">ScannerInterface.scan()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.device_interface.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.device_interface.ble.html">toio.device_interface.ble module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleCube"><code class="docutils literal notranslate"><span class="pre">BleCube</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="toio.device_interface.ble.html#toio.device_interface.ble.BleScanner"><code class="docutils literal notranslate"><span class="pre">BleScanner</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.scanner.html">toio.scanner package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.scanner.html#submodules">Submodules</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.scanner.ble.html">toio.scanner.ble module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="toio.scanner.ble.html#toio.scanner.ble.scan"><code class="docutils literal notranslate"><span class="pre">scan()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="toio.scanner.ble.html#toio.scanner.ble.scan_with_id"><code class="docutils literal notranslate"><span class="pre">scan_with_id()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="toio.scanner.ble.html#toio.scanner.ble.scan_with_address"><code class="docutils literal notranslate"><span class="pre">scan_with_address()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="toio.scanner.ble.html#toio.scanner.ble.scan_registered_cubes"><code class="docutils literal notranslate"><span class="pre">scan_registered_cubes()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="toio.scanner.ble.html#toio.scanner.ble.scan_registered_cubes_with_id"><code class="docutils literal notranslate"><span class="pre">scan_registered_cubes_with_id()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.simple.html">toio.simple package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.simple.html#toio.simple.Direction"><code class="docutils literal notranslate"><span class="pre">Direction</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.Direction.Forward"><code class="docutils literal notranslate"><span class="pre">Direction.Forward</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.Direction.Backward"><code class="docutils literal notranslate"><span class="pre">Direction.Backward</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.Direction.Right"><code class="docutils literal notranslate"><span class="pre">Direction.Right</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.Direction.Left"><code class="docutils literal notranslate"><span class="pre">Direction.Left</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube"><code class="docutils literal notranslate"><span class="pre">SimpleCube</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.DEFAULT_ROTATION_OPTION"><code class="docutils literal notranslate"><span class="pre">SimpleCube.DEFAULT_ROTATION_OPTION</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.DEFAULT_MOVEMENT_TYPE"><code class="docutils literal notranslate"><span class="pre">SimpleCube.DEFAULT_MOVEMENT_TYPE</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.DEFAULT_TIMEOUT"><code class="docutils literal notranslate"><span class="pre">SimpleCube.DEFAULT_TIMEOUT</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.DEFAULT_ONE_STEP"><code class="docutils literal notranslate"><span class="pre">SimpleCube.DEFAULT_ONE_STEP</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.CELL_SIZE"><code class="docutils literal notranslate"><span class="pre">SimpleCube.CELL_SIZE</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.MONITORING_CYCLE"><code class="docutils literal notranslate"><span class="pre">SimpleCube.MONITORING_CYCLE</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.search"><code class="docutils literal notranslate"><span class="pre">SimpleCube.search()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.__init__"><code class="docutils literal notranslate"><span class="pre">SimpleCube.__init__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.disconnect"><code class="docutils literal notranslate"><span class="pre">SimpleCube.disconnect()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.sleep"><code class="docutils literal notranslate"><span class="pre">SimpleCube.sleep()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.move"><code class="docutils literal notranslate"><span class="pre">SimpleCube.move()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.spin"><code class="docutils literal notranslate"><span class="pre">SimpleCube.spin()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.run_motor"><code class="docutils literal notranslate"><span class="pre">SimpleCube.run_motor()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.stop_motor"><code class="docutils literal notranslate"><span class="pre">SimpleCube.stop_motor()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.move_steps"><code class="docutils literal notranslate"><span class="pre">SimpleCube.move_steps()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.turn"><code class="docutils literal notranslate"><span class="pre">SimpleCube.turn()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.move_to"><code class="docutils literal notranslate"><span class="pre">SimpleCube.move_to()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.set_orientation"><code class="docutils literal notranslate"><span class="pre">SimpleCube.set_orientation()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.move_to_the_grid_cell"><code class="docutils literal notranslate"><span class="pre">SimpleCube.move_to_the_grid_cell()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_current_position"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_current_position()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_x"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_y"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_y()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_orientation"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_orientation()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_grid"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_grid()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_grid_x"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_grid_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_grid_y"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_grid_y()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.is_on_the_gird_cell"><code class="docutils literal notranslate"><span class="pre">SimpleCube.is_on_the_gird_cell()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.is_touched"><code class="docutils literal notranslate"><span class="pre">SimpleCube.is_touched()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_touched_card"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_touched_card()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_cube_name"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_cube_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_battery_level"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_battery_level()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_3d_angle"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_3d_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.get_posture"><code class="docutils literal notranslate"><span class="pre">SimpleCube.get_posture()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.is_button_pressed"><code class="docutils literal notranslate"><span class="pre">SimpleCube.is_button_pressed()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.turn_on_cube_lamp"><code class="docutils literal notranslate"><span class="pre">SimpleCube.turn_on_cube_lamp()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.turn_off_cube_lamp"><code class="docutils literal notranslate"><span class="pre">SimpleCube.turn_off_cube_lamp()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.play_sound"><code class="docutils literal notranslate"><span class="pre">SimpleCube.play_sound()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.stop_sound"><code class="docutils literal notranslate"><span class="pre">SimpleCube.stop_sound()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.simple.html#toio.simple.SimpleCube.is_magnet_in_contact"><code class="docutils literal notranslate"><span class="pre">SimpleCube.is_magnet_in_contact()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="toio.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="toio.coordinate_systems.html">toio.coordinate_systems module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.__init__"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.__init__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.set_origin"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.set_origin()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.to_native_angle"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.to_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.to_native_x"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.to_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.to_native_y"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.to_native_y()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.from_native_angle"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.from_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.from_native_x"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.from_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.ToioRelativeCoordinateSystem.from_native_y"><code class="docutils literal notranslate"><span class="pre">ToioRelativeCoordinateSystem.from_native_y()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.__init__"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.__init__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.set_origin"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.set_origin()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.to_native_angle"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.to_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.to_native_x"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.to_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.to_native_y"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.to_native_y()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.from_native_angle"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.from_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.from_native_x"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.from_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.coordinate_systems.html#toio.coordinate_systems.VisualProgrammingCoordinateSystem.from_native_y"><code class="docutils literal notranslate"><span class="pre">VisualProgrammingCoordinateSystem.from_native_y()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.logger.html">toio.logger module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.logger.html#toio.logger.get_toio_logger"><code class="docutils literal notranslate"><span class="pre">get_toio_logger()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="toio.logger.html#toio.logger.change_toio_log_level"><code class="docutils literal notranslate"><span class="pre">change_toio_log_level()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="toio.logger.html#toio.logger.output_toio_log"><code class="docutils literal notranslate"><span class="pre">output_toio_log()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.position.html">toio.position module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.position.html#toio.position.Point"><code class="docutils literal notranslate"><span class="pre">Point</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.Point.x"><code class="docutils literal notranslate"><span class="pre">Point.x</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.Point.y"><code class="docutils literal notranslate"><span class="pre">Point.y</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.Point.new"><code class="docutils literal notranslate"><span class="pre">Point.new()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.Point.distance"><code class="docutils literal notranslate"><span class="pre">Point.distance()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.Point.flatten"><code class="docutils literal notranslate"><span class="pre">Point.flatten()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.Point.__init__"><code class="docutils literal notranslate"><span class="pre">Point.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation"><code class="docutils literal notranslate"><span class="pre">CubeLocation</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation.point"><code class="docutils literal notranslate"><span class="pre">CubeLocation.point</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation.angle"><code class="docutils literal notranslate"><span class="pre">CubeLocation.angle</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation.new"><code class="docutils literal notranslate"><span class="pre">CubeLocation.new()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation.get_boundary_point"><code class="docutils literal notranslate"><span class="pre">CubeLocation.get_boundary_point()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation.flatten"><code class="docutils literal notranslate"><span class="pre">CubeLocation.flatten()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CubeLocation.__init__"><code class="docutils literal notranslate"><span class="pre">CubeLocation.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.position.html#toio.position.MatRect"><code class="docutils literal notranslate"><span class="pre">MatRect</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.top_left"><code class="docutils literal notranslate"><span class="pre">MatRect.top_left</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.bottom_right"><code class="docutils literal notranslate"><span class="pre">MatRect.bottom_right</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.name"><code class="docutils literal notranslate"><span class="pre">MatRect.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.new"><code class="docutils literal notranslate"><span class="pre">MatRect.new()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.center"><code class="docutils literal notranslate"><span class="pre">MatRect.center()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.__str__"><code class="docutils literal notranslate"><span class="pre">MatRect.__str__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.flatten"><code class="docutils literal notranslate"><span class="pre">MatRect.flatten()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.MatRect.__init__"><code class="docutils literal notranslate"><span class="pre">MatRect.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.__init__"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.__init__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.set_origin"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.set_origin()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.to_native_angle"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.to_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.to_native_x"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.to_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.to_native_y"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.to_native_y()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.from_native_angle"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.from_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.from_native_x"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.from_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.from_native_y"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.from_native_y()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.to_native_point"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.to_native_point()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.to_native_location"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.to_native_location()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.from_native_point"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.from_native_point()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.CoordinateSystemABC.from_native_location"><code class="docutils literal notranslate"><span class="pre">CoordinateSystemABC.from_native_location()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.__init__"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.__init__()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.set_origin"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.set_origin()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.to_native_angle"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.to_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.to_native_x"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.to_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.to_native_y"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.to_native_y()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.from_native_angle"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.from_native_angle()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.from_native_x"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.from_native_x()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.DefaultCoordinateSystem.from_native_y"><code class="docutils literal notranslate"><span class="pre">DefaultCoordinateSystem.from_native_y()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.relative_location"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.relative_location</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.coordinate_system"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.coordinate_system</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.new"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.new()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.to_absolute_point"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.to_absolute_point()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.to_absolute_location"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.to_absolute_location()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.from_absolute_point"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.from_absolute_point()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.from_absolute_location"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.from_absolute_location()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.change_coordinate_system"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.change_coordinate_system()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.RelativeCubeLocation.__init__"><code class="docutils literal notranslate"><span class="pre">RelativeCubeLocation.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="toio.position.html#toio.position.ToioMat"><code class="docutils literal notranslate"><span class="pre">ToioMat</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.ToioCollectionMatRing"><code class="docutils literal notranslate"><span class="pre">ToioMat.ToioCollectionMatRing</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.ToioCollectionMatColoredTiles"><code class="docutils literal notranslate"><span class="pre">ToioMat.ToioCollectionMatColoredTiles</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.PicotonsPlayMatFront"><code class="docutils literal notranslate"><span class="pre">ToioMat.PicotonsPlayMatFront</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.PicotonsPlayMatBack"><code class="docutils literal notranslate"><span class="pre">ToioMat.PicotonsPlayMatBack</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.PicotonsControlMat"><code class="docutils literal notranslate"><span class="pre">ToioMat.PicotonsControlMat</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.PicotonsAutoplayMat"><code class="docutils literal notranslate"><span class="pre">ToioMat.PicotonsAutoplayMat</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.SimpleMat"><code class="docutils literal notranslate"><span class="pre">ToioMat.SimpleMat</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.GesundroidMat"><code class="docutils literal notranslate"><span class="pre">ToioMat.GesundroidMat</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.position.html#toio.position.ToioMat.mats"><code class="docutils literal notranslate"><span class="pre">ToioMat.mats</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.standard_id.html">toio.standard_id module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard"><code class="docutils literal notranslate"><span class="pre">StandardIdCard</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Typhoon"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Typhoon</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Rush"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Rush</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.AutoTackle"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.AutoTackle</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Random"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Random</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.PoweredUpStrike"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.PoweredUpStrike</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.PoweredUpSlap"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.PoweredUpSlap</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SideAttack"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SideAttack</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.EasyMode"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.EasyMode</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Left"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Left</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Right"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Right</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Forward"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Forward</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Back"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Back</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Go"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Go</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SkunkBlue"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SkunkBlue</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SkunkGreen"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SkunkGreen</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SkunkYellow"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SkunkYellow</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SkunkOrange"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SkunkOrange</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SkunkRed"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SkunkRed</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SkunkBrown"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SkunkBrown</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SpeedUp"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SpeedUp</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SlowDown"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SlowDown</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Wobble"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Wobble</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Panic"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Panic</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Spin"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Spin</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Shock"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Shock</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.CraftFighter"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.CraftFighter</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.RhythmAndGo"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.RhythmAndGo</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.SkunkChaser"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.SkunkChaser</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.FingerStrike"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.FingerStrike</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.FingerStrikeForSinglePlayer"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.FingerStrikeForSinglePlayer</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.FreeMove"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.FreeMove</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.QuickSkunk2p"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.QuickSkunk2p</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.QuickSkunkCpu"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.QuickSkunkCpu</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.KaijuBusters"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.KaijuBusters</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.WatchOutFree"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.WatchOutFree</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.WatchOut2p"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.WatchOut2p</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.WatchOutCpu"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.WatchOutCpu</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ColorMemory"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ColorMemory</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.LaserBeamChallenge"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.LaserBeamChallenge</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.LaserBeamCreate"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.LaserBeamCreate</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Baton"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Baton</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.PullBack"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.PullBack</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Dash"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Dash</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.DontDisturbNormal"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.DontDisturbNormal</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.DontDisturbRodeo"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.DontDisturbRodeo</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.Answer"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.Answer</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MusicSong1"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MusicSong1</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MusicSong2"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MusicSong2</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MusicSong3"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MusicSong3</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MusicSong4"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MusicSong4</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_0"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_0</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_1"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_1</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_2"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_2</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_3"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_3</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_4"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_4</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_5"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_5</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_6"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_6</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_7"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_7</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_8"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_8</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.NUMBER_9"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.NUMBER_9</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_A"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_A</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_B"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_B</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_C"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_C</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_D"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_D</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_E"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_E</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_F"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_F</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_G"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_G</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_H"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_H</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_I"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_I</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_J"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_J</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_K"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_K</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_L"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_L</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_M"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_M</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_N"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_N</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_O"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_O</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_P"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_P</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_Q"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_Q</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_R"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_R</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_S"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_S</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_T"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_T</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_U"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_U</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_V"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_V</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_W"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_W</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_X"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_X</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_Y"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_Y</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.ALPHABET_Z"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.ALPHABET_Z</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Exclamation"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Exclamation</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Up"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Up</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Question"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Question</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Plus"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Plus</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Minus"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Minus</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Equal"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Equal</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Left"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Left</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Down"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Down</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Right"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Right</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Multiplication"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Multiplication</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Division"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Division</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="toio.standard_id.html#toio.standard_id.StandardIdCard.MARK_Percent"><code class="docutils literal notranslate"><span class="pre">StandardIdCard.MARK_Percent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toio.toio_uuid.html">toio.toio_uuid module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toio.utility.html">toio.utility module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toio.utility.html#toio.utility.clip"><code class="docutils literal notranslate"><span class="pre">clip()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+</article>
+        <aside class="nftt-toc">
+          
+          <div class="mt-3 mb-1 my-lg-0 ps-xl-3 text-muted">
+            <button class="btn btn-link link-dark p-lg-0 mb-2 mb-lg-0 text-decoration-none nftt-toc-toggle d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents"
+            >On this page <i class="ms-2 bi bi-chevron-expand"></i></button>
+            <div class="title d-none d-lg-block">
+              <i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;<span class="small">On this page</span>
+            </div>
+            <div class="collapse nftt-toc-collapse" id="tocContents">
+              <nav id="TableOfContents">
+                <ul>
+<li><a class="reference internal" href="#">Welcome to toio.py’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+              </nav>
+            </div>
+          </div>
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      <nav id="paginator" class="py-4" aria-label="Documentation navigation">
+    <div class="container">
+      <ul class="pagination justify-content-between mb-0"><li class="page-item ms-auto">
+            <a href="toio.html" class="d-flex px-5 align-items-end" rel="next" aria-label="Next page: toio package">
+              <div class="d-flex flex-column">
+                <span class="text-small text-end text-start text-muted">Next</span>
+                <span class="underline">toio package</span>
+              </div>
+              <span class="next-page"><i class="bi bi-caret-right"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Nefertiti-for-Sphinx">
+          <span class="fs-6 fw-bold">toio.py</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2022, Sony Interactive Entertainment</li>
+          </ul>
+        
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 7.1.2</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.3.2</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+
+    <script type="text/javascript" src="_static/sphinx-nefertiti-0.3.2.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap.bundle-0.3.2.min.js"></script>
+    
+    <script type="text/javascript" src="_static/doc_versions.js"></script>
+  </body>
+</html>
