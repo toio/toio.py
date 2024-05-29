@@ -30,7 +30,7 @@ else
     GREP="grep -P"
 fi
 
-LATEST=`git tag --sort=committerdate | ${GREP} '^\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|\d+\.post\d+)$' | tail -1`
+LATEST=`git tag --sort=committerdate | ${GREP} '^api_\d+\.\d+\.(\d+|\d(a|b|rc)*\d+|\d+\.post\d+)$' | tail -1`
 
 cp ./mkdocs/index.html ./docs/index.html
 pushd docs
