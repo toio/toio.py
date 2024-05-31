@@ -2,8 +2,7 @@
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 REPO_TOP=$(git rev-parse --show-toplevel)
 
-# DOWNLOAD_URL="https://toio.github.io/toio.py"
-DOWNLOAD_URL="https://toio.github.io/internal-toio.py/examples"
+DOWNLOAD_URL="https://toio.github.io/toio.py"
 EXAMPLES_DIR="${REPO_TOP}/docs/examples"
 EXAMPLES_SIMPLE_DIR="${REPO_TOP}/docs/examples-simple"
 

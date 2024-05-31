@@ -35,8 +35,8 @@ def get_latest_toio_py(min="1.1.0a1", max="1.2.0"):
     max_ver = parse(max)
     latest = Version("0.0.0")
     found_specified_version = False
-    # query = "https://pypi.org/pypi/toio-py/json"
-    query = "https://test.pypi.org/pypi/toio-py/json"
+    query = "https://pypi.org/pypi/toio-py/json"
+    # query = "https://test.pypi.org/pypi/toio-py/json"
     result = requests.get(query).json()
     # search latest version
     releases = result["releases"]
@@ -73,29 +73,29 @@ CLEANUP_TARGETS = (
 )
 
 EXAMPLES = (
-   "https://toio.github.io/internal-toio.py/examples/async_gather.py",
-   "https://toio.github.io/internal-toio.py/examples/async_gather_multi.py",
-   "https://toio.github.io/internal-toio.py/examples/async_task_group.py",
-   "https://toio.github.io/internal-toio.py/examples/detect_mat.py",
-   "https://toio.github.io/internal-toio.py/examples/motor_control.py",
-   "https://toio.github.io/internal-toio.py/examples/multi_cubes_with_attribute.py",
-   "https://toio.github.io/internal-toio.py/examples/multi_cubes_with_named.py",
-   "https://toio.github.io/internal-toio.py/examples/read_position.py",
-   "https://toio.github.io/internal-toio.py/examples/scan_and_connect.py",
-   "https://toio.github.io/internal-toio.py/examples/tutorial_pursuer.py",
+   "https://toio.github.io/toio.py/async_gather.py",
+   "https://toio.github.io/toio.py/async_gather_multi.py",
+   "https://toio.github.io/toio.py/async_task_group.py",
+   "https://toio.github.io/toio.py/detect_mat.py",
+   "https://toio.github.io/toio.py/motor_control.py",
+   "https://toio.github.io/toio.py/multi_cubes_with_attribute.py",
+   "https://toio.github.io/toio.py/multi_cubes_with_named.py",
+   "https://toio.github.io/toio.py/read_position.py",
+   "https://toio.github.io/toio.py/scan_and_connect.py",
+   "https://toio.github.io/toio.py/tutorial_pursuer.py",
 )
 
 EXAMPLES_SIMPLE = (
-   "https://toio.github.io/internal-toio.py/examples/async_gather.py",
-   "https://toio.github.io/internal-toio.py/examples/async_gather_multi.py",
-   "https://toio.github.io/internal-toio.py/examples/async_task_group.py",
-   "https://toio.github.io/internal-toio.py/examples/detect_mat.py",
-   "https://toio.github.io/internal-toio.py/examples/motor_control.py",
-   "https://toio.github.io/internal-toio.py/examples/multi_cubes_with_attribute.py",
-   "https://toio.github.io/internal-toio.py/examples/multi_cubes_with_named.py",
-   "https://toio.github.io/internal-toio.py/examples/read_position.py",
-   "https://toio.github.io/internal-toio.py/examples/scan_and_connect.py",
-   "https://toio.github.io/internal-toio.py/examples/tutorial_pursuer.py",
+   "https://toio.github.io/toio.py/async_gather.py",
+   "https://toio.github.io/toio.py/async_gather_multi.py",
+   "https://toio.github.io/toio.py/async_task_group.py",
+   "https://toio.github.io/toio.py/detect_mat.py",
+   "https://toio.github.io/toio.py/motor_control.py",
+   "https://toio.github.io/toio.py/multi_cubes_with_attribute.py",
+   "https://toio.github.io/toio.py/multi_cubes_with_named.py",
+   "https://toio.github.io/toio.py/read_position.py",
+   "https://toio.github.io/toio.py/scan_and_connect.py",
+   "https://toio.github.io/toio.py/tutorial_pursuer.py",
 )
 
 
