@@ -73,29 +73,32 @@ CLEANUP_TARGETS = (
 )
 
 EXAMPLES = (
-   "https://toio.github.io/toio.py/async_gather.py",
-   "https://toio.github.io/toio.py/async_gather_multi.py",
-   "https://toio.github.io/toio.py/async_task_group.py",
-   "https://toio.github.io/toio.py/detect_mat.py",
-   "https://toio.github.io/toio.py/motor_control.py",
-   "https://toio.github.io/toio.py/multi_cubes_with_attribute.py",
-   "https://toio.github.io/toio.py/multi_cubes_with_named.py",
-   "https://toio.github.io/toio.py/read_position.py",
-   "https://toio.github.io/toio.py/scan_and_connect.py",
-   "https://toio.github.io/toio.py/tutorial_pursuer.py",
+   "https://toio.github.io/toio.py/examples/async_gather.py",
+   "https://toio.github.io/toio.py/examples/async_gather_multi.py",
+   "https://toio.github.io/toio.py/examples/async_task_group.py",
+   "https://toio.github.io/toio.py/examples/detect_mat.py",
+   "https://toio.github.io/toio.py/examples/motor_control.py",
+   "https://toio.github.io/toio.py/examples/multi_cubes_with_attribute.py",
+   "https://toio.github.io/toio.py/examples/multi_cubes_with_named.py",
+   "https://toio.github.io/toio.py/examples/read_position.py",
+   "https://toio.github.io/toio.py/examples/scan_and_connect.py",
+   "https://toio.github.io/toio.py/examples/tutorial_pursuer.py",
 )
 
 EXAMPLES_SIMPLE = (
-   "https://toio.github.io/toio.py/async_gather.py",
-   "https://toio.github.io/toio.py/async_gather_multi.py",
-   "https://toio.github.io/toio.py/async_task_group.py",
-   "https://toio.github.io/toio.py/detect_mat.py",
-   "https://toio.github.io/toio.py/motor_control.py",
-   "https://toio.github.io/toio.py/multi_cubes_with_attribute.py",
-   "https://toio.github.io/toio.py/multi_cubes_with_named.py",
-   "https://toio.github.io/toio.py/read_position.py",
-   "https://toio.github.io/toio.py/scan_and_connect.py",
-   "https://toio.github.io/toio.py/tutorial_pursuer.py",
+   "https://toio.github.io/toio.py/examples-simple/angle_control.py",
+   "https://toio.github.io/toio.py/examples-simple/basic_motor_control.py",
+   "https://toio.github.io/toio.py/examples-simple/concurrent_futures_simple.py",
+   "https://toio.github.io/toio.py/examples-simple/get_current_grid.py",
+   "https://toio.github.io/toio.py/examples-simple/get_information_1.py",
+   "https://toio.github.io/toio.py/examples-simple/get_information_2.py",
+   "https://toio.github.io/toio.py/examples-simple/get_standard_id.py",
+   "https://toio.github.io/toio.py/examples-simple/goto_a_gird.py",
+   "https://toio.github.io/toio.py/examples-simple/lamp.py",
+   "https://toio.github.io/toio.py/examples-simple/move_to.py",
+   "https://toio.github.io/toio.py/examples-simple/multi_cubes_async_simple.py",
+   "https://toio.github.io/toio.py/examples-simple/sound.py",
+   "https://toio.github.io/toio.py/examples-simple/step.py",
 )
 
 
