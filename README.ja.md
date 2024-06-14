@@ -41,18 +41,18 @@ toio.py は Pythonista3 上で動作します。
 
 セットアップの方法とチュートリアルの実行については下記を参照してください。
 
-- [セットアップガイド （日本語）](./blob/main/SETUP_GUIDE.ja.md)
-- [セットアップガイド （英語）](./blob/main/SETUP_GUIDE.en.md)
+- [セットアップガイド （日本語）](./SETUP_GUIDE.ja.md)
+- [セットアップガイド （英語）](./SETUP_GUIDE.en.md)
 
 
 ---
 
 ## SimpleCube API
 
-簡単に toio コアキューブを制御するための SimpleCube API に関する情報は[SIMPLE_API.ja.md](./blob/main/SIMPLE_API.ja.md)を参照してください。
+簡単に toio コアキューブを制御するための SimpleCube API に関する情報は[SIMPLE_API.ja.md](./SIMPLE_API.ja.md)を参照してください。
 
-- [SIMPLE_API.ja.md （日本語）](./blob/main/SIMPLE_API.ja.md)
-- [SIMPLE_API.en.md （英語）](./blob/main/SIMPLE_API.en.md)
+- [SIMPLE_API.ja.md （日本語）](./SIMPLE_API.ja.md)
+- [SIMPLE_API.en.md （英語）](./SIMPLE_API.en.md)
 
 ---
 
@@ -315,7 +315,7 @@ if __name__ == "__main__":
     asyncio.run(read_id())
 ```
 
-Ctrl-C が押されるまで ID 情報を表示し続ける完全なコードは [examples/read_position.py](https://github.com/toio/toio.py/blob/main/examples/read_position.py) です。
+Ctrl-C が押されるまで ID 情報を表示し続ける完全なコードは [examples/read_position.py](./examples/read_position.py) です。
 
 ### モーター制御
 

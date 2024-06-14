@@ -6,7 +6,7 @@ This is a library for controlling [toio™Core Cube](https://toio.io/platform/cu
 
 Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v2.4.0.
 
-**（日本語版 README.md は[こちら](./blob/main/README.ja.md)）**
+**（日本語版 README.md は[こちら](./README.ja.md)）**
 
 ## Features
 
@@ -43,18 +43,18 @@ toio.py works on Pythonista3.
 
 See below for instructions on how to set up and run the tutorial.
 
-- [Setup Guide (English)](./blob/main/SETUP_GUIDE.en.md)
-- [Setup Guide (Japanese)](./blob/main/SETUP_GUIDE.ja.md)
-- [Setup Guide (Chinese)](./blob/main/SETUP_GUIDE.zh.md)
+- [Setup Guide (English)](./SETUP_GUIDE.en.md)
+- [Setup Guide (Japanese)](./SETUP_GUIDE.ja.md)
+- [Setup Guide (Chinese)](./SETUP_GUIDE.zh.md)
 
 ---
 
 ## SimpleCube API
 
-See [SIMPLE_API.en.md](./blob/main/SIMPLE_API.en.md) for information on the SimpleCube API for easily controlling toio Core Cubes.
+See [SIMPLE_API.en.md](./SIMPLE_API.en.md) for information on the SimpleCube API for easily controlling toio Core Cubes.
 
-- [SIMPLE_API.en.md (English)](./blob/main/SIMPLE_API.en.md)
-- [SIMPLE_API.ja.md (Japanese)](./blob/main/SIMPLE_API.ja.md)
+- [SIMPLE_API.en.md (English)](./SIMPLE_API.en.md)
+- [SIMPLE_API.ja.md (Japanese)](./SIMPLE_API.ja.md)
 
 ---
 
@@ -317,7 +317,7 @@ if __name__ == "__main__":
     asyncio.run(read_id())
 ```
 
-The complete code that keeps displaying ID information until Ctrl-C is pressed is [examples/read_position.py](https://github.com/toio/toio.py/blob/main/examples/read_position.py).
+The complete code that keeps displaying ID information until Ctrl-C is pressed is [examples/read_position.py](./examples/read_position.py).
 
 ### Motor control
 
