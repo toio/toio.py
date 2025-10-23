@@ -355,7 +355,7 @@ import asyncio
 from toio import *
 
 def notification_handler(payload: bytearray):
-    id_info = IdInformation.is_my_data(payload)
+    id_info = Motor.is_my_data(payload)
     print(str(id_info))
 
 async def motor_2():
