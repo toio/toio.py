@@ -354,8 +354,8 @@ from toio import *
 
 # 通知ハンドラ
 def notification_handler(payload: bytearray):
-    id_info = Motor.is_my_data(payload)
-    print(str(id_info))
+    motor_info = Motor.is_my_data(payload)
+    print(str(motor_info))
 
 async def motor_2():
     async with ToioCoreCube() as cube:
