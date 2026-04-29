@@ -1,47 +1,54 @@
-[tool.poetry]
+[project]
 name = "toio.py"
 version = "1.1.0"
 description = "Control toio™Core Cube"
-authors = ["Sony Interactive Entertainment"]
+authors = [
+    {name = "Sony Interactive Entertainment"},
+]
 readme = "README.md"
-packages = [{include = "toio"}]
-license = "MIT"
-repository = "https://github.com/toio/toio.py"
-homepage = "https://toio.io/"
+license = {text = "MIT"}
 keywords = ["toio"]
+requires-python = ">=3.8.1,<3.13"
+dependencies = [
+    "typing-extensions>=4.10.0",
+    "bleak>=0.22.1",
+    "setuptools>=69.5.1",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.8.1,<3.13"
-typing-extensions = "^4.10.0"
-bleak = ">=0.22.1"
-setuptools = "^69.5.1"
+[project.urls]
+Repository = "https://github.com/toio/toio.py"
+Homepage = "https://toio.io/"
 
-[tool.poetry.group.dev.dependencies]
-pyright = "^1.1.361"
-isort = "^5.13.2"
-pytest = "^8.2.0"
-pytest-asyncio = "^0.23.5"
-autopep8 = "^2.0.2"
-black = "^24.4.2"
-ipykernel = "^6.29.3"
-sphinx = "^7.1.0"
-pytest-cov = "^5.0.0"
-coverage = "^7.5.1"
-flake8 = "^7.0.0"
-mypy = "^1.10.0"
-pytest-mock = "^3.12.0"
-poethepoet = "^0.26.1"
-sphinx-rtd-theme = "^2.0.0"
-pygments = "^2.17.2"
-poetry = "^1.8.2"
-colorama = "^0.4.6"
-sphinx-multiversion = "^0.2.4"
-sphinx-nefertiti = "^0.3.2"
-m2r = "^0.3.1"
+[dependency-groups]
+dev = [
+    "pyright>=1.1.361",
+    "isort>=5.13.2",
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.5",
+    "autopep8>=2.0.2",
+    "black>=24.4.2",
+    "ipykernel>=6.29.3",
+    "sphinx>=7.1.0",
+    "pytest-cov>=5.0.0",
+    "coverage>=7.5.1",
+    "flake8>=7.0.0",
+    "mypy>=1.10.0",
+    "pytest-mock>=3.12.0",
+    "poethepoet>=0.26.1",
+    "sphinx-rtd-theme>=2.0.0",
+    "pygments>=2.17.2",
+    "colorama>=0.4.6",
+    "sphinx-multiversion>=0.2.4",
+    "sphinx-nefertiti>=0.3.2",
+    "m2r>=0.3.1",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["toio"]
 
 [tool.pyright]
 ignore = ["tutorial/*"]
@@ -57,7 +64,7 @@ minversion = "6.0"
 # addopts = "--cov toio --log-cli-level=INFO"
 addopts = "--log-cli-level=INFO"
 pythonpath = "toio"
-testpaths =  ["tests"]
+testpaths = ["tests"]
 
 [tool.mypy]
 python_version = "3.8"
@@ -67,8 +74,6 @@ exclude = ["pythonista3corebluetooth"]
 line-length = 88
 exclude = ["pythonista3corebluetooth"]
 
-
 [tool.poe.tasks]
 update-apidocs = { "shell" = "./mkdocs/mkdocs.sh --rebuild" }
 check-coverage = { "shell" = "./tests/check_coverage.sh" }
-
