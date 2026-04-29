@@ -184,11 +184,20 @@ class ToioCoreCube(CubeInterface):
 
     def __init__(
         self,
-        interface: Optional[CubeInterface] = None,
+        interface: Optional[CubeInitializer] = None,
         name: Optional[str] = None,
         scanner: Type[ScannerInterface] = UniversalBleScanner,
         scanner_args: Sequence[Any] = (),
     ):
+        """
+        Initialize a ToioCoreCube instance.
+
+        Args:
+            interface (Optional[CubeInitializer]): cube interface, cube info, or None
+            name (Optional[str]): cube name
+            scanner (Type[ScannerInterface]): scanner interface
+            scanner_args (Sequence[Any]): arguments given to the scanner.scan() function
+        """
         if ToioCoreCube._LOCK is None:
             ToioCoreCube._LOCK = asyncio.Lock()
 
@@ -197,7 +206,12 @@ class ToioCoreCube(CubeInterface):
             self.interface = None
         else:
             self._scanning_required = False
-            self.interface = interface
+            if isinstance(interface, CubeInfo):
+                self.interface = interface.interface
+                if name is None:
+                    name = interface.name
+            else:
+                self.interface = interface
         self.name = name
         self._scanner = scanner
         self._scanner_args = scanner_args
