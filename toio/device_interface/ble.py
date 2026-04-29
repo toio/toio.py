@@ -83,9 +83,10 @@ class BleCube(CubeInterface):
 
     async def connect(self) -> bool:
         if not self.connected:
-            self.connected = await self.device.connect()
+            await self.device.connect()
             while not self.device.is_connected:
                 await asyncio.sleep(0.1)
+            self.connected = self.device.is_connected
         else:
             logger.warning("already connected")
         return self.connected
@@ -95,6 +96,7 @@ class BleCube(CubeInterface):
             await self.device.disconnect()
             while self.device.is_connected:
                 await asyncio.sleep(0.1)
+            self.connected = self.device.is_connected
         else:
             logger.warning("already disconnected")
         return True
