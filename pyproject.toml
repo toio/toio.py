@@ -8,10 +8,10 @@ authors = [
 readme = "README.md"
 license = {text = "MIT"}
 keywords = ["toio"]
-requires-python = ">=3.8.1,<3.13"
+requires-python = ">=3.10"
 dependencies = [
     "typing-extensions>=4.10.0",
-    "bleak>=0.22.1",
+    "bleak>=3,<4",
     "setuptools>=69.5.1",
 ]
 
@@ -67,7 +67,7 @@ pythonpath = "toio"
 testpaths = ["tests"]
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.10"
 exclude = ["pythonista3corebluetooth"]
 
 [tool.ruff]
