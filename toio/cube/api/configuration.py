@@ -758,7 +758,7 @@ class Configuration(CubeCharacteristic):
         References:
             https://toio.github.io/toio-spec/en/docs/ble_configuration#collision-detection-threshold-settings
         """
-        command = SetHorizontalDetectionThreshold(threshold)
+        command = SetCollisionDetectionThreshold(threshold)
         await self._write(bytes(command))
 
     async def set_double_tap_detection_threshold(self, threshold: int) -> None:

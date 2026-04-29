@@ -8,7 +8,9 @@
 # ************************************************************
 
 import os
+import shlex
 import time
+from pathlib import Path
 from logging import getLogger
 
 import pytest
@@ -26,6 +28,14 @@ def wait():
 def setup(pytestconfig):
     init()
     capmanager = pytestconfig.pluginmanager.getplugin("capturemanager")
+    selected_paths = [
+        Path(arg)
+        for arg in pytestconfig.invocation_params.args
+        if not arg.startswith("-")
+    ]
+    if selected_paths and all("test_50_definition" in path.parts for path in selected_paths):
+        logger.info("** skip cube setup for definition-only tests")
+        return
 
     logger.info(
         Fore.RED
@@ -50,9 +60,12 @@ def setup(pytestconfig):
     logger.info("%s", yn)
     test_dir = os.path.dirname(__file__)
     cube_file = os.path.join(test_dir, "_cubes.py")
+    make_cube_list = os.path.join(test_dir, "make_cube_list.py")
     if yn.lower() != "s":
         logger.info("** GENERATE _cubes.py")
-        result = os.system("python ./make_cube_list.py %s" % cube_file)
+        result = os.system(
+            f"python {shlex.quote(make_cube_list)} {shlex.quote(cube_file)}"
+        )
         if result:
             logger.info(
                 Fore.RED

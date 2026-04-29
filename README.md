@@ -355,8 +355,8 @@ import asyncio
 from toio import *
 
 def notification_handler(payload: bytearray):
-    id_info = IdInformation.is_my_data(payload)
-    print(str(id_info))
+    motor_info = Motor.is_my_data(payload)
+    print(str(motor_info))
 
 async def motor_2():
     async with ToioCoreCube() as cube:
@@ -490,5 +490,4 @@ async def scan_and_connect():
 if __name__ == "__main__":
     asyncio.run(scan_and_connect())
 ```
-
 
