@@ -17,7 +17,13 @@ import platform
 
 from typing_extensions import Any, List, NamedTuple, Optional, Set
 
-from ..device_interface import DEFAULT_SCAN_TIMEOUT, CubeInfo, ScannerInterface, SortKey
+from ..device_interface import (
+    DEFAULT_SCAN_TIMEOUT,
+    CubeInfo,
+    ScannerInterface,
+    ScanStrategy,
+    SortKey,
+)
 from ..device_interface.ble import BaseBleScanner
 from ..logger import get_toio_logger
 
@@ -53,30 +59,53 @@ class UniversalBleScanner(ScannerInterface):
         address: Optional[Set[str]] = None,
         sort: SortKey = None,
         timeout: float = DEFAULT_SCAN_TIMEOUT,
+        strategy: ScanStrategy = "best",
     ) -> List[CubeInfo]:
         scanner = BaseBleScanner()
         return await scanner._scan(
-            num=num, cube_id=cube_id, address=address, sort=sort, timeout=timeout
+            num=num,
+            cube_id=cube_id,
+            address=address,
+            sort=sort,
+            timeout=timeout,
+            strategy=strategy,
         )
 
     async def scan(  # type: ignore
-        self, num: int, sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
+        self,
+        num: int,
+        sort: SortKey = "rssi",
+        timeout: float = DEFAULT_SCAN_TIMEOUT,
+        strategy: ScanStrategy = "best",
     ) -> List[CubeInfo]:
         """Scan the specified number of toio Core Cubes.
 
-        The scan is terminated by a timeout.
-        In the case of a timeout, the number of elements in the returned list
-        is the number of cubes found at the time of the timeout.
+        With strategy "best", the scan collects cubes until timeout and returns
+        the top results after sorting. With strategy "quick", the scan returns
+        as soon as the specified number of cubes are found.
 
         Args:
             num (int): Number of cubes to be found.
             sort (SortKey, optional): Key to sort results. Defaults to "rssi".
             timeout (float, optional): Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.
+            strategy (ScanStrategy, optional): Scan strategy. Defaults to "best".
 
         Returns:
             List[CubeInfo]: List of found cubes.
         """
-        return await self._scan(num=num, sort=sort, timeout=timeout)
+        return await self._scan(num=num, sort=sort, timeout=timeout, strategy=strategy)
+
+    async def scan_best(
+        self, num: int, sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
+    ) -> List[CubeInfo]:
+        """Scan cubes until timeout and return the best candidates after sorting."""
+        return await self.scan(num=num, sort=sort, timeout=timeout, strategy="best")
+
+    async def scan_quick(
+        self, num: int, sort: SortKey = "rssi", timeout: float = DEFAULT_SCAN_TIMEOUT
+    ) -> List[CubeInfo]:
+        """Scan cubes and return as soon as the specified number are found."""
+        return await self.scan(num=num, sort=sort, timeout=timeout, strategy="quick")
 
     async def scan_with_id(
         self,
