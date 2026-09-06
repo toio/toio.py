@@ -9,12 +9,15 @@
 
 import os
 import time
+from pathlib import Path
 from logging import getLogger
 
 import pytest
 from colorama import Back, Fore, Style, init
 
 logger = getLogger(__name__)
+
+DEFINITION_TEST_DIR = "test_50_definition"
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -26,6 +29,14 @@ def wait():
 def setup(pytestconfig):
     init()
     capmanager = pytestconfig.pluginmanager.getplugin("capturemanager")
+    # config.args holds only the resolved test paths (or testpaths when the
+    # command line selects nothing). invocation_params.args cannot be used
+    # here because it also contains option values such as the
+    # "no:cacheprovider" of "-p no:cacheprovider".
+    selected = [Path(arg) for arg in pytestconfig.args]
+    if selected and all(DEFINITION_TEST_DIR in path.parts for path in selected):
+        logger.info("** skip cube setup for definition-only tests")
+        return
 
     logger.info(
         Fore.RED
