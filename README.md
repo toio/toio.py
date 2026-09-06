@@ -80,6 +80,19 @@ ToioCoreCube class includes basic scanner function.
 ToioCoreCube class can scan a toio Core Cube without the help of the Scanner class.
 For scanning in special settings. use the Scanner class.
 
+`ToioCoreCube` can be initialized with either a `CubeInfo` returned by a
+scanner or a `CubeInterface`.
+
+When a `CubeInfo` is passed, `ToioCoreCube` uses `CubeInfo.interface` as the
+actual control interface. If `name` is not specified, `CubeInfo.name` is used
+as the cube name.
+
+```Python
+dev_list = await BLEScanner.scan(num=1)
+cube = ToioCoreCube(dev_list[0])
+await cube.connect()
+```
+
 ### Scanner
 
 Class for scanning cubes via the BLE interface.
@@ -169,7 +182,7 @@ from toio import *
 async def scan_and_connect():
     dev_list = await BLEScanner.scan(num=1)
     assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
+    cube = ToioCoreCube(dev_list[0])
     await cube.connect()
 
     await asyncio.sleep(3)
@@ -206,7 +219,7 @@ from toio import *
 async def scan_and_connect():
     dev_list = await BLEScanner.scan_with_id(cube_id={"C7f"})
     assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
+    cube = ToioCoreCube(dev_list[0])
     await cube.connect()
 
     await asyncio.sleep(3)
@@ -245,7 +258,7 @@ from toio import *
 async def scan_and_connect():
     dev_list = await BLEScanner.scan_registered_cubes(num=1)
     assert len(dev_list)
-    cube = ToioCoreCube(dev_list[0].interface)
+    cube = ToioCoreCube(dev_list[0])
     await cube.connect()
 
     await asyncio.sleep(3)

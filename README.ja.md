@@ -78,6 +78,19 @@ ToioCoreCube は[toio コアキューブ技術仕様](https://toio.github.io/toi
 ToioCoreCubeクラスは基本的な Scanner の機能を持ち、Scanner を使わなくてもキューブの探索と接続が行えるようになりました。  
 複雑な設定でのキューブの探索には Scanner を使ってください。
 
+`ToioCoreCube` は Scanner が返す `CubeInfo` または `CubeInterface` のどちらでも
+初期化できます。
+
+`CubeInfo` を渡した場合、`ToioCoreCube` は `CubeInfo.interface` を実際の制御用
+interface として使います。`name` を明示しない場合は `CubeInfo.name` を cube name
+として使います。
+
+```Python
+dev_list = await BLEScanner.scan(num=1)
+cube = ToioCoreCube(dev_list[0])
+await cube.connect()
+```
+
 ### Scanner
 
 BLE インターフェース経由でキューブを探索するためのクラスです。
