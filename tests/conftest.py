@@ -8,6 +8,7 @@
 # ************************************************************
 
 import os
+import shlex
 import time
 from pathlib import Path
 from logging import getLogger
@@ -61,9 +62,12 @@ def setup(pytestconfig):
     logger.info("%s", yn)
     test_dir = os.path.dirname(__file__)
     cube_file = os.path.join(test_dir, "_cubes.py")
+    make_cube_list = os.path.join(test_dir, "make_cube_list.py")
     if yn.lower() != "s":
         logger.info("** GENERATE _cubes.py")
-        result = os.system("python ./make_cube_list.py %s" % cube_file)
+        result = os.system(
+            f"python {shlex.quote(make_cube_list)} {shlex.quote(cube_file)}"
+        )
         if result:
             logger.info(
                 Fore.RED
