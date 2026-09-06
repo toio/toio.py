@@ -231,7 +231,7 @@ class PostureAngleHighPrecisionEulerData(CubeResponse):
     @staticmethod
     def is_myself(payload: GattReadData) -> bool:
         return (
-            payload[0] == PostureAngleEulerData._payload_id
+            payload[0] == PostureAngleHighPrecisionEulerData._payload_id
             and payload[1] == PostureDataType.HighPrecisionEuler
         )
 
