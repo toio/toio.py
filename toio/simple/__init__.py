@@ -31,6 +31,7 @@ from ..cube.api.configuration import (
     MagneticSensorFunction,
     PostureAngleDetectionCondition,
     PostureAngleDetectionType,
+    SpeakerMute,
 )
 from ..cube.api.id_information import (
     IdInformation,
@@ -665,6 +666,64 @@ class SimpleCube_v1_0:
         else:
             return self._magnet.state
 
+    def turn_on_smooth_flashing(
+        self, r: int, g: int, b: int, repeat: int, cycle: float
+    ) -> None:
+        """turn_on_smooth_flashing.
+
+        Args:
+            r (int): Red (0-255)
+            g (int): Green (0-255)
+            b (int): Blue (0-255)
+            repeat (int): Number of repetitions (0: infinite)
+            cycle (float): Cycle of flashing [s]
+
+        Returns:
+            None:
+        """
+        cycle_ms = int(cycle * 1000)
+        return self._event_loop.run_until_complete(
+            self._cube.api.indicator.smooth_flash(
+                repeat, cycle_ms, Color(r=r, g=g, b=b)
+            )
+        )
+
+    def request_remote_power_off(self, time_s: int) -> None:
+        """request_remote_power_off.
+
+        Args:
+            time_s (int): Time until power off [s]
+
+        Returns:
+            None:
+        """
+        return self._event_loop.run_until_complete(
+            self._cube.api.configuration.request_remote_power_off(time_s)
+        )
+
+    def set_speaker_mute(self, mute: SpeakerMute) -> None:
+        """set_speaker_mute.
+
+        Args:
+            mute (SpeakerMute): Mute setting
+
+        Returns:
+            None:
+        """
+        return self._event_loop.run_until_complete(
+            self._cube.api.configuration.set_speaker_mute(mute)
+        )
+
+    def reset_configuration(self) -> None:
+        """reset_configuration.
+
+        Returns:
+            None:
+        """
+        return self._event_loop.run_until_complete(
+            self._cube.api.configuration.reset_configuration()
+        )
+
 
 class SimpleCube:
     """
@@ -833,6 +892,57 @@ class SimpleCube:
 
     def is_magnet_in_contact(self) -> Optional[int]:
         return self._event_loop.run_until_complete(self._async.is_magnet_in_contact())
+
+    def turn_on_smooth_flashing(
+        self, r: int, g: int, b: int, repeat: int, cycle: float
+    ) -> None:
+        """turn_on_smooth_flashing.
+
+        Args:
+            r (int): Red (0-255)
+            g (int): Green (0-255)
+            b (int): Blue (0-255)
+            repeat (int): Number of repetitions (0: infinite)
+            cycle (float): Cycle of flashing [s]
+
+        Returns:
+            None:
+        """
+        return self._event_loop.run_until_complete(
+            self._async.turn_on_smooth_flashing(r, g, b, repeat, cycle)
+        )
+
+    def request_remote_power_off(self, time_s: int) -> None:
+        """request_remote_power_off.
+
+        Args:
+            time_s (int): Time until power off [s]
+
+        Returns:
+            None:
+        """
+        return self._event_loop.run_until_complete(
+            self._async.request_remote_power_off(time_s)
+        )
+
+    def set_speaker_mute(self, mute: SpeakerMute) -> None:
+        """set_speaker_mute.
+
+        Args:
+            mute (SpeakerMute): Mute setting
+
+        Returns:
+            None:
+        """
+        return self._event_loop.run_until_complete(self._async.set_speaker_mute(mute))
+
+    def reset_configuration(self) -> None:
+        """reset_configuration.
+
+        Returns:
+            None:
+        """
+        return self._event_loop.run_until_complete(self._async.reset_configuration())
 
 
 __all__ = [
