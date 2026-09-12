@@ -22,7 +22,7 @@ from .motor import Motor
 from .sensor import Sensor
 from .sound import Sound
 
-API_VERSION = "2.4.0"
+API_VERSION = "2.5.0"
 
 CubeApi: TypeAlias = Union[
     Battery, Button, Configuration, IdInformation, Indicator, Motor, Sensor, Sound

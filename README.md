@@ -4,7 +4,7 @@
 
 This is a library for controlling [toio™Core Cube](https://toio.io/platform/cube/) from Python.
 
-Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v2.4.0.
+Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v2.5.0.
 
 **（日本語版 README.md は[こちら](./README.ja.md)）**
 
