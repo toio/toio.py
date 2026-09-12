@@ -390,6 +390,33 @@ class GetCurrentConnectionIntervalValue(CubeCommand):
         return bytes((self._payload_id, 0x00))
 
 
+class SpeakerMute(IntEnum):
+    """
+    Speaker mute settings
+    """
+
+    Unmute = 0x00
+    MuteAll = 0x01
+    MuteSystemOnly = 0x02
+
+
+class SetSpeakerMute(CubeCommand):
+    """
+    Speaker mute setting command
+
+    References:
+        https://toio.github.io/toio-spec/en/docs/ble_persistent_configuration#speaker-mute-settings
+    """
+
+    _payload_id = 0x33
+
+    def __init__(self, mute: SpeakerMute) -> None:
+        self.mute = mute
+
+    def __bytes__(self) -> bytes:
+        return bytes((self._payload_id, 0x00, self.mute))
+
+
 class ProtocolVersion(CubeResponse):
     """
     Protocol version response
@@ -663,6 +690,35 @@ class ResponseGettingCurrentConnectionInterval(CubeResponse):
         return pprint.pformat(vars(self))
 
 
+class ResponseSpeakerMuteSettings(CubeResponse):
+    """
+    Speaker mute setting response
+
+    Attributes:
+        result (bool): Result of the command
+
+    References:
+        https://toio.github.io/toio-spec/en/docs/ble_persistent_configuration#responses-to-speaker-mute-settings
+    """
+
+    _payload_id = 0xB3
+    _converter = struct.Struct("<BBB")
+
+    @staticmethod
+    def is_myself(payload: GattReadData) -> bool:
+        return payload[0] == ResponseSpeakerMuteSettings._payload_id
+
+    def __init__(self, payload: GattReadData):
+        if ResponseSpeakerMuteSettings.is_myself(payload):
+            _, _, result = self._converter.unpack_from(payload)
+            self.result = result == 0x00
+        else:
+            raise TypeError("wrong payload")
+
+    def __str__(self) -> str:
+        return pprint.pformat(vars(self))
+
+
 ConfigurationResponseType: TypeAlias = Union[
     ProtocolVersion,
     ResponseIdNotificationSettings,
@@ -673,6 +729,7 @@ ConfigurationResponseType: TypeAlias = Union[
     ResponseConnectionIntervalRequest,
     ResponseGettingRequestedConnectionInterval,
     ResponseGettingCurrentConnectionInterval,
+    ResponseSpeakerMuteSettings,
 ]
 """
 Response types of configuration characteristic
@@ -707,6 +764,8 @@ class Configuration(CubeCharacteristic):
             return ResponseGettingRequestedConnectionInterval(payload)
         elif ResponseGettingCurrentConnectionInterval.is_myself(payload):
             return ResponseGettingCurrentConnectionInterval(payload)
+        elif ResponseSpeakerMuteSettings.is_myself(payload):
+            return ResponseSpeakerMuteSettings(payload)
         else:
             return None
 
@@ -921,4 +980,23 @@ class Configuration(CubeCharacteristic):
             https://toio.github.io/toio-spec/en/docs/ble_configuration#obtaining-the-actual-connection-interval-value-
         """
         command = GetCurrentConnectionIntervalValue()
+        await self._write(bytes(command))
+
+    async def set_speaker_mute(self, mute: SpeakerMute) -> None:
+        """
+        Send speaker mute setting command
+
+        This function DO NOT return response payload.
+        Receive the result by notification.
+
+        Note:
+            To write this setting, the function button must be pressed.
+
+        Args:
+            mute (SpeakerMute): Mute setting
+
+        References:
+            https://toio.github.io/toio-spec/en/docs/ble_persistent_configuration#speaker-mute-settings
+        """
+        command = SetSpeakerMute(mute)
         await self._write(bytes(command))
