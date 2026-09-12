@@ -17,6 +17,7 @@ from toio.cube import ToioCoreCube
 from toio.cube.api.button import Button, ButtonInformation, ButtonState
 from toio.cube.api.configuration import (
     Configuration,
+    ResponseConfigurationReset,
     ResponseSpeakerMuteSettings,
     SpeakerMute,
 )
@@ -106,6 +107,28 @@ async def test_speaker_mute(interactive, confirm, get_result):
         assert response.result is True
         logger.info(">> PLAYING SOUND (should be AUDIBLE)")
         await _play_note(cube)
+    finally:
+        logger.info("** DISCONNECTING")
+        await cube.disconnect()
+        logger.info("** DISCONNECTED")
+
+
+@pytest.mark.asyncio
+async def test_configuration_reset(interactive, confirm, get_result):
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube(device_list[0].interface)
+    logger.info("** CONNECTING...")
+    await cube.connect()
+    logger.info("** CONNECTED")
+    try:
+        logger.info("===== CONFIGURATION RESET TEST =====")
+        response = await _send_while_button_pressed(
+            cube,
+            ResponseConfigurationReset,
+            cube.api.configuration.reset_configuration,
+        )
+        assert response.result is True
     finally:
         logger.info("** DISCONNECTING")
         await cube.disconnect()

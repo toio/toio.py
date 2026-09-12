@@ -16,6 +16,7 @@ import pytest
 from toio.cube import ToioCoreCube
 from toio.cube.api.configuration import (
     Configuration,
+    ResponseConfigurationReset,
     ResponseSpeakerMuteSettings,
     SpeakerMute,
 )
@@ -61,6 +62,26 @@ async def test_speaker_mute_is_rejected_without_button():
             cube,
             ResponseSpeakerMuteSettings,
             lambda: cube.api.configuration.set_speaker_mute(SpeakerMute.MuteAll),
+        )
+        assert response.result is False
+    finally:
+        logger.info("** DISCONNECTING")
+        await cube.disconnect()
+
+
+@pytest.mark.asyncio
+async def test_configuration_reset_is_rejected_without_button():
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube(device_list[0].interface)
+    logger.info("** CONNECTING...")
+    await cube.connect()
+    logger.info("** CONNECTED")
+    try:
+        response = await _wait_response(
+            cube,
+            ResponseConfigurationReset,
+            cube.api.configuration.reset_configuration,
         )
         assert response.result is False
     finally:
