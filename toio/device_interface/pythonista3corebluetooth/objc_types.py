@@ -37,6 +37,9 @@ CBManagerStateUnauthorized = 3
 CBManagerStatePoweredOff = 4
 CBManagerStatePoweredOn = 5
 
+CBManagerAuthorizationRestricted = 1
+CBManagerAuthorizationDenied = 2
+
 CBCharacteristicWriteWithResponse = 0
 CBCharacteristicWriteWithoutResponse = 1
 
@@ -47,12 +50,7 @@ CBPeripheralStateDisconnecting = 3
 
 DISPATCH_QUEUE_SERIAL = None
 
-NSKeyValueObservingOptionNew = 0x01
-
-# https://forum.omz-software.com/topic/6077/help-finding-the-value-of-an-objc-string-constant
-NSKeyValueChangeNewKey = ObjCInstance(
-    ctypes.c_void_p.in_dll(c, "NSKeyValueChangeNewKey")
-)
+CBATTErrorDomain = "CBATTErrorDomain"
 
 
 def dispatch_queue_create(_name, attr):
