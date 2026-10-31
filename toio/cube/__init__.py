@@ -188,7 +188,25 @@ class ToioCoreCube(CubeInterface):
         name: Optional[str] = None,
         scanner: Type[ScannerInterface] = UniversalBleScanner,
         scanner_args: Sequence[Any] = (),
+        **kwargs: Any,
     ):
+        """
+        Initialize a ToioCoreCube instance.
+
+        When keyword arguments are specified, they are passed to the
+        scanner's scan() function.
+
+        Example:
+            >>> async with ToioCoreCube(strategy="quick") as cube:
+            >>>     cube.api....()
+
+        Args:
+            interface (Optional[CubeInitializer]): cube interface, cube info, or None
+            name (Optional[str]): cube name
+            scanner (Type[ScannerInterface]): scanner interface
+            scanner_args (Sequence[Any]): arguments given to the scanner.scan() function
+            **kwargs (Any): keyword arguments given to the scanner.scan() function
+        """
         if ToioCoreCube._LOCK is None:
             ToioCoreCube._LOCK = asyncio.Lock()
 
@@ -206,6 +224,7 @@ class ToioCoreCube(CubeInterface):
         self.name = name
         self._scanner = scanner
         self._scanner_args = scanner_args
+        self._scanner_kwargs = kwargs
 
         self.protocol_version: Optional[ProtocolVersion] = None
         self.max_retry_to_get_protocol_version: int = 10
@@ -222,7 +241,9 @@ class ToioCoreCube(CubeInterface):
 
     async def scan(self):
         if self._scanning_required and self.interface is None:
-            device_list = await self._scanner().scan(1, *self._scanner_args)
+            device_list = await self._scanner().scan(
+                1, *self._scanner_args, **self._scanner_kwargs
+            )
             if len(device_list):
                 self.interface = device_list[0].interface
                 if self.name is None:

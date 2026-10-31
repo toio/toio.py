@@ -80,6 +80,12 @@ class MultipleToioCoreCubes:
     >>>     alpha.api....()
     >>>     beta.api....()
 
+    When keyword arguments are specified, they are passed to the scanner's scan() function.
+
+    >>> # specifying scan strategy as keyword argument
+    >>> async with MultipleToioCoreCubes(2, strategy="quick") as cubes:
+    >>>    cubes[0].api....()
+
     """
 
     OPERATION_INTERVAL: float = 0.5
@@ -91,6 +97,7 @@ class MultipleToioCoreCubes:
         names: Optional[Sequence[str]] = None,
         scanner: Type[ScannerInterface] = UniversalBleScanner,
         scanner_args: Sequence[Any] = (),
+        **kwargs: Any,
     ):
         """
         Initialize MultipleCubes
@@ -100,6 +107,7 @@ class MultipleToioCoreCubes:
             names (Optional[Sequence[str]]): sequence of names of cubes
             scanner (Type[ScannerInterface]): scanner interface (default is UniversalBleScanner)
             scanner_args (Sequence[Any]): arguments given to the scanner.scan() function
+            **kwargs (Any): keyword arguments given to the scanner.scan() function
         """
         if MultipleToioCoreCubes._LOCK is None:
             MultipleToioCoreCubes._LOCK = asyncio.Lock()
@@ -118,6 +126,7 @@ class MultipleToioCoreCubes:
         self._names = names
         self._scanner = scanner
         self._scanner_args = scanner_args
+        self._scanner_kwargs = kwargs
         self._cube_dict: Dict[str, ToioCoreCube] = {}
 
     def __getattr__(self, name: str) -> ToioCoreCube:
@@ -161,7 +170,7 @@ class MultipleToioCoreCubes:
 
         if self._scanning_required and isinstance(self._cube_num, int):
             device_list = await self._scanner().scan(
-                self._cube_num, *self._scanner_args
+                self._cube_num, *self._scanner_args, **self._scanner_kwargs
             )
             self._cubes = ToioCoreCube.create_cubes(device_list)
             self._scanning_required = False
