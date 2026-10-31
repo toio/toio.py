@@ -170,6 +170,41 @@ The argument is the number of cubes to find in the scan.
 
 If the specified number of cubes are not found by the timeout (default value is 5 seconds), it returns a list of the number of cubes found at the time of the timeout.
 
+`BLEScanner.scan()` accepts `strategy="best"` and `strategy="quick"`.
+The default strategy is `"best"`.
+
+- `strategy="best"` scans until the timeout, sorts the discovered cubes, and
+  returns the top `N`. Use it when you want the strongest candidates. This is
+  the behavior of `BLEScanner.scan(num=N)` in earlier versions.
+- `strategy="quick"` returns as soon as `N` cubes are found. Use it when
+  startup latency matters more than RSSI-based candidate selection.
+
+`BLEScanner.scan_best()` and `BLEScanner.scan_quick()` name the strategies
+explicitly.
+
+```Python
+# Prefer RSSI-ranked candidates. This waits until timeout.
+dev_list = await BLEScanner.scan(num=2, strategy="best")
+
+# Prefer fast startup. This returns after two cubes are found.
+dev_list = await BLEScanner.scan(num=2, strategy="quick")
+
+# Helper methods equivalent to the explicit strategy values.
+best_list = await BLEScanner.scan_best(num=2)
+quick_list = await BLEScanner.scan_quick(num=2)
+```
+
+Scan settings such as `strategy` and `timeout` can also be given directly as
+keyword arguments to `ToioCoreCube` and `MultipleToioCoreCubes`.
+
+```Python
+async with ToioCoreCube(strategy="quick") as cube:
+    ...
+
+async with MultipleToioCoreCubes(cubes=2, strategy="quick") as cubes:
+    ...
+```
+
 The following sample scans and connects nearby cubes.
 
 Disconnects 3 seconds after connecting.

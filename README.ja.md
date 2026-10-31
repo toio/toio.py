@@ -168,6 +168,41 @@ if __name__ == "__main__":
 
 タイムアウト（デフォルト値は 5 秒）までに指定された数のキューブが見つからない場合は、タイムアウト時点で見つかった数のキューブのリストを返します。
 
+`BLEScanner.scan()` は `strategy="best"` と `strategy="quick"` をサポートします。
+デフォルトの strategy は `"best"` です。
+
+- `strategy="best"` はタイムアウトまでスキャンを続け、見つかったキューブをソートして
+  上位 `N` 台を返します。電波強度の高い候補を優先したい場合に使います。これは以前の
+  バージョンの `BLEScanner.scan(num=N)` の動作です。
+- `strategy="quick"` は `N` 台のキューブが見つかった時点で返します。RSSI による候補
+  選択よりも起動の速さを優先したい場合に使います。
+
+`BLEScanner.scan_best()` と `BLEScanner.scan_quick()` で strategy を明示的に
+指定することもできます。
+
+```Python
+# Prefer RSSI-ranked candidates. This waits until timeout.
+dev_list = await BLEScanner.scan(num=2, strategy="best")
+
+# Prefer fast startup. This returns after two cubes are found.
+dev_list = await BLEScanner.scan(num=2, strategy="quick")
+
+# Helper methods equivalent to the explicit strategy values.
+best_list = await BLEScanner.scan_best(num=2)
+quick_list = await BLEScanner.scan_quick(num=2)
+```
+
+`strategy` や `timeout` などのスキャン設定は、`ToioCoreCube` および
+`MultipleToioCoreCubes` の初期化時にキーワード引数として直接指定することもできます。
+
+```Python
+async with ToioCoreCube(strategy="quick") as cube:
+    ...
+
+async with MultipleToioCoreCubes(cubes=2, strategy="quick") as cubes:
+    ...
+```
+
 以下のサンプルでは、近くにあるキューブをスキャンして接続します。
 
 接続してから 3 秒後に切断します。
