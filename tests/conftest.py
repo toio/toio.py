@@ -8,6 +8,7 @@
 # ************************************************************
 
 import os
+import runpy
 import subprocess
 import sys
 import time
@@ -20,6 +21,7 @@ from colorama import Back, Fore, Style, init
 logger = getLogger(__name__)
 
 DEFINITION_TEST_DIR = "test_50_definition"
+CUBE_FILE = os.path.join(os.path.dirname(__file__), "_cubes.py")
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -62,11 +64,10 @@ def setup(pytestconfig):
     capmanager.resume_global_capture()
     logger.info("%s", yn)
     test_dir = os.path.dirname(__file__)
-    cube_file = os.path.join(test_dir, "_cubes.py")
     make_cube_list = os.path.join(test_dir, "make_cube_list.py")
     if yn.lower() != "s":
         logger.info("** GENERATE _cubes.py")
-        result = subprocess.run([sys.executable, make_cube_list, cube_file])
+        result = subprocess.run([sys.executable, make_cube_list, CUBE_FILE])
         if result.returncode:
             logger.info(
                 Fore.RED
@@ -76,8 +77,16 @@ def setup(pytestconfig):
     else:
         logger.info(Fore.YELLOW + "** skip to generate _cubes.py" + Style.RESET_ALL)
     logger.info("** cubes used in this test:")
-    with open(cube_file, "r") as rf:
+    with open(CUBE_FILE, "r") as rf:
         logger.info("\n" + rf.read())
+
+
+@pytest.fixture(scope="session")
+def cubes(setup):
+    # Test modules must not import _cubes.py: they are imported during
+    # collection, before setup can regenerate the file, so they would keep
+    # the cubes of the previous run.
+    return runpy.run_path(CUBE_FILE)["CUBES"]
 
 
 @pytest.fixture(scope="function")
