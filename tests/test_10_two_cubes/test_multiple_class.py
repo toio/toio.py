@@ -9,6 +9,7 @@
 # ************************************************************
 
 import asyncio
+import time
 from logging import getLogger
 
 import pytest
@@ -16,6 +17,7 @@ import pytest
 from toio.cube import ToioCoreCube
 from toio.cube.api.indicator import Color, IndicatorParam
 from toio.cube.multi_cubes import MultipleToioCoreCubes
+from toio.device_interface import DEFAULT_SCAN_TIMEOUT
 from toio.scanner import BLEScanner
 
 logger = getLogger(__name__)
@@ -87,3 +89,31 @@ async def test_multiple_3():
             )
         logger.info("** DISCONNECTING")
     logger.info("** DISCONNECTED")
+
+
+@pytest.mark.asyncio
+async def test_multiple_strategy_quick():
+    cubes = MultipleToioCoreCubes(cubes=2, names=("taro", "jiro"), strategy="quick")
+    logger.info("** SCANNING...")
+    start = time.monotonic()
+    await cubes.scan()
+    elapsed = time.monotonic() - start
+    logger.info("** SCANNED: %.2f sec", elapsed)
+    # The default strategy would keep scanning until the timeout.
+    assert elapsed < DEFAULT_SCAN_TIMEOUT
+    assert len(cubes) == 2
+
+    logger.info("** CONNECTING...")
+    # A cube found by a quick scan is connected right after the scan stops.
+    async with cubes:
+        logger.info("** CONNECTED")
+        for c in cubes:
+            assert c.is_connect()
+            await c.api.indicator.turn_on(
+                IndicatorParam(duration_ms=0, color=Color(r=0x00, g=0xFF, b=0x00))
+            )
+        await asyncio.sleep(1)
+        logger.info("** DISCONNECTING")
+    logger.info("** DISCONNECTED")
+    for c in cubes:
+        assert not c.is_connect()

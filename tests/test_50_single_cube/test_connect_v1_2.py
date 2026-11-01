@@ -8,11 +8,13 @@
 #
 # ************************************************************
 
+import time
 from logging import getLogger
 
 import pytest
 
 from toio.cube import ToioCoreCube
+from toio.device_interface import DEFAULT_SCAN_TIMEOUT
 from toio.scanner import BLEScanner
 
 logger = getLogger(__name__)
@@ -145,5 +147,22 @@ async def test_connect_cube_info_with_name():
     async with ToioCoreCube(device_list[0], name="taro") as cube:
         assert cube.is_connect()
         assert cube.name == "taro"
+    logger.info("** DISCONNECTED")
+    assert not cube.is_connect()
+
+
+@pytest.mark.asyncio
+async def test_connect_strategy_quick():
+    cube = ToioCoreCube(strategy="quick")
+    start = time.monotonic()
+    await cube.scan()
+    elapsed = time.monotonic() - start
+    logger.info("** SCANNED: %.2f sec", elapsed)
+    # The default strategy would keep scanning until the timeout.
+    assert elapsed < DEFAULT_SCAN_TIMEOUT
+    async with cube:
+        assert cube.is_connect()
+        logger.info("** CONNECTED: %s", cube.name)
+        await cube.api.id_information.read()
     logger.info("** DISCONNECTED")
     assert not cube.is_connect()
