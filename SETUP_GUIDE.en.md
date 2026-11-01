@@ -20,12 +20,12 @@ This is a setup guide of toio.py (library for controlling [toio™Core Cube](htt
 
 ## Install (Windows)
 
-## Install [Python](https://www.python.org/) (Recommended version is 3.11 or later)
+## Install [Python](https://www.python.org/) (Python 3.10 or later required, 3.14 recommended)
 
 ### Install Python
 
 Install Python by referring to [Using Python on Windows](https://docs.python.org/3/using/windows.html).
-Recommended version is Python 3.11 or later.
+Python 3.10 or later is required. Python 3.14 is recommended.
 
 ### Install related packages
 

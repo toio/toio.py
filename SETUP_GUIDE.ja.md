@@ -21,12 +21,12 @@ toio.py は Python から[toio コアキューブ](https://toio.io/platform/cube
 
 ## インストール（Windows）
 
-## [Python](https://www.python.org/) のインストール（Version 3.11 以降推奨）
+## [Python](https://www.python.org/) のインストール（Python 3.10 以降必須、3.14 推奨）
 
 ### Python 本体のインストール
 
 [Python Japan の Windows 版 Python のインストール](https://www.python.jp/install/windows/install.html)を参考にして Python をインストールします。
-3.11 以降のバージョンを推奨します。
+Python 3.10 以降が必要です。Python 3.14 を推奨します。
 
 ### 関連パッケージのインストール
 

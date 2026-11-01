@@ -11,7 +11,7 @@ Based on [toio Core Cube Specifications](https://toio.github.io/toio-spec/en/) v
 ## Features
 
 - Uses [bleak](https://github.com/hbldh/bleak) for Bluetooth communication
-- Supports Python 3.8 and later versions (Python 3.12 is recommended)
+- Supports Python 3.10 and later versions (Python 3.14 is recommended)
 - Multi-platform (Windows, Linux, macOS, iOS, iPadOS)
 - No dedicated Bluetooth dongle required
 - Asynchronous API (ToioCoreCube API) based on the toio Core Cube Specifications and synchronous API (SimpleCube API) for easy cube control
