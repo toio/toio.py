@@ -8,7 +8,8 @@
 # ************************************************************
 
 import os
-import shlex
+import subprocess
+import sys
 import time
 from pathlib import Path
 from logging import getLogger
@@ -65,10 +66,8 @@ def setup(pytestconfig):
     make_cube_list = os.path.join(test_dir, "make_cube_list.py")
     if yn.lower() != "s":
         logger.info("** GENERATE _cubes.py")
-        result = os.system(
-            f"python {shlex.quote(make_cube_list)} {shlex.quote(cube_file)}"
-        )
-        if result:
+        result = subprocess.run([sys.executable, make_cube_list, cube_file])
+        if result.returncode:
             logger.info(
                 Fore.RED
                 + "** 2 cubes are not found. _cubes.py is not updated"
