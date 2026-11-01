@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # ************************************************************
 #
-#     test_savable_configuration.py
+#     test_savable_configuration_interactive.py
 #
 #     Copyright 2026 Sony Interactive Entertainment Inc.
 #
