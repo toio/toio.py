@@ -31,6 +31,7 @@ from ..device_interface import (
     GattReadData,
     GattWriteData,
     ScannerInterface,
+    ScanStrategy,
     SortKey,
 )
 from ..logger import get_toio_logger
@@ -134,6 +135,7 @@ class BaseBleScanner(ScannerInterface):
         address: Optional[Set[str]] = None,
         sort: SortKey = None,
         timeout: float = DEFAULT_SCAN_TIMEOUT,
+        strategy: ScanStrategy = "best",
     ) -> List[CubeInfo]:
         """Scan toio Core Cubes.
         Argument 'num', 'cube_id', and 'address' is exclusive.
@@ -144,6 +146,7 @@ class BaseBleScanner(ScannerInterface):
             address (Optional[set[str]], optional): Set of cube BLE address to be found. Defaults to None.
             sort (SortKey, optional): Key to sort results. Defaults to None (no sort).
             timeout (float, optional): Scan timeout. Defaults to DEFAULT_SCAN_TIMEOUT.
+            strategy (ScanStrategy, optional): Scan strategy. Defaults to "best".
 
         Returns:
             list[CubeInfo]: List of found cubes
@@ -158,6 +161,11 @@ class BaseBleScanner(ScannerInterface):
 
             Ref: https://support.toio.io/s/article/15855
         """
+        # ScanStrategy is a Literal, which only type checkers enforce, so an
+        # unknown value has to be rejected here as well.
+        if strategy not in ("best", "quick"):
+            raise ValueError("wrong strategy: " + str(strategy))
+
         w31j = False
         condition_met = asyncio.Event()
         found_cubes: Dict[Union[str, int], CubeInfo] = {}
@@ -209,6 +217,12 @@ class BaseBleScanner(ScannerInterface):
                         interface=BleCube(device),
                         advertisement=advertisement,
                     )
+                    if (
+                        strategy == "quick"
+                        and num is not None
+                        and len(found_cubes) >= num
+                    ):
+                        condition_met.set()
 
         # scan ble devices
         async with BleakScanner(

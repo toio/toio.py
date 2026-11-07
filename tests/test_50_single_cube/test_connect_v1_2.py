@@ -8,11 +8,13 @@
 #
 # ************************************************************
 
+import time
 from logging import getLogger
 
 import pytest
 
 from toio.cube import ToioCoreCube
+from toio.device_interface import DEFAULT_SCAN_TIMEOUT
 from toio.scanner import BLEScanner
 
 logger = getLogger(__name__)
@@ -114,5 +116,53 @@ async def test_connect_6():
             pos = await cube.api.id_information.read()
             xx = str(pos)
             logger.info("%4d:%s", n, xx)
+    logger.info("** DISCONNECTED")
+    assert not cube.is_connect()
+
+
+@pytest.mark.asyncio
+async def test_connect_cube_info():
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube(device_list[0])
+    assert cube.name == device_list[0].name
+    logger.info("** CONNECTING...")
+    assert not cube.is_connect()
+    await cube.connect()
+    assert cube.is_connect()
+    logger.info("** CONNECTED: %s", cube.name)
+    for n in range(10):
+        pos = await cube.api.id_information.read()
+        xx = str(pos)
+        logger.info("%4d:%s", n, xx)
+    logger.info("** DISCONNECT")
+    await cube.disconnect()
+    assert not cube.is_connect()
+
+
+@pytest.mark.asyncio
+async def test_connect_cube_info_with_name():
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    async with ToioCoreCube(device_list[0], name="taro") as cube:
+        assert cube.is_connect()
+        assert cube.name == "taro"
+    logger.info("** DISCONNECTED")
+    assert not cube.is_connect()
+
+
+@pytest.mark.asyncio
+async def test_connect_strategy_quick():
+    cube = ToioCoreCube(strategy="quick")
+    start = time.monotonic()
+    await cube.scan()
+    elapsed = time.monotonic() - start
+    logger.info("** SCANNED: %.2f sec", elapsed)
+    # The default strategy would keep scanning until the timeout.
+    assert elapsed < DEFAULT_SCAN_TIMEOUT
+    async with cube:
+        assert cube.is_connect()
+        logger.info("** CONNECTED: %s", cube.name)
+        await cube.api.id_information.read()
     logger.info("** DISCONNECTED")
     assert not cube.is_connect()

@@ -108,6 +108,7 @@ class CubeInfo(NamedTuple):
 
 
 SortKey = Optional[Literal["rssi", "local_name"]]
+ScanStrategy: TypeAlias = Literal["best", "quick"]
 
 
 class ScannerInterface(metaclass=ABCMeta):
@@ -125,6 +126,7 @@ class ScannerInterface(metaclass=ABCMeta):
         address: Optional[Set[str]] = None,
         sort: SortKey = None,
         timeout: float = DEFAULT_SCAN_TIMEOUT,
+        strategy: ScanStrategy = "best",
     ) -> List[CubeInfo]:
         raise NotImplementedError()
 
