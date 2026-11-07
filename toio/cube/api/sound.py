@@ -281,7 +281,6 @@ class Sound(CubeCharacteristic):
         return None
 
     def __init__(self, interface: CubeInterface, device: NotificationReceivedDevice):
-        self.interface = interface
         super().__init__(interface, ToioUuid.Sound.value, device)
 
     async def play_sound_effect(self, sound_id: SoundId, volume: int):

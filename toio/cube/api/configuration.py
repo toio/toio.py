@@ -713,7 +713,6 @@ class Configuration(CubeCharacteristic):
     def __init__(
         self, interface: CubeInterface, device: NotificationReceivedDevice
     ) -> None:
-        self.interface = interface
         super().__init__(interface, ToioUuid.Config.value, device)
 
     async def request_protocol_version(self) -> None:

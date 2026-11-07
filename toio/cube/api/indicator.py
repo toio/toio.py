@@ -171,7 +171,6 @@ class Indicator(CubeCharacteristic):
         return None
 
     def __init__(self, interface: CubeInterface, device: NotificationReceivedDevice):
-        self.interface = interface
         super().__init__(interface, ToioUuid.Light.value, device)
 
     async def turn_on(self, param: Union[IndicatorParam, Sequence[int]]) -> None:
