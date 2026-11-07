@@ -91,3 +91,20 @@ async def test_indicator_repeated_turn_on():
     await asyncio.sleep(2)
     print("** DISCONNECT")
     await cube.disconnect()
+
+
+@pytest.mark.asyncio
+async def test_indicator_smooth_flash():
+    device_list = await BLEScanner.scan(1)
+    assert len(device_list)
+    cube = ToioCoreCube(device_list[0].interface)
+    print("** CONNECTING...")
+    await cube.connect()
+    print("** CONNECTED")
+    print("** LED SMOOTH FLASH #00FF40 (repeat 5, cycle 1s)")
+    await cube.api.indicator.smooth_flash(
+        repeat=5, cycle_ms=1000, color=(0x00, 0xFF, 0x40)
+    )
+    await asyncio.sleep(10)
+    print("** DISCONNECT")
+    await cube.disconnect()

@@ -127,7 +127,7 @@ class ToioCoreCube(CubeInterface):
     """
 
     SUPPORTED_MAJOR_VERSION: int = 2
-    SUPPORTED_MINOR_VERSION: int = 4
+    SUPPORTED_MINOR_VERSION: int = 5
     _LOCK: Optional[asyncio.Lock] = None
 
     @staticmethod

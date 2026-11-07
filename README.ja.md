@@ -4,7 +4,7 @@
 
 これは Python から[toio コアキューブ](https://toio.io/platform/cube/)を制御するためのライブラリです。
 
-[toio コアキューブ技術仕様](https://toio.github.io/toio-spec/) v2.4.0 に基づいています。
+[toio コアキューブ技術仕様](https://toio.github.io/toio-spec/) v2.5.0 に基づいています。
 
 ## 特徴
 
