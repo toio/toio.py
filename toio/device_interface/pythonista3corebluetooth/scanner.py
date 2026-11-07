@@ -4,8 +4,9 @@ Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
 """
 
 import logging
-from typing import Any, Dict, List, Literal, Optional, TypedDict
+from typing import List, Literal, Optional
 
+from bleak.args.corebluetooth import CBScannerArgs
 from bleak.backends.scanner import (
     AdvertisementData,
     AdvertisementDataCallback,
@@ -15,24 +16,9 @@ from bleak.exc import BleakError
 from objc_util import NSDictionary, nsdata_to_bytes
 
 from .CentralManagerDelegate import CBPeripheralType, CentralManager
-from .utils import cb_uuid_to_str
+from .utils import cb_uuid_to_str, to_optional_str
 
 logger = logging.getLogger(__name__)
-
-
-class CBScannerArgs(TypedDict, total=False):
-    """
-    Platform-specific :class:`BleakScanner` args for the Pythonista3 backend.
-    """
-
-    use_bdaddr: bool
-    """
-    If true, use Bluetooth address instead of UUID.
-
-    .. warning:: This uses an undocumented IOBluetooth API to get the Bluetooth
-        address and may break in the future macOS releases. `It is known to not
-        work on macOS 10.15 <https://github.com/hbldh/bleak/issues/1286>`_.
-    """
 
 
 class BleakScannerPythonista3(BaseBleakScanner):
@@ -69,7 +55,7 @@ class BleakScannerPythonista3(BaseBleakScanner):
         scanning_mode: Literal["active", "passive"],
         *,
         cb: CBScannerArgs,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(detection_callback, service_uuids)
 
@@ -82,9 +68,19 @@ class BleakScannerPythonista3(BaseBleakScanner):
         self._timeout: float = kwargs.get("timeout", 5.0)
 
     async def start(self) -> None:
+        await self._manager.wait_until_ready()
+
         self.seen_devices = {}
 
         def callback(p: CBPeripheralType, a: NSDictionary, r: int) -> None:
+
+            service_uuid_data = a["kCBAdvDataServiceUUIDs"]
+            if service_uuid_data is None:
+                service_uuid_data = []
+            service_uuids = [cb_uuid_to_str(u) for u in service_uuid_data]
+
+            if not self.is_allowed_uuid(service_uuids):
+                return
 
             # Process service data
             service_data_dict_raw = a["kCBAdvDataServiceData"]
@@ -105,18 +101,13 @@ class BleakScannerPythonista3(BaseBleakScanner):
                 manufacturer_value = bytes(binary_data[2:])
                 manufacturer_data[manufacturer_id] = manufacturer_value
 
-            service_uuid_data = a["kCBAdvDataServiceUUIDs"]
-            if service_uuid_data is None:
-                service_uuid_data = []
-            service_uuids = [cb_uuid_to_str(u) for u in service_uuid_data]
-
             # set tx_power data if available
             tx_power = a["kCBAdvDataTxPowerLevel"]
             if tx_power is not None:
                 tx_power = tx_power.intValue()
 
             advertisement_data = AdvertisementData(
-                local_name=str(a["kCBAdvDataLocalName"]),
+                local_name=to_optional_str(a["kCBAdvDataLocalName"]),
                 manufacturer_data=manufacturer_data,
                 service_data=service_data,
                 service_uuids=service_uuids,
@@ -125,18 +116,29 @@ class BleakScannerPythonista3(BaseBleakScanner):
                 platform_data=(p, a, r),
             )
 
+            # bleak reports this address in upper case on Apple platforms, and
+            # the scanner in ble.py compares it with an upper case address.
+            identifier = str(p.identifier().UUIDString())
+
             if self._use_bdaddr:
                 # HACK: retrieveAddressForPeripheral_ is undocumented but seems to do the trick
-                address_bytes: bytes = (
+                address_bytes: Optional[bytes] = (
                     self._manager.central_manager.retrieveAddressForPeripheral_(p)
                 )
+                if address_bytes is None:
+                    logger.debug(
+                        "Could not get Bluetooth address for %s. Ignoring this device.",
+                        identifier,
+                    )
+                    return
                 address = address_bytes.hex(":").upper()
             else:
-                address = cb_uuid_to_str(p.identifier())
+                address = identifier
 
             device = self.create_or_update_device(
+                identifier,
                 address,
-                str(p.name()),
+                to_optional_str(p.name()),
                 (p, self._manager),
                 advertisement_data,
             )
@@ -149,25 +151,3 @@ class BleakScannerPythonista3(BaseBleakScanner):
     async def stop(self) -> None:
         await self._manager.stop_scan()
         self._manager.callbacks.pop(id(self), None)
-
-    def set_scanning_filter(self, **kwargs) -> None:
-        """Set scanning filter for the scanner.
-
-        .. note::
-
-            This is not implemented for macOS yet.
-
-        Raises:
-
-           ``NotImplementedError``
-
-        """
-        raise NotImplementedError(
-            "Need to evaluate which macOS versions to support first..."
-        )
-
-    # macOS specific methods
-
-    @property
-    def is_scanning(self):
-        return self._manager.central_manager.isScanning()

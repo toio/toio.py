@@ -11,10 +11,9 @@ Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
 import asyncio
 import itertools
 import logging
-import math
 import sys
+import weakref
 from enum import IntEnum
-from uuid import UUID
 
 from typing_extensions import Any, Dict, Iterable, NewType, Optional, TypeAlias
 
@@ -23,8 +22,10 @@ if sys.version_info < (3, 11):
 else:
     from asyncio import timeout as async_timeout
 
+from bleak.args.corebluetooth import NotificationDiscriminator
+from bleak.backends._utils import try_call_soon_threadsafe
 from bleak.backends.client import NotifyCallback
-from bleak.exc import BleakError
+from bleak.exc import BleakError, BleakGATTProtocolError
 from objc_util import (
     NSArray,
     NSData,
@@ -39,6 +40,7 @@ from objc_util import (
 from .objc_types import (
     CBUUID,
     DISPATCH_QUEUE_SERIAL,
+    CBATTErrorDomain,
     CBCentralManager,
     CBCentralManagerType,
     CBCharacteristic,
@@ -60,8 +62,6 @@ from .objc_types import (
     CBUUIDType,
     NSError,
     NSErrorType,
-    NSKeyValueChangeNewKey,
-    NSKeyValueObservingOptionNew,
     dispatch_queue_create,
 )
 
@@ -81,7 +81,6 @@ class PeripheralManager:
         """iOS init function for NSObject"""
 
         self.peripheral = peripheral
-        self.peripheral.delegate = self.create_delegate()
 
         self._event_loop = asyncio.get_running_loop()
         self._services_discovered_future = self._event_loop.create_future()
@@ -97,8 +96,15 @@ class PeripheralManager:
 
         self._characteristic_notify_change_futures: Dict[int, asyncio.Future] = {}
         self._characteristic_notify_callbacks: Dict[int, NotifyCallback] = {}
+        self._characteristic_notification_discriminators: Dict[
+            int, Optional[NotificationDiscriminator]
+        ] = {}
 
-        self._read_rssi_futures: Dict[UUID, asyncio.Future] = {}
+        self._read_rssi_futures: Dict[str, asyncio.Future] = {}
+
+        # CBPeripheral holds its delegate weakly, so it has to be kept here.
+        self.delegate = self.create_delegate()
+        self.peripheral.delegate = self.delegate
 
     def futures(self) -> Iterable[asyncio.Future]:
         """
@@ -237,13 +243,19 @@ class PeripheralManager:
             del self._descriptor_write_futures[descriptor.handle()]
 
     async def start_notifications(
-        self, characteristic: CBCharacteristicType, callback: NotifyCallback
+        self,
+        characteristic: CBCharacteristicType,
+        callback: NotifyCallback,
+        notification_discriminator: Optional[NotificationDiscriminator] = None,
     ) -> None:
         c_handle = characteristic.handle()
         if c_handle in self._characteristic_notify_callbacks:
             raise ValueError("Characteristic notifications already started")
 
         self._characteristic_notify_callbacks[c_handle] = callback
+        self._characteristic_notification_discriminators[c_handle] = (
+            notification_discriminator
+        )
 
         future = self._event_loop.create_future()
 
@@ -269,16 +281,25 @@ class PeripheralManager:
             del self._characteristic_notify_change_futures[c_handle]
 
         self._characteristic_notify_callbacks.pop(c_handle)
+        self._characteristic_notification_discriminators.pop(c_handle)
 
-    async def read_rssi(self) -> NSNumber:
+    async def read_rssi(self) -> int:
         future = self._event_loop.create_future()
 
-        self._read_rssi_futures[self.peripheral.identifier()] = future
+        # ObjCInstance compares by pointer, so the UUID string is the stable key.
+        peripheral_id = str(self.peripheral.identifier().UUIDString())
+        self._read_rssi_futures[peripheral_id] = future
         try:
             self.peripheral.readRSSI()
             return await future
         finally:
-            del self._read_rssi_futures[self.peripheral.identifier()]
+            del self._read_rssi_futures[peripheral_id]
+
+    @staticmethod
+    def _gatt_exception(error: NSErrorType, message: str) -> BleakError:
+        if str(error.domain()) == CBATTErrorDomain:
+            return BleakGATTProtocolError(error.code())
+        return BleakError(f"{message}: {error}")
 
     def did_discover_services(
         self,
@@ -352,18 +373,36 @@ class PeripheralManager:
 
         future = self._characteristic_read_futures.get(c_handle)
 
-        # If there is no pending read request, then this must be a notification
-        # (the same delegate callback is used by both).
-        if not future:
-            if error is None:
+        # If error is set, then we know this was a read response.
+        # Otherwise, if there is a pending read request, we can't tell if this is
+        # a read response or notification. The same delegate callback is used by
+        # both, so only a user provided discriminator can tell them apart.
+        if error is None:
+            data = nsdata_to_bytes(value)
+            notification_discriminator = (
+                self._characteristic_notification_discriminators.get(c_handle)
+            )
+            if not future or (
+                notification_discriminator and notification_discriminator(data)
+            ):
                 notify_callback = self._characteristic_notify_callbacks.get(c_handle)
 
                 if notify_callback:
-                    notify_callback(nsdata_to_bytes(value))
+                    notify_callback(bytearray(data))
+                    return
+
+        if not future:
+            logger.warning(
+                "Unexpected event didUpdateValueForCharacteristic for %s with error: %s",
+                c_handle,
+                error,
+            )
             return
 
         if error is not None:
-            exception = BleakError(f"Failed to read characteristic {c_handle}: {error}")
+            exception = self._gatt_exception(
+                error, f"Failed to read characteristic {c_handle}"
+            )
             future.set_exception(exception)
         else:
             logger.debug("Read characteristic value")
@@ -381,25 +420,13 @@ class PeripheralManager:
             logger.warning("Unexpected event didUpdateValueForDescriptor")
             return
         if error is not None:
-            exception = BleakError(
-                f"Failed to read descriptor {descriptor.handle()}: {error}"
+            exception = self._gatt_exception(
+                error, f"Failed to read descriptor {descriptor.handle()}"
             )
             future.set_exception(exception)
         else:
             logger.debug("Read descriptor value")
-            str_value = str(value)
-            try:
-                int_value = int(str(value))
-                length = (
-                    1
-                    if int_value == 0
-                    else math.ceil(math.log(int_value) / math.log(256))
-                )
-                result = int_value.to_bytes(length, "little")
-            except:
-                result = str_value.encode("utf-8")
-
-            future.set_result(result)
+            future.set_result(value)
 
     def did_write_value_for_characteristic(
         self,
@@ -411,8 +438,8 @@ class PeripheralManager:
         if not future:
             return  # event only expected on write with response
         if error is not None:
-            exception = BleakError(
-                f"Failed to write characteristic {characteristic.handle()}: {error}"
+            exception = self._gatt_exception(
+                error, f"Failed to write characteristic {characteristic.handle()}"
             )
             future.set_exception(exception)
         else:
@@ -430,8 +457,8 @@ class PeripheralManager:
             logger.warning("Unexpected event didWriteValueForDescriptor")
             return
         if error is not None:
-            exception = BleakError(
-                f"Failed to write descriptor {descriptor.handle()}: {error}"
+            exception = self._gatt_exception(
+                error, f"Failed to write descriptor {descriptor.handle()}"
             )
             future.set_exception(exception)
         else:
@@ -461,9 +488,11 @@ class PeripheralManager:
             future.set_result(None)
 
     def did_read_rssi(
-        self, peripheral: CBPeripheralType, rssi: NSNumber, error: Optional[NSErrorType]
+        self, peripheral: CBPeripheralType, rssi: int, error: Optional[NSErrorType]
     ) -> None:
-        future = self._read_rssi_futures.get(peripheral.identifier(), None)
+        future = self._read_rssi_futures.get(
+            str(peripheral.identifier().UUIDString()), None
+        )
 
         if not future:
             logger.warning("Unexpected event did_read_rssi")
@@ -489,6 +518,16 @@ class PeripheralManager:
     # Protocol Functions
 
     def create_delegate(self):
+        # objc_util keeps the methods of a created class alive, so a strong
+        # reference here would prevent this object from ever being released.
+        manager_ref = weakref.ref(self)
+
+        def post(method_name: str, *args: Any) -> None:
+            manager = manager_ref()
+            if manager is not None:
+                try_call_soon_threadsafe(
+                    manager._event_loop, getattr(manager, method_name), *args
+                )
 
         def peripheral_didDiscoverServices_(_self, _cmd, pe_id, err_id):
             logger.info("peripheral_didDiscoverServices_")
@@ -496,8 +535,8 @@ class PeripheralManager:
             error = ObjCInstance(err_id) if err_id is not None else None
             logger.info("services: %s", peripheral.services())
             logger.info("error: %s", err_id)
-            self._event_loop.call_soon_threadsafe(
-                self.did_discover_services,
+            post(
+                "did_discover_services",
                 peripheral,
                 peripheral.services(),
                 error,
@@ -510,8 +549,8 @@ class PeripheralManager:
             peripheral = ObjCInstance(pe_id)
             service = ObjCInstance(sv_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_discover_characteristics_for_service,
+            post(
+                "did_discover_characteristics_for_service",
                 peripheral,
                 service,
                 service.characteristics(),
@@ -529,8 +568,8 @@ class PeripheralManager:
             peripheral = ObjCInstance(pe_id)
             characteristic = ObjCInstance(ch_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_discover_descriptors_for_characteristic,
+            post(
+                "did_discover_descriptors_for_characteristic",
                 peripheral,
                 characteristic,
                 error,
@@ -547,8 +586,8 @@ class PeripheralManager:
             peripheral = ObjCInstance(pe_id)
             characteristic = ObjCInstance(ch_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_update_value_for_characteristic,
+            post(
+                "did_update_value_for_characteristic",
                 peripheral,
                 characteristic,
                 characteristic.value(),
@@ -566,8 +605,8 @@ class PeripheralManager:
             peripheral = ObjCInstance(pe_id)
             descriptor = ObjCInstance(desc_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_update_value_for_descriptor,
+            post(
+                "did_update_value_for_descriptor",
                 peripheral,
                 descriptor,
                 descriptor.value(),
@@ -585,8 +624,8 @@ class PeripheralManager:
             peripheral = ObjCInstance(pe_id)
             characteristic = ObjCInstance(ch_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_write_value_for_characteristic,
+            post(
+                "did_write_value_for_characteristic",
                 peripheral,
                 characteristic,
                 error,
@@ -599,8 +638,8 @@ class PeripheralManager:
             peripheral = ObjCInstance(pe_id)
             descriptor = ObjCInstance(desc_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_write_value_for_descriptor,
+            post(
+                "did_write_value_for_descriptor",
                 peripheral,
                 descriptor,
                 error,
@@ -615,8 +654,8 @@ class PeripheralManager:
             peripheral = ObjCInstance(pe_id)
             characteristic = ObjCInstance(ch_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_update_notification_for_characteristic,
+            post(
+                "did_update_notification_for_characteristic",
                 peripheral,
                 characteristic,
                 error,
@@ -625,26 +664,20 @@ class PeripheralManager:
         def peripheralDidUpdateName_(_self, _cmd, pe_id):
             logger.debug("peripheralDidUpdateName_")
             peripheral = ObjCInstance(pe_id)
-            self._event_loop.call_soon_threadsafe(
-                self.did_update_name, peripheral, peripheral.name()
-            )
+            post("did_update_name", peripheral, peripheral.name())
 
         def peripheral_didModifyServices_(_self, _cmd, pe_id, invsv_id):
             logger.debug("peripheral_didModifyServices_")
             peripheral = ObjCInstance(pe_id)
             invalidatedServices = ObjCInstance(invsv_id)
-            self._event_loop.call_soon_threadsafe(
-                self.did_modify_services, peripheral, invalidatedServices
-            )
+            post("did_modify_services", peripheral, invalidatedServices)
 
         def peripheral_didReadRSSI_error_(_self, _cmd, pe_id, rssi_id, err_id):
             logger.debug("peripheral_didReadRSSI_error_")
             peripheral = ObjCInstance(pe_id)
             rssi = ObjCInstance(rssi_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self._event_loop.call_soon_threadsafe(
-                self.did_read_rssi, peripheral, rssi, error
-            )
+            post("did_read_rssi", peripheral, rssi.intValue(), error)
 
         methods = [
             peripheral_didDiscoverServices_,

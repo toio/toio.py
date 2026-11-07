@@ -12,7 +12,7 @@ import asyncio
 import ctypes
 import logging
 import sys
-import threading
+import weakref
 from uuid import UUID
 
 from typing_extensions import Any, Callable, Dict, Optional, TypeAlias
@@ -24,12 +24,16 @@ if sys.version_info < (3, 11):
 else:
     from asyncio import timeout as async_timeout
 
-from bleak.exc import BleakError
+from bleak.backends._utils import try_call_soon_threadsafe
+from bleak.exc import (
+    BleakBluetoothNotAvailableError,
+    BleakBluetoothNotAvailableReason,
+    BleakError,
+)
 from objc_util import (
     NSArray,
     NSDictionary,
     NSNumber,
-    NSString,
     ObjCInstance,
     c,
     create_objc_class,
@@ -40,6 +44,8 @@ from .objc_types import (
     DISPATCH_QUEUE_SERIAL,
     CBCentralManager,
     CBCentralManagerType,
+    CBManagerAuthorizationDenied,
+    CBManagerAuthorizationRestricted,
     CBManagerStatePoweredOff,
     CBManagerStatePoweredOn,
     CBManagerStateResetting,
@@ -53,8 +59,6 @@ from .objc_types import (
     CBUUIDType,
     NSError,
     NSErrorType,
-    NSKeyValueChangeNewKey,
-    NSKeyValueObservingOptionNew,
     dispatch_queue_create,
 )
 
@@ -76,7 +80,7 @@ class CentralManager:
         self._disconnect_callbacks: Dict[UUID, DisconnectCallback] = {}
         self._disconnect_futures: Dict[UUID, asyncio.Future] = {}
 
-        self._did_update_state_event = threading.Event()
+        self.did_update_state_event = asyncio.Event()
         self.delegate = self.create_delegate()
         self.central_manager = CBCentralManager.alloc().initWithDelegate_queue_(
             self.delegate,
@@ -85,38 +89,54 @@ class CentralManager:
             ),
         )
 
-        # according to CoreBluetooth docs, it is not valid to call CBCentral
+    # User defined functions
+
+    async def wait_until_ready(self) -> None:
+        # According to CoreBluetooth docs, it is not valid to call CBCentral
         # methods until the centralManagerDidUpdateState_() delegate method
         # is called and the current state is CBManagerStatePoweredOn.
-        # It doesn't take long for the callback to occur, so we should be able
-        # to do a blocking wait here without anyone complaining.
-        self._did_update_state_event.wait(1)
+        # There is no timeout because iOS shows a permission dialog when the app
+        # has no Bluetooth access yet, and it stays open until the user answers.
+        await self.did_update_state_event.wait()
 
-        if self.central_manager.state() == CBManagerStateUnsupported:
-            raise BleakError("BLE is unsupported")
-
-        if self.central_manager.state() == CBManagerStateUnauthorized:
-            raise BleakError("BLE is not authorized - check macOS privacy settings")
-
-        if self.central_manager.state() != CBManagerStatePoweredOn:
-            raise BleakError("Bluetooth device is turned off")
-
-        self.central_manager.addObserver_forKeyPath_options_context_(
-            self, "isScanning", NSKeyValueObservingOptionNew, 0
-        )
-        self._did_start_scanning_event: Optional[asyncio.Event] = None
-        self._did_stop_scanning_event: Optional[asyncio.Event] = None
-
-    def __del__(self):
-        try:
-            self.central_manager.removeObserver_forKeyPath_(self, "isScanning")
-        except IndexError:
-            # If self.init() raised an exception before calling
-            # addObserver_forKeyPath_options_context_, attempting
-            # to remove the observer will fail with IndexError
-            pass
-
-    # User defined functions
+        state = self.central_manager.state()
+        if state == CBManagerStateUnsupported:
+            raise BleakBluetoothNotAvailableError(
+                "Bluetooth is unsupported",
+                BleakBluetoothNotAvailableReason.NO_BLUETOOTH,
+            )
+        elif state == CBManagerStateUnauthorized:
+            authorization = self.central_manager.authorization()
+            if authorization == CBManagerAuthorizationDenied:
+                raise BleakBluetoothNotAvailableError(
+                    "Bluetooth access is denied by the user for the current application. Check iOS privacy settings.",
+                    BleakBluetoothNotAvailableReason.DENIED_BY_USER,
+                )
+            elif authorization == CBManagerAuthorizationRestricted:
+                raise BleakBluetoothNotAvailableError(
+                    "Bluetooth access is restricted for the current application, e.g. by parental controls. Ask the admin to remove this restriction.",
+                    BleakBluetoothNotAvailableReason.DENIED_BY_SYSTEM,
+                )
+            else:
+                raise BleakBluetoothNotAvailableError(
+                    "Bluetooth is not authorized for an unknown reason. Check iOS privacy settings.",
+                    BleakBluetoothNotAvailableReason.DENIED_BY_UNKNOWN,
+                )
+        elif state == CBManagerStatePoweredOff:
+            raise BleakBluetoothNotAvailableError(
+                "Bluetooth device is turned off",
+                BleakBluetoothNotAvailableReason.POWERED_OFF,
+            )
+        elif state == CBManagerStateResetting:
+            raise BleakBluetoothNotAvailableError(
+                "Connection to the Bluetooth system service was lost. Currently trying to reconnect...",
+                BleakBluetoothNotAvailableReason.UNKNOWN,
+            )
+        elif state != CBManagerStatePoweredOn:
+            raise BleakBluetoothNotAvailableError(
+                "Bluetooth state is unknown",
+                BleakBluetoothNotAvailableReason.UNKNOWN,
+            )
 
     async def start_scan(self, service_uuids) -> None:
         service_uuids = (
@@ -131,17 +151,8 @@ class CentralManager:
             service_uuids, None
         )
 
-        event = asyncio.Event()
-        self._did_start_scanning_event = event
-        if not self.central_manager.isScanning():
-            await event.wait()
-
     async def stop_scan(self) -> None:
         self.central_manager.stopScan()
-        event = asyncio.Event()
-        self._did_stop_scanning_event = event
-        if self.central_manager.isScanning():
-            await event.wait()
 
     async def connect(
         self,
@@ -187,24 +198,8 @@ class CentralManager:
         finally:
             del self._disconnect_futures[peripheral_uuid]
 
-    def _changed_is_scanning(self, is_scanning: bool) -> None:
-        if is_scanning:
-            if self._did_start_scanning_event:
-                self._did_start_scanning_event.set()
-        else:
-            if self._did_stop_scanning_event:
-                self._did_stop_scanning_event.set()
-
-    def observeValueForKeyPath_ofObject_change_context_(
-        self, keyPath: NSString, object: Any, change: NSDictionary, context: int
-    ) -> None:
-        logger.debug("'%s' changed", keyPath)
-
-        if keyPath != "isScanning":
-            return
-
-        is_scanning = bool(change[NSKeyValueChangeNewKey])
-        self.event_loop.call_soon_threadsafe(self._changed_is_scanning, is_scanning)
+    def did_update_state(self) -> None:
+        self.did_update_state_event.set()
 
     def did_discover_peripheral(
         self,
@@ -286,6 +281,17 @@ class CentralManager:
             callback()
 
     def create_delegate(self):
+        # objc_util keeps the methods of a created class alive, so a strong
+        # reference here would prevent this object from ever being released.
+        manager_ref = weakref.ref(self)
+
+        def post(method_name: str, *args: Any) -> None:
+            manager = manager_ref()
+            if manager is not None:
+                try_call_soon_threadsafe(
+                    manager.event_loop, getattr(manager, method_name), *args
+                )
+
         # Protocol Functions
 
         def centralManagerDidUpdateState_(_self, _cmd, ct_id):
@@ -304,7 +310,7 @@ class CentralManager:
             elif central.state() == CBManagerStatePoweredOn:
                 logger.debug("Bluetooth powered on")
 
-            self._did_update_state_event.set()
+            post("did_update_state")
 
         def centralManager_didDiscoverPeripheral_advertisementData_RSSI_(
             _self, _cmd, ct_id, pe_id, adv_id, rssi_id
@@ -314,8 +320,8 @@ class CentralManager:
             peripheral = ObjCInstance(pe_id)
             advertisement_data = ObjCInstance(adv_id)
             rssi = ObjCInstance(rssi_id)
-            self.event_loop.call_soon_threadsafe(
-                self.did_discover_peripheral,
+            post(
+                "did_discover_peripheral",
                 central,
                 peripheral,
                 advertisement_data,
@@ -326,9 +332,7 @@ class CentralManager:
             logger.debug("centralManager_didConnectPeripheral_")
             central = ObjCInstance(ct_id)
             peripheral = ObjCInstance(pe_id)
-            self.event_loop.call_soon_threadsafe(
-                self.did_connect_peripheral, central, peripheral
-            )
+            post("did_connect_peripheral", central, peripheral)
 
         def centralManager_didFailToConnectPeripheral_error_(
             _self, _cmd, ctmg_id, pe_id, err_id
@@ -337,9 +341,7 @@ class CentralManager:
             central_manager = ObjCInstance(ctmg_id)
             peripheral = ObjCInstance(pe_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self.event_loop.call_soon_threadsafe(
-                self.did_fail_to_connect_peripheral, central_manager, peripheral, error
-            )
+            post("did_fail_to_connect_peripheral", central_manager, peripheral, error)
 
         def centralManager_didDisconnectPeripheral_error_(
             _self, _cmd, ct_id, pe_id, err_id
@@ -348,9 +350,7 @@ class CentralManager:
             central = ObjCInstance(ct_id)
             peripheral = ObjCInstance(pe_id)
             error = ObjCInstance(err_id) if err_id is not None else None
-            self.event_loop.call_soon_threadsafe(
-                self.did_disconnect_peripheral, central, peripheral, error
-            )
+            post("did_disconnect_peripheral", central, peripheral, error)
 
         methods = [
             centralManagerDidUpdateState_,

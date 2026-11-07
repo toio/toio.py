@@ -8,40 +8,32 @@ Ported to Pythonista3 in 2024 by Sony Interactive Entertainment Inc.
 """
 
 import asyncio
+import functools
 import logging
-import sys
-import uuid
-from typing import Optional, Set, Union
-
-if sys.version_info < (3, 12):
-    from typing_extensions import Buffer
-else:
-    from collections.abc import Buffer
+from typing import Any, Optional, Set, Union
 
 from bleak import BleakScanner
+from bleak.args import SizedBuffer
+from bleak.args.corebluetooth import CBStartNotifyArgs
+from bleak.assigned_numbers import gatt_char_props_to_strs
 from bleak.backends.characteristic import BleakGATTCharacteristic
 from bleak.backends.client import BaseBleakClient, NotifyCallback
+from bleak.backends.descriptor import BleakGATTDescriptor
 from bleak.backends.device import BLEDevice
-from bleak.backends.service import BleakGATTServiceCollection
+from bleak.backends.service import BleakGATTService, BleakGATTServiceCollection
 from bleak.exc import BleakDeviceNotFoundError, BleakError
 from objc_util import NSArray, NSData, ObjCInstance, nsdata_to_bytes
 
-from .CentralManagerDelegate import CentralManager
-from .characteristic import BleakGATTCharacteristicPythonista3
-from .descriptor import BleakGATTDescriptorPythonista3
 from .objc_types import (
+    CBUUID,
     CBCharacteristicWriteWithoutResponse,
     CBCharacteristicWriteWithResponse,
     CBPeripheralStateConnected,
-    CBPeripheralStateConnecting,
-    CBPeripheralStateDisconnected,
-    CBPeripheralStateDisconnecting,
     CBPeripheralType,
 )
 from .PeripheralDelegate import PeripheralManager
 from .scanner import BleakScannerPythonista3
-from .service import BleakGATTServicePythonista3
-from .utils import cb_uuid_to_str
+from .utils import cb_uuid_to_str, descriptor_value_to_bytearray, nsnumber_to_int
 
 logger = logging.getLogger(__name__)
 
@@ -70,10 +62,6 @@ class BleakClientPythonista3(BaseBleakClient):
         self._manager = None
         self._central_manager = None
 
-        logger.info(address_or_ble_device)
-        logger.info(type(address_or_ble_device))
-        logger.info(address_or_ble_device.details)
-
         if isinstance(address_or_ble_device, BLEDevice):
             (
                 self._peripheral,
@@ -89,16 +77,19 @@ class BleakClientPythonista3(BaseBleakClient):
     def __str__(self):
         return "BleakClientPythonista3 ({})".format(self.address)
 
-    async def connect(self, **kwargs) -> bool:
+    async def connect(self, pair: bool, **kwargs: Any) -> None:
         """Connect to a specified Peripheral
+
+        Args:
+            pair (bool): Ignored, since CoreBluetooth has no explicit pairing API.
 
         Keyword Args:
             timeout (float): Timeout for required ``BleakScanner.find_device_by_address`` call. Defaults to 10.0.
 
-        Returns:
-            Boolean representing connection status.
-
         """
+        if pair:
+            logger.debug("Explicit pairing is not available in CoreBluetooth.")
+
         timeout = kwargs.get("timeout", self._timeout)
         if self._peripheral is None:
             device = await BleakScanner.find_device_by_address(
@@ -116,7 +107,7 @@ class BleakClientPythonista3(BaseBleakClient):
             self._manager = PeripheralManager(self._peripheral)
 
         def disconnect_callback():
-            # Ensure that `get_services` retrieves services again, rather
+            # Ensure that `_get_services` retrieves services again, rather
             # than using the cached object
             self.services = None
 
@@ -140,38 +131,34 @@ class BleakClientPythonista3(BaseBleakClient):
 
         # Now get services
         logger.info("now get services")
-        await self.get_services()
+        await self._get_services()
         logger.info("now I've got services")
 
-        return True
-
-    async def disconnect(self) -> bool:
-        """disconnect.
-
-        Args:
-
-        Returns:
-            bool:
-        """
+    async def disconnect(self) -> None:
         """Disconnect from the peripheral device"""
         if (
             self._peripheral is None
             or self._peripheral.state() != CBPeripheralStateConnected
         ):
-            return True
+            return
 
         await self._central_manager.disconnect(self._peripheral)
-
-        return True
 
     @property
     def is_connected(self) -> bool:
         """Checks for current active connection"""
-        return self._DeprecatedIsConnectedReturn(
+        return (
             False
             if self._peripheral is None
             else self._peripheral.state() == CBPeripheralStateConnected
         )
+
+    @property
+    def name(self) -> str:
+        """Get the name of the connected peripheral"""
+        if self._peripheral is None:
+            raise BleakError("Not connected")
+        return str(self._peripheral.name())
 
     @property
     def mtu_size(self) -> int:
@@ -186,7 +173,7 @@ class BleakClientPythonista3(BaseBleakClient):
             + 3
         )
 
-    async def pair(self, *args, **kwargs) -> bool:
+    async def pair(self, *args: Any, **kwargs: Any) -> None:
         """Attempt to pair with a peripheral.
 
         .. note::
@@ -201,21 +188,14 @@ class BleakClientPythonista3(BaseBleakClient):
             - `Stack Overflow post #1 <https://stackoverflow.com/questions/25254932/can-you-pair-a-bluetooth-le-device-in-an-ios-app>`_
             - `Stack Overflow post #2 <https://stackoverflow.com/questions/47546690/ios-bluetooth-pairing-request-dialog-can-i-know-the-users-choice>`_
 
-        Returns:
-            Boolean regarding success of pairing.
-
         """
         raise NotImplementedError("Pairing is not available in Core Bluetooth.")
 
-    async def unpair(self) -> bool:
-        """
-
-        Returns:
-
-        """
+    async def unpair(self) -> None:
+        """Remove pairing information for a peripheral."""
         raise NotImplementedError("Pairing is not available in Core Bluetooth.")
 
-    async def get_services(self, **kwargs) -> BleakGATTServiceCollection:
+    async def _get_services(self) -> BleakGATTServiceCollection:
         """Get all services registered for this GATT server.
 
         Returns:
@@ -235,51 +215,62 @@ class BleakClientPythonista3(BaseBleakClient):
         cb_services = [ObjCInstance(x) for x in cb_services_id]
 
         for service in cb_services:
+            # N.B. the `startHandle` method of the CBService is an undocumented Core Bluetooth feature,
+            # which Bleak takes advantage of in order to have a service handle to use.
+            serv = BleakGATTService(
+                service,
+                nsnumber_to_int(service.startHandle()),
+                cb_uuid_to_str(service.UUID()),
+            )
+            services.add_service(serv)
+
             serviceUUID = service.UUID().UUIDString()
             logger.info("Retrieving characteristics for service {}".format(serviceUUID))
             characteristics = await self._manager.discover_characteristics(service)
-
-            services.add_service(BleakGATTServicePythonista3(service))
 
             for characteristic in characteristics:
                 cUUID = characteristic.UUID().UUIDString()
                 logger.debug(
                     "Retrieving descriptors for characteristic {}".format(cUUID)
                 )
-                descriptors = await self._manager.discover_descriptors(characteristic)
 
-                services.add_characteristic(
-                    BleakGATTCharacteristicPythonista3(
-                        characteristic,
-                        self._peripheral.maximumWriteValueLengthForType_(
-                            CBCharacteristicWriteWithoutResponse
-                        ),
-                    )
+                char = BleakGATTCharacteristic(
+                    characteristic,
+                    nsnumber_to_int(characteristic.handle()),
+                    cb_uuid_to_str(characteristic.UUID()),
+                    list(gatt_char_props_to_strs(characteristic.properties())),
+                    functools.partial(
+                        self._peripheral.maximumWriteValueLengthForType_,
+                        CBCharacteristicWriteWithoutResponse,
+                    ),
+                    serv,
                 )
+                services.add_characteristic(char)
+
+                descriptors = await self._manager.discover_descriptors(characteristic)
                 for descriptor in descriptors:
-                    services.add_descriptor(
-                        BleakGATTDescriptorPythonista3(
-                            descriptor,
-                            cb_uuid_to_str(characteristic.UUID()),
-                            int(str(characteristic.handle())),
-                        )
+                    desc = BleakGATTDescriptor(
+                        descriptor,
+                        nsnumber_to_int(descriptor.handle()),
+                        cb_uuid_to_str(descriptor.UUID()),
+                        char,
                     )
+                    services.add_descriptor(desc)
         logger.debug("Services resolved for %s", str(self))
         self.services = services
         return self.services
 
     async def read_gatt_char(
         self,
-        char_specifier: Union[BleakGATTCharacteristic, int, str, uuid.UUID],
-        use_cached=False,
-        **kwargs,
+        characteristic: BleakGATTCharacteristic,
+        *,
+        use_cached: bool = False,
+        **kwargs: Any,
     ) -> bytearray:
         """Perform read operation on the specified GATT characteristic.
 
         Args:
-            char_specifier (BleakGATTCharacteristic, int, str or UUID): The characteristic to read from,
-                specified by either integer handle, UUID or directly by the
-                BleakGATTCharacteristic object representing it.
+            characteristic (BleakGATTCharacteristic): The characteristic to read from.
             use_cached (bool): `False` forces macOS to read the value from the
                 device again and not use its own cached value. Defaults to `False`.
 
@@ -287,58 +278,47 @@ class BleakClientPythonista3(BaseBleakClient):
             (bytearray) The read data.
 
         """
-        if not isinstance(char_specifier, BleakGATTCharacteristic):
-            characteristic = self.services.get_characteristic(char_specifier)
-        else:
-            characteristic = char_specifier
-        if not characteristic:
-            raise BleakCharacteristicNotFoundError(char_specifier)
-
         assert self._manager is not None
         output = await self._manager.read_characteristic(
             characteristic.obj, use_cached=use_cached
         )
-        value = nsdata_to_bytes(output)
+        value = bytearray(nsdata_to_bytes(output))
         logger.debug("Read Characteristic {0} : {1}".format(characteristic.uuid, value))
         return value
 
     async def read_gatt_descriptor(
-        self, handle: int, use_cached=False, **kwargs
+        self,
+        descriptor: BleakGATTDescriptor,
+        *,
+        use_cached: bool = False,
+        **kwargs: Any,
     ) -> bytearray:
         """Perform read operation on the specified GATT descriptor.
 
         Args:
-            handle (int): The handle of the descriptor to read from.
+            descriptor (BleakGATTDescriptor): The descriptor to read from.
             use_cached (bool): `False` forces Windows to read the value from the
                 device again and not use its own cached value. Defaults to `False`.
 
         Returns:
             (bytearray) The read data.
         """
-        descriptor = self.services.get_descriptor(handle)
-        if not descriptor:
-            raise BleakError("Descriptor {} was not found!".format(handle))
-
         assert self._manager is not None
         output = await self._manager.read_descriptor(
             descriptor.obj, use_cached=use_cached
         )
-        if isinstance(
-            output, str
-        ):  # Sometimes a `pyobjc_unicode`or `__NSCFString` is returned and they can be used as regular Python strings.
-            value = bytearray(output.encode("utf-8"))
-        else:  # _NSInlineData
-            value = bytearray(output)  # value.getBytes_length_(None, len(value))
-        logger.debug("Read Descriptor {0} : {1}".format(handle, value))
+        value = descriptor_value_to_bytearray(output, descriptor.uuid)
+        logger.debug("Read Descriptor {0} : {1}".format(descriptor.handle, value))
         return value
 
     async def write_gatt_char(
         self,
         characteristic: BleakGATTCharacteristic,
-        data: Buffer,
+        data: SizedBuffer,
         response: bool,
     ) -> None:
-        value = NSData.alloc().initWithBytes_length_(data, len(data))
+        # objc_util passes this argument as c_void_p, which rejects a bytearray.
+        value = NSData.alloc().initWithBytes_length_(bytes(data), len(data))
         assert self._manager is not None
         await self._manager.write_characteristic(
             characteristic.obj,
@@ -351,59 +331,52 @@ class BleakClientPythonista3(BaseBleakClient):
         )
         logger.debug(f"Write Characteristic {characteristic.uuid} : {data}")
 
-    async def write_gatt_descriptor(self, handle: int, data: Buffer) -> None:
+    async def write_gatt_descriptor(
+        self, descriptor: BleakGATTDescriptor, data: SizedBuffer
+    ) -> None:
         """Perform a write operation on the specified GATT descriptor.
 
         Args:
-            handle: The handle of the descriptor to read from.
+            descriptor: The descriptor to write to.
             data: The data to send (any bytes-like object).
 
         """
-        descriptor = self.services.get_descriptor(handle)
-        if not descriptor:
-            raise BleakError("Descriptor {} was not found!".format(handle))
-
-        value = NSData.alloc().initWithBytes_length_(data, len(data))
+        value = NSData.alloc().initWithBytes_length_(bytes(data), len(data))
         assert self._manager is not None
         await self._manager.write_descriptor(descriptor.obj, value)
-        logger.debug("Write Descriptor {0} : {1}".format(handle, data))
+        logger.debug("Write Descriptor {0} : {1}".format(descriptor.handle, data))
 
     async def start_notify(
         self,
         characteristic: BleakGATTCharacteristic,
         callback: NotifyCallback,
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         """
         Activate notifications/indications on a characteristic.
         """
         assert self._manager is not None
 
-        await self._manager.start_notifications(characteristic.obj, callback)
+        cb: CBStartNotifyArgs = kwargs["cb"]
 
-    async def stop_notify(
-        self, char_specifier: Union[BleakGATTCharacteristic, int, str, uuid.UUID]
-    ) -> None:
+        await self._manager.start_notifications(
+            characteristic.obj,
+            callback,
+            cb.get("notification_discriminator"),
+        )
+
+    async def stop_notify(self, characteristic: BleakGATTCharacteristic) -> None:
         """Deactivate notification/indication on a specified characteristic.
 
         Args:
-            char_specifier (BleakGATTCharacteristic, int, str or UUID): The characteristic to deactivate
-                notification/indication on, specified by either integer handle, UUID or
-                directly by the BleakGATTCharacteristic object representing it.
-
+            characteristic (BleakGATTCharacteristic): The characteristic to deactivate
+                notification/indication on.
 
         """
-        if not isinstance(char_specifier, BleakGATTCharacteristic):
-            characteristic = self.services.get_characteristic(char_specifier)
-        else:
-            characteristic = char_specifier
-        if not characteristic:
-            raise BleakCharacteristicNotFoundError(char_specifier)
-
         assert self._manager is not None
         await self._manager.stop_notifications(characteristic.obj)
 
     async def get_rssi(self) -> int:
         """To get RSSI value in dBm of the connected Peripheral"""
         assert self._manager is not None
-        return int(await self._manager.read_rssi())
+        return await self._manager.read_rssi()

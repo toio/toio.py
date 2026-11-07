@@ -10,12 +10,12 @@
 ## Installation (Windows)
 ## 安装（Windows版本），并确认系统版本为win10
 
-## 下载 Python 3.11或更高版本(https://www.python.org/)
+## 下载 Python 3.10或更高版本（推荐 3.14）(https://www.python.org/)
 
 ### 安装 Python
 
 若显示安装失败，可参照[Using Python on Windows](https://docs.python.org/3/using/windows.html)进行重新安装。
-注意：python版本一定要3.11或更高版本。
+注意：python版本必须为3.10或更高版本，推荐使用3.14。
 
 ### 完成以上流程后，接下来需要安装相关软件包，操作如下：
 
@@ -66,7 +66,7 @@ python -c "import toio.scanner; print('ok')"
 
 若屏幕中显示“ImportError”，说明导入失败，请尝试重新安装.wh1文件，并确保已经进入到保存该文件的目录中。
 若再次显示安装失败
-请检查python的版本，确保python版本为3.11及以上
+请检查python的版本，确保python版本为3.10及以上
 
 **供参考：导入错误信息**
 

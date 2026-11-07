@@ -20,7 +20,6 @@ import pprint
 from logging import getLogger
 
 import pytest
-from _cubes import CUBES
 
 from toio.scanner import BLEScanner
 
@@ -28,21 +27,21 @@ logger = getLogger(__name__)
 
 
 @pytest.mark.asyncio
-async def test_rssi():
+async def test_rssi(cubes):
     logger.info("** RSSI")
-    dev = await BLEScanner.scan(len(CUBES))
+    dev = await BLEScanner.scan(len(cubes))
     for d in dev:
         pprint.pprint(d)
-    assert len(dev) == len(CUBES)
+    assert len(dev) == len(cubes)
 
 
 @pytest.mark.asyncio
-async def test_local_name():
+async def test_local_name(cubes):
     logger.info("** LOCAL NAME")
-    dev = await BLEScanner.scan(len(CUBES), sort="local_name")
+    dev = await BLEScanner.scan(len(cubes), sort="local_name")
     for d in dev:
         pprint.pprint(d)
-    assert len(dev) == len(CUBES)
+    assert len(dev) == len(cubes)
 
 
 @pytest.mark.asyncio
@@ -55,28 +54,28 @@ async def test_num1():
 
 
 @pytest.mark.asyncio
-async def test_name1():
+async def test_name1(cubes):
     logger.info("** NAME1")
-    dev = await BLEScanner.scan_with_id(cube_id={CUBES[0]["name"]})
+    dev = await BLEScanner.scan_with_id(cube_id={cubes[0]["name"]})
     for d in dev:
         pprint.pprint(d)
     assert len(dev) == 1
 
 
 @pytest.mark.asyncio
-async def test_name2():
+async def test_name2(cubes):
     logger.info("** NAME2")
-    dev = await BLEScanner.scan_with_id(cube_id={CUBES[0]["name"], CUBES[1]["name"]})
+    dev = await BLEScanner.scan_with_id(cube_id={cubes[0]["name"], cubes[1]["name"]})
     for d in dev:
         pprint.pprint(d)
     assert len(dev) == 2
 
 
 @pytest.mark.asyncio
-async def test_name3():
+async def test_name3(cubes):
     logger.info("** NAME3")
     dev = await BLEScanner.scan_with_id(
-        cube_id={CUBES[0]["name"], CUBES[1]["name"], CUBES[0]["name"]}
+        cube_id={cubes[0]["name"], cubes[1]["name"], cubes[0]["name"]}
     )
     for d in dev:
         pprint.pprint(d)
@@ -84,18 +83,18 @@ async def test_name3():
 
 
 @pytest.mark.asyncio
-async def test_address1():
+async def test_address1(cubes):
     logger.info("** ADDRESS1 (UPPERCASE)")
-    dev = await BLEScanner.scan_with_address(address={CUBES[0]["address"].upper()})
+    dev = await BLEScanner.scan_with_address(address={cubes[0]["address"].upper()})
     for d in dev:
         logger.info(d)
         assert len(dev) == 1
 
 
 @pytest.mark.asyncio
-async def test_address2():
+async def test_address2(cubes):
     logger.info("** ADDRESS2 (LOWERCASE)")
-    dev = await BLEScanner.scan_with_address(address={CUBES[0]["address"].lower()})
+    dev = await BLEScanner.scan_with_address(address={cubes[0]["address"].lower()})
     for d in dev:
         logger.info(d)
         assert len(dev) == 1
@@ -137,9 +136,9 @@ async def test_registered_3():
 
 
 @pytest.mark.asyncio
-async def test_registered_4():
+async def test_registered_4(cubes):
     logger.info("** REGISTERED4")
-    dev = await BLEScanner.scan_registered_cubes_with_id({"ooo", CUBES[0]["name"]})
+    dev = await BLEScanner.scan_registered_cubes_with_id({"ooo", cubes[0]["name"]})
     for d in dev:
         pprint.pprint(d)
     if platform.system() == "Windows":
@@ -160,10 +159,10 @@ async def test_registered_5(mocker):
 
 
 @pytest.mark.asyncio
-async def test_registered_6(mocker):
+async def test_registered_6(mocker, cubes):
     logger.info("** REGISTERED6")
     mocker.patch("platform.system", return_value="UnknownOS")
-    dev = await BLEScanner.scan_registered_cubes_with_id({"ooo", CUBES[0]["name"]})
+    dev = await BLEScanner.scan_registered_cubes_with_id({"ooo", cubes[0]["name"]})
     for d in dev:
         pprint.pprint(d)
     assert len(dev) == 0
