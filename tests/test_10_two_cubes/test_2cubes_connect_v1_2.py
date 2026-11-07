@@ -113,3 +113,24 @@ async def test_connect_7():
         logger.info("** DISCONNECT")
         await cube.disconnect()
     logger.info(warn[0].message)
+
+
+@pytest.mark.asyncio
+async def test_connect_cube_info():
+    device_list = await BLEScanner.scan(2)
+    assert len(device_list) == 2
+    cubes = [ToioCoreCube(cube_info) for cube_info in device_list]
+    assert [cube.name for cube in cubes] == [d.name for d in device_list]
+    logger.info("** CONNECTING...")
+    for cube in cubes:
+        await cube.connect()
+        assert cube.is_connect()
+    logger.info("** CONNECTED")
+    for i, cube in enumerate(cubes):
+        pos = await cube.api.id_information.read()
+        logger.info("cube[%d]: %s", i, str(pos))
+    logger.info("** DISCONNECTING")
+    for cube in cubes:
+        await cube.disconnect()
+        assert not cube.is_connect()
+    logger.info("** DISCONNECTED")
