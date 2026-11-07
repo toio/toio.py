@@ -79,9 +79,7 @@ class BleCube(CubeInterface):
             await self.device.connect()
             while not self.device.is_connected:
                 await asyncio.sleep(0.1)
-            # bleak 0.22 returns a truthy wrapper object rather than a bool,
-            # and callers compare the result with "is True".
-            self.connected = bool(self.device.is_connected)
+            self.connected = self.device.is_connected
         else:
             logger.warning("already connected")
         return self.connected
@@ -91,7 +89,7 @@ class BleCube(CubeInterface):
             await self.device.disconnect()
             while self.device.is_connected:
                 await asyncio.sleep(0.1)
-            self.connected = bool(self.device.is_connected)
+            self.connected = self.device.is_connected
         else:
             logger.warning("already disconnected")
         return True
@@ -113,7 +111,7 @@ class BleCube(CubeInterface):
         return True
 
     def is_connect(self) -> bool:
-        return bool(self.device.is_connected)
+        return self.device.is_connected
 
 
 class BaseBleScanner(ScannerInterface):
