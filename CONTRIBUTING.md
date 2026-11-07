@@ -7,7 +7,7 @@ Before contributing to toio.py, please read our [Code of Conduct](./CODE_OF_COND
 
 ### Setup
 
-1. [Install poetry](https://python-poetry.org/docs/#installing-with-the-official-installer)
+1. [Install uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 2. Clone the toio.py repository
 
@@ -15,11 +15,11 @@ Before contributing to toio.py, please read our [Code of Conduct](./CODE_OF_COND
 git clone https://github.com/toio/toio.py
 ```
 
-3. Run `poetry install` in toio.py repository
+3. Run `uv sync` in toio.py repository
 
 ```
 cd toio.py
-poetry install
+uv sync
 ```
 
 ### Lint and format
@@ -29,8 +29,8 @@ poetry install
 [`black`](https://black.readthedocs.io/en/stable/) and [`isort`](https://pycqa.github.io/isort/) is used in this project.
 
 ```
-poetry run black
-poetry run isort
+uv run black
+uv run isort
 ```
 
 #### Optional:
@@ -38,11 +38,11 @@ poetry run isort
 Checking with [`flake8`](https://flake8.pycqa.org/en/latest/) or [`mypy`](https://www.mypy-lang.org/) is recommended.
 
 ```
-poetry run flake8
+uv run flake8
 ```
 
 ```
-poetry run mypy
+uv run mypy
 ```
 
 

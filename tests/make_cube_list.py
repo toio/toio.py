@@ -28,9 +28,11 @@ async def main(argv):
     else:
         if len(argv) >= 2:
             wfh = open(argv[1], "w")
+            output_file = argv[1]
         else:
             wfh = sys.stdout
-        sys.stderr.write("generate cube list: '%s'\n" % argv[1])
+            output_file = "stdout"
+        sys.stderr.write("generate cube list: '%s'\n" % output_file)
         wfh.write("from typing import Dict, List\n")
         wfh.write("\n")
         wfh.write("CUBES: List[Dict[str, str]] = [\n")
